@@ -490,9 +490,9 @@ bool Form::saveDocument(QString filePath)
 void Form::on_saveFileButton_pressed(QString cd)
 {
     on_generateButton_pressed(cd);
-    if ((ui->label_16->pixmap() != Q_NULLPTR)  && (ui->label_16->pixmap()->isNull() != true))
+    if ((ui->label_barCode->pixmap() != Q_NULLPTR)  && (ui->label_barCode->pixmap()->isNull() != true))
     {
-     const QPixmap *QRCodePixmap = ui->label_16->pixmap();
+     const QPixmap *QRCodePixmap = ui->label_barCode->pixmap();
 
     QString imageType = "PNG";
     QString filetypeStr;
@@ -521,13 +521,13 @@ void Form::on_generateButton_pressed( QString te)
        return;
     }
 
-    int qrcode_width = 120 /*ui->label_16->width()*/;
-    int qrcode_height = 120/*ui->label_16->height()*/;
+    int qrcode_width = 120 /*ui->label_barCode->width()*/;
+    int qrcode_height = 120/*ui->label_barCode->height()*/;
     QPixmap qrcode_pixmap;
     bool result;
     result = Form::GeneratePixmapFromText(text, qrcode_pixmap, qrcode_width, qrcode_height);
     if (true == result){
-        ui->label_16->setPixmap(qrcode_pixmap);
+        ui->label_barCode->setPixmap(qrcode_pixmap);
     }
     else{
         QMessageBox::warning(this, tr("QRCode Generator"), tr("Invalid QRCodeImage."));
@@ -555,11 +555,10 @@ void Form::on_toolButton_clicked() //tb 1
 
     //Tambahan Filter
     ui->comboBox_4->setVisible(true);
-    ui->label_26->setVisible(true);
+    ui->label_filter->setVisible(true);
     ui->toolButton_18->setVisible(true);
     ui->comboBox_4->clear();
     muatListFilter();
-
 
    ui->stackedWidget->setCurrentIndex(0);
    menu ="1";
@@ -568,7 +567,6 @@ void Form::on_toolButton_clicked() //tb 1
        {
            QString id = qbx_id_kam->currentText();
            muat_bamuskam(id);
-
        }
    }
 }
@@ -592,7 +590,7 @@ void Form::on_toolButton_danaDesa_clicked()
 
     //Tambahan Filter
     ui->comboBox_4->setVisible(false);
-    ui->label_26->setVisible(false);
+    ui->label_filter->setVisible(false);
     ui->toolButton_18->setVisible(false);
 
     ui->stackedWidget->setCurrentIndex(1);
@@ -623,7 +621,7 @@ void Form::on_toolButton_8_clicked()
 
     //Tambahan Filter
     ui->comboBox_4->setVisible(false);
-    ui->label_26->setVisible(false);
+    ui->label_filter->setVisible(false);
     ui->toolButton_18->setVisible(false);
 
     ui->stackedWidget->setCurrentIndex(2);
@@ -640,7 +638,7 @@ void Form::on_toolButton_13_clicked() // ToolButton 4
 {
     //Tambahan Filter
     ui->comboBox_4->setVisible(false);
-    ui->label_26->setVisible(false);
+    ui->label_filter->setVisible(false);
     ui->toolButton_18->setVisible(false);
 
     menu="4";

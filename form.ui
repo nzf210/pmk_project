@@ -81,14 +81,14 @@ border-style: outset;
     </rect>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page">
     <layout class="QVBoxLayout" name="verticalLayout_8">
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QLabel" name="label_21">
+        <widget class="QLabel" name="label_twBamuskam">
          <property name="minimumSize">
           <size>
            <width>700</width>
@@ -1507,7 +1507,7 @@ bacground-size: 70%</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_13">
           <item>
-           <widget class="QToolButton" name="toolButton_8">
+           <widget class="QToolButton" name="toolButton_add">
             <property name="minimumSize">
              <size>
               <width>55</width>
@@ -1670,7 +1670,7 @@ bacground-size: 70%</string>
           </item>
          </layout>
         </widget>
-        <widget class="QLabel" name="label_3">
+        <widget class="QLabel" name="label_space_1">
          <property name="geometry">
           <rect>
            <x>600</x>
@@ -2095,7 +2095,7 @@ background-repeat: no-repeat; </string>
          </spacer>
         </item>
         <item>
-         <widget class="QLabel" name="label_16">
+         <widget class="QLabel" name="label_barCode">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>61</horstretch>
@@ -2124,7 +2124,7 @@ background-repeat: no-repeat; </string>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_15">
         <item>
-         <widget class="QLabel" name="label_26">
+         <widget class="QLabel" name="label_filter">
           <property name="text">
            <string>Filter:</string>
           </property>
