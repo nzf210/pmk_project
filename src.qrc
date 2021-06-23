@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/gbr">
+        <file>html/gbr/yhk.jpg</file>
+        <file>html/gbr/icons8-refresh-50.png</file>
+        <file>html/gbr/icons8-unavailable-50.png</file>
+        <file>html/gbr/icons8-lock-50-2.png</file>
+        <file>html/gbr/icons8-user-male-50-2.png</file>
+        <file>html/gbr/yhk.png</file>
+        <file>html/gbr/icons8-add-list-50.png</file>
+        <file>html/gbr/icons8-export-pdf-50.png</file>
+        <file>html/gbr/icons8-scroll-50.png</file>
+        <file>html/gbr/icons8-create-50.png</file>
+        <file>html/gbr/icons8-resume-50.png</file>
+        <file>html/gbr/icons8-resume-50-2.png</file>
+        <file>html/gbr/icons8-settings-50.png</file>
+        <file>html/gbr/yhk.ico</file>
+    </qresource>
+</RCC>
