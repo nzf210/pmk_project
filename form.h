@@ -88,19 +88,19 @@ private slots:
     void qbx_id_dis_conn();
     //void on_toolButton_3_clicked();
     void on_toolButton_tmbRealdds_clicked();
-    void on_toolButton_5_clicked();
+    //void on_toolButton_5_clicked();
     void on_toolButton_cetakPdfdds_clicked();
 
       //private slots:
       void even_klik_tw13();
       void even_dklik_tw13();
       void headsppd_2(); // Double Klik tw13
-      void event_doubleklik_tw_2();
-      void event_doubleklik_tw_9();
-      void event_doubleklik_tw();
+      void event_doubleklik_tw_cetak_dds();
+      void event_doubleklik_tw_cetak_add();
+      void event_doubleklik_tw_bamuskam();
       void event_klik_tw_6();
       void event_klik_tw_11();
-      void event_klik_tw_13();
+      //void event_klik_tw_13();
       void event_klik_tw();
       void click_btn(); //Button di edit data bamuskam;
       void click_btn1(); //Tambah kegiatan ke tw widget
@@ -119,8 +119,8 @@ private slots:
       void on_toolButton_Sppd_clicked();
       void on_toolButton_logOut_clicked();
       void on_toolButton_pdf_main_clicked();
-      void on_toolButton_16_clicked();
-      void on_toolButton_17_clicked();
+      void on_toolButton_tmbSppd_clicked();
+      void on_toolButton_cetakpdfSppd_clicked();
 
       void sppdbtc();
       void sppdbtc_2();
@@ -134,6 +134,27 @@ private slots:
       void eventQbxadd_2();
       void on_toolButton_filter_clicked();
 
+      void on_toolButton_covid_clicked();
+
+      void on_toolButton_blt_clicked();
+
+      void on_toolButton_user_clicked();
+
+      void on_pushButton_buat_usr_clicked();
+
+      void on_pushButton_update_usr_clicked();
+
+      void on_pushButton_hapus_usr_clicked();
+
+      void on_pushButton_bersihkan_usr_clicked();
+
+      void header_tw_daftarUser();
+
+      void activitiUser();
+
+      void memuat_data_user_();
+
+      void even_klik_tw_user();
 signals:
      // void myLabelClicked();      // Signal to emit
       void sendData(QString data);
@@ -143,6 +164,7 @@ public slots:
     void onTabChanged(int tabIndex);
 
 private:
+    void boderToolbar(int);
     void updateTampilan(Mode mode);
     Mode ModeSekarang;
     // === Tambahan Fungsi Buat Getter Ke Cetak PDF1 ===S===
@@ -164,7 +186,7 @@ private:
 
     void  datapdf1();
     void  datapdf2();
-    void  datapdf3();
+    //void  datapdf3();
     void  databam(QString skam );
     void  muatheadertw12();
     void  muatheadertw12_2();

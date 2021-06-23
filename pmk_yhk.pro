@@ -13,7 +13,6 @@ CONFIG += c++17
 
 #LIBS += -lqtfreetype
 SOURCES += \
-    01_Bamuskam.cpp \
     form.cpp \
     main.cpp \
     mainwindow.cpp \

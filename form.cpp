@@ -107,7 +107,7 @@ bool openDB(QSqlDatabase &db2)
     //=================== Baca Setting =============
             db2.setHostName(hostName);
             db2.setPort(porto);
-            db2.setDatabaseName("megarezst");
+            db2.setDatabaseName("yhk_2021");
             db2.setUserName(nm); //Change the username
             //db2.setPassword("megarezst_yhk"); //Change the password
             db2.setPassword(pass); }//Change the password
@@ -148,11 +148,8 @@ Form::Form(QWidget *parent) :
 
  //Muat Daftar Filter Bamuskam
     muatListFilter();
-
     muat_dis();
     muat_kampung();
-//   Widget *a = new Widget;
-//   a->hide();
     ui->label_realisasi->setVisible(false);
     ui->label_s_d->setVisible(false);
     ui->comboBox_realisasi->setVisible(false);
@@ -165,14 +162,14 @@ Form::Form(QWidget *parent) :
  connect(ui->comboBox_nmKampung, SIGNAL (currentIndexChanged(int)), this, SLOT(qbx_id_kam_conn()));
  connect(ui->comboBox_realisasi, SIGNAL (currentIndexChanged(int)), this, SLOT(qbx3event()));
 
- connect(ui->tableWidget_Bamuskam, &QTableWidget::doubleClicked , this, &Form::event_doubleklik_tw);
+ connect(ui->tableWidget_Bamuskam, &QTableWidget::doubleClicked , this, &Form::event_doubleklik_tw_bamuskam);
  connect(ui->tableWidget_Bamuskam, &QTableWidget::cellClicked , this, &Form::event_klik_tw);
- connect(ui->tableWidget_6, &QTableWidget::cellClicked , this, &Form::event_klik_tw_6);
+ connect(ui->tableWidget_rAnggaran_dds, &QTableWidget::cellClicked , this, &Form::event_klik_tw_6);
  connect(ui->tableWidget_rAnggaran_add, &QTableWidget::cellClicked , this, &Form::event_klik_tw_11);
- connect(ui->tableWidget_13, &QTableWidget::cellClicked , this, &Form::event_klik_tw_13);
- connect(ui->tableWidget_2, &QTableWidget::doubleClicked , this, &Form::event_doubleklik_tw_2);
- connect(ui->tableWidget_cetak_add, &QTableWidget::doubleClicked , this, &Form::event_doubleklik_tw_9);
- connect(ui->tableWidget_13, &QTableWidget::doubleClicked , this, &Form::even_dklik_tw13);
+ connect(ui->tableWidget_daftarUser, &QTableWidget::cellClicked , this, &Form::even_klik_tw_user);
+ connect(ui->tableWidget_cetak_dds, &QTableWidget::doubleClicked , this, &Form::event_doubleklik_tw_cetak_dds);
+ connect(ui->tableWidget_cetak_add, &QTableWidget::doubleClicked , this, &Form::event_doubleklik_tw_cetak_add);
+ connect(ui->tableWidget_cetak_sppd, &QTableWidget::doubleClicked , this, &Form::even_dklik_tw13);
  connect(this, SIGNAL( currentChanged(int)), this, SLOT(onTabChanged(int)));
 
 //  =======================================  SIGNAL AND SLOT ==========================================
@@ -186,19 +183,11 @@ menu="1";
 
  ui->label_4->setText(""); ui->label_5->setText(" Dana Desa"); ui->label_13->setText(""); ui->label_14->setText("Alokasi Dana Desa");
 
- ui->toolButton_3->setVisible(false);
- ui->toolButton_5->setVisible(false);
- ui->toolButton_9->setVisible(false);
- ui->toolButton_11->setVisible(false);
+
+
 
  // === Memua Level Type ===
  muat_lvl_type();
-
-// qInfo() << "Type data pada lvl: " << lvl;
-// qInfo() << "Type data pada Type: " << type;
-
-
-
  if(lvl=="su" && type=="su")
  {
      updateTampilan(SuperMode);
@@ -211,8 +200,11 @@ menu="1";
                                            {updateTampilan(UserMode_1);}
                                              else if(lvl=="usr" && type=="add")
                                                            {updateTampilan(UserMode_2);}
-
  // === Memuat Level Type ===
+
+
+
+
 
 #ifdef Q_OS_WINDOWS
     Form::Initialize();
@@ -221,14 +213,11 @@ menu="1";
 }
 
 Form::~Form()
-{
-    delete ui;
-}
+{    delete ui; }
 
 
 QString decryptToString(const QString plaintext)
-{
-    QString a = plaintext;
+{    QString a = plaintext;
     return a;
 }
 
@@ -240,15 +229,13 @@ void Form::onTabChanged(int tabIndex) {
 
 // === StringList dari list daftar nama ===S===
 QStringList Form::getLspdf1() const
-{
-    return  lspdf1;
-}
+{    return  lspdf1; }
 
 void Form::rundatapdf1()
 {
     Form *a = new Form;
     a->datapdf1();
-    qInfo() << " Running Dari run data pdf ";
+  //  qInfo() << " Running Dari run data pdf ";
 }
 
 QString Form::getPdfdt1() const
@@ -256,7 +243,73 @@ QString Form::getPdfdt1() const
     return pdfdt1;
 }
 
+// === Border ToolButton selected ==========
+void Form::boderToolbar(int a)
+{
+    if(a==1){ui->toolButton->setStyleSheet("QToolButton#toolButton{ border: 2px solid #FFD700; }" );
+                ui->toolButton_danaDesa->setStyleSheet("QToolButton#toolButton_danaDesa{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_add->setStyleSheet("QToolButton#toolButton_add{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );
+    }
 
+    if(a==2){ui->toolButton->setStyleSheet("QToolButton#toolButton{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_danaDesa->setStyleSheet("QToolButton#toolButton_danaDesa{ border: 2px solid #FFD700; }" );
+                ui->toolButton_add->setStyleSheet("QToolButton#toolButton_add{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );
+    }
+
+    if(a==3){ui->toolButton->setStyleSheet("QToolButton#toolButton{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_danaDesa->setStyleSheet("QToolButton#toolButton_danaDesa{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_add->setStyleSheet("QToolButton#toolButton_add{ border: 2px solid #FFD700; }" );
+                ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );
+    }
+
+    if(a==4){ui->toolButton->setStyleSheet("QToolButton#toolButton{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_danaDesa->setStyleSheet("QToolButton#toolButton_danaDesa{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_add->setStyleSheet("QToolButton#toolButton_add{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid #FFD700; }" );
+                ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );
+    }
+
+    if(a==5){ui->toolButton->setStyleSheet("QToolButton#toolButton{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_danaDesa->setStyleSheet("QToolButton#toolButton_danaDesa{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_add->setStyleSheet("QToolButton#toolButton_add{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid #FFD700; }" );
+                ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );
+    }
+
+    if(a==6){ui->toolButton->setStyleSheet("QToolButton#toolButton{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_danaDesa->setStyleSheet("QToolButton#toolButton_danaDesa{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_add->setStyleSheet("QToolButton#toolButton_add{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid rgba(255,255,255,.5);}" );
+                ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid #FFD700; }" );
+                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );
+    }
+
+    if(a==7){ui->toolButton->setStyleSheet("QToolButton#toolButton{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_danaDesa->setStyleSheet("QToolButton#toolButton_danaDesa{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_add->setStyleSheet("QToolButton#toolButton_add{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid #FFD700; }" );
+    }
+}
+// === Border ToolButton selected ==========
 
 // === StringList dari list daftar nama ===E===
 
@@ -350,55 +403,41 @@ QString Form::jumlahcair()
 }
 
 
-void Form::on_toolButton_cetakPdfadd_clicked()
-{
-    int noBrs = ui->tableWidget_cetak_add->currentRow();
-    if(noBrs<0){QMessageBox::information(this,"Info...!!!","Pilih Realisasi yang ingin di cetak...");return;}
-    if(noBrs>=0){
-        datapdf2();
-        QString id = ui->tableWidget_cetak_add->item(noBrs,2)->text();
-        databam(id);
 
-        Widget2 *a = new Widget2;
-        QIcon logo(":/gbr/html/gbr/yhk.png");
-        a->setWindowIcon(logo);
-        a->show();
-    }
-}
 
 void Form::datapdf1()
 {
     QStringList lspdf;
-    int noBrs = ui->tableWidget_2->currentRow();
+    int noBrs = ui->tableWidget_cetak_dds->currentRow();
     if(noBrs!=-1 && menu=="2"){
-    QString id_kam =  ui->tableWidget_2->item(noBrs,2)->text();
-    QString nmdis = ui->tableWidget_2->item(noBrs,3)->text();
-    QString nmkamp = ui->tableWidget_2->item(noBrs,4)->text();
-    QString terbilang= ui->tableWidget_2->item(noBrs,13)->text();
-    QString norek = ui->tableWidget_2->item(noBrs,5)->text();
-    QString nmrek = ui->tableWidget_2->item(noBrs,6)->text();
-    QString nmbank = ui->tableWidget_2->item(noBrs,7)->text();
-    QString nmkkp = ui->tableWidget_2->item(noBrs,9)->text();
-    QString nmbenk = ui->tableWidget_2->item(noBrs,10)->text();
-    QString jkk = ui->tableWidget_2->item(noBrs,28)->text();
-    QString tahap = ui->tableWidget_2->item(noBrs,11)->text();
-    QString jml = ui->tableWidget_2->item(noBrs,12)->text();
-    QString persen = ui->tableWidget_2->item(noBrs,17)->text();
-    QString nmkpdns = ui->tableWidget_2->item(noBrs,22)->text();
-    QString tahap2 = ui->tableWidget_2->item(noBrs,26)->text();
-    QString pkpldns = ui->tableWidget_2->item(noBrs,24)->text();
-    QString nip = ui->tableWidget_2->item(noBrs,25)->text();
-    QString nosrt1 = ui->tableWidget_2->item(noBrs,15)->text();
-    QString nosrt2 = ui->tableWidget_2->item(noBrs,16)->text();
-    QString tgl = ui->tableWidget_2->item(noBrs,14)->text();
+    QString id_kam =  ui->tableWidget_cetak_dds->item(noBrs,2)->text();
+    QString nmdis = ui->tableWidget_cetak_dds->item(noBrs,3)->text();
+    QString nmkamp = ui->tableWidget_cetak_dds->item(noBrs,4)->text();
+    QString terbilang= ui->tableWidget_cetak_dds->item(noBrs,13)->text();
+    QString norek = ui->tableWidget_cetak_dds->item(noBrs,5)->text();
+    QString nmrek = ui->tableWidget_cetak_dds->item(noBrs,6)->text();
+    QString nmbank = ui->tableWidget_cetak_dds->item(noBrs,7)->text();
+    QString nmkkp = ui->tableWidget_cetak_dds->item(noBrs,9)->text();
+    QString nmbenk = ui->tableWidget_cetak_dds->item(noBrs,10)->text();
+    QString jkk = ui->tableWidget_cetak_dds->item(noBrs,28)->text();
+    QString tahap = ui->tableWidget_cetak_dds->item(noBrs,11)->text();
+    QString jml = ui->tableWidget_cetak_dds->item(noBrs,12)->text();
+    QString persen = ui->tableWidget_cetak_dds->item(noBrs,17)->text();
+    QString nmkpdns = ui->tableWidget_cetak_dds->item(noBrs,22)->text();
+    QString tahap2 = ui->tableWidget_cetak_dds->item(noBrs,26)->text();
+    QString pkpldns = ui->tableWidget_cetak_dds->item(noBrs,24)->text();
+    QString nip = ui->tableWidget_cetak_dds->item(noBrs,25)->text();
+    QString nosrt1 = ui->tableWidget_cetak_dds->item(noBrs,15)->text();
+    QString nosrt2 = ui->tableWidget_cetak_dds->item(noBrs,16)->text();
+    QString tgl = ui->tableWidget_cetak_dds->item(noBrs,14)->text();
 
     QString unmdis = nmdis.toUpper();
     QString unmkam = nmkamp.toUpper();\
 
-    QString skben= ui->tableWidget_2->item(noBrs,8)->text();
-    QString skkkam= ui->tableWidget_2->item(noBrs,19)->text();
+    QString skben= ui->tableWidget_cetak_dds->item(noBrs,8)->text();
+    QString skkkam= ui->tableWidget_cetak_dds->item(noBrs,19)->text();
     //Tambahan thn 2
-    QString thn2 = ui->tableWidget_2->item(noBrs,23)->text();
+    QString thn2 = ui->tableWidget_cetak_dds->item(noBrs,23)->text();
 
     lspdf << nmdis << nmkamp << terbilang << norek << nmrek << nmbank <<nmkkp << nmbenk << jkk << tahap << jml << persen << nmkpdns << tahap2 << pkpldns << nip << nosrt1 << nosrt2 << tgl << unmdis << unmkam;
     lspdf1 =lspdf;
@@ -471,10 +510,6 @@ if(noBrs!=-1 && menu=="3"){
      }
 }}
 
-void Form::datapdf3()
-{
-
-}
 
 
 bool Form::saveDocument(QString filePath)
@@ -533,45 +568,12 @@ void Form::on_generateButton_pressed( QString te)
     }
 }
 
-//!================== QToolButton ============================
 
-void Form::on_toolButton_clicked() //tb 1
-{
-    ui->comboBox->setVisible(true);
-    ui->comboBox_nmKampung->setVisible(true);
-    ui->label->setVisible(true);
-    ui->label_namaKampung->setVisible(true);
-    ui->toolButton_refResh->setVisible(true);
-
-    ui->label_realisasi->setVisible(false);
-    ui->label_s_d->setVisible(false);
-    ui->comboBox_realisasi->setVisible(false);
-    ui->toolButton_pdf_main->setVisible(false);
-
-    ui->dateEdit->setVisible(false);
-    ui->dateEdit_2->setVisible(false);
-
-    //Tambahan Filter
-    ui->comboBox_filter->setVisible(true);
-    ui->label_filter->setVisible(true);
-    ui->toolButton_filter->setVisible(true);
-    ui->comboBox_filter->clear();
-    muatListFilter();
-
-   ui->stackedWidget->setCurrentIndex(0);
-   menu ="1";
-   if(menu=="1"){
-       if(qbx_id_kam->currentText()!="")
-       {
-           QString id = qbx_id_kam->currentText();
-           muat_bamuskam(id);
-       }
-   }
-}
 
 // ==== Button Menu Dana Desa ==========
 void Form::on_toolButton_danaDesa_clicked()
 {
+    boderToolbar(2);
     ui->comboBox->setVisible(true);
     ui->comboBox_nmKampung->setVisible(true);
     ui->label->setVisible(true);
@@ -603,6 +605,7 @@ void Form::on_toolButton_danaDesa_clicked()
 
 void Form::on_toolButton_add_clicked()
 {
+    boderToolbar(3);
     ui->comboBox->setVisible(true);
     ui->comboBox_nmKampung->setVisible(true);
     ui->label->setVisible(true);
@@ -635,6 +638,7 @@ void Form::on_toolButton_add_clicked()
 void Form::on_toolButton_Sppd_clicked() // ToolButton 4
 {
     //Tambahan Filter
+    boderToolbar(6);
     ui->comboBox_filter->setVisible(false);
     ui->label_filter->setVisible(false);
     ui->toolButton_filter->setVisible(false);
@@ -708,15 +712,15 @@ void Form::muatrealdds() // Muat Data Realisasi Dana Desa
 void Form::muatheadertw12()
 {
     int j = li_realdds.count();
-    ui->tableWidget_12->setColumnCount(j);
-    ui->tableWidget_12->setHorizontalHeaderLabels(li_realdds );
-    ui->tableWidget_12->setColumnHidden(0,true);
+    ui->tableWidget_realisasi_sppd->setColumnCount(j);
+    ui->tableWidget_realisasi_sppd->setHorizontalHeaderLabels(li_realdds );
+    ui->tableWidget_realisasi_sppd->setColumnHidden(0,true);
 }
 
 void Form::muatrealdds_() // Muat Data Kampung Untuk Realisasi
 {
-    while(ui->tableWidget_12->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
-   {ui->tableWidget_12->removeRow(0);}
+    while(ui->tableWidget_realisasi_sppd->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+   {ui->tableWidget_realisasi_sppd->removeRow(0);}
 
     QSqlQuery query;
     QString cmd = "SELECT no,distrik,kampung,pagu FROM pmk_yhk.m_kampung ORDER BY no";
@@ -726,7 +730,7 @@ void Form::muatrealdds_() // Muat Data Kampung Untuk Realisasi
     int no=0;
     while(query.next())
     {
-        ui->tableWidget_12->insertRow(no);
+        ui->tableWidget_realisasi_sppd->insertRow(no);
         QTableWidgetItem *id_ = new QTableWidgetItem;
         QTableWidgetItem *nmdis_ = new QTableWidgetItem;
         QTableWidgetItem *nmkam_ = new QTableWidgetItem;
@@ -744,10 +748,10 @@ void Form::muatrealdds_() // Muat Data Kampung Untuk Realisasi
         nmkam_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
         pagu_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
 
-       ui->tableWidget_12->setItem(no,0,id_);
-       ui->tableWidget_12->setItem(no,1,nmdis_);
-       ui->tableWidget_12->setItem(no,2,nmkam_);
-       ui->tableWidget_12->setItem(no,3,pagu_);
+       ui->tableWidget_realisasi_sppd->setItem(no,0,id_);
+       ui->tableWidget_realisasi_sppd->setItem(no,1,nmdis_);
+       ui->tableWidget_realisasi_sppd->setItem(no,2,nmkam_);
+       ui->tableWidget_realisasi_sppd->setItem(no,3,pagu_);
 
         no++;
 }}
@@ -761,8 +765,8 @@ void Form::muatrealdds__()
     QString tgl = tg.toString("yyyy-MM-dd");
     QString tgl2 = tg2.toString("yyyy-MM-dd");
 
-    int j = ui->tableWidget_12->rowCount();
-    int k = ui->tableWidget_12->columnCount();
+    int j = ui->tableWidget_realisasi_sppd->rowCount();
+    int k = ui->tableWidget_realisasi_sppd->columnCount();
 
     for(int i=0; i<j ; i++)
     {
@@ -773,8 +777,8 @@ void Form::muatrealdds__()
                 qInfo()<<"iiiii Ii" << ii;
                 qInfo()<<"iiiii k3" << k-2;
 
-            QString id = ui->tableWidget_12->item(i,0)->text();
-            QString a = ui->tableWidget_12->item(i,3)->text();
+            QString id = ui->tableWidget_realisasi_sppd->item(i,0)->text();
+            QString a = ui->tableWidget_realisasi_sppd->item(i,3)->text();
              if(a==nullptr){a="0";}
             a.replace("Rp ",""); a.replace(".",""); a.replace(",",".");
             double aa = a.toDouble();
@@ -801,19 +805,19 @@ void Form::muatrealdds__()
             QString jcc = indo.toCurrencyString(jc,"Rp ");
 
             jc_->setText(jcc);
-           ui->tableWidget_12->setItem(i,ii,jc_);
+           ui->tableWidget_realisasi_sppd->setItem(i,ii,jc_);
 
            QTableWidgetItem *sb_ = new QTableWidgetItem;
            QString sb = indo.toCurrencyString(sbt,"Rp ");
            sb_->setText(sb);
-           ui->tableWidget_12->setItem(i, ui->tableWidget_12->columnCount()-2, sb_);
+           ui->tableWidget_realisasi_sppd->setItem(i, ui->tableWidget_realisasi_sppd->columnCount()-2, sb_);
 
 
            double dd_ = aa-sbt;
            QString  dd = indo.toCurrencyString(dd_,"Rp ");
            QTableWidgetItem *sb__ = new QTableWidgetItem;
            sb__->setText(dd);
-           ui->tableWidget_12->setItem(i, ui->tableWidget_12->columnCount()-1, sb__);
+           ui->tableWidget_realisasi_sppd->setItem(i, ui->tableWidget_realisasi_sppd->columnCount()-1, sb__);
 
            /**/ }
 
@@ -833,8 +837,8 @@ QString Form::muatreal()
 
 void Form::muatrealadd()
 {
-    while(ui->tableWidget_12->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
-   {ui->tableWidget_12->removeRow(0);}
+    while(ui->tableWidget_realisasi_sppd->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+   {ui->tableWidget_realisasi_sppd->removeRow(0);}
 
     li_realadd.clear();
     li_realadd.append("ID");
@@ -862,16 +866,16 @@ void Form::muatrealadd()
 void Form::muatheadertw12_2()
 {
     int j = li_realadd.count();
-    ui->tableWidget_12->setColumnCount(j);
-    ui->tableWidget_12->setHorizontalHeaderLabels(li_realadd );
-    ui->tableWidget_12->setColumnHidden(0,true);
+    ui->tableWidget_realisasi_sppd->setColumnCount(j);
+    ui->tableWidget_realisasi_sppd->setHorizontalHeaderLabels(li_realadd );
+    ui->tableWidget_realisasi_sppd->setColumnHidden(0,true);
 
 }
 
 void Form::muatrealadd_() // Muat Data Kampung Untuk Realisasi
 {
-    while(ui->tableWidget_12->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
-   {ui->tableWidget_12->removeRow(0);}
+    while(ui->tableWidget_realisasi_sppd->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+   {ui->tableWidget_realisasi_sppd->removeRow(0);}
 
     QSqlQuery query;
     QString cmd = "SELECT no,distrik,kampung,pagu_add FROM pmk_yhk.m_kampung ORDER BY no";
@@ -881,7 +885,7 @@ void Form::muatrealadd_() // Muat Data Kampung Untuk Realisasi
     int no=0;
     while(query.next())
     {
-        ui->tableWidget_12->insertRow(no);
+        ui->tableWidget_realisasi_sppd->insertRow(no);
         QTableWidgetItem *id_ = new QTableWidgetItem;
         QTableWidgetItem *nmdis_ = new QTableWidgetItem;
         QTableWidgetItem *nmkam_ = new QTableWidgetItem;
@@ -899,10 +903,10 @@ void Form::muatrealadd_() // Muat Data Kampung Untuk Realisasi
         nmkam_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
         pagu_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
 
-       ui->tableWidget_12->setItem(no,0,id_);
-       ui->tableWidget_12->setItem(no,1,nmdis_);
-       ui->tableWidget_12->setItem(no,2,nmkam_);
-       ui->tableWidget_12->setItem(no,3,pagu_);
+       ui->tableWidget_realisasi_sppd->setItem(no,0,id_);
+       ui->tableWidget_realisasi_sppd->setItem(no,1,nmdis_);
+       ui->tableWidget_realisasi_sppd->setItem(no,2,nmkam_);
+       ui->tableWidget_realisasi_sppd->setItem(no,3,pagu_);
 
         no++;
 }}
@@ -916,15 +920,15 @@ void Form::muatrealadd__()
     QString tgl = tg.toString("yyyy-MM-dd");
     QString tgl2 = tg2.toString("yyyy-MM-dd");
 
-    int j = ui->tableWidget_12->rowCount();
-    int k = ui->tableWidget_12->columnCount();
+    int j = ui->tableWidget_realisasi_sppd->rowCount();
+    int k = ui->tableWidget_realisasi_sppd->columnCount();
     for(int i=0; i<j ; i++)
     {
         double sbt=0;
         for(int ii=4; ii<k-2; ii++)
         {
-            QString id = ui->tableWidget_12->item(i,0)->text();
-            QString a = ui->tableWidget_12->item(i,3)->text();
+            QString id = ui->tableWidget_realisasi_sppd->item(i,0)->text();
+            QString a = ui->tableWidget_realisasi_sppd->item(i,3)->text();
              if(a==nullptr){a="0";}
             a.replace("Rp ",""); a.replace(".",""); a.replace(",",".");
             double aa = a.toDouble();
@@ -951,19 +955,19 @@ void Form::muatrealadd__()
             QString jcc = indo.toCurrencyString(jc,"Rp ");
 
             jc_->setText(jcc);
-           ui->tableWidget_12->setItem(i,ii,jc_);
+           ui->tableWidget_realisasi_sppd->setItem(i,ii,jc_);
 
            QTableWidgetItem *sb_ = new QTableWidgetItem;
            QString sb = indo.toCurrencyString(sbt,"Rp ");
            sb_->setText(sb);
-           ui->tableWidget_12->setItem(i, ui->tableWidget_12->columnCount()-2, sb_);
+           ui->tableWidget_realisasi_sppd->setItem(i, ui->tableWidget_realisasi_sppd->columnCount()-2, sb_);
 
 
            double dd_ = aa-sbt;
            QString  dd = indo.toCurrencyString(dd_,"Rp ");
            QTableWidgetItem *sb__ = new QTableWidgetItem;
            sb__->setText(dd);
-           ui->tableWidget_12->setItem(i, ui->tableWidget_12->columnCount()-1, sb__);
+           ui->tableWidget_realisasi_sppd->setItem(i, ui->tableWidget_realisasi_sppd->columnCount()-1, sb__);
 
            /**/ }
 
@@ -1114,8 +1118,8 @@ void Form::even_distrik_combo(QString &id_kam_s)
     ui->comboBox_nmKampung->setCompleter(completer);
 
     if(menu=="2"&&ui->comboBox_nmKampung->currentText()==""){
-        while(ui->tableWidget_2->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
-       {ui->tableWidget_2->removeRow(0);}}
+        while(ui->tableWidget_cetak_dds->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+       {ui->tableWidget_cetak_dds->removeRow(0);}}
 
     if(menu=="3"&&ui->comboBox_nmKampung->currentText()==""){
         while(ui->tableWidget_cetak_add->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
@@ -1187,8 +1191,8 @@ void Form::qbx_id_kam_conn() // Connect qbx ke ke even id_kampung
    // qInfo() << " qbx_id_kam " << qbx_id_kam->currentText();
     QString id_kp = qbx_id_kam->currentText();
     if(menu=="2"){
-        while(ui->tableWidget_2->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
-       {ui->tableWidget_2->removeRow(0);}
+        while(ui->tableWidget_cetak_dds->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+       {ui->tableWidget_cetak_dds->removeRow(0);}
         muat_v_bam(id_kp);}
 
     if(menu=="3"){
@@ -1284,8 +1288,8 @@ void Form::muat_bamuskam(QString &id_kam_s)
 
 void Form::muat_v_bam(QString &id_kam_s) // Data realisasi kampung
 {
-    while(ui->tableWidget_6->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
-   {ui->tableWidget_6->removeRow(0);}
+    while(ui->tableWidget_rAnggaran_dds->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+   {ui->tableWidget_rAnggaran_dds->removeRow(0);}
     QLocale indo = QLocale(QLocale::Indonesian, QLocale::Indonesia);
     QSqlQuery query;
     QString cmd= " SELECT no, distrik, kampung, pagu, pagu1 AS sisa, realisasi FROM pmk_yhk.v_bam WHERE no= :id ORDER BY no";
@@ -1300,7 +1304,7 @@ void Form::muat_v_bam(QString &id_kam_s) // Data realisasi kampung
     double Tr=0;
     double Ts=0;
     while (query.next()) {
-            ui->tableWidget_6->insertRow(noBrs);
+            ui->tableWidget_rAnggaran_dds->insertRow(noBrs);
 
             QTableWidgetItem *no_ = new QTableWidgetItem;
             QTableWidgetItem *dis_ = new QTableWidgetItem;
@@ -1329,12 +1333,12 @@ void Form::muat_v_bam(QString &id_kam_s) // Data realisasi kampung
             real_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
             sisa_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
 
-            ui->tableWidget_6->setItem(noBrs,0,no_);
-            ui->tableWidget_6->setItem(noBrs,1,dis_);
-            ui->tableWidget_6->setItem(noBrs,2,kam_);
-            ui->tableWidget_6->setItem(noBrs,3,pagu_);
-            ui->tableWidget_6->setItem(noBrs,4,real_);
-            ui->tableWidget_6->setItem(noBrs,5,sisa_);
+            ui->tableWidget_rAnggaran_dds->setItem(noBrs,0,no_);
+            ui->tableWidget_rAnggaran_dds->setItem(noBrs,1,dis_);
+            ui->tableWidget_rAnggaran_dds->setItem(noBrs,2,kam_);
+            ui->tableWidget_rAnggaran_dds->setItem(noBrs,3,pagu_);
+            ui->tableWidget_rAnggaran_dds->setItem(noBrs,4,real_);
+            ui->tableWidget_rAnggaran_dds->setItem(noBrs,5,sisa_);
             noBrs++;
     }
 
@@ -1460,19 +1464,19 @@ void Form::header_wt1() // Header table widget 1
 void Form::header_wt6() // Header table widget 6
 {
     QStringList headerWidget;
-    ui->tableWidget_6->setColumnCount(6);
+    ui->tableWidget_rAnggaran_dds->setColumnCount(6);
     headerWidget <<"id" <<"Nama Distrik"<<"Nama Kampung" <<"Pagu Anggaran " <<"Sisa Anggaran "<<"Realisasi ";
-    ui->tableWidget_6->setHorizontalHeaderLabels(headerWidget);
-    ui->tableWidget_6->horizontalHeader()->setStretchLastSection(true);
-    ui->tableWidget_6->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->tableWidget_6->setColumnWidth(0,8);
-    ui->tableWidget_6->setColumnHidden(0,true);
-    ui->tableWidget_6->setColumnWidth(1,140);
-    ui->tableWidget_6->setColumnWidth(2,150);
+    ui->tableWidget_rAnggaran_dds->setHorizontalHeaderLabels(headerWidget);
+    ui->tableWidget_rAnggaran_dds->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget_rAnggaran_dds->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableWidget_rAnggaran_dds->setColumnWidth(0,8);
+    ui->tableWidget_rAnggaran_dds->setColumnHidden(0,true);
+    ui->tableWidget_rAnggaran_dds->setColumnWidth(1,140);
+    ui->tableWidget_rAnggaran_dds->setColumnWidth(2,150);
     //ui->tableWidget->setColumnHidden(2,true);
-    ui->tableWidget_6->setColumnWidth(3,120);
-    ui->tableWidget_6->setColumnWidth(4,120);
-    ui->tableWidget_6->setColumnWidth(5,120);
+    ui->tableWidget_rAnggaran_dds->setColumnWidth(3,120);
+    ui->tableWidget_rAnggaran_dds->setColumnWidth(4,120);
+    ui->tableWidget_rAnggaran_dds->setColumnWidth(5,120);
 
 }
 
@@ -1498,44 +1502,44 @@ void Form::header_wt11() // Header table widget 6
 void Form::header_wt2()
 {
     QStringList headerWidget;
-    ui->tableWidget_2->setColumnCount(29);
+    ui->tableWidget_cetak_dds->setColumnCount(29);
     headerWidget <<"cetak"<<"Id Dis"<<"Id Kam"<<" Nama Distrik"<<"Nama Kampung"<<"No Rekening"<<"Nama Rekening"<<"Nama Bank"<<"SK Bendahara"<<"Nama Kepala Kampung"<<" Nama Bendahara "
                  <<"Tahap Pencairan"<<"Jumlah Pencairan"<<"Terbilang"<<"Tanggal Terima"<<"No Srt 1"<<"No Srt 2"<<"%"<<"SK Bupati"<<"SK Kep.Kampung"
                 <<"SK Men PMK"<<"SK Men Keu"<<"Kepala Dinas" << " Ket " << "Pangkat" << "NIP" <<"Laporan Realisasi"<<"id"<<"jkk";
-    ui->tableWidget_2->setHorizontalHeaderLabels(headerWidget);
+    ui->tableWidget_cetak_dds->setHorizontalHeaderLabels(headerWidget);
 
-    ui->tableWidget_2->setColumnHidden(0,true);
-    ui->tableWidget_2->setColumnHidden(1,true);
-    ui->tableWidget_2->setColumnHidden(2,true);
-    //ui->tableWidget_2->setColumnHidden(3,true);
-    //ui->tableWidget_2->setColumnHidden(4,true);
-    ui->tableWidget_2->setColumnHidden(5,true);
-    ui->tableWidget_2->setColumnHidden(6,true);
-    ui->tableWidget_2->setColumnHidden(7,true);
-    ui->tableWidget_2->setColumnHidden(8,true);
-    ui->tableWidget_2->setColumnHidden(9,true);
-    ui->tableWidget_2->setColumnHidden(10,true);
-    ui->tableWidget_2->setColumnHidden(18,true);
-    ui->tableWidget_2->setColumnHidden(19,true);
-    ui->tableWidget_2->setColumnHidden(20,true);
-    ui->tableWidget_2->setColumnHidden(21,true);
-    ui->tableWidget_2->setColumnHidden(22,true);
-    ui->tableWidget_2->setColumnHidden(23,true);
-    ui->tableWidget_2->setColumnHidden(24,true);
-    ui->tableWidget_2->setColumnHidden(25,true);
-    ui->tableWidget_2->setColumnHidden(27,true);
-    ui->tableWidget_2->setColumnHidden(28,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(0,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(1,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(2,true);
+    //ui->tableWidget_cetak_dds->setColumnHidden(3,true);
+    //ui->tableWidget_cetak_dds->setColumnHidden(4,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(5,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(6,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(7,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(8,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(9,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(10,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(18,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(19,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(20,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(21,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(22,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(23,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(24,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(25,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(27,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(28,true);
 
-    ui->tableWidget_2->setColumnWidth(3,120);
-    ui->tableWidget_2->setColumnWidth(4,120);
-   ui->tableWidget_2->setColumnWidth(11,150);
-   ui->tableWidget_2->setColumnWidth(12,120);
-   ui->tableWidget_2->setColumnWidth(13,340);
-   ui->tableWidget_2->setColumnWidth(14,90);
-   ui->tableWidget_2->setColumnWidth(15,230);
-   ui->tableWidget_2->setColumnWidth(16,230);
-   ui->tableWidget_2->setColumnWidth(17,50);
-   ui->tableWidget_2->setColumnWidth(26,120);
+    ui->tableWidget_cetak_dds->setColumnWidth(3,120);
+    ui->tableWidget_cetak_dds->setColumnWidth(4,120);
+   ui->tableWidget_cetak_dds->setColumnWidth(11,150);
+   ui->tableWidget_cetak_dds->setColumnWidth(12,120);
+   ui->tableWidget_cetak_dds->setColumnWidth(13,340);
+   ui->tableWidget_cetak_dds->setColumnWidth(14,90);
+   ui->tableWidget_cetak_dds->setColumnWidth(15,230);
+   ui->tableWidget_cetak_dds->setColumnWidth(16,230);
+   ui->tableWidget_cetak_dds->setColumnWidth(17,50);
+   ui->tableWidget_cetak_dds->setColumnWidth(26,120);
 
 }
 
@@ -1592,7 +1596,7 @@ void Form::header_wt9()
 }
 
 
-void Form::event_doubleklik_tw() // Double Klik tw data bamuskam menu 1
+void Form::event_doubleklik_tw_bamuskam() // Double Klik tw data bamuskam menu 1
 {
     qInfo()<< "Even Double Kli tw 1";
     if(menu=="1"){ int nBrs = ui->tableWidget_Bamuskam->currentRow();
@@ -1689,7 +1693,7 @@ void Form::event_doubleklik_tw() // Double Klik tw data bamuskam menu 1
 }
 
 
-void Form::event_doubleklik_tw_2() //Double Klik Edit data realisasi dds
+void Form::event_doubleklik_tw_cetak_dds() //Double Klik Edit data realisasi dds
 {
     qInfo() << "Doubleklik tw 2";
 
@@ -1698,7 +1702,7 @@ if(menu=="2"){  menu2="2";
     QString id_dis = qbx_id_dis->currentText();
     QString id_kam = qbx_id_kam->currentText();
     if(id_dis==""&& id_kam==""){QMessageBox::information(this,"Info","Pilih Distrik dan Kampung..."); return;}
-    int noBrs = ui->tableWidget_2->currentRow();
+    int noBrs = ui->tableWidget_cetak_dds->currentRow();
 
     if(noBrs>=0){
 
@@ -1710,40 +1714,40 @@ if(menu=="2"){  menu2="2";
 //        qbx_sk_keu= new QComboBox;
 
         le_jml->setClearButtonEnabled(true);
-        le_jml->setText( ui->tableWidget_2->item(noBrs,12)->text());
+        le_jml->setText( ui->tableWidget_cetak_dds->item(noBrs,12)->text());
         le_jml->setMaximumWidth(190);
 
 
         //========== Data dari table widget ================
-        QString thp_tw = ui->tableWidget_2->item(noBrs,11)->text();
+        QString thp_tw = ui->tableWidget_cetak_dds->item(noBrs,11)->text();
 
 //        QString jcair = le_jml->text();
 //        jcair.replace("Rp ",""); jcair.replace(".",""); jcair.replace(",",".");
 //        double jc = jcair.toDouble();
 
-//        QString jcair2 = ui->tableWidget_2->item(noBrs,12)->text();
+//        QString jcair2 = ui->tableWidget_cetak_dds->item(noBrs,12)->text();
 //        jcair2.replace("Rp ",""); jcair2.replace(".",""); jcair2.replace(",",".");
 //        double jc2 = jcair2.toDouble();
 
-//        QString jcair3 = ui->tableWidget_6->item(0,4)->text();
+//        QString jcair3 = ui->tableWidget_rAnggaran_dds->item(0,4)->text();
 //        jcair3.replace("Rp ",""); jcair3.replace(".",""); jcair3.replace(",",".");
 //        double jc3 = jcair3.toDouble();
 //        qInfo() << "Doubleklik tw 2";
 //        if((jc3+jc2)-(jc3+jc)<0){QMessageBox::information(eb_v,"Info....","Nilai yang anda masukkan melebihi pagu"); return;}
 
-        QString tl = ui->tableWidget_2->item(noBrs, 14)->text();
+        QString tl = ui->tableWidget_cetak_dds->item(noBrs, 14)->text();
         QDate dt = QDate::fromString(tl,"dd-MM-yyyy");
 //        QDateEdit *de = new QDateEdit;
 //        de->setDate(dt);
 //        de->setDisplayFormat("dd-MM-yyyy");
 
 
-        QString nosr1 = ui->tableWidget_2->item(noBrs,15)->text();
-        QString nosr2 = ui->tableWidget_2->item(noBrs,16)->text();
-        QString persent = ui->tableWidget_2->item(noBrs,17)->text();
-//        QString pmk = ui->tableWidget_2->item(noBrs,20)->text();
-//        QString keu = ui->tableWidget_2->item(noBrs,21)->text();
-        QString lap = ui->tableWidget_2->item(noBrs,26)->text();
+        QString nosr1 = ui->tableWidget_cetak_dds->item(noBrs,15)->text();
+        QString nosr2 = ui->tableWidget_cetak_dds->item(noBrs,16)->text();
+        QString persent = ui->tableWidget_cetak_dds->item(noBrs,17)->text();
+//        QString pmk = ui->tableWidget_cetak_dds->item(noBrs,20)->text();
+//        QString keu = ui->tableWidget_cetak_dds->item(noBrs,21)->text();
+        QString lap = ui->tableWidget_cetak_dds->item(noBrs,26)->text();
 
 
          //==========================================
@@ -1891,7 +1895,7 @@ if(menu=="2"){  menu2="2";
 }
 }}
 
-void Form::event_doubleklik_tw_9()  //Double Klik Edit data realisasi add double klik tw 9
+void Form::event_doubleklik_tw_cetak_add()  //Double Klik Edit data realisasi add double klik tw 9
 {
 
 //    disconnect(btn1, SIGNAL(pressed()), this, SLOT(click_btn2()));
@@ -2132,7 +2136,7 @@ void Form::eventQbxadd()
       le_jml->clear();
       QString per = persen_2.left(2);
       QString thn2 = thp.right(4);
-      QString pagu = ui->tableWidget_6->item(0,3)->text();
+      QString pagu = ui->tableWidget_rAnggaran_dds->item(0,3)->text();
       pagu.replace("Rp ",""); pagu.replace(".",""); pagu.replace(",",".");
 
       double pg = pagu.toDouble();
@@ -2795,8 +2799,8 @@ wg_2->close();
 void Form::loadsppd()
 {
     if(ui->comboBox_realisasi->currentIndex()==0){
-    while(ui->tableWidget_13->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
-   {ui->tableWidget_13->removeRow(0);}
+    while(ui->tableWidget_cetak_sppd->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+   {ui->tableWidget_cetak_sppd->removeRow(0);}
     QSqlQuery query;
     QString cmd = "SELECT * FROM pmk_yhk.sppdd ORDER BY id";
     query.prepare(cmd);
@@ -2805,7 +2809,7 @@ void Form::loadsppd()
     int i=0;
     while(query.next())
     {
-                ui->tableWidget_13->insertRow(i);
+                ui->tableWidget_cetak_sppd->insertRow(i);
                 QTableWidgetItem *no_ = new QTableWidgetItem;
                 QTableWidgetItem *nosrt_ = new QTableWidgetItem;
                 QTableWidgetItem *hal_ = new QTableWidgetItem;
@@ -2822,10 +2826,10 @@ void Form::loadsppd()
                 hal_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
                 tgl_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
-                ui->tableWidget_13->setItem(i,0,no_);
-                ui->tableWidget_13->setItem(i,1,nosrt_);
-                ui->tableWidget_13->setItem(i,2,hal_);
-                ui->tableWidget_13->setItem(i,3,tgl_);
+                ui->tableWidget_cetak_sppd->setItem(i,0,no_);
+                ui->tableWidget_cetak_sppd->setItem(i,1,nosrt_);
+                ui->tableWidget_cetak_sppd->setItem(i,2,hal_);
+                ui->tableWidget_cetak_sppd->setItem(i,3,tgl_);
                 i++;
     }}
 }
@@ -2833,8 +2837,8 @@ void Form::loadsppd()
 void Form::loadsppd_2()
 {
     if(ui->comboBox_realisasi->currentIndex()==1){
-    while(ui->tableWidget_13->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
-   {ui->tableWidget_13->removeRow(0);}
+    while(ui->tableWidget_cetak_sppd->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+   {ui->tableWidget_cetak_sppd->removeRow(0);}
     QSqlQuery query;
     QString cmd = "SELECT * FROM pmk_yhk.sppdd_2 ORDER BY id";
     query.prepare(cmd);
@@ -2843,7 +2847,7 @@ void Form::loadsppd_2()
     int i=0;
     while(query.next())
     {
-                ui->tableWidget_13->insertRow(i);
+                ui->tableWidget_cetak_sppd->insertRow(i);
                 QTableWidgetItem *no_ = new QTableWidgetItem;
                 QTableWidgetItem *nosrt_ = new QTableWidgetItem;
                 QTableWidgetItem *hal_ = new QTableWidgetItem;
@@ -2859,10 +2863,10 @@ void Form::loadsppd_2()
                 hal_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
                 tgl_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
-                ui->tableWidget_13->setItem(i,0,no_);
-                ui->tableWidget_13->setItem(i,1,nosrt_);
-                ui->tableWidget_13->setItem(i,2,hal_);
-                ui->tableWidget_13->setItem(i,3,tgl_);
+                ui->tableWidget_cetak_sppd->setItem(i,0,no_);
+                ui->tableWidget_cetak_sppd->setItem(i,1,nosrt_);
+                ui->tableWidget_cetak_sppd->setItem(i,2,hal_);
+                ui->tableWidget_cetak_sppd->setItem(i,3,tgl_);
                 i++;
     }}
 }
@@ -2871,16 +2875,16 @@ void Form::loadsppd_2()
 void Form::headsppd()
 {
     QStringList headerWidget;
-    ui->tableWidget_13->setColumnCount(4);
+    ui->tableWidget_cetak_sppd->setColumnCount(4);
     headerWidget <<"id" <<"No Surat"<<"Perihal" <<"Tanggal ";
-    ui->tableWidget_13->setHorizontalHeaderLabels(headerWidget);
-    ui->tableWidget_13->horizontalHeader()->setStretchLastSection(true);
-    ui->tableWidget_13->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableWidget_cetak_sppd->setHorizontalHeaderLabels(headerWidget);
+    ui->tableWidget_cetak_sppd->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget_cetak_sppd->setSelectionBehavior(QAbstractItemView::SelectRows);
 
-    ui->tableWidget_13->setColumnHidden(0,true);
-    ui->tableWidget_13->setColumnWidth(1,230);
-    ui->tableWidget_13->setColumnWidth(2,330);
-    ui->tableWidget_13->setColumnWidth(3,70);
+    ui->tableWidget_cetak_sppd->setColumnHidden(0,true);
+    ui->tableWidget_cetak_sppd->setColumnWidth(1,230);
+    ui->tableWidget_cetak_sppd->setColumnWidth(2,330);
+    ui->tableWidget_cetak_sppd->setColumnWidth(3,70);
 }
 
 void Form::headsppd_2() // di gunakan double klik tw 13 ..........................................
@@ -2901,11 +2905,11 @@ muat_sppd_2();
   if(ui->comboBox_realisasi->currentIndex()==0)
   {
     //qInfo() << "qbx  double klik 11....................... ";
-      int b = ui->tableWidget_13->currentRow();
-      QString id = ui->tableWidget_13->item(b,0)->text();
-      QString nosrt = ui->tableWidget_13->item(b,1)->text();
-      QString hal = ui->tableWidget_13->item(b,2)->text();
-      QString tgl = ui->tableWidget_13->item(b,3)->text();
+      int b = ui->tableWidget_cetak_sppd->currentRow();
+      QString id = ui->tableWidget_cetak_sppd->item(b,0)->text();
+      QString nosrt = ui->tableWidget_cetak_sppd->item(b,1)->text();
+      QString hal = ui->tableWidget_cetak_sppd->item(b,2)->text();
+      QString tgl = ui->tableWidget_cetak_sppd->item(b,3)->text();
 
       QDate dt = QDate::fromString(tgl,"dd-MM-yyyy");
       desppd = new QDateEdit;
@@ -2975,11 +2979,11 @@ muat_sppd_2();
   {
 
     //qInfo() << "qbx  double klik 22....................... ";
-      int b = ui->tableWidget_13->currentRow();
-      QString id = ui->tableWidget_13->item(b,0)->text();
-      QString nosrt = ui->tableWidget_13->item(b,1)->text();
-      QString hal = ui->tableWidget_13->item(b,2)->text();
-      QString tgl = ui->tableWidget_13->item(b,3)->text();
+      int b = ui->tableWidget_cetak_sppd->currentRow();
+      QString id = ui->tableWidget_cetak_sppd->item(b,0)->text();
+      QString nosrt = ui->tableWidget_cetak_sppd->item(b,1)->text();
+      QString hal = ui->tableWidget_cetak_sppd->item(b,2)->text();
+      QString tgl = ui->tableWidget_cetak_sppd->item(b,3)->text();
 
       QDate dt = QDate::fromString(tgl,"dd-MM-yyyy");
       desppd_2 = new QDateEdit;
@@ -3050,8 +3054,8 @@ void Form::updatesppd() // Update sppd
 {
     if(ui->comboBox_realisasi->currentIndex()==0)
     {
-       int b = ui->tableWidget_13->currentRow();
-       QString id = ui->tableWidget_13->item(b,0)->text();
+       int b = ui->tableWidget_cetak_sppd->currentRow();
+       QString id = ui->tableWidget_cetak_sppd->item(b,0)->text();
        QString nosrt = qbnosppd->currentText();
        QString hal = qbhal->currentText();
        QString tgl =  desppd->text();
@@ -3075,8 +3079,8 @@ void Form::updatesppd() // Update sppd
 
     if(ui->comboBox_realisasi->currentIndex()==1)
     {
-        int b = ui->tableWidget_13->currentRow();
-        QString id = ui->tableWidget_13->item(b,0)->text();
+        int b = ui->tableWidget_cetak_sppd->currentRow();
+        QString id = ui->tableWidget_cetak_sppd->item(b,0)->text();
         QString nosrt = qbnosppd_2->currentText();
         QString hal = qbhal_2->currentText();
         QString tgl =  desppd_2->text();
@@ -3162,7 +3166,7 @@ void Form::click_btn1() // Even Klik Save di tambah realisasi dana desa
         j.replace("Rp ",""); j.replace(".",""); j.replace(",",".");
        //qInfo()  << "qinfo j pada btn1 replace" << j;
         bilang(j);
-         QString jcair3 = ui->tableWidget_6->item(0,4)->text();
+         QString jcair3 = ui->tableWidget_rAnggaran_dds->item(0,4)->text();
         jcair3.replace("Rp ",""); jcair3.replace(".",""); jcair3.replace(",",".");
         double jc3 = jcair3.toDouble();
         double jj = j.toDouble();
@@ -3289,7 +3293,7 @@ void Form::click_btn1() // Even Klik Save di tambah realisasi dana desa
     //================ 2 ======================
 
     if(menu2=="2"){
-        int noBrs = ui->tableWidget_2->currentRow();
+        int noBrs = ui->tableWidget_cetak_dds->currentRow();
 
         // if(menu=="2"){
         active_eb_v();
@@ -3301,11 +3305,11 @@ void Form::click_btn1() // Even Klik Save di tambah realisasi dana desa
         jcair.replace("Rp ",""); jcair.replace(".",""); jcair.replace(",",".");
         double jc = jcair.toDouble();
 
-        QString jcair2 = ui->tableWidget_2->item(noBrs,12)->text();
+        QString jcair2 = ui->tableWidget_cetak_dds->item(noBrs,12)->text();
         jcair2.replace("Rp ",""); jcair2.replace(".",""); jcair2.replace(",",".");
         double jc2 = jcair2.toDouble();
 
-        QString jcair3 = ui->tableWidget_6->item(0,4)->text();
+        QString jcair3 = ui->tableWidget_rAnggaran_dds->item(0,4)->text();
         jcair3.replace("Rp ",""); jcair3.replace(".",""); jcair3.replace(",",".");
         double jc3 = jcair3.toDouble();
         //nfo() << "Doubleklik tw 2";
@@ -3319,7 +3323,7 @@ void Form::click_btn1() // Even Klik Save di tambah realisasi dana desa
        //Info()<< "isi Bilang j" << j;
         QString jj_ = j;
         bilang(j);
-        // QString jcair3 = ui->tableWidget_6->item(0,4)->text();
+        // QString jcair3 = ui->tableWidget_rAnggaran_dds->item(0,4)->text();
         jcair3.replace("Rp ",""); jcair3.replace(".",""); jcair3.replace(",",".");
         //double jc3 = jcair3.toDouble();
         //double jj = j.toDouble();
@@ -3328,7 +3332,7 @@ void Form::click_btn1() // Even Klik Save di tambah realisasi dana desa
        //Info()<< "isi Bilang jj_" << jj_;
         //bilang(jj_);
 
-        QString id=ui->tableWidget_2->item(noBrs,27)->text();
+        QString id=ui->tableWidget_cetak_dds->item(noBrs,27)->text();
 
         QString terbil = terbilang;
         QString thp_cair = qbx_thp_penc->currentText();
@@ -3641,8 +3645,8 @@ on_toolButton_refResh_clicked();
 
 void Form::muat_real(QString &s_id_kamp) //
 {
-    while(ui->tableWidget_2->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
-   {ui->tableWidget_2->removeRow(0);}
+    while(ui->tableWidget_cetak_dds->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+   {ui->tableWidget_cetak_dds->removeRow(0);}
     QSqlQuery query;
     QString cmd = "SELECT * FROM pmk_yhk.t_real WHERE id_kam = :id ORDER BY id_real ";
     //if(s_id_kamp==""){cmd ="SELECT * FROM pmk_yhk.t_real ORDER BY id_real ";}
@@ -3654,8 +3658,8 @@ void Form::muat_real(QString &s_id_kamp) //
     int i=0;
     while (query.next()) {
 
-        //int i = ui->tableWidget_2->rowCount();
-        ui->tableWidget_2->insertRow(i);
+        //int i = ui->tableWidget_cetak_dds->rowCount();
+        ui->tableWidget_cetak_dds->insertRow(i);
         QPushButton *pb = new QPushButton;
         QRadioButton *rb = new QRadioButton;
         rb->setContentsMargins(0,0,0,0);
@@ -3756,35 +3760,35 @@ void Form::muat_real(QString &s_id_kamp) //
         thp_cair2_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         jkk_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
-        ui->tableWidget_2->setCellWidget(i,0,rb);
-        ui->tableWidget_2->setItem(i,1,nm_dis_);
-        ui->tableWidget_2->setItem(i,2,nm_kam_);
-        ui->tableWidget_2->setItem(i,3,id_dis_);
-        ui->tableWidget_2->setItem(i,4,id_kam_);
-        ui->tableWidget_2->setItem(i,5,no_rek_);
-        ui->tableWidget_2->setItem(i,6,nm_rek_);
-        ui->tableWidget_2->setItem(i,7,nm_bank_);
-        ui->tableWidget_2->setItem(i,8,j_sek_);
-        ui->tableWidget_2->setItem(i,9,nm_kp_);
-        ui->tableWidget_2->setItem(i,10,nm_ben_);
-        ui->tableWidget_2->setItem(i,11,thp_cair_);
-        ui->tableWidget_2->setItem(i,12,j_cair_);
-        ui->tableWidget_2->setItem(i,13,j_terbil_);
-        ui->tableWidget_2->setItem(i,14,tgl_);
-        ui->tableWidget_2->setItem(i,15,no_srt1_);
-        ui->tableWidget_2->setItem(i,16,no_srt2_);
-        ui->tableWidget_2->setItem(i,17,persen_);
-        ui->tableWidget_2->setItem(i,18,sk_bup_);
-        ui->tableWidget_2->setItem(i,19,sk_kam_);
-        ui->tableWidget_2->setItem(i,20,sk_men_);
-        ui->tableWidget_2->setItem(i,21,sk_keu_);
-        ui->tableWidget_2->setItem(i,22,ket_);
-        ui->tableWidget_2->setItem(i,23,nm_kpd_);
-        ui->tableWidget_2->setItem(i,24,j_kpd_);
-        ui->tableWidget_2->setItem(i,25,nip_kpd_);
-        ui->tableWidget_2->setItem(i,26,thp_cair2_);
-        ui->tableWidget_2->setItem(i,27,id_);
-        ui->tableWidget_2->setItem(i,28,jkk_);
+        ui->tableWidget_cetak_dds->setCellWidget(i,0,rb);
+        ui->tableWidget_cetak_dds->setItem(i,1,nm_dis_);
+        ui->tableWidget_cetak_dds->setItem(i,2,nm_kam_);
+        ui->tableWidget_cetak_dds->setItem(i,3,id_dis_);
+        ui->tableWidget_cetak_dds->setItem(i,4,id_kam_);
+        ui->tableWidget_cetak_dds->setItem(i,5,no_rek_);
+        ui->tableWidget_cetak_dds->setItem(i,6,nm_rek_);
+        ui->tableWidget_cetak_dds->setItem(i,7,nm_bank_);
+        ui->tableWidget_cetak_dds->setItem(i,8,j_sek_);
+        ui->tableWidget_cetak_dds->setItem(i,9,nm_kp_);
+        ui->tableWidget_cetak_dds->setItem(i,10,nm_ben_);
+        ui->tableWidget_cetak_dds->setItem(i,11,thp_cair_);
+        ui->tableWidget_cetak_dds->setItem(i,12,j_cair_);
+        ui->tableWidget_cetak_dds->setItem(i,13,j_terbil_);
+        ui->tableWidget_cetak_dds->setItem(i,14,tgl_);
+        ui->tableWidget_cetak_dds->setItem(i,15,no_srt1_);
+        ui->tableWidget_cetak_dds->setItem(i,16,no_srt2_);
+        ui->tableWidget_cetak_dds->setItem(i,17,persen_);
+        ui->tableWidget_cetak_dds->setItem(i,18,sk_bup_);
+        ui->tableWidget_cetak_dds->setItem(i,19,sk_kam_);
+        ui->tableWidget_cetak_dds->setItem(i,20,sk_men_);
+        ui->tableWidget_cetak_dds->setItem(i,21,sk_keu_);
+        ui->tableWidget_cetak_dds->setItem(i,22,ket_);
+        ui->tableWidget_cetak_dds->setItem(i,23,nm_kpd_);
+        ui->tableWidget_cetak_dds->setItem(i,24,j_kpd_);
+        ui->tableWidget_cetak_dds->setItem(i,25,nip_kpd_);
+        ui->tableWidget_cetak_dds->setItem(i,26,thp_cair2_);
+        ui->tableWidget_cetak_dds->setItem(i,27,id_);
+        ui->tableWidget_cetak_dds->setItem(i,28,jkk_);
        i++;
     }
 }
@@ -3804,7 +3808,7 @@ void Form::muat_real_2(QString &s_id_kamp) //
     int i=0;
     while (query.next()) {
 
-        //int i = ui->tableWidget_2->rowCount();
+        //int i = ui->tableWidget_cetak_dds->rowCount();
         ui->tableWidget_cetak_add->insertRow(i);
         QPushButton *pb = new QPushButton;
         QRadioButton *rb = new QRadioButton;
@@ -4304,23 +4308,23 @@ void Form::event_klik_tw_6() // Tw 6
    // qInfo()<< "Even Klik tw_6 ";
     if(menu=="2"){
     QClipboard *clipboard = QApplication::clipboard();
-    int tbl_lines = ui->tableWidget_6->rowCount();
+    int tbl_lines = ui->tableWidget_rAnggaran_dds->rowCount();
     QString str =  " No \t Nama Distrik  \t Nama Kampung  \t  Pagu Anggaran  \t  Sisa Anggaran  \t Realisasi \n ";
     for (int i=0; i<tbl_lines; i++)
     {
-    QString mydata0 = ui->tableWidget_6->item(i, 0)->text();
-    QString mydata1 = ui->tableWidget_6->item(i, 1)->text();
-    QString mydata2 = ui->tableWidget_6->item(i, 2)->text();
-    QString mydata3 = ui->tableWidget_6->item(i, 3)->text();
+    QString mydata0 = ui->tableWidget_rAnggaran_dds->item(i, 0)->text();
+    QString mydata1 = ui->tableWidget_rAnggaran_dds->item(i, 1)->text();
+    QString mydata2 = ui->tableWidget_rAnggaran_dds->item(i, 2)->text();
+    QString mydata3 = ui->tableWidget_rAnggaran_dds->item(i, 3)->text();
     mydata3.replace("Rp ",""); mydata3.replace(".",""); mydata3.replace(",",".");
     double p = mydata3.toDouble();
     QString p_ = QString::number(p);
 
-    QString mydata4 = ui->tableWidget_6->item(i, 4)->text();
+    QString mydata4 = ui->tableWidget_rAnggaran_dds->item(i, 4)->text();
     mydata4.replace("Rp ",""); mydata4.replace(".",""); mydata4.replace(",",".");
     double r = mydata4.toDouble();
     QString r_ = QString::number(r);
-    QString mydata5 = ui->tableWidget_6->item(i, 5)->text();
+    QString mydata5 = ui->tableWidget_rAnggaran_dds->item(i, 5)->text();
     mydata5.replace("Rp ",""); mydata5.replace(".",""); mydata5.replace(",",".");
     double s = mydata5.toDouble();
     QString s_ = QString::number(s);
@@ -4362,37 +4366,10 @@ void Form::event_klik_tw_11() // Tw 11
     clipboard->setText(str);
 }}
 
-void Form::event_klik_tw_13() // Tw 13
-{
-    //qInfo()<< "Even Klik tw_13 ";
-//    if(menu=="4"){
-//    QClipboard *clipboard = QApplication::clipboard();
-//    int tbl_lines = ui->tableWidget_13->rowCount();
-//    QString str =  " No \t Nama Distrik  \t Nama Kampung  \t  Data I  \t  Data II  \t Data II \t  Data III  \t  Data IV  \t Data V \t  Data VI  \t  Data VII  \t Sub Total \t Total \n  ";
-//    for (int i=0; i<tbl_lines; i++)
-//    {
-//    QString mydata0 = ui->tableWidget_13->item(i, 0)->text();
-//    QString mydata1 = ui->tableWidget_13->item(i, 1)->text();
-//    QString mydata2 = ui->tableWidget_13->item(i, 2)->text();
-//    QString mydata3 = ui->tableWidget_13->item(i, 3)->text();
-//    mydata3.replace("Rp ",""); mydata3.replace(".",""); mydata3.replace(",",".");
-//    double p = mydata3.toDouble();
-//    QString p_ = QString::number(p);
+//void Form::event_klik_tw_13() // Tw 13
+//{
 
-//    QString mydata4 = ui->tableWidget_rAnggaran_add->item(i, 4)->text();
-//    mydata4.replace("Rp ",""); mydata4.replace(".",""); mydata4.replace(",",".");
-//    double r = mydata4.toDouble();
-//    QString r_ = QString::number(r);
-//    QString mydata5 = ui->tableWidget_rAnggaran_add->item(i, 5)->text();
-//    mydata5.replace("Rp ",""); mydata5.replace(".",""); mydata5.replace(",",".");
-//    double s = mydata5.toDouble();
-//    QString s_ = QString::number(s);
-
-//    QTextStream(&str) << mydata0 << "\t" << mydata1 << "\t"<< mydata2 << "\t" << p_ <<"\t"<< r_ << "\t" << s_ << Qt::endl;
-//    }
-//    clipboard->setText(str);
 //}
-}
 
 void   Form::muat_bend_kp(QString &id_kam_s)
 {
@@ -4499,6 +4476,133 @@ void Form::bil(QString nilai){
    qInfo() << konvertAng(ad);
 }
 
+QString Form::qcode()
+{
+    int noBrs = ui->tableWidget_cetak_dds->currentRow();
+    QString a = ui->tableWidget_cetak_dds->item(noBrs,11)->text();
+    QString b = ui->tableWidget_cetak_dds->item(noBrs,14)->text();
+    QString b_ =" "+ b.right(4);
+    QString c = " Distrik " + ui->tableWidget_cetak_dds->item(noBrs,3)->text();
+    QString d = " Kampung " + ui->tableWidget_cetak_dds->item(noBrs,4)->text();
+    QString e = "@" + ui->tableWidget_cetak_dds->item(noBrs,10)->text();
+    QString f = "/" +ui->tableWidget_cetak_dds->item(noBrs,9)->text();
+    QString g = "/" +ui->tableWidget_cetak_dds->item(noBrs,5)->text();
+    QString h = "/" +ui->tableWidget_cetak_dds->item(noBrs,12)->text();
+     return a+b_+c+d+e+f+g+h;
+}
+
+ // refresh
+void Form::on_toolButton_refResh_clicked()
+{
+  if(menu=="1"){
+      if(qbx_id_kam->currentText()!="")
+      {
+          QString id = qbx_id_kam->currentText();
+        muat_bamuskam(id);
+      }}
+
+  if(menu=="2"){
+      if(qbx_id_kam->currentText()!="")
+                        { QString id = qbx_id_kam->currentText();
+                            muat_v_bam(id);
+                        }}
+
+  if(menu=="3"){
+      if(qbx_id_kam->currentText()!="")
+                        { QString id = qbx_id_kam->currentText();
+                            muat_v_bam_2(id);
+                    }}
+  if(menu=="4"){
+                        if (ui->comboBox_realisasi->currentIndex()==0){muatrealdds(); loadsppd(); }
+                        if (ui->comboBox_realisasi->currentIndex()==1){muatrealadd(); loadsppd_2();}
+                         }
+}
+
+//logout Button
+void Form::on_toolButton_logOut_clicked()
+{
+    this->close();
+    MainWindow *a = new MainWindow;
+    QIcon logo(":/gbr/html/gbr/yhk.png");
+    a->setWindowIcon(logo);
+    a->show();
+}
+
+void Form::updateTampilan(Mode mode)
+{
+    ModeSekarang = mode;
+
+    switch (ModeSekarang) {
+
+    case SuperMode:
+        qInfo()<<"Ini adalah Mode Super USER";
+        break;
+
+    case AdminMode_1:
+        qInfo()<<"Ini adalah Mode Admin_Mode_1";
+        break;
+
+    case AdminMode_2:
+        qInfo()<<"Ini adalah Mode Admin Mode_2";
+        break;
+
+    case UserMode_1:
+        qInfo()<<"Ini adalah Mode User MODE 1";
+        ui->toolButton->setVisible(false);
+        ui->label_Bamuskam->setVisible(false);
+        break;
+
+    case UserMode_2:
+        qInfo()<<"Ini adalah Mode User MODE 2";
+
+        break;
+    }
+}
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//=======================================================================================
+// ============================== Halaman Bamuskam =========================================
+//!================== QToolButton ============================
+
+void Form::on_toolButton_clicked() //tb 1
+{
+    boderToolbar(1);
+    ui->comboBox->setVisible(true);
+    ui->comboBox_nmKampung->setVisible(true);
+    ui->label->setVisible(true);
+    ui->label_namaKampung->setVisible(true);
+    ui->toolButton_refResh->setVisible(true);
+
+    ui->label_realisasi->setVisible(false);
+    ui->label_s_d->setVisible(false);
+    ui->comboBox_realisasi->setVisible(false);
+    ui->toolButton_pdf_main->setVisible(false);
+
+    ui->dateEdit->setVisible(false);
+    ui->dateEdit_2->setVisible(false);
+
+    //Tambahan Filter
+    ui->comboBox_filter->setVisible(true);
+    ui->label_filter->setVisible(true);
+    ui->toolButton_filter->setVisible(true);
+    ui->comboBox_filter->clear();
+    muatListFilter();
+
+   ui->stackedWidget->setCurrentIndex(0);
+   menu ="1";
+   if(menu=="1"){
+       if(qbx_id_kam->currentText()!="")
+       {
+           QString id = qbx_id_kam->currentText();
+           muat_bamuskam(id);
+       }
+   }
+}
 
 void Form::click_btn()
 {
@@ -4564,38 +4668,125 @@ void Form::click_btn()
 }
 
 
-void Form::on_toolButton_tmbRealdds_clicked() // Klik Tambah Pencairan dana desa
+
+// ============ From Filter data Bamusmkam =================
+void Form::muatListFilter()
 {
-      if(menu=="2"){
-      if(ui->comboBox->currentText()==""&&ui->comboBox_nmKampung->currentText()==""){ QMessageBox::information(this,"Info...!!!","Pilih distrik dan kampung...");     return;}
-                            act(); }
+    li_dftBams.clear();
+    qInfo() << "Baca File Daftar Jabatan Bamuskam" ;
+     QString path("data/");
+    QFile f_bams(path+"bamuskam.txt");
+    if(!f_bams.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat List Daftar Jabatan Bamuskam");return;}
+     f_bams.open(QIODevice::ReadOnly|QIODevice::Text);
+     QTextStream str(&f_bams);
+     while (!str.atEnd()) {
+        QString line = str.readAll();
+        li_dftBams = line.split("\n");
+    }
+    f_bams.close();
+    ui->comboBox_filter->addItems(li_dftBams);
 }
 
-void Form::on_toolButton_tmbRealadd_clicked() // Klik Tambah Pencairan Alokasi dana desa
+
+
+void Form::on_toolButton_filter_clicked()
 {
-    if(menu=="3"){
-    if(ui->comboBox->currentText()==""&&ui->comboBox_nmKampung->currentText()==""){ QMessageBox::information(this,"Info...!!!","Pilih distrik dan kampung...");     return;}
-                            act_2();}
+
+    ui->comboBox->setCurrentText("");
+    ui->comboBox_nmKampung->setCurrentText("");
+    QString jbt = ui->comboBox_filter->currentText();
+    QString cmd;
+    if(ui->comboBox_filter->currentIndex() == 0)
+    {        cmd  = " SELECT id,id_kam,id_dis,id_j,distrik,kampung, nama, jabatan,no_sk, tgl_sk,ttl,alamat FROM pmk_yhk.v_bam_ ORDER BY id " ;    }
+    if(ui->comboBox_filter->currentIndex() > 0)
+    {        cmd = " SELECT id,id_kam,id_dis,id_j,distrik,kampung, nama, jabatan,no_sk, tgl_sk,ttl,alamat FROM pmk_yhk.v_bam_ WHERE jabatan = :jbt ORDER BY id " ; }
+
+    while(ui->tableWidget_Bamuskam->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+   {ui->tableWidget_Bamuskam->removeRow(0);}
+
+    QSqlQuery query;
+    query.prepare(cmd);
+    query.bindValue(":jbt",jbt);
+    int noBrs=0;
+    bool ok = exec(query);
+    if(!ok){QMessageBox::information(this,"Error...!!!","Gagal Memuat data Bamuskam...""...error... "+query.lastError().text()+"...!!!"); return;}
+    while (query.next()) {
+            ui->tableWidget_Bamuskam->insertRow(noBrs);
+            QTableWidgetItem *id_ = new QTableWidgetItem;
+            QTableWidgetItem *id_kam_ = new QTableWidgetItem;
+            QTableWidgetItem *id_dis_ = new QTableWidgetItem;
+            QTableWidgetItem *id_j_ = new QTableWidgetItem;
+            QTableWidgetItem *nmDis_ = new QTableWidgetItem;
+            QTableWidgetItem *nmKam_ = new QTableWidgetItem;
+            QTableWidgetItem *nama_ = new QTableWidgetItem;
+            QTableWidgetItem *jabatan_ = new QTableWidgetItem;
+            QTableWidgetItem *no_sk_ = new QTableWidgetItem;
+            QTableWidgetItem *tgl_sk_ = new QTableWidgetItem;
+            QTableWidgetItem *ttl_ = new QTableWidgetItem;
+            QTableWidgetItem *almt_ = new QTableWidgetItem;
+
+            id_->setText(query.value(0).toString());
+            id_kam_->setText(query.value(1).toString());
+            id_dis_->setText(query.value(2).toString());
+            id_j_->setText(query.value(3).toString());
+            nmDis_->setText(query.value(4).toString());
+            nmKam_->setText(query.value(5).toString());
+            nama_->setText(query.value(6).toString());
+            jabatan_->setText(query.value(7).toString());
+            no_sk_->setText(query.value(8).toString());
+            QDate d = QDate::fromString(query.value(9).toString(),"yyyy-MM-dd");
+            QString dd = d.toString("dd-MM-yyyy");
+
+            tgl_sk_->setText(dd);
+            ttl_->setText(query.value(10).toString());
+            almt_->setText(query.value(11).toString());
+
+            id_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+            id_kam_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+            id_dis_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+            id_j_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+            nmDis_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+            nmKam_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+            nama_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+            jabatan_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+            no_sk_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+            tgl_sk_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+            ttl_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+            almt_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+
+            ui->tableWidget_Bamuskam->setItem(noBrs,0,id_);
+            ui->tableWidget_Bamuskam->setItem(noBrs,1,id_kam_);
+            ui->tableWidget_Bamuskam->setItem(noBrs,2,id_dis_);
+            ui->tableWidget_Bamuskam->setItem(noBrs,3,id_j_);
+            ui->tableWidget_Bamuskam->setItem(noBrs,4,nmDis_);
+            ui->tableWidget_Bamuskam->setItem(noBrs,5,nmKam_);
+            ui->tableWidget_Bamuskam->setItem(noBrs,6,nama_);
+            ui->tableWidget_Bamuskam->setItem(noBrs,7,jabatan_);
+            ui->tableWidget_Bamuskam->setItem(noBrs,8,no_sk_);
+            ui->tableWidget_Bamuskam->setItem(noBrs,9,tgl_sk_);
+            ui->tableWidget_Bamuskam->setItem(noBrs,10,ttl_);
+            ui->tableWidget_Bamuskam->setItem(noBrs,11,almt_);
+
+            noBrs++;
+    }
+
+    if(noBrs==0){QMessageBox::information(this,"Info...!!!","Data Bamuskam pada kampung ini belum tersedia..."); return;}
 }
 
-void Form::on_toolButton_5_clicked() // cetak menu
-{
-    //ui->stackedWidget_2->setCurrentIndex(0);
-    if(menu=="2")
-    {
-        if(ui->comboBox->currentText()!="" && ui->comboBox_nmKampung->currentText()!=""){
-        int jBrs = ui->tableWidget_2->rowCount();
-        if(jBrs>= 1){
-            int nRow = ui->tableWidget_2->currentRow();
-            if(nRow==-1){QMessageBox::information(this,"Info...!!!","Pilih Realisasi yang ingin di cetak...");return;}
-            //qInfo()<< "Baris Sekarna" <<nRow << jBrs;
-    }}}
-}
+// ============================== Halaman Bamuskam =========================================
+//=======================================================================================
 
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//=======================================================================================
+// ============================== Halaman DDS =============================================
 // Button pada cetak PDF dana Desa
 void Form::on_toolButton_cetakPdfdds_clicked()
 {
-    int noBrs = ui->tableWidget_2->currentRow();
+    int noBrs = ui->tableWidget_cetak_dds->currentRow();
     if(noBrs<0){QMessageBox::information(this,"Info...!!!","Pilih Realisasi yang ingin di cetak...");return;}
     if(noBrs>=0){
        datapdf1();
@@ -4608,84 +4799,97 @@ void Form::on_toolButton_cetakPdfdds_clicked()
 
 }}
 
-QString Form::qcode()
+
+
+
+// Klik Tambah Pencairan dana desa
+void Form::on_toolButton_tmbRealdds_clicked()
 {
-    int noBrs = ui->tableWidget_2->currentRow();
-    QString a = ui->tableWidget_2->item(noBrs,11)->text();
-    QString b = ui->tableWidget_2->item(noBrs,14)->text();
-    QString b_ =" "+ b.right(4);
-    QString c = " Distrik " + ui->tableWidget_2->item(noBrs,3)->text();
-    QString d = " Kampung " + ui->tableWidget_2->item(noBrs,4)->text();
-    QString e = "@" + ui->tableWidget_2->item(noBrs,10)->text();
-    QString f = "/" +ui->tableWidget_2->item(noBrs,9)->text();
-    QString g = "/" +ui->tableWidget_2->item(noBrs,5)->text();
-    QString h = "/" +ui->tableWidget_2->item(noBrs,12)->text();
-     return a+b_+c+d+e+f+g+h;
+      if(menu=="2"){
+      if(ui->comboBox->currentText()==""&&ui->comboBox_nmKampung->currentText()==""){ QMessageBox::information(this,"Info...!!!","Pilih distrik dan kampung...");     return;}
+                            act(); }
+}
+// ============================== Halaman DDS =============================================
+//=======================================================================================
+
+
+
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+//=======================================================================================
+// ============================== Halaman ADD =============================================
+
+// Klik Tambah Pencairan Alokasi dana desa
+void Form::on_toolButton_tmbRealadd_clicked()
+{
+    if(menu=="3"){
+    if(ui->comboBox->currentText()==""&&ui->comboBox_nmKampung->currentText()==""){ QMessageBox::information(this,"Info...!!!","Pilih distrik dan kampung...");     return;}
+                            act_2();}
 }
 
-
-void Form::on_toolButton_refResh_clicked() // refresh
+void Form::on_toolButton_cetakPdfadd_clicked()
 {
+    int noBrs = ui->tableWidget_cetak_add->currentRow();
+    if(noBrs<0){QMessageBox::information(this,"Info...!!!","Pilih Realisasi yang ingin di cetak...");return;}
+    if(noBrs>=0){
+        datapdf2();
+        QString id = ui->tableWidget_cetak_add->item(noBrs,2)->text();
+        databam(id);
 
-  if(menu=="1"){
-      if(qbx_id_kam->currentText()!="")
-      {
-          QString id = qbx_id_kam->currentText();
-        muat_bamuskam(id);
-      }}
-
-  if(menu=="2"){
-      if(qbx_id_kam->currentText()!="")
-                        { QString id = qbx_id_kam->currentText();
-                            muat_v_bam(id);
-                        }}
-
-  if(menu=="3"){
-      if(qbx_id_kam->currentText()!="")
-                        { QString id = qbx_id_kam->currentText();
-                            muat_v_bam_2(id);
-                    }}
-  if(menu=="4"){
-                        if (ui->comboBox_realisasi->currentIndex()==0){muatrealdds(); loadsppd(); }
-                        if (ui->comboBox_realisasi->currentIndex()==1){muatrealadd(); loadsppd_2();}
-                         }
-}
-
-void Form::on_toolButton_logOut_clicked() //logout Button
-{
-    this->close();
-    MainWindow *a = new MainWindow;
-    QIcon logo(":/gbr/html/gbr/yhk.png");
-    a->setWindowIcon(logo);
-    a->show();
-}
-
-void Form::on_toolButton_pdf_main_clicked() // Button Cetak pdf untuk pengantar
-{
-  if(ui->comboBox_realisasi->currentIndex()==0){    Widget3 *a = new Widget3;
-      a->show();}
-  if(ui->comboBox_realisasi->currentIndex()==1){    QMessageBox::information(this,"Info","Menu ini Belum tersedia");}
-
-}
-
-void Form::on_toolButton_16_clicked() // Button Tambah Realisasi
-{
-    if (menu=="4")
-    {
-        if(ui->comboBox_realisasi->currentIndex()==0){ sppd();}
-        if(ui->comboBox_realisasi->currentIndex()==1){ sppd_2();}
+        Widget2 *a = new Widget2;
+        QIcon logo(":/gbr/html/gbr/yhk.png");
+        a->setWindowIcon(logo);
+        a->show();
     }
 }
 
-void Form::on_toolButton_17_clicked() // Button Clik Generate pdf di sppd =====================================
+// ============================== Halaman ADD =============================================
+//=======================================================================================
+
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+//=======================================================================================
+// ============================== Halaman SPPD =============================================
+
+void Form::save_sppd(){
+QString path("doc/temp/");
+QFile fOut(path+"sppd_temp.txt");
+if(!fOut.exists()){ QMessageBox::information(this,"Error..","Gagal Creat Data sspd_temp.txt"); return; }
+fOut.open(QFile::WriteOnly | QFile::Text);
+if(fOut.open(QFile::WriteOnly | QFile::Text)){qInfo()<<"Gagal Menyimpan sppd_temp.txt"; return;} else
+{
+    QTextStream stream(&fOut);
+    stream << ds_sppd_;
+    fOut.flush();
+    fOut.close();
+}}
+
+void Form::on_toolButton_cetakpdfSppd_clicked() // Button Clik Generate pdf di sppd =====================================
 {
 
-    int j = ui->tableWidget_13->currentRow();
+    int j = ui->tableWidget_cetak_sppd->currentRow();
     if(j==-1){QMessageBox::information(this,"Info","Pilih Surat yang akan di cetak... "); return;}
 
-    QString nosrt = ui->tableWidget_13->item(j,1)->text();
-    QString hal = ui->tableWidget_13->item(j,2)->text();
-    QString tgl = ui->tableWidget_13->item(j,3)->text();
+    QString nosrt = ui->tableWidget_cetak_sppd->item(j,1)->text();
+    QString hal = ui->tableWidget_cetak_sppd->item(j,2)->text();
+    QString tgl = ui->tableWidget_cetak_sppd->item(j,3)->text();
     QDate dt = QDate::fromString(tgl,"dd-MM-yyyy");
     QString tgl_ = dt.toString("yyyy-MM-dd");
     QString tgl_1 = dt.toString("dd MMMM yyyy");
@@ -4791,158 +4995,228 @@ void Form::on_toolButton_17_clicked() // Button Clik Generate pdf di sppd ======
     }
 }
 
-void Form::save_sppd(){
-QString path("doc/temp/");
-QFile fOut(path+"sppd_temp.txt");
-if(!fOut.exists()){ QMessageBox::information(this,"Error..","Gagal Creat Data sspd_temp.txt"); return; }
-fOut.open(QFile::WriteOnly | QFile::Text);
-if(fOut.open(QFile::WriteOnly | QFile::Text)){qInfo()<<"Gagal Menyimpan sppd_temp.txt"; return;} else
+// Button Cetak pdf untuk pengantar di main
+void Form::on_toolButton_pdf_main_clicked()
 {
-    QTextStream stream(&fOut);
-    stream << ds_sppd_;
-    fOut.flush();
-    fOut.close();
-}}
+ if(ui->comboBox_realisasi->currentIndex()==0){    Widget3 *a = new Widget3;
+     a->show();}
+ if(ui->comboBox_realisasi->currentIndex()==1){    QMessageBox::information(this,"Info","Menu ini Belum tersedia");}
+
+}
+
+void Form::on_toolButton_tmbSppd_clicked() // Button Tambah Realisasi
+{
+   if (menu=="4")
+   {
+       if(ui->comboBox_realisasi->currentIndex()==0){ sppd();}
+       if(ui->comboBox_realisasi->currentIndex()==1){ sppd_2();}
+   }
+}
+
+// ============================== Halaman SPPD =============================================
+//=======================================================================================
 
 
-// ============ From Filter data Bamusmkam =================
-void Form::muatListFilter()
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+//=======================================================================================
+// ============================== Halaman Covid =============================================
+void Form::on_toolButton_covid_clicked()
 {
-    li_dftBams.clear();
-    qInfo() << "Baca File Daftar Jabatan Bamuskam" ;
-     QString path("data/");
-    QFile f_bams(path+"bamuskam.txt");
-    if(!f_bams.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat List Daftar Jabatan Bamuskam");return;}
-     f_bams.open(QIODevice::ReadOnly|QIODevice::Text);
-     QTextStream str(&f_bams);
-     while (!str.atEnd()) {
-        QString line = str.readAll();
-        li_dftBams = line.split("\n");
-    }
-    f_bams.close();
-    ui->comboBox_filter->addItems(li_dftBams);
+    boderToolbar(4);
+    ui->stackedWidget->setCurrentIndex(4);
 }
 
 
+// ============================== Halaman Covid =============================================
+//=======================================================================================
 
-void Form::on_toolButton_filter_clicked()
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+//=======================================================================================
+// ============================== Halaman BLT ==============================================
+void Form::on_toolButton_blt_clicked()
+{
+    boderToolbar(5);
+    ui->stackedWidget->setCurrentIndex(5);
+}
+// ============================== Halaman BLT ==============================================
+//=======================================================================================
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//=======================================================================================
+// ============================== Halaman USer ==============================================
+void Form::on_toolButton_user_clicked()
+{
+    boderToolbar(7);
+    ui->stackedWidget->setCurrentIndex(6);
+    header_tw_daftarUser();
+    activitiUser();
+}
+
+void Form::on_pushButton_buat_usr_clicked()
+{
+if(ui->lineEdit_id_usr->text() !=nullptr){QMessageBox::information(this, "Info", "Bersihkan terlebih dahulu"); return;}
+
+}
+
+void Form::on_pushButton_update_usr_clicked()
+{
+     if(ui->lineEdit_id_usr->text() ==nullptr){QMessageBox::information(this, "Info", "Pilih lebih dahulu User yang akan di update"); return;}
+}
+
+void Form::on_pushButton_hapus_usr_clicked()
+{
+    if(ui->lineEdit_id_usr->text() ==nullptr){QMessageBox::information(this,"Info", "Pilih lebih dahulu User yang akan di hapus"); return;}
+}
+
+void Form::on_pushButton_bersihkan_usr_clicked()
+{
+ui->pushButton_buat_usr->setEnabled(true);
+activitiUser();
+
+}
+
+void Form::activitiUser()
+{
+    QStringList lvl_usr;
+    lvl_usr << "admin" << "usr" ;
+//ui->pushButton_buat_usr->setEnabled(true);
+ui->lineEdit_namaUser->clear();
+ui->lineEdit_password->clear();
+ui->lineEdit_userName->clear();
+ui->lineEdit_namaUser->setPlaceholderText("Nama lengkap");
+ui->lineEdit_userName->setPlaceholderText("username");
+ui->lineEdit_password->setPlaceholderText("masukan password");
+ui->lineEdit_password_2->setPlaceholderText("masukan password ulang");
+ui->lineEdit_password_2->clear();
+ui->lineEdit_id_usr->clear();
+ui->comboBox_level_user->clear();
+ui->comboBox_level_user->addItems(lvl_usr);
+
+memuat_data_user_();
+}
+
+void Form::header_tw_daftarUser() // Header table widget Daftar User
+{
+    QStringList headerWidget;
+    ui->tableWidget_daftarUser->setColumnCount(7);
+    headerWidget <<" id " <<" Nama "<<" User Name "<<" Level User " << "Pass" << "Id_lvl" << "id_type";
+    ui->tableWidget_daftarUser->setHorizontalHeaderLabels(headerWidget);
+    ui->tableWidget_daftarUser->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget_daftarUser->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableWidget_daftarUser->setColumnWidth(0,8);
+   // ui->tableWidget_daftarUser->setColumnHidden(0,true);
+    ui->tableWidget_daftarUser->setColumnWidth(1,120);
+    ui->tableWidget_daftarUser->setColumnWidth(2,80);
+    ui->tableWidget_daftarUser->setColumnWidth(3,40);
+    ui->tableWidget_daftarUser->setColumnWidth(4,40);
+    ui->tableWidget_daftarUser->setColumnWidth(5,40);
+    ui->tableWidget_daftarUser->setColumnWidth(6,40);
+
+    ui->pushButton_buat_usr->setEnabled(false);
+    ui->lineEdit_id_usr->setVisible(false);
+}
+
+void Form::memuat_data_user_()
 {
 
-    ui->comboBox->setCurrentText("");
-    ui->comboBox_nmKampung->setCurrentText("");
-
-    QString jbt = ui->comboBox_filter->currentText();
-    QString cmd;
-    if(ui->comboBox_filter->currentIndex() == 0)
-    {        cmd  = " SELECT id,id_kam,id_dis,id_j,distrik,kampung, nama, jabatan,no_sk, tgl_sk,ttl,alamat FROM pmk_yhk.v_bam_ ORDER BY id " ;    }
-    if(ui->comboBox_filter->currentIndex() > 0)
-    {        cmd = " SELECT id,id_kam,id_dis,id_j,distrik,kampung, nama, jabatan,no_sk, tgl_sk,ttl,alamat FROM pmk_yhk.v_bam_ WHERE jabatan = :jbt ORDER BY id " ; }
-
-
-    while(ui->tableWidget_Bamuskam->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
-   {ui->tableWidget_Bamuskam->removeRow(0);}
+    while(ui->tableWidget_daftarUser->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+   {ui->tableWidget_daftarUser->removeRow(0);}
 
     QSqlQuery query;
-    //QString cmd= "  SELECT id,id_kam,id_dis,id_j,distrik,kampung, nama, jabatan,no_sk, tgl_sk,ttl,alamat FROM pmk_yhk.v_bam_ WHERE id_kam = :id ORDER BY id_j ";
+    QString cmd = "SELECT id,nama,jabatan,pass,level,id_lvl,id_type FROM pmk_yhk.usr";
+
+    if(lvl=="admin_1" && type=="dds"){cmd = "SELECT id,nama,jabatan,pass,level,id_lvl,id_type FROM pmk_yhk.usr WHERE id_type=1";}
+
+    if(lvl=="admin_2" && type=="add"){cmd = "SELECT id,nama,jabatan,pass,level,id_lvl,id_type FROM pmk_yhk.usr WHERE id_type=2";}
+
     query.prepare(cmd);
-    query.bindValue(":jbt",jbt);
-    int noBrs=0;
     bool ok = exec(query);
-    if(!ok){QMessageBox::information(this,"Error...!!!","Gagal Memuat data Bamuskam...""...error... "+query.lastError().text()+"...!!!"); return;}
-    while (query.next()) {
+    if(!ok){QMessageBox::information(this,"Error...","Gagal Memuat Data user .."); return;}
+    int no=0;
+    while(query.next())
+    {
+        ui->tableWidget_daftarUser->insertRow(no);
+        QTableWidgetItem *id_ = new QTableWidgetItem;
+        QTableWidgetItem *nama_ = new QTableWidgetItem;
+        QTableWidgetItem *userName_ = new QTableWidgetItem;
+        QTableWidgetItem *level_ = new QTableWidgetItem;
+        QTableWidgetItem *pass_ = new QTableWidgetItem;
+        QTableWidgetItem *id_lvl_ = new QTableWidgetItem;
+        QTableWidgetItem *id_type_ = new QTableWidgetItem;
 
-            ui->tableWidget_Bamuskam->insertRow(noBrs);
+        id_->setText(query.value(0).toString());
+        nama_->setText(query.value(2).toString());
+        userName_->setText(query.value(1).toString());
+        pass_->setText(query.value(3).toString());
+        level_->setText(query.value(4).toString());
+        id_lvl_->setText(query.value(5).toString());
+        id_type_->setText(query.value(6).toString());
 
-            QTableWidgetItem *id_ = new QTableWidgetItem;
-            QTableWidgetItem *id_kam_ = new QTableWidgetItem;
-            QTableWidgetItem *id_dis_ = new QTableWidgetItem;
-            QTableWidgetItem *id_j_ = new QTableWidgetItem;
-            QTableWidgetItem *nmDis_ = new QTableWidgetItem;
-            QTableWidgetItem *nmKam_ = new QTableWidgetItem;
-            QTableWidgetItem *nama_ = new QTableWidgetItem;
-            QTableWidgetItem *jabatan_ = new QTableWidgetItem;
-            QTableWidgetItem *no_sk_ = new QTableWidgetItem;
-            QTableWidgetItem *tgl_sk_ = new QTableWidgetItem;
-            QTableWidgetItem *ttl_ = new QTableWidgetItem;
-            QTableWidgetItem *almt_ = new QTableWidgetItem;
+        id_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+        nama_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+        userName_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+        level_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
 
-            id_->setText(query.value(0).toString());
-            id_kam_->setText(query.value(1).toString());
-            id_dis_->setText(query.value(2).toString());
-            id_j_->setText(query.value(3).toString());
-            nmDis_->setText(query.value(4).toString());
-            nmKam_->setText(query.value(5).toString());
-            nama_->setText(query.value(6).toString());
-            jabatan_->setText(query.value(7).toString());
-            no_sk_->setText(query.value(8).toString());
-            QDate d = QDate::fromString(query.value(9).toString(),"yyyy-MM-dd");
-            QString dd = d.toString("dd-MM-yyyy");
-
-            tgl_sk_->setText(dd);
-            ttl_->setText(query.value(10).toString());
-            almt_->setText(query.value(11).toString());
-
-            id_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-            id_kam_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-            id_dis_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-            id_j_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-            nmDis_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-            nmKam_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-            nama_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-            jabatan_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-            no_sk_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-            tgl_sk_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-            ttl_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-            almt_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-
-            ui->tableWidget_Bamuskam->setItem(noBrs,0,id_);
-            ui->tableWidget_Bamuskam->setItem(noBrs,1,id_kam_);
-            ui->tableWidget_Bamuskam->setItem(noBrs,2,id_dis_);
-            ui->tableWidget_Bamuskam->setItem(noBrs,3,id_j_);
-            ui->tableWidget_Bamuskam->setItem(noBrs,4,nmDis_);
-            ui->tableWidget_Bamuskam->setItem(noBrs,5,nmKam_);
-            ui->tableWidget_Bamuskam->setItem(noBrs,6,nama_);
-            ui->tableWidget_Bamuskam->setItem(noBrs,7,jabatan_);
-            ui->tableWidget_Bamuskam->setItem(noBrs,8,no_sk_);
-            ui->tableWidget_Bamuskam->setItem(noBrs,9,tgl_sk_);
-            ui->tableWidget_Bamuskam->setItem(noBrs,10,ttl_);
-            ui->tableWidget_Bamuskam->setItem(noBrs,11,almt_);
-
-            noBrs++;
-    }
-
-    if(noBrs==0){QMessageBox::information(this,"Info...!!!","Data Bamuskam pada kampung ini belum tersedia..."); return;}
-
+       ui->tableWidget_daftarUser->setItem(no,0,id_);
+       ui->tableWidget_daftarUser->setItem(no,1,nama_);
+       ui->tableWidget_daftarUser->setItem(no,2,userName_);
+       ui->tableWidget_daftarUser->setItem(no,4,pass_);
+       ui->tableWidget_daftarUser->setItem(no,3,level_);
+       ui->tableWidget_daftarUser->setItem(no,5,id_lvl_);
+       ui->tableWidget_daftarUser->setItem(no,6,id_type_);
+        no++;
+}
 }
 
-void Form::updateTampilan(Mode mode)
+
+void Form::even_klik_tw_user()
 {
-    ModeSekarang = mode;
+    //qInfo()<<"Ini Even Klik tw User";
+    int noBrs = ui->tableWidget_daftarUser->currentRow();
+    QString id_u = ui->tableWidget_daftarUser->item(noBrs,0)->text();
+    QString nama_u = ui->tableWidget_daftarUser->item(noBrs,1)->text();
+    QString usrName_u = ui->tableWidget_daftarUser->item(noBrs,2)->text();
+    QString level_u = ui->tableWidget_daftarUser->item(noBrs,3)->text();
+    QString pass_u = ui->tableWidget_daftarUser->item(noBrs,4)->text();
+    QString id_lvl_u =ui->tableWidget_daftarUser->item(noBrs,5)->text();
+    QString id_type_u =ui->tableWidget_daftarUser->item(noBrs,6)->text();
 
-    switch (ModeSekarang) {
+    qInfo() << id_u <<" " << nama_u << " " << usrName_u << " " << level_u << " " << pass_u << " " << id_lvl_u << " " << id_type_u;
+    ui->lineEdit_id_usr->setText(id_u);
+    ui->lineEdit_namaUser->setText(nama_u);
+    ui->lineEdit_userName->setText(usrName_u);
 
-    case SuperMode:
-        qInfo()<<"Ini adalah Mode Super USER";
-        break;
 
-    case AdminMode_1:
-        qInfo()<<"Ini adalah Mode Admin_Mode_1";
-        break;
-
-    case AdminMode_2:
-        qInfo()<<"Ini adalah Mode Admin Mode_2";
-        break;
-
-    case UserMode_1:
-        qInfo()<<"Ini adalah Mode User MODE 1";
-        ui->toolButton->setVisible(false);
-        ui->label_Bamuskam->setVisible(false);
-        break;
-
-    case UserMode_2:
-        qInfo()<<"Ini adalah Mode User MODE 2";
-
-        break;
-    }
 }
+// ============================== Halaman User ==============================================
+//=======================================================================================
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 

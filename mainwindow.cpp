@@ -25,7 +25,7 @@ bool openDB2(QSqlDatabase &db2)
     // qInfo() << "oooooooooooooooo  Opening Database boollllllllllllllllllllllll" << line;
             db2.setHostName(hostName);
             db2.setPort(porto);
-            db2.setDatabaseName("megarezst");
+            db2.setDatabaseName("yhk_2021");
             db2.setUserName(nm); //Change the username
             //db2.setPassword("megarezst_yhk"); //Change the password
             db2.setPassword(pass); } //Change the password
@@ -47,8 +47,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->setupUi(this);
 
-    if(this->isVisible()){QMessageBox::information(this,"Info...","Aplikasi Telah Terbuka"); return;}
-    if(this->isActiveWindow()){return;}
+    //if(this->isVisible()){QMessageBox::information(this,"Info...","Aplikasi Telah Terbuka"); return;}
+    //if(this->isActiveWindow()){return;}
 
     QDateTime wkt = QDateTime::currentDateTime();
     QDate thn = QDate::currentDate();
