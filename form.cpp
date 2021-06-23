@@ -153,10 +153,10 @@ Form::Form(QWidget *parent) :
     muat_kampung();
 //   Widget *a = new Widget;
 //   a->hide();
-    ui->label_17->setVisible(false);
-    ui->label_19->setVisible(false);
+    ui->label_realisasi->setVisible(false);
+    ui->label_s_d->setVisible(false);
     ui->comboBox_realisasi->setVisible(false);
-    ui->toolButton_14->setVisible(false);
+    ui->toolButton_pdf_main->setVisible(false);
 
     ui->dateEdit->setVisible(false);
     ui->dateEdit_2->setVisible(false);
@@ -543,12 +543,12 @@ void Form::on_toolButton_clicked() //tb 1
     ui->comboBox_nmKampung->setVisible(true);
     ui->label->setVisible(true);
     ui->label_2->setVisible(true);
-    ui->toolButton_7->setVisible(true);
+    ui->toolButton_refResh->setVisible(true);
 
-    ui->label_17->setVisible(false);
-    ui->label_19->setVisible(false);
+    ui->label_realisasi->setVisible(false);
+    ui->label_s_d->setVisible(false);
     ui->comboBox_realisasi->setVisible(false);
-    ui->toolButton_14->setVisible(false);
+    ui->toolButton_pdf_main->setVisible(false);
 
     ui->dateEdit->setVisible(false);
     ui->dateEdit_2->setVisible(false);
@@ -580,12 +580,12 @@ void Form::on_toolButton_danaDesa_clicked()
     ui->comboBox_nmKampung->setVisible(true);
     ui->label->setVisible(true);
     ui->label_2->setVisible(true);
-    ui->toolButton_7->setVisible(true);
+    ui->toolButton_refResh->setVisible(true);
 
-    ui->label_17->setVisible(false);
-    ui->label_19->setVisible(false);
+    ui->label_realisasi->setVisible(false);
+    ui->label_s_d->setVisible(false);
     ui->comboBox_realisasi->setVisible(false);
-    ui->toolButton_14->setVisible(false);
+    ui->toolButton_pdf_main->setVisible(false);
 
     ui->dateEdit->setVisible(false);
     ui->dateEdit_2->setVisible(false);
@@ -611,12 +611,12 @@ void Form::on_toolButton_8_clicked()
     ui->comboBox_nmKampung->setVisible(true);
     ui->label->setVisible(true);
     ui->label_2->setVisible(true);
-    ui->toolButton_7->setVisible(true);
+    ui->toolButton_refResh->setVisible(true);
 
-    ui->label_17->setVisible(false);
-    ui->label_19->setVisible(false);
+    ui->label_realisasi->setVisible(false);
+    ui->label_s_d->setVisible(false);
     ui->comboBox_realisasi->setVisible(false);
-    ui->toolButton_14->setVisible(false);
+    ui->toolButton_pdf_main->setVisible(false);
 
     ui->dateEdit->setVisible(false);
     ui->dateEdit_2->setVisible(false);
@@ -649,10 +649,10 @@ void Form::on_toolButton_13_clicked() // ToolButton 4
     ui->label->setVisible(false);
     ui->label_2->setVisible(false);
 
-    ui->label_17->setVisible(true);
-    ui->label_19->setVisible(true);
+    ui->label_realisasi->setVisible(true);
+    ui->label_s_d->setVisible(true);
     ui->comboBox_realisasi->setVisible(true);
-    ui->toolButton_14->setVisible(false);
+    ui->toolButton_pdf_main->setVisible(false);
 
     ui->dateEdit->setVisible(true);
     ui->dateEdit_2->setVisible(true);
@@ -3396,7 +3396,7 @@ void Form::click_btn1() // Even Klik Save di tambah realisasi dana desa
          //nfo()<<"menu=2 Saja";
          } // }
 }
-on_toolButton_7_clicked();
+on_toolButton_refResh_clicked();
 }
 
 
@@ -3639,7 +3639,7 @@ void Form::click_btn2()// Even Klik Save di tambah realisasi alokasi dana desa
              QString id = qbx_id_kam->currentText();
              muat_real_2(id);} }
 }
-on_toolButton_7_clicked();
+on_toolButton_refResh_clicked();
 }
 
 
@@ -4628,7 +4628,7 @@ QString Form::qcode()
 }
 
 
-void Form::on_toolButton_7_clicked() // refresh
+void Form::on_toolButton_refResh_clicked() // refresh
 {
 
   if(menu=="1"){
@@ -4655,7 +4655,7 @@ void Form::on_toolButton_7_clicked() // refresh
                          }
 }
 
-void Form::on_toolButton_15_clicked() //logout Button
+void Form::on_toolButton_logOut_clicked() //logout Button
 {
     this->close();
     MainWindow *a = new MainWindow;
@@ -4664,7 +4664,7 @@ void Form::on_toolButton_15_clicked() //logout Button
     a->show();
 }
 
-void Form::on_toolButton_14_clicked() // Button Cetak pdf untuk pengantar
+void Form::on_toolButton_pdf_main_clicked() // Button Cetak pdf untuk pengantar
 {
   if(ui->comboBox_realisasi->currentIndex()==0){    Widget3 *a = new Widget3;
       a->show();}

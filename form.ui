@@ -1875,7 +1875,7 @@ bacground-size: 70%</string>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_17">
+          <widget class="QLabel" name="label_realisasi">
            <property name="minimumSize">
             <size>
              <width>10</width>
@@ -1927,7 +1927,7 @@ bacground-size: 70%</string>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_19">
+          <widget class="QLabel" name="label_s_d">
            <property name="minimumSize">
             <size>
              <width>41</width>
@@ -1969,7 +1969,7 @@ bacground-size: 70%</string>
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="toolButton_7">
+          <widget class="QToolButton" name="toolButton_refResh">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>40</horstretch>
@@ -2000,7 +2000,7 @@ bacground-size: 70%</string>
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="toolButton_14">
+          <widget class="QToolButton" name="toolButton_pdf_main">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>40</horstretch>
@@ -2032,7 +2032,7 @@ bacground-size: 70%</string>
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="toolButton_15">
+          <widget class="QToolButton" name="toolButton_logOut">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>40</horstretch>

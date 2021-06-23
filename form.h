@@ -108,7 +108,7 @@ private slots:
       void active_eb_v();
       void active_eb_v_2();
      // void on_pushButton_clicked();
-      void on_toolButton_7_clicked();
+      void on_toolButton_refResh_clicked();
       void on_toolButton_8_clicked();
       void on_toolButton_10_clicked();
 
@@ -117,8 +117,8 @@ private slots:
       void muatrealadd();
 
       void on_toolButton_13_clicked();
-      void on_toolButton_15_clicked();
-      void on_toolButton_14_clicked();
+      void on_toolButton_logOut_clicked();
+      void on_toolButton_pdf_main_clicked();
       void on_toolButton_16_clicked();
       void on_toolButton_17_clicked();
 
