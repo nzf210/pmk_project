@@ -87,9 +87,9 @@ private slots:
     void even_distrik_combo(QString &id_kam_s);
     void qbx_id_dis_conn();
     //void on_toolButton_3_clicked();
-    void on_toolButton_4_clicked();
+    void on_toolButton_tmbRealdds_clicked();
     void on_toolButton_5_clicked();
-    void on_toolButton_6_clicked();
+    void on_toolButton_cetakPdfdds_clicked();
 
       //private slots:
       void even_klik_tw13();
@@ -109,14 +109,14 @@ private slots:
       void active_eb_v_2();
      // void on_pushButton_clicked();
       void on_toolButton_refResh_clicked();
-      void on_toolButton_8_clicked();
-      void on_toolButton_10_clicked();
+      void on_toolButton_add_clicked();
+      void on_toolButton_tmbRealadd_clicked();
 
-      void on_toolButton_12_clicked();
+      void on_toolButton_cetakPdfadd_clicked();
       void muatrealdds();
       void muatrealadd();
 
-      void on_toolButton_13_clicked();
+      void on_toolButton_Sppd_clicked();
       void on_toolButton_logOut_clicked();
       void on_toolButton_pdf_main_clicked();
       void on_toolButton_16_clicked();
@@ -132,7 +132,7 @@ private slots:
       void eventQbxadd();
       void muatTahap_2(QString);
       void eventQbxadd_2();
-      void on_toolButton_18_clicked();
+      void on_toolButton_filter_clicked();
 
 signals:
      // void myLabelClicked();      // Signal to emit

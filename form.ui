@@ -28,7 +28,7 @@ border-style: outset;
 	
 }
 
-QToolButton#toolButton_2 { background-image: url(:/gbr/html/gbr/icons8-resume-50-2.png);
+QToolButton#toolButton_danaDesa { background-image: url(:/gbr/html/gbr/icons8-resume-50-2.png);
 
 image: no-repeate;
 background-size:100%;
@@ -42,7 +42,7 @@ border-style: outset;
    text-align: bottom-center;background-repeat: no-repeat; 
 	
 }
-QToolButton#toolButton_8 { background-image: url(:/gbr/html/gbr/icons8-resume-50.png);
+QToolButton#toolButton_add { background-image: url(:/gbr/html/gbr/icons8-resume-50.png);
 image: no-repeate;
 background-size:100%;
 width: 60%;
@@ -57,7 +57,7 @@ border-style: outset;
 }
 
 
-QToolButton#toolButton_13 { background-image: url(:/gbr/html/gbr/icons8-scroll-50.png);
+QToolButton#toolButton_Sppd { background-image: url(:/gbr/html/gbr/icons8-scroll-50.png);
 image: no-repeate;
 background-size:100%;
 width: 60%;
@@ -81,7 +81,7 @@ border-style: outset;
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="page">
     <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -191,7 +191,7 @@ border-style: outset;
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
-            <widget class="QLabel" name="label_7">
+            <widget class="QLabel" name="label_pagu_dds">
              <property name="minimumSize">
               <size>
                <width>51</width>
@@ -233,7 +233,7 @@ border-style: outset;
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_8">
+            <widget class="QLabel" name="label_realisasi_dds">
              <property name="minimumSize">
               <size>
                <width>71</width>
@@ -259,7 +259,7 @@ border-style: outset;
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_2">
+            <widget class="QLineEdit" name="lineEdit_realisasi_dds">
              <property name="minimumSize">
               <size>
                <width>181</width>
@@ -275,7 +275,7 @@ border-style: outset;
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_9">
+            <widget class="QLabel" name="label_sisa_dds">
              <property name="minimumSize">
               <size>
                <width>41</width>
@@ -301,7 +301,7 @@ border-style: outset;
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_3">
+            <widget class="QLineEdit" name="lineEdit_sisa_dds">
              <property name="minimumSize">
               <size>
                <width>181</width>
@@ -366,7 +366,7 @@ border-style: outset;
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="toolButton_4">
+            <widget class="QToolButton" name="toolButton_tmbRealdds">
              <property name="minimumSize">
               <size>
                <width>56</width>
@@ -404,7 +404,7 @@ bacground-size: 70%</string>
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="toolButton_6">
+            <widget class="QToolButton" name="toolButton_cetakPdfdds">
              <property name="minimumSize">
               <size>
                <width>56</width>
@@ -541,7 +541,7 @@ bacground-size: 70%</string>
           </widget>
          </item>
          <item>
-          <widget class="QTableWidget" name="tableWidget_11">
+          <widget class="QTableWidget" name="tableWidget_rAnggaran_add">
            <property name="minimumSize">
             <size>
              <width>531</width>
@@ -738,7 +738,7 @@ bacground-size: 70%</string>
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="toolButton_10">
+            <widget class="QToolButton" name="toolButton_tmbRealadd">
              <property name="minimumSize">
               <size>
                <width>56</width>
@@ -776,7 +776,7 @@ bacground-size: 70%</string>
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="toolButton_12">
+            <widget class="QToolButton" name="toolButton_cetakPdfadd">
              <property name="minimumSize">
               <size>
                <width>56</width>
@@ -852,7 +852,7 @@ bacground-size: 70%</string>
           </layout>
          </item>
          <item>
-          <widget class="QTableWidget" name="tableWidget_9">
+          <widget class="QTableWidget" name="tableWidget_cetak_add">
            <property name="minimumSize">
             <size>
              <width>400</width>
@@ -1594,7 +1594,7 @@ bacground-size: 70%</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_14">
           <item>
-           <widget class="QToolButton" name="toolButton_13">
+           <widget class="QToolButton" name="toolButton_Sppd">
             <property name="minimumSize">
              <size>
               <width>55</width>
@@ -1839,7 +1839,7 @@ bacground-size: 70%</string>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="label_namaKampung">
            <property name="minimumSize">
             <size>
              <width>10</width>
@@ -2131,7 +2131,7 @@ background-repeat: no-repeat; </string>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_4">
+         <widget class="QComboBox" name="comboBox_filter">
           <property name="minimumSize">
            <size>
             <width>241</width>
@@ -2147,7 +2147,7 @@ background-repeat: no-repeat; </string>
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="toolButton_18">
+         <widget class="QToolButton" name="toolButton_filter">
           <property name="minimumSize">
            <size>
             <width>31</width>
