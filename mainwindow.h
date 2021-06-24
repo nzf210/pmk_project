@@ -46,6 +46,7 @@ private:
     QString lvl;
     QString type;
     QString id;
+    QString namaL;
 
 };
 #endif // MAINWINDOW_H

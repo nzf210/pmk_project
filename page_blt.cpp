@@ -35,9 +35,10 @@
 #include <QUrl>
 
 
-void Form::on_toolButton_covid_clicked()
+void Form::on_toolButton_blt_clicked()
 {
-    boderToolbar(4);
-    ui->stackedWidget->setCurrentIndex(4);
+    boderToolbar(5);
+    ui->stackedWidget->setCurrentIndex(5);
     sembunyi_subMenu();
+
 }

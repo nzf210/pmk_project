@@ -18,8 +18,11 @@ SOURCES += \
     mainwindow.cpp \
     page_add.cpp \
     page_bamuskam.cpp \
+    page_blt.cpp \
     page_covid.cpp \
     page_dds.cpp \
+    page_sppd.cpp \
+    page_tambahan.cpp \
     page_user.cpp \
     pdf_dok.cpp
 
@@ -27,11 +30,11 @@ HEADERS += \
     form.h \
     mainwindow.h \
     page_user.h \
-    pdf.h \
-    pdf2.h \
-    pdf3.h \
     pdf4.h \
+    pdf_add.h \
+    pdf_dds.h \
     pdf_dok.h \
+    pdf_sppd_dds.h \
     qrencode.h
 
 FORMS += \

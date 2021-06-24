@@ -63,6 +63,9 @@ void Form::on_toolButton_user_clicked()
     ui->stackedWidget->setCurrentIndex(6);
     header_tw_daftarUser();
     activitiUser();
+    sembunyi_subMenu();
+
+
 }
 
 void Form::on_pushButton_buat_usr_clicked()
@@ -88,6 +91,7 @@ void Form::on_pushButton_bersihkan_usr_clicked()
 {
 ui->pushButton_buat_usr->setEnabled(true);
 activitiUser();
+
 }
 
 void Form::hapus_user()
@@ -128,8 +132,8 @@ void Form::update_user()
 
     if(lvl=="usr"){cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass  WHERE id= :id_usr "; }
 
-    if(type=="su"){ if(textCombo=="admin"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass,   WHERE id= :id ";}
-                            if(textCombo=="usr"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass, WHERE id= :id " ;}
+    if(type=="su"){ if(textCombo=="admin"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass   WHERE id= :id ";}
+                            if(textCombo=="usr"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass WHERE id= :id " ;}
     }
 
     if(lvl=="admin" && type=="dds"){

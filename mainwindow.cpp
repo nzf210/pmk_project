@@ -217,7 +217,7 @@ void MainWindow::loadusr(QString nm, QString ps)
 {
     if(!open()){open();}
     QSqlQuery query;
-    QString cmd ="SELECT nama,pass,level,type,id FROM pmk_yhk.usr WHERE nama = :nm AND pass = :ps " ;
+    QString cmd ="SELECT nama,pass,level,type,id,jabatan FROM pmk_yhk.usr WHERE nama = :nm AND pass = :ps " ;
     query.prepare(cmd);
     query.bindValue(":nm",nm);
     query.bindValue(":ps",ps);
@@ -229,6 +229,7 @@ void MainWindow::loadusr(QString nm, QString ps)
             lvl = query.value(2).toString();
             type = query.value(3).toString();
             id = query.value(4).toString();
+            namaL = query.value(5).toString();
                                   }
 
     QString path("doc/temp/");
@@ -239,7 +240,7 @@ void MainWindow::loadusr(QString nm, QString ps)
     if(fOut.open(QFile::WriteOnly | QFile::Text)){qInfo()<<"Gagal Menyimpan lvl_type.txt"; return;} else
     {
         QTextStream stream(&fOut);
-        stream << lvl <<"/n"<<type << "/n" << id;
+        stream << lvl <<"/n"<<type << "/n" << id <<"/n" <<namaL;
         fOut.flush();
         fOut.close(); }
 }

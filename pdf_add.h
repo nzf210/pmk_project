@@ -1,5 +1,5 @@
-#ifndef PDF2_H
-#define PDF2_H
+#ifndef PDF_ADD_H
+#define PDF_ADD_H
 
 #include <QtWebEngineWidgets>
 #include <QThread>
@@ -323,5 +323,5 @@ public slots:
 };
 
 
-#endif // PDF2_H
+#endif // PDF_ADD_H
 

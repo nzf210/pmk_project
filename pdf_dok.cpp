@@ -1,8 +1,8 @@
 #include "pdf_dok.h"
 #include "ui_pdf_dok.h"
 
-#include "pdf.h"
-#include "pdf2.h"
+#include "pdf_dds.h"
+#include "pdf_add.h"
 
 #include <QApplication>
 #include <QFileInfo>

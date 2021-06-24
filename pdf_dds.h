@@ -1,5 +1,5 @@
-#ifndef PDF_H
-#define PDF_H
+#ifndef PDF_DDS_H
+#define PDF_DDS_H
 
 #include <QtWebEngineWidgets>
 #include <QThread>
@@ -347,6 +347,6 @@ public slots:
 };
 
 
-#endif // PDF_H
+#endif // PDF_DDS_H
 
 

@@ -1,5 +1,5 @@
-#ifndef PDF3_H
-#define PDF3_H
+#ifndef PDF_SPPD_DDS_H
+#define PDF_SPPD_DDS_H
 
 #include <QtWebEngineWidgets>
 #include <QThread>
@@ -269,4 +269,4 @@ public slots:
 
 
 
-#endif // PDF3_H
+#endif // PDF_SPPD_DDS_H

@@ -91,10 +91,16 @@ private slots:
     //void on_toolButton_5_clicked();
     void on_toolButton_cetakPdfdds_clicked();
 
+    void sembunyi_subMenu();
+
+    void modeTampilan_usr();
+
+    void conect_slot();
+
       //private slots:
-      void even_klik_tw13();
+      //void even_klik_tw13();
       void even_dklik_tw13();
-      void headsppd_2(); // Double Klik tw13
+      //void headsppd_2(); // Double Klik tw13
       void event_doubleklik_tw_cetak_dds();
       void event_doubleklik_tw_cetak_add();
       void event_doubleklik_tw_bamuskam();
@@ -175,6 +181,7 @@ private:
     QString lvl;
     QString type;
     QString id_usr;
+    QString nama_l;
     //Tambahan untuk Otomatisasi Jumlah Caor, Persen dan Tahap Laporan
     QString persen_2;
     QString laporan;
