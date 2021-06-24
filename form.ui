@@ -33,7 +33,7 @@
    <string>Form</string>
   </property>
   <property name="toolTip">
-   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;untuk Buat User tekan &lt;span style=&quot; font-weight:600;&quot;&gt;Bersihkan&lt;/span&gt; lebih dahulu&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   <string/>
   </property>
   <property name="styleSheet">
    <string notr="true">QToolButton#toolButton { background-image: url(:/gbr/html/gbr/icons8-create-50.png);
@@ -146,7 +146,7 @@ border-style: outset;
     </rect>
    </property>
    <property name="currentIndex">
-    <number>6</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="page">
     <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1406,7 +1406,7 @@ bacground-size: 70%</string>
           <item>
            <widget class="QPushButton" name="pushButton_buat_usr">
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;untuk Buat User tekan &lt;span style=&quot; font-weight:600;&quot;&gt;Bersihkan&lt;/span&gt; lebih dahulu&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;tekan Bersihkan lebih dahulu...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Buat</string>

@@ -192,9 +192,9 @@ menu="1";
  {
      updateTampilan(SuperMode);
  }
-    else if( lvl=="admin_1" && type=="dds" )
+    else if( lvl=="admin" && type=="dds" )
                 {updateTampilan(AdminMode_1);}
-                else if(lvl=="admin_2" && type=="add")
+                else if(lvl=="admin" && type=="add")
                               {updateTampilan(AdminMode_2);}
                              else if(lvl=="usr" && type=="dds")
                                            {updateTampilan(UserMode_1);}
@@ -4299,6 +4299,7 @@ void Form::muat_lvl_type() {
         li_lvl_type = line.split("/n");
         lvl = li_lvl_type.at(0);
         type = li_lvl_type.at(1);
+        id_usr = li_lvl_type.at(2);
     }
     lvl_type.close();
 }
@@ -4540,21 +4541,30 @@ void Form::updateTampilan(Mode mode)
 
     case AdminMode_1:
         qInfo()<<"Ini adalah Mode Admin_Mode_1";
+        ui->toolButton_add->setVisible(false);
+        ui->label_Add->setVisible(false);
         break;
 
     case AdminMode_2:
         qInfo()<<"Ini adalah Mode Admin Mode_2";
+        ui->toolButton_danaDesa->setVisible(false);
+        ui->label_danaDesa->setVisible(false);
         break;
 
     case UserMode_1:
         qInfo()<<"Ini adalah Mode User MODE 1";
-        ui->toolButton->setVisible(false);
-        ui->label_Bamuskam->setVisible(false);
+//       ui->toolButton_user->setVisible(false);
+//       ui->label_User->setVisible(false);
+       ui->toolButton_add->setVisible(false);
+       ui->label_Add->setVisible(false);
         break;
 
     case UserMode_2:
         qInfo()<<"Ini adalah Mode User MODE 2";
-
+//        ui->toolButton_user->setVisible(false);
+//        ui->label_User->setVisible(false);
+        ui->toolButton_danaDesa->setVisible(false);
+        ui->label_danaDesa->setVisible(false);
         break;
     }
 }
@@ -5116,7 +5126,7 @@ void Form::hapus_user()
 
 void Form::update_user()
 {
-     if(lvl=="usr"){QMessageBox::information(this,"Info...","Level user anda bukan Admin"); return;}
+    //if(lvl=="usr"){QMessageBox::information(this,"Info...","Level user anda bukan Admin"); return;}
     QString id_b = ui->lineEdit_id_usr->text();
     QString nama_b = ui->lineEdit_namaUser->text();
     if(nama_b==nullptr){QMessageBox::information(this,"Info...","Isi nama..."); return;}
@@ -5132,37 +5142,39 @@ void Form::update_user()
    QString textCombo = ui->comboBox_level_user->currentText();
 
    QSqlQuery query;
-   QString cmd = "UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass, level = :level '' WHERE id= :id";
+   QString cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass, level = :level ";
+
+    if(lvl=="usr"){cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass  WHERE id= :id_usr "; }
 
     if(type=="su"){ if(textCombo=="admin"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass,   WHERE id= :id ";}
                             if(textCombo=="usr"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass, WHERE id= :id " ;}
     }
 
-    if(lvl=="admin_1" && type=="dds"){
+    if(lvl=="admin" && type=="dds"){
         if(pass_b==nullptr){
-            if(textCombo=="admin"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan ,  level= 'admin_1' ,id_lvl='2'  WHERE id= :id " ;}
+            if(textCombo=="admin"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan ,  level= 'admin' ,id_lvl='2'  WHERE id= :id " ;}
             if(textCombo=="usr"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan ,  level= 'usr' ,id_lvl='3'  WHERE id= :id ";}
         }else{
-                                                              if(textCombo=="admin"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass, level= 'admin_1' ,id_lvl='2'  WHERE id= :id " ;}
+                                                              if(textCombo=="admin"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass, level= 'admin' ,id_lvl='2'  WHERE id= :id " ;}
                                                               if(textCombo=="usr"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass, level= 'usr' ,id_lvl='3'  WHERE id= :id ";} }
                 }
 
-    if(lvl=="admin_2" && type=="add"){
+    if(lvl=="admin" && type=="add"){
         if(pass_b==nullptr){
-            if(textCombo=="admin"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , level= 'admin_2' ,id_lvl='2'  WHERE id= :id ";}
+            if(textCombo=="admin"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , level= 'admin' ,id_lvl='2'  WHERE id= :id ";}
             if(textCombo=="usr"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , level= 'usr' ,id_lvl='3'  WHERE id= :id ";}
                                         }else{
-                                                                    if(textCombo=="admin"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass, level= 'admin_2' ,id_lvl='2'  WHERE id= :id ";}
+                                                                    if(textCombo=="admin"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass, level= 'admin' ,id_lvl='2'  WHERE id= :id ";}
                                                                     if(textCombo=="usr"){ cmd = " UPDATE pmk_yhk.usr SET nama =:nama , jabatan = :jabatan , pass = :pass, level= 'usr' ,id_lvl='3'  WHERE id= :id ";}
         }
     }
-
 
     query.prepare(cmd);
     query.bindValue(":jabatan", nama_b);
     query.bindValue(":nama",usrName_b);
     query.bindValue(":pass",pass_B);
     query.bindValue(":id",id_b);
+    query.bindValue(":id_usr",id_usr);
     bool ok = exec(query);
     if(ok){QMessageBox::information(this,"Info","Berhasil Memperbaharui Data user .."); memuat_data_user_();}
     if(!ok){QMessageBox::information(this,"Info","Gagal Memperbaharui Data user .."); return;}
@@ -5189,14 +5201,14 @@ void Form::buat_user()
    QSqlQuery query;
    QString cmd = "SELECT id,nama,jabatan,pass,level,id_lvl,id_type FROM pmk_yhk.usr";
 
-    if(type=="su"){ if(textCombo=="admin"){ cmd = "INSERT INTO pmk_yhk.usr (jabatan,nama,pass,level,type, id_lvl, id_type) VALUES (:jabatan, :nama, :pass, 'admin_1', 'dds', '2', '1') ";}
-                            if(textCombo=="usr"){ cmd = "INSERT INTO pmk_yhk.usr (jabatan,nama,pass,level,type, id_lvl, id_type) VALUES (:jabatan, :nama, :pass, 'admin_2', 'add', '2', '2') ";}
+    if(type=="su"){ if(textCombo=="admin"){ cmd = "INSERT INTO pmk_yhk.usr (jabatan,nama,pass,level,type, id_lvl, id_type) VALUES (:jabatan, :nama, :pass, 'admin', 'dds', '2', '1') ";}
+                            if(textCombo=="usr"){ cmd = "INSERT INTO pmk_yhk.usr (jabatan,nama,pass,level,type, id_lvl, id_type) VALUES (:jabatan, :nama, :pass, 'admin', 'add', '2', '2') ";}
     }
 
-    if(lvl=="admin_1" && type=="dds"){ if(textCombo=="admin"){ cmd = "INSERT INTO pmk_yhk.usr (jabatan,nama,pass,level,type, id_lvl, id_type) VALUES (:jabatan, :nama, :pass, 'admin_1', 'dds', '2', '1') ";}
+    if(lvl=="admin" && type=="dds"){ if(textCombo=="admin"){ cmd = "INSERT INTO pmk_yhk.usr (jabatan,nama,pass,level,type, id_lvl, id_type) VALUES (:jabatan, :nama, :pass, 'admin', 'dds', '2', '1') ";}
                                                               if(textCombo=="usr"){ cmd = "INSERT INTO pmk_yhk.usr (jabatan,nama,pass,level,type, id_lvl, id_type) VALUES (:jabatan, :nama, :pass, 'usr', 'dds', '3', '1') ";}}
 
-    if(lvl=="admin_2" && type=="add"){ if(textCombo=="admin"){ cmd = "INSERT INTO pmk_yhk.usr (jabatan,nama,pass,level,type, id_lvl, id_type) VALUES (:jabatan, :nama, :pass, 'admin_2', 'add', '2', '2') ";}
+    if(lvl=="admin" && type=="add"){ if(textCombo=="admin"){ cmd = "INSERT INTO pmk_yhk.usr (jabatan,nama,pass,level,type, id_lvl, id_type) VALUES (:jabatan, :nama, :pass, 'admin', 'add', '2', '2') ";}
                                                                 if(textCombo=="usr"){ cmd = "INSERT INTO pmk_yhk.usr (jabatan,nama,pass,level,type, id_lvl, id_type) VALUES (:jabatan, :nama, :pass, 'usr', 'add', '3', '2') ";}}
     if(lvl=="usr"){QMessageBox::information(this,"Info...","Level user anda bukan Admin"); return;}
 
@@ -5220,11 +5232,13 @@ void Form::memuat_data_user_()
     QSqlQuery query;
     QString cmd = "SELECT id,nama,jabatan,pass,level,id_lvl,id_type FROM pmk_yhk.usr";
 
-    if(lvl=="admin_1" && type=="dds"){cmd = "SELECT id,nama,jabatan,pass,level,id_lvl,id_type FROM pmk_yhk.usr WHERE id_type=1";}
+    if(lvl=="usr"){cmd = "SELECT id,nama,jabatan,pass,level,id_lvl,id_type FROM pmk_yhk.usr WHERE  id= :id ";}
+    if(lvl=="admin" && type=="dds"){cmd = "SELECT id,nama,jabatan,pass,level,id_lvl,id_type FROM pmk_yhk.usr WHERE id_type=1";}
 
-    if(lvl=="admin_2" && type=="add"){cmd = "SELECT id,nama,jabatan,pass,level,id_lvl,id_type FROM pmk_yhk.usr WHERE id_type=2";}
+    if(lvl=="admin" && type=="add"){cmd = "SELECT id,nama,jabatan,pass,level,id_lvl,id_type FROM pmk_yhk.usr WHERE id_type=2";}
 
     query.prepare(cmd);
+    query.bindValue(":id", id_usr);
     bool ok = exec(query);
     if(!ok){QMessageBox::information(this,"Error...","Gagal Memuat Data user .."); return;}
     int no=0;
@@ -5288,7 +5302,7 @@ void Form::even_klik_tw_user()
 void Form::activitiUser()
 {
     QStringList lvl_usr;
-    lvl_usr << "admin" << "usr" ;
+    lvl_usr << "usr" << "admin" ;
 //ui->pushButton_buat_usr->setEnabled(true);
 ui->lineEdit_namaUser->clear();
 ui->lineEdit_password->clear();

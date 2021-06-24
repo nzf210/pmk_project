@@ -78,7 +78,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -244,6 +244,9 @@ stop:0#f9fffa,stop:0.4#0c18ff,stop:0.6 #0913cf, stop: 1.0 #050a6a);
           <property name="text">
            <string>masuk</string>
           </property>
+          <property name="autoDefault">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>
@@ -264,7 +267,7 @@ stop:0#f9fffa,stop:0.4#0c18ff,stop:0.6 #0913cf, stop: 1.0 #050a6a);
      </layout>
     </widget>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>48</x>

@@ -174,6 +174,7 @@ private:
 
     QString lvl;
     QString type;
+    QString id_usr;
     //Tambahan untuk Otomatisasi Jumlah Caor, Persen dan Tahap Laporan
     QString persen_2;
     QString laporan;

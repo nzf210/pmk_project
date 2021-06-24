@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "form.h"
+#include <QObject>
 
 
 bool openDB2(QSqlDatabase &db2)
@@ -72,6 +73,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->lineEdit->addAction(usrIcon, QLineEdit::LeadingPosition);
     const QIcon passwordIcon(":/gbr/html/gbr/icons8-lock-50-2.png");
     ui->lineEdit_2->addAction(passwordIcon, QLineEdit::LeadingPosition);
+
+
+    //connect(ui->lineEdit_2->editingFinished(), &QLineEdit::returnPressed, this, MainWindow::on_pushButton_clicked());
 
     QDateTime wkt2 = QDateTime::fromString(getdate(),"yyyy-MM-dd");
     //QDateTime wkt3 = QDateTime::fromString(getdate(),"yyyy-MM-dd");
@@ -213,7 +217,7 @@ void MainWindow::loadusr(QString nm, QString ps)
 {
     if(!open()){open();}
     QSqlQuery query;
-    QString cmd ="SELECT nama,pass,level,type FROM pmk_yhk.usr WHERE nama = :nm AND pass = :ps " ;
+    QString cmd ="SELECT nama,pass,level,type,id FROM pmk_yhk.usr WHERE nama = :nm AND pass = :ps " ;
     query.prepare(cmd);
     query.bindValue(":nm",nm);
     query.bindValue(":ps",ps);
@@ -224,6 +228,7 @@ void MainWindow::loadusr(QString nm, QString ps)
             pas = query.value(1).toString();
             lvl = query.value(2).toString();
             type = query.value(3).toString();
+            id = query.value(4).toString();
                                   }
 
     QString path("doc/temp/");
@@ -234,7 +239,7 @@ void MainWindow::loadusr(QString nm, QString ps)
     if(fOut.open(QFile::WriteOnly | QFile::Text)){qInfo()<<"Gagal Menyimpan lvl_type.txt"; return;} else
     {
         QTextStream stream(&fOut);
-        stream << lvl <<"/n"<<type;
+        stream << lvl <<"/n"<<type << "/n" << id;
         fOut.flush();
         fOut.close(); }
 }

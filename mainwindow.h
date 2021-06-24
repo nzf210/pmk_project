@@ -45,6 +45,7 @@ private:
     QString pas;
     QString lvl;
     QString type;
+    QString id;
 
 };
 #endif // MAINWINDOW_H
