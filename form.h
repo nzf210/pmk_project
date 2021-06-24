@@ -298,6 +298,9 @@ private:
     void act();
     void act_2();
 
+    void buat_user();
+    void update_user();
+    void hapus_user();
 //================= sppd ================
 void instsppd(QString nosrt, QString hal,QString date);
 void instsppd_2(QString nosrt, QString hal,QString date);
