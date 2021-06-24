@@ -366,5 +366,9 @@ protected:
  bool saveDocument(QString filePath);
  QString html1;
 
+
+
 };
 #endif // FORM_H
+
+
