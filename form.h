@@ -59,6 +59,8 @@ public:
     QString jumlahcair();
     enum Mode { SuperMode, AdminMode_1, AdminMode_2, UserMode_1, UserMode_2 };
 
+//#Q_SLOT void setMyText(const QString &);
+
     #ifdef Q_OS_WINDOWS
         static void Initialize();
         static void Deinitialize();
@@ -71,7 +73,7 @@ public:
         QString getPdfdt1() const;
 
         //ini percobaan send data
-        void sendCMD();
+
 
 
 private slots:
@@ -170,16 +172,16 @@ signals:
       void sendData(QString data);
 
       //ini percobaan Slot signal
-      void cmd();
+
 
 public slots:
       // void slotLabelClicked();    // Slot which will consume signal
     void onTabChanged(int tabIndex);
 
 
+
 private:
     //ini percobaan Slot signal
-
 
 
     void boderToolbar(int);

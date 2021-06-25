@@ -27,11 +27,18 @@ public:
     void rollback();
     bool exec(QSqlQuery &query);
 
+ QString nama_main;
+ QString pass_main;
 
+   // Q_SIGNAL void myTextChanged(const QString &);
+   //QString myText() const { return nama_main ;}
 
 
 public slots:
-    void rx_data();
+
+    QString getdate();
+    QStringList getListDatauser();
+
 
 
 
@@ -40,7 +47,7 @@ private slots:
 
 
 private:
-    QString getdate();
+
     QString wk;
     void updatedate();
     //QString decryptToString(const QString& plaintext);
@@ -54,6 +61,9 @@ private:
     QString type;
     QString id;
     QString namaL;
+    QStringList listDatauser;
+
+
 
 };
 #endif // MAINWINDOW_H

@@ -7,7 +7,8 @@
 #include "pdf_add.h"
 #include "pdf_sppd_dds.h"
 #include "pdf4.h"
-#include "mainwindow.h"
+
+#include "autoconnectQ.h"
 
 // =======================================================================================
 #include "QDebug"
@@ -35,6 +36,7 @@
 #include <QPainter>
 #include <QUrl>
 // =======================================================================================
+#include "mainwindow.h"
 
 
 #define EXPORT_IMAGE_SIZE 256
@@ -123,6 +125,8 @@ bool openDB(QSqlDatabase &db2)
     return false;
  }
 
+
+
 Form::Form(QWidget *parent) :
     QWidget(parent),data("ssssss"),
     ui(new Ui::Form)
@@ -173,7 +177,6 @@ modeTampilan_usr();
 ui->label_space_1->setText("Selamat Datang : "+nama_l);
  // === Memuat Level Type ===
 
-
 //Percobaan Signal and Slot
 
 #ifdef Q_OS_WINDOWS
@@ -194,8 +197,10 @@ QString decryptToString(const QString plaintext)
 void Form::onTabChanged(int tabIndex) {
     if (tabIndex == 0) {
     } else if (tabIndex == 1) {
-     }
+    }
 }
+
+
 
 //QStringList Form::getSend_cmd2() const
 //{
@@ -218,10 +223,6 @@ QString Form::getPdfdt1() const
     return pdfdt1;
 }
 //ini Percobaan Send CMD
-void Form::sendCMD()
-{
-    emit cmd();
-}
 
 // === StringList dari list daftar nama ===E===
 

@@ -108,6 +108,7 @@ MainWindow::MainWindow(QWidget *parent)
    // if(days1>0){updatedate();}
     //MainWindow *a = new MainWindow;
    // this->close();
+
 }
 
 MainWindow::~MainWindow()
@@ -175,10 +176,6 @@ bool MainWindow::exec(QSqlQuery &query)
     return ok;
 }
 
-void MainWindow::rx_data()
-{
-    qDebug() << "Ini adalah rx data pada MainWindow";
-}
 
 
 void MainWindow::begin()
@@ -200,17 +197,20 @@ void MainWindow::rollback()
 void MainWindow::on_pushButton_clicked()  // Button Login ...
 {
 
-    QString nama = ui->lineEdit->text();
+    QString nama_i = ui->lineEdit->text();
     QString pass = ui->lineEdit_2->text();
-    if(nama=="" && pass==""){QMessageBox::information(this,"Perhatian...","Nama atau Password tdk boleh kosong"); return;}
-    QByteArray hash = QCryptographicHash::hash(pass.toLocal8Bit(),QCryptographicHash::Sha256).toHex();
-    QByteArray hash2 = QCryptographicHash::hash(nama.toLocal8Bit(),QCryptographicHash::Sha256).toHex();
+
+
+    if(nama_i=="" && pass==""){QMessageBox::information(this,"Perhatian...","Nama atau Password tdk boleh kosong"); return;}
+    QByteArray hash = QCryptographicHash::hash(nama_i.toLocal8Bit(),QCryptographicHash::Sha256).toHex();
+    QByteArray hash2 = QCryptographicHash::hash(pass.toLocal8Bit(),QCryptographicHash::Sha256).toHex();
     QString pass_= QString::fromLocal8Bit(hash);
     QString nama_ = QString::fromLocal8Bit(hash2);
 
-    loadusr(nama,pass_);
+    qDebug() << "cekkkkkkkkkkkkk Error"<<nama_main << pass_main;
+    loadusr(nama_i,pass_);
 
-    if(nama==nama && pass_==pas)
+    if(nama_i==nama_i  && pass_==pas)
     {
         Form  *form = new Form();
         form->show();
@@ -239,7 +239,8 @@ void MainWindow::loadusr(QString nm, QString ps)
             namaL = query.value(5).toString();
             list_data_coba <<nama<<pas<<lvl<<type<<id<<namaL;
                                   }
-
+    listDatauser = list_data_coba;
+    //qInfo() << "NIlai List Data User" << listDatauser;
     QString path("doc/temp/");
     QDir dir(path);
     QFile fOut(path+"lvl_type.txt");
@@ -251,6 +252,35 @@ void MainWindow::loadusr(QString nm, QString ps)
         stream << lvl <<"/n"<<type << "/n" << id <<"/n" <<namaL;
         fOut.flush();
         fOut.close(); }
+
+    //getListDatauser();
+}
+
+QStringList MainWindow::getListDatauser()
+{
+    QString xx = nama_main;
+    QString cc =pass_main;
+    //qDebug ()<< "Data User Main WIndow di getList User"<< nm <<"===" <<ps;
+    QStringList list_data_coba;
+    if(!open()){open();}
+    QSqlQuery query;
+    QString cmd ="SELECT nama,pass,level,type,id,jabatan FROM pmk_yhk.usr WHERE nama = :nm AND pass = :ps " ;
+    query.prepare(cmd);
+    query.bindValue(":nm",xx);
+    query.bindValue(":ps",cc);
+    lg= exec(query);
+    if(!lg) { QMessageBox::information(this,"Error..."," Gagal Memuat Data User... "+query.lastError().text()+""); }
+    while (query.next()) {
+            nama = query.value(0).toString();
+            pas = query.value(1).toString();
+            lvl = query.value(2).toString();
+            type = query.value(3).toString();
+            id = query.value(4).toString();
+            namaL = query.value(5).toString();
+            list_data_coba <<nama<<pas<<lvl<<type<<id<<namaL;
+                                  }
+
+    return list_data_coba;
 }
 
 
