@@ -31,7 +31,7 @@
 #include <QLibrary>
 #endif
 #include "qrencode.h"
-//#include "mainwindow.h"
+#include "mainwindow.h"
 
 namespace Ui {
 class Form;
@@ -53,8 +53,8 @@ public:
     void rollback();
     QWidget *eb_v;
     bool eventFilter(QObject *object, QEvent *event);
-    static bool GeneratePixmapFromText(QString &text, QPixmap &pixmap,
-                                       int width, int height);
+    static bool GeneratePixmapFromText(QString &text, QPixmap &pixmap_,int width, int height);
+    const QPixmap *QRCodePixmap;
 
     QString jumlahcair();
     enum Mode { SuperMode, AdminMode_1, AdminMode_2, UserMode_1, UserMode_2 };
@@ -70,9 +70,12 @@ public:
         void  rundatapdf1();
         QString getPdfdt1() const;
 
+        //ini percobaan send data
+        void sendCMD();
+
 
 private slots:
-// ==== Qr_Code ====
+        // ==== Qr_Code ====
     void on_saveFileButton_pressed(QString);
     void on_generateButton_pressed(QString text);
 // ==== Qr_Code ====
@@ -161,15 +164,24 @@ private slots:
       void memuat_data_user_();
 
       void even_klik_tw_user();
+
 signals:
      // void myLabelClicked();      // Signal to emit
       void sendData(QString data);
+
+      //ini percobaan Slot signal
+      void cmd();
 
 public slots:
       // void slotLabelClicked();    // Slot which will consume signal
     void onTabChanged(int tabIndex);
 
+
 private:
+    //ini percobaan Slot signal
+
+
+
     void boderToolbar(int);
     void updateTampilan(Mode mode);
     Mode ModeSekarang;

@@ -102,12 +102,12 @@ MainWindow::MainWindow(QWidget *parent)
     qInfo() << "int days =================" << days;
     qInfo() << "int day1 =================" << days1;
 
-//    if(days<20){QMessageBox::information(this,"Info...","Mohon Perbaharui Aplikasi anda untuk tetap menggunakannya..."); }
-//    if(days1<0){QMessageBox::information(this,"Info...","Mohon perbaharui Aplikasi anda..."); return;
+//  if(days<20&&days1<0){QMessageBox::information(this,"Info...","Mohon Perbaharui Aplikasi anda untuk tetap menggunakannya..."); }
+//    if(){QMessageBox::information(this,"Info...","Mohon perbaharui Aplikasi anda..."); return;
 //    }
-//    if(days1>0){updatedate();}
-//    MainWindow *a = new MainWindow;
-//    a->close();
+   // if(days1>0){updatedate();}
+    //MainWindow *a = new MainWindow;
+   // this->close();
 }
 
 MainWindow::~MainWindow()
@@ -175,6 +175,12 @@ bool MainWindow::exec(QSqlQuery &query)
     return ok;
 }
 
+void MainWindow::rx_data()
+{
+    qDebug() << "Ini adalah rx data pada MainWindow";
+}
+
+
 void MainWindow::begin()
 {
     QSqlDatabase::database().transaction();
@@ -215,6 +221,7 @@ void MainWindow::on_pushButton_clicked()  // Button Login ...
 
 void MainWindow::loadusr(QString nm, QString ps)
 {
+    QStringList list_data_coba;
     if(!open()){open();}
     QSqlQuery query;
     QString cmd ="SELECT nama,pass,level,type,id,jabatan FROM pmk_yhk.usr WHERE nama = :nm AND pass = :ps " ;
@@ -230,6 +237,7 @@ void MainWindow::loadusr(QString nm, QString ps)
             type = query.value(3).toString();
             id = query.value(4).toString();
             namaL = query.value(5).toString();
+            list_data_coba <<nama<<pas<<lvl<<type<<id<<namaL;
                                   }
 
     QString path("doc/temp/");

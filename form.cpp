@@ -80,9 +80,9 @@ QString konvertAngka(qint64 n) {
     } else if (n < 1000000000000) {
         return konvertAngka((n-(n%1000000000))/1000000000) + "Miliar " + konvertAngka(n % 1000000000);
     }  else if (n < 1000000000000000) {
-        return konvertAngka((n-(n%1000000000000))/1000000000000) + "Triliun " + konvertAngka(n % 1000000000000);}
+        return konvertAngka((n-(n%1000000000000))/1000000000000) + "Triliun" + konvertAngka(n % 1000000000000);}
     else if (n < 1000000000000000000) {
-            return konvertAngka((n-(n%1000000000000000))/1000000000000000) + "Quad Billion " + konvertAngka(n % 1000000000000000);}
+            return konvertAngka((n-(n%1000000000000000))/1000000000000000) + "Quad Billion" + konvertAngka(n % 1000000000000000);}
     else {
         return "Angka lebih besar dari 999.999.999.999,999,999 (harus kurang dari 1jt T)";
     }
@@ -173,6 +173,9 @@ modeTampilan_usr();
 ui->label_space_1->setText("Selamat Datang : "+nama_l);
  // === Memuat Level Type ===
 
+
+//Percobaan Signal and Slot
+
 #ifdef Q_OS_WINDOWS
     Form::Initialize();
 #endif
@@ -194,6 +197,11 @@ void Form::onTabChanged(int tabIndex) {
      }
 }
 
+//QStringList Form::getSend_cmd2() const
+//{
+//    return send_cmd2;
+//}
+
 // === StringList dari list daftar nama ===S===
 QStringList Form::getLspdf1() const
 {    return  lspdf1; }
@@ -208,6 +216,11 @@ void Form::rundatapdf1()
 QString Form::getPdfdt1() const
 {
     return pdfdt1;
+}
+//ini Percobaan Send CMD
+void Form::sendCMD()
+{
+    emit cmd();
 }
 
 // === StringList dari list daftar nama ===E===
@@ -237,7 +250,7 @@ void Form::Deinitialize()
 }
 #endif
 
-bool Form::GeneratePixmapFromText(QString &text, QPixmap &pixmap, int width, int height)
+bool Form::GeneratePixmapFromText(QString &text, QPixmap &pixmap_, int width, int height)
 {
 
     bool result = false;
@@ -288,8 +301,8 @@ bool Form::GeneratePixmapFromText(QString &text, QPixmap &pixmap, int width, int
                 }
             }
         }
-        pixmap = QPixmap::fromImage(mainimg);
-        if (false == pixmap.isNull()){
+        pixmap_ = QPixmap::fromImage(mainimg);
+        if (false == pixmap_.isNull()){
             result = true;
         }
     }
@@ -319,7 +332,7 @@ void Form::on_saveFileButton_pressed(QString cd)
     if (imageType == QString("PNG")){
         filetypeStr = QString(".png");
     }
-    const QPixmap *QRCodePixmap = ui->label_barCode->pixmap();
+    QRCodePixmap = ui->label_barCode->pixmap();
     bool saveResult;
     QString savefileName = QString("doc/temp/gbr/QRCode") + filetypeStr;
     saveResult = QRCodePixmap->save(savefileName);

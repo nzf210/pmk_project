@@ -43,7 +43,7 @@ void Form::on_toolButton_cetakPdfdds_clicked()
        datapdf1();
        //qInfo()<<"Ini adalah info pada button klik"<< getLspdf1();
        on_saveFileButton_pressed(qcode());
-       qInfo() << "Qinfo Cari Bug===========================================================================================";
+       //qInfo() << "Qinfo Cari Bug===========================================================================================";
        Widget1 *a = new Widget1;
        QIcon logo(":/gbr/html/gbr/yhk.png");
        a->setWindowIcon(logo);

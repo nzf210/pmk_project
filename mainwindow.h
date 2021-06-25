@@ -29,8 +29,15 @@ public:
 
 
 
+
+public slots:
+    void rx_data();
+
+
+
 private slots:
     void on_pushButton_clicked();
+
 
 private:
     QString getdate();
