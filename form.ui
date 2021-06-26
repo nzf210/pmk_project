@@ -152,7 +152,7 @@ border-style: outset;
     </rect>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="page">
     <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1122,7 +1122,7 @@ bacground-size: 70%</string>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_16">
         <item>
-         <widget class="QLabel" name="label_pagu_dds_2">
+         <widget class="QLabel" name="label_pagu_covid">
           <property name="minimumSize">
            <size>
             <width>51</width>
@@ -1148,7 +1148,7 @@ bacground-size: 70%</string>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_2">
+         <widget class="QLineEdit" name="lineEdit_pagu_covid">
           <property name="minimumSize">
            <size>
             <width>181</width>
@@ -1164,7 +1164,7 @@ bacground-size: 70%</string>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_realisasi_dds_2">
+         <widget class="QLabel" name="label_realisasi_covid">
           <property name="minimumSize">
            <size>
             <width>71</width>
@@ -1190,7 +1190,7 @@ bacground-size: 70%</string>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_realisasi_dds_2">
+         <widget class="QLineEdit" name="lineEdit_realisasi_covid">
           <property name="minimumSize">
            <size>
             <width>181</width>
@@ -1206,7 +1206,7 @@ bacground-size: 70%</string>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_sisa_dds_2">
+         <widget class="QLabel" name="label_sisa_covid">
           <property name="minimumSize">
            <size>
             <width>41</width>
@@ -1232,7 +1232,7 @@ bacground-size: 70%</string>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_sisa_dds_2">
+         <widget class="QLineEdit" name="lineEdit_sisa_covid">
           <property name="minimumSize">
            <size>
             <width>181</width>
@@ -1478,7 +1478,7 @@ bacground-size: 70%</string>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_20">
         <item>
-         <widget class="QLabel" name="label_pagu_dds_3">
+         <widget class="QLabel" name="label_pagu_blt">
           <property name="minimumSize">
            <size>
             <width>51</width>
@@ -1504,7 +1504,7 @@ bacground-size: 70%</string>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_3">
+         <widget class="QLineEdit" name="lineEdit_pagu_blt">
           <property name="minimumSize">
            <size>
             <width>181</width>
@@ -1520,7 +1520,7 @@ bacground-size: 70%</string>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_realisasi_dds_3">
+         <widget class="QLabel" name="label_realisasi_blt_">
           <property name="minimumSize">
            <size>
             <width>71</width>
@@ -1546,7 +1546,7 @@ bacground-size: 70%</string>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_realisasi_dds_3">
+         <widget class="QLineEdit" name="lineEdit_realisasi_blt">
           <property name="minimumSize">
            <size>
             <width>181</width>
@@ -1562,7 +1562,7 @@ bacground-size: 70%</string>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_sisa_dds_3">
+         <widget class="QLabel" name="label_sisa_blt">
           <property name="minimumSize">
            <size>
             <width>41</width>
@@ -1588,7 +1588,7 @@ bacground-size: 70%</string>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_sisa_dds_3">
+         <widget class="QLineEdit" name="lineEdit_sisa_blt">
           <property name="minimumSize">
            <size>
             <width>181</width>

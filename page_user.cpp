@@ -65,6 +65,10 @@ void Form::on_toolButton_user_clicked()
     activitiUser();
     sembunyi_subMenu();
 
+    menu="7";
+    ui->comboBox->setCurrentIndex(0);
+    ui->comboBox_nmKampung->setCurrentIndex(0);
+    qInfo() << "Nilai Menu untuk ====" << menu;
 
 }
 

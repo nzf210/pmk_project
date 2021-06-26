@@ -37,34 +37,59 @@
 
 void Form::on_toolButton_blt_clicked()
 {
+
     boderToolbar(5);
     ui->stackedWidget->setCurrentIndex(5);
     sembunyi_subMenu();
-    memuatData_twRealisasiblt();
-
+    memuatData_twRealisasiblt("");
+    menu="6";
+    ui->comboBox->setCurrentIndex(0);
+    ui->comboBox_nmKampung->setCurrentIndex(0);
+    qInfo() << "Nilai Menu untuk ====" << menu;
 }
 
-void Form::memuatData_twRealisasiblt(){
-    header_twRealisasiblt();
+void Form::memuatData_twRealisasiblt(QString id_kamp){
+
+   header_twRealisasiblt();
    while(ui->tableWidget_realisasi_blt->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
    {ui->tableWidget_realisasi_blt->removeRow(0);}
+
+   double pagu_blt=0;
+   double tot_cair_blt=0;
+   double sisa_blt=0;
+
     QSqlQuery query;
     QString cmd = "SELECT pmk_yhk.blt.nama_kampung,pmk_yhk.blt.nama_distrik,pmk_yhk.blt.id_dis, pmk_yhk.blt.id_k,pmk_yhk.blt.pagu,"
                   "SUM ( pmk_yhk.blt_cair.jml_cair_blt ) AS total_pencairan, pmk_yhk.blt.pagu - SUM ( pmk_yhk.blt_cair.jml_cair_blt ) AS sisa_dana "
-       " FROM"
+       " FROM "
            " pmk_yhk.blt"
            " LEFT JOIN pmk_yhk.blt_cair ON pmk_yhk.blt.id_k = pmk_yhk.blt_cair.id_kam "
-        "GROUP BY"
+        " GROUP BY "
            " pmk_yhk.blt.nama_kampung,"
             "pmk_yhk.blt.nama_distrik,"
             "pmk_yhk.blt.id_dis,"
-            "pmk_yhk.blt.id_k,"
-           " pmk_yhk.blt_cair.jml_cair_blt "
+            "pmk_yhk.blt.id_k"
        " ORDER BY "
            "pmk_yhk.blt.id_k";
-    //if(s_id_kamp==""){cmd ="SELECT * FROM pmk_yhk.t_real ORDER BY id_real ";}
+
+    QString cmd_ = "SELECT pmk_yhk.blt.nama_kampung,pmk_yhk.blt.nama_distrik,pmk_yhk.blt.id_dis, pmk_yhk.blt.id_k,pmk_yhk.blt.pagu,"
+                  "SUM ( pmk_yhk.blt_cair.jml_cair_blt ) AS total_pencairan, pmk_yhk.blt.pagu - SUM ( pmk_yhk.blt_cair.jml_cair_blt ) AS sisa_dana "
+       " FROM "
+           " pmk_yhk.blt"
+           " LEFT JOIN pmk_yhk.blt_cair ON pmk_yhk.blt.id_k = pmk_yhk.blt_cair.id_kam "
+                  " WHERE pmk_yhk.blt.id_k = :id "
+        " GROUP BY "
+           " pmk_yhk.blt.nama_kampung,"
+            "pmk_yhk.blt.nama_distrik,"
+            "pmk_yhk.blt.id_dis,"
+            "pmk_yhk.blt.id_k"
+       " ORDER BY "
+           "pmk_yhk.blt.id_k";
+
+     if(id_kamp != ""){cmd = cmd_;}
      //if(s_id_kamp==""){cmd =" SELECT	* FROM	pmk_yhk.t_real ORDER BY	id_real ASC, pmk_yhk.t_real.id_real LIMIT 40 ";}
     query.prepare(cmd);
+    query.bindValue(":id",id_kamp);
     //query.bindValue(":id",s_id_kamp);
     bool ok = exec(query);
     if(!ok){QMessageBox::information(this,"Error...!!!","Gagal Memuat data realisasi"); return;}
@@ -122,8 +147,23 @@ void Form::memuatData_twRealisasiblt(){
         ui->tableWidget_realisasi_blt->setItem(i,3,pagu_);
         ui->tableWidget_realisasi_blt->setItem(i,5,tot_cair_);
         ui->tableWidget_realisasi_blt->setItem(i,4,sisa_dana_);
-       i++;
+
+        i++;
+
+       pagu_blt += pagu_d;
+       tot_cair_blt += tot_cair_d;
+
     }
+
+    sisa_blt = pagu_blt - tot_cair_blt;
+
+    QString pagu_blt_ss = indo.toCurrencyString(pagu_blt, "Rp ");
+    QString tot_cair_d_ss = indo.toCurrencyString(tot_cair_blt, "Rp ");
+    QString realisasi_blt_ss = indo.toCurrencyString(sisa_blt, "Rp ");
+
+    ui->lineEdit_pagu_blt->setText(pagu_blt_ss);
+    ui->lineEdit_realisasi_blt->setText(tot_cair_d_ss);
+    ui->lineEdit_sisa_blt->setText(realisasi_blt_ss);
 }
 
 
@@ -143,8 +183,7 @@ void Form::header_twRealisasiblt() // Header table widget 6
     ui->tableWidget_realisasi_blt->setColumnWidth(3,120);
     ui->tableWidget_realisasi_blt->setColumnWidth(4,120);
     ui->tableWidget_realisasi_blt->setColumnWidth(5,120);
-        //ui->tableWidget_realisasi_blt->setColumnWidth(6,120);
-
+   //ui->tableWidget_realisasi_blt->setColumnWidth(6,120);
 }
 
 

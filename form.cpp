@@ -375,10 +375,11 @@ QString Form::muatreal()
 
 }
 
+//=========== Combo Box Nama Distrik ============
 void Form::on_comboBox_currentIndexChanged(int index)
 {
     qInfo () << " Indexx Combo Box " << index;
-    ui->comboBox->currentText();
+    qInfo () << " isi ComBox  " << ui->comboBox->currentText();
 }
 
 void Form::muat_bm(QString skam) // Memuat data nama Bamuskam
@@ -470,7 +471,6 @@ void Form::muat_kampung()
            QString kam=query.value(0).toString() ; QString id=query.value(1).toString() ;
            id_kam<< id;
            Kampung << kam;
-
  }
     ui->comboBox_nmKampung->addItems(Kampung);
     ui->comboBox_nmKampung->setEditable(true);
@@ -482,6 +482,7 @@ void Form::muat_kampung()
                 ui->comboBox_nmKampung->setCompleter(completer);
 }
 
+//==== Even Combo DIstrik ===========
 void Form::even_distrik_combo(QString &id_kam_s)
 {
     qInfo()<< "Even Distrik COmbo ......................... <> "  ;
@@ -572,20 +573,25 @@ void Form::rollback()
 
 void Form::qbx_id_dis_conn() // Connect qbx ke ke even id_distrik
 {
-     int aa = ui->comboBox->currentIndex();
-     qbx_id_dis->setCurrentIndex(aa);
+     //int aa = ;
+     qbx_id_dis->setCurrentIndex(ui->comboBox->currentIndex());
      //qInfo() << " qbx_id_dis " << qbx_id_dis->currentText();
      QString id_kam_s = qbx_id_dis->currentText();
      even_distrik_combo(id_kam_s);
 }
 
-void Form::qbx_id_kam_conn() // Connect qbx ke ke even id_kampung
-{
-    int aa = ui->comboBox_nmKampung->currentIndex();
-    qbx_id_kam->setCurrentIndex(aa);
 
-   // qInfo() << " qbx_id_kam " << qbx_id_kam->currentText();
-    QString id_kp = qbx_id_kam->currentText();
+void Form::qbx_id_kam_conn() // dengan SIGNAL SLOT Connect qbx ke ke even id_kampung
+{
+    //int aa = ;
+    qbx_id_kam->setCurrentIndex(ui->comboBox_nmKampung->currentIndex());
+
+    qInfo() << " qbx_id_kam ============== " << qbx_id_kam->currentText();
+    QString id_kp = qbx_id_kam->currentText(); //id_kampung untuk filter di masing menu
+
+    if(id_kp==""){return;}
+    if(menu=="1"){muat_bamuskam(id_kp);}  //Muat data kampung di menu 1
+
     if(menu=="2"){
         while(ui->tableWidget_cetak_dds->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
        {ui->tableWidget_cetak_dds->removeRow(0);}
@@ -596,8 +602,13 @@ void Form::qbx_id_kam_conn() // Connect qbx ke ke even id_kampung
        {ui->tableWidget_cetak_add->removeRow(0);}
         muat_v_bam_2(id_kp);}
 
-    if(id_kp==""){return;}
-    if(menu=="1"){muat_bamuskam(id_kp);}  //Muat data kampung di menu 1
+
+     if(menu=="5"){memuatData_twRealisasicovid(id_kp);}
+
+         if(menu=="6"){memuatData_twRealisasiblt(id_kp);}
+     //if(menu=="6"){}
+
+
 
 }
 

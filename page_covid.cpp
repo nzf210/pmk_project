@@ -40,15 +40,23 @@ void Form::on_toolButton_covid_clicked()
     boderToolbar(4);
     ui->stackedWidget->setCurrentIndex(4);
     sembunyi_subMenu();
-    memuatData_twRealisasicovid();
+    memuatData_twRealisasicovid("");
+
+    menu="5";
+    ui->comboBox->setCurrentIndex(0);
+    ui->comboBox_nmKampung->setCurrentIndex(0);
+    qInfo() << "Nilai Menu untuk ====" << menu;
 }
 
 
 
-void Form::memuatData_twRealisasicovid(){
+void Form::memuatData_twRealisasicovid(QString id_kamp){
     header_twRealisasicovid();
    while(ui->tableWidget_realisasi_covid->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
    {ui->tableWidget_realisasi_covid->removeRow(0);}
+
+
+
     QSqlQuery query;
     QString cmd = "SELECT "
             "pmk_yhk.covid.nama_kampung, "
@@ -68,17 +76,45 @@ void Form::memuatData_twRealisasicovid(){
            " pmk_yhk.covid.id_dis, "
             "pmk_yhk.covid.nama_kampung, "
             "pmk_yhk.covid.nama_distrik, "
-            "pmk_yhk.covid.pagu, "
-            "pmk_yhk.covid_cair.jml_cair_covid"
+            "pmk_yhk.covid.pagu"
        " ORDER BY "
             "pmk_yhk.covid.id_kam";
+
+    QString cmd_ = "SELECT "
+            "pmk_yhk.covid.nama_kampung, "
+            "pmk_yhk.covid.nama_distrik, "
+           " pmk_yhk.covid.id_kam, "
+            "pmk_yhk.covid.id_dis, "
+            "pmk_yhk.covid.pagu, "
+            "SUM(pmk_yhk.covid_cair.jml_cair_covid) AS total_pencairan, pmk_yhk.covid.pagu - SUM(pmk_yhk.covid_cair.jml_cair_covid) AS sisa_dana"
+        " FROM "
+            "pmk_yhk.covid"
+            " LEFT JOIN "
+            "pmk_yhk.covid_cair"
+            " ON "
+                "pmk_yhk.covid.id_kam = pmk_yhk.covid_cair.id_kam "
+            " WHERE pmk_yhk.covid.id_kam = :id "
+       " GROUP BY "
+            "pmk_yhk.covid.id_kam, "
+           " pmk_yhk.covid.id_dis, "
+            "pmk_yhk.covid.nama_kampung, "
+            "pmk_yhk.covid.nama_distrik, "
+            "pmk_yhk.covid.pagu"
+       " ORDER BY "
+            "pmk_yhk.covid.id_kam";
+
+    if(id_kamp!=""){cmd=cmd_;};
     //if(s_id_kamp==""){cmd ="SELECT * FROM pmk_yhk.t_real ORDER BY id_real ";}
      //if(s_id_kamp==""){cmd =" SELECT	* FROM	pmk_yhk.t_real ORDER BY	id_real ASC, pmk_yhk.t_real.id_real LIMIT 40 ";}
     query.prepare(cmd);
+    query.bindValue(":id",id_kamp);
     //query.bindValue(":id",s_id_kamp);
     bool ok = exec(query);
     if(!ok){QMessageBox::information(this,"Error...!!!","Gagal Memuat data realisasi COVID"); return;}
     int i=0;
+    double pagu_covid=0;
+    double tot_cair_covid=0;
+    double sisa_covid=0;
     while (query.next()) {
 
         //int i = ui->tableWidget_realisasi_covid->rowCount();
@@ -103,6 +139,7 @@ void Form::memuatData_twRealisasicovid(){
 
         QString tot_cair_s = query.value(5).toString();
         double tot_cair_d = tot_cair_s.toDouble();
+        //qInfo()<<"total Cair =========" << tot_cair_d;
         QString tot_cair_ss = indo.toCurrencyString(tot_cair_d, "Rp ");
 
         double realisasi_covid = pagu_d - tot_cair_d;
@@ -111,7 +148,7 @@ void Form::memuatData_twRealisasicovid(){
         //double sisa_dana_d = sisa_dana_s.toDouble();
         QString sisa_dana_ss = indo.toCurrencyString(realisasi_covid, "Rp ");
 
-
+     //qInfo()<<"Sisa Dana =========" << sisa_dana_d;
         pagu_->setText(pagu_ss);
         tot_cair_->setText(tot_cair_ss); //total Pencairan
         sisa_dana_->setText(sisa_dana_ss); //Sisa Dana
@@ -132,8 +169,28 @@ void Form::memuatData_twRealisasicovid(){
         ui->tableWidget_realisasi_covid->setItem(i,3,pagu_);
         ui->tableWidget_realisasi_covid->setItem(i,5,tot_cair_);
         ui->tableWidget_realisasi_covid->setItem(i,4,sisa_dana_);
-       i++;
+
+        i++;
+       pagu_covid+= pagu_d;
+       tot_cair_covid+= tot_cair_d;
+
     }
+
+     //sisa_covid = pagu_covid - realisasi_covid;
+     //qInfo() << "== "<<i<<"===" <<  sisa_covid << "====" << pagu_covid << "===" << realisasi_covid;
+
+     sisa_covid = pagu_covid - tot_cair_covid ;
+
+    QString pagu_covid_ss = indo.toCurrencyString(pagu_covid, "Rp ");
+    QString tot_cair_d_ss = indo.toCurrencyString(tot_cair_covid, "Rp ");
+    QString realisasi_covid_ss = indo.toCurrencyString(sisa_covid, "Rp ");
+
+    //qInfo() << "=====" << pagu_covid_ss << "====" << tot_cair_d_ss << "===" << realisasi_covid_ss;
+
+    ui->lineEdit_pagu_covid->setText(pagu_covid_ss);
+    ui->lineEdit_realisasi_covid->setText(tot_cair_d_ss);
+    ui->lineEdit_sisa_covid->setText(realisasi_covid_ss);
+
 }
 
 

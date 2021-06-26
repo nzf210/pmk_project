@@ -188,12 +188,12 @@ private:
     //ini percobaan Slot signal
 
     //=========== Data Page BLT ==========
-    void memuatData_twRealisasiblt();
+    void memuatData_twRealisasiblt(QString);
     void header_twRealisasiblt();
     //=========== Data Page BLT ==========
 
     //=========== Data Page Covid =========
-    void memuatData_twRealisasicovid();
+    void memuatData_twRealisasicovid(QString);
     void header_twRealisasicovid();
 
     //=========== Data Page Covid =========
