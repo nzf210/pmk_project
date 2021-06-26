@@ -2675,7 +2675,7 @@ bacground-size: 70%</string>
      </size>
     </property>
     <property name="text">
-     <string>Laebl 3 Space</string>
+     <string>-----------------------------</string>
     </property>
    </widget>
    <widget class="QWidget" name="layoutWidget">
