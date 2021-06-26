@@ -1,0 +1,4 @@
+V1.1.1
+V1.2.0- Penambahan Nama Kepala Kampung Dan Bendahara di tambah Realisasi
+V1.2.1- Penambahan Filter Data di bamuskan, dan Limit View Pencairan di dds dan add
+V1.2.2- Penambahan dan Penggantian sistem tahap, dan Penyesuain Tahun di anggaran
