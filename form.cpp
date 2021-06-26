@@ -405,7 +405,6 @@ void Form::databam(QString skam)
     if(fl.exists()){QMessageBox::information(this,"Error","Gagal Menghapus data bamuskam"); return;};
     //if(!fl.exists()){  }
     if(!fl.open(QIODevice::WriteOnly | QIODevice::Text)){QMessageBox::information(this,"Error","Gagal Memuat Menyimpan data bamuskam"); return; }
-
     for(int i=0; i<li_bam.count(); i++ )
     {
 //  QString a = li_bam.at(i);
@@ -427,7 +426,6 @@ void Form::muat_dis()
     id_dis<<"";
     Distrik<<"";
     Kampung<<"";
-
 
     QSqlQuery query;
     QString cmd = " SELECT * FROM pmk_yhk.v_dis ORDER BY id_distrik";

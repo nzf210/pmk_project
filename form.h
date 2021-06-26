@@ -167,6 +167,10 @@ private slots:
 
       void even_klik_tw_user();
 
+      void on_toolButton_tmbRealblt_clicked();
+
+      void on_toolButton_cetakPdfblt_clicked();
+
 signals:
      // void myLabelClicked();      // Signal to emit
       void sendData(QString data);
@@ -183,7 +187,16 @@ public slots:
 private:
     //ini percobaan Slot signal
 
+    //=========== Data Page BLT ==========
+    void memuatData_twRealisasiblt();
+    void header_twRealisasiblt();
+    //=========== Data Page BLT ==========
 
+    //=========== Data Page Covid =========
+    void memuatData_twRealisasicovid();
+    void header_twRealisasicovid();
+
+    //=========== Data Page Covid =========
     void boderToolbar(int);
     void updateTampilan(Mode mode);
     Mode ModeSekarang;

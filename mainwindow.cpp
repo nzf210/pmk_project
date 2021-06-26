@@ -200,14 +200,12 @@ void MainWindow::on_pushButton_clicked()  // Button Login ...
     QString nama_i = ui->lineEdit->text();
     QString pass = ui->lineEdit_2->text();
 
-
     if(nama_i=="" && pass==""){QMessageBox::information(this,"Perhatian...","Nama atau Password tdk boleh kosong"); return;}
     QByteArray hash = QCryptographicHash::hash(nama_i.toLocal8Bit(),QCryptographicHash::Sha256).toHex();
     QByteArray hash2 = QCryptographicHash::hash(pass.toLocal8Bit(),QCryptographicHash::Sha256).toHex();
     QString pass_= QString::fromLocal8Bit(hash);
     QString nama_ = QString::fromLocal8Bit(hash2);
 
-    qDebug() << "cekkkkkkkkkkkkk Error"<<nama_main << pass_main;
     loadusr(nama_i,pass_);
 
     if(nama_i==nama_i  && pass_==pas)
@@ -216,7 +214,6 @@ void MainWindow::on_pushButton_clicked()  // Button Login ...
         form->show();
         this->hide();
     } else {if(!lg) {return;}  QMessageBox::information(this, "Gagal Login" , "User atau Pass Salah...!!! ");}
-
 }
 
 void MainWindow::loadusr(QString nm, QString ps)
@@ -279,7 +276,6 @@ QStringList MainWindow::getListDatauser()
             namaL = query.value(5).toString();
             list_data_coba <<nama<<pas<<lvl<<type<<id<<namaL;
                                   }
-
     return list_data_coba;
 }
 
