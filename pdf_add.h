@@ -217,8 +217,8 @@ public:
         if(pdfFile.exists()){ pdfFile.remove(); }
         if(pdfFile.exists()) {QMessageBox::information(this,"Info...","Tutup File pdf yg terbuka dan Generate Kembali"); qInfo()<<"Silahkan tutup pdf file"; return;}
 
-        view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(743,987))), QPageLayout::Portrait, QMargins(65,0,15,15)) );
-  //   view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Landscape, QMargins(25,15,15,15)) );
+//        view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(743,987))), QPageLayout::Portrait, QMargins(65,0,15,15)) ); ini fix ukuran 2020
+        view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)) );
         view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan ok setelah loading selesai</b>"));
         sleep(2);
         QDesktopServices::openUrl(QUrl::fromLocalFile(fn));

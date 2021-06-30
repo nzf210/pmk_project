@@ -112,8 +112,6 @@ public:
                 fOut2.close();
                 htmlFile2.close();
 
-
-
                QUrl url = QUrl::fromLocalFile("/doc/temp/sppd.html");
                view->setHtml(html);
                view->load(url);

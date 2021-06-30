@@ -205,9 +205,14 @@ public:
         if(pdfFile2.exists()) {QMessageBox::information(this,"Info...","Tutup File pdf yg terbuka dan Generate Kembali"); qInfo()<<"Silahkan tutup pdf file"; return;}
 
 //    view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Portrait, QMargins(25,15,15,15)) );
-        view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,0,15,15)) );
-//    view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Landscape, QMargins(25,15,15,15)) );
-        view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(25,1,15,10)));
+         view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,0,15,15)) ); // fix old
+
+       // view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Landscape, QMargins(0,0,0,0)));
+//    view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4Extra), QPageLayout::Landscape, QMargins(25,15,15,15)) );
+        //view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(25,1,15,10)));
+         view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)));
+        //view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0))); new Ver
+
         view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan ok setelah loading selesai</b>"));
         bool ok ;
         view2->page()->pdfPrintingFinished(fn2, (ok=true));
