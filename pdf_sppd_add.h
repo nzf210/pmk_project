@@ -56,6 +56,7 @@ public:
         htmlContent.replace("#PKPLD#", jkpdns);
         htmlContent.replace("#NIPKDNS#", nipkpdns);
         htmlContent.replace("#hal#", hal);
+        htmlContent.replace("#JBTKPDNS#",jbt_klp_dns);
 
         QString html = htmlContent;
         htmlFile.close();
@@ -91,6 +92,7 @@ public:
          htmlContent2.replace("#NIPKDNS#", nipkpdns);
          htmlContent2.replace("#terbilang#", toCamelCase(terbilang));
         htmlContent2.replace("#hal#", hal);
+        htmlContent2.replace("#JBTKPDNS#",jbt_klp_dns);
          qInfo() << "Terbilang pdf 3" << terbilang;
 
         QString html2 = htmlContent2;
@@ -213,6 +215,7 @@ public:
         jkpdns= list.at(8);
         nipkpdns = list.at(9);
         terbilang = list.at(10);
+         jbt_klp_dns = list.at(11);
 
     }
 
@@ -255,6 +258,7 @@ public slots:
      QString jkpdns;
      QString nipkpdns;
      QString terbilang;
+     QString jbt_klp_dns;
 
      //===================================================
 

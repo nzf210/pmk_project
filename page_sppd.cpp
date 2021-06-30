@@ -36,7 +36,7 @@
 
 
 
-
+// Simpan Halam Untuk Semua Data
 void Form::save_sppd(){
 QString path("doc/temp/");
 QFile fOut(path+"sppd_temp.txt");
@@ -103,11 +103,11 @@ void Form::on_toolButton_cetakpdfSppd_clicked() // Button Clik Generate pdf di s
         ds_sppd_.append("#/#"+thn);
         ds_sppd_.append("#/#"+nosrt);
         ds_sppd_.append("#/#"+hal);
-        ds_sppd_.append("#/#"+li_kp_dns.at(0));
         ds_sppd_.append("#/#"+li_kp_dns.at(1));
         ds_sppd_.append("#/#"+li_kp_dns.at(2));
+        ds_sppd_.append("#/#"+li_kp_dns.at(3));
         ds_sppd_.append("#/#"+terbilang);
-
+        ds_sppd_.append("#/#"+li_kp_dns.at(0));
         //setTot_sppd(tot_sppd);
         save_sppd();
        Widget3 *pdf3 = new Widget3;
@@ -153,10 +153,11 @@ void Form::on_toolButton_cetakpdfSppd_clicked() // Button Clik Generate pdf di s
         ds_sppd_.append("#/#"+thn);
         ds_sppd_.append("#/#"+nosrt);
         ds_sppd_.append("#/#"+hal);
-        ds_sppd_.append("#/#"+li_kp_dns.at(0));
         ds_sppd_.append("#/#"+li_kp_dns.at(1));
         ds_sppd_.append("#/#"+li_kp_dns.at(2));
+        ds_sppd_.append("#/#"+li_kp_dns.at(3));
         ds_sppd_.append("#/#"+terbilang);
+        ds_sppd_.append("#/#"+li_kp_dns.at(0));
         //setTot_sppd(tot_sppd);
          save_sppd();
             Widget4 *pdf4 = new Widget4;

@@ -79,6 +79,7 @@ public:
        htmlContent.replace("#SKKP#", skkam);
        htmlContent.replace("#sk#", skkam);
        htmlContent.replace("#skben#", skben );
+       htmlContent.replace("#JBTKPDNS#", jbt_klp_dns);
 
         QString html = htmlContent;
         htmlFile.close();
@@ -121,6 +122,7 @@ public:
         htmlContent2.replace("#NIPKDNS#", nip);
         htmlContent2.replace("****", nosrt1);
         htmlContent2.replace("####", nosrt2);
+        htmlContent2.replace("#JBTKPDNS#", jbt_klp_dns);
 
         htmlContent2.replace("#TGL#", tgl_);
         htmlContent2.replace("#thn#", thn);
@@ -278,6 +280,7 @@ public:
         skben=list.at(21);
         skkam=list.at(22);
         thn2=list.at(23);
+        jbt_klp_dns = list.at(24);
     }
 
     QString toCamelCase(const QString& s)
@@ -308,7 +311,7 @@ public:
 public slots:
 
      //===================================================
-
+    QString jbt_klp_dns;
      QString nmdis ;
      QString nmkamp ;
      QString terbilang;

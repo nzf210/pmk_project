@@ -132,7 +132,7 @@ void Form::muat_real_2(QString &s_id_kamp) //
     QSqlQuery query;
     QString cmd = "SELECT * FROM pmk_yhk.t_real_2 WHERE id_kam = :id ORDER BY id_real";
 //    if(s_id_kamp==""){cmd ="SELECT * FROM pmk_yhk.t_real_2 ORDER BY id_real ";}
-    if(s_id_kamp==""){cmd =" SELECT	* FROM	pmk_yhk.t_real_2 ORDER BY	id_real ASC, pmk_yhk.t_real_2.id_real LIMIT 40 ";}
+    if(s_id_kamp==""){cmd =" SELECT * FROM	pmk_yhk.t_real_2 ORDER BY	id_real ASC, pmk_yhk.t_real_2.id_real LIMIT 40 ";}
     query.prepare(cmd);
     query.bindValue(":id",s_id_kamp);
     bool ok = exec(query);
@@ -176,6 +176,7 @@ void Form::muat_real_2(QString &s_id_kamp) //
         QTableWidgetItem *thp_cair2_ = new QTableWidgetItem;
         QTableWidgetItem *id_ = new QTableWidgetItem;
         QTableWidgetItem *jkk_ = new QTableWidgetItem;
+        QTableWidgetItem *jbt_kpl_dns_ = new QTableWidgetItem;
 
         nm_dis_->setText(query.value(0).toString());
         nm_kam_->setText(query.value(1).toString());
@@ -211,6 +212,7 @@ void Form::muat_real_2(QString &s_id_kamp) //
         thp_cair2_->setText(query.value(26).toString());
         id_->setText(query.value(27).toString());
         jkk_->setText(query.value(28).toString());
+        jbt_kpl_dns_->setText(query.value(30).toString());
 
         nm_dis_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         nm_kam_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
@@ -240,6 +242,7 @@ void Form::muat_real_2(QString &s_id_kamp) //
         nip_kpd_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         thp_cair2_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         jkk_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+         jbt_kpl_dns_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
         ui->tableWidget_cetak_add->setCellWidget(i,0,rb);
         ui->tableWidget_cetak_add->setItem(i,1,nm_dis_);
@@ -270,6 +273,7 @@ void Form::muat_real_2(QString &s_id_kamp) //
         ui->tableWidget_cetak_add->setItem(i,26,thp_cair2_);
         ui->tableWidget_cetak_add->setItem(i,27,id_);
         ui->tableWidget_cetak_add->setItem(i,28,jkk_);
+        ui->tableWidget_cetak_add->setItem(i,29,jbt_kpl_dns_);
        i++;
     }
 }
@@ -333,10 +337,11 @@ void Form::click_btn2()// Even Klik Save di tambah realisasi alokasi dana desa
     QString sk_bup = li_sk_bup.at(0); //=====================
     QString sk_kam = s_sk_kp;
 
-    QString nm_kp_dns = li_kp_dns.at(0);
-    QString pg_kp_dns = li_kp_dns.at(1);
-    QString nip_kp_dns = li_kp_dns.at(2);
+    QString nm_kp_dns = li_kp_dns.at(1);
+    QString pg_kp_dns = li_kp_dns.at(2);
+    QString nip_kp_dns = li_kp_dns.at(3);
     QString thn2 = thp_2.right(4);
+    QString jbt_kpl_dns = li_kp_dns.at(0);
    //Info() << "Tahap Tahun 2" << thn2;
 
 //    QString sk_pmk = qbx_sk_pmk->currentText();
@@ -362,9 +367,9 @@ void Form::click_btn2()// Even Klik Save di tambah realisasi alokasi dana desa
          QSqlQuery query;
          begin();
          QString cmd = "INSERT INTO pmk_yhk.t_real_2 (id_kam,nm_dis,nm_kam, no_rek, nm_rek,nm_bank, sk_bend, sk_kp, nm_ben, nm_kp, thp_cair, j_cair, j_terbilang, "
-                                  "tgl, no_srt1, no_srt2,persentase,sk_bup,sk_kam,sk_pmk,sk_keu, nm_kpd, j_kpd, nip_kpd, ket, thp_l, jkk, nos) VALUES "
+                                  "tgl, no_srt1, no_srt2,persentase,sk_bup,sk_kam,sk_pmk,sk_keu, nm_kpd, j_kpd, nip_kpd, ket, thp_l, jkk, nos, jbt_kpl_dns) VALUES "
                                   "(:id_kam, :nm_dis, :nm_kam, :no_rek, :nm_rek, :nm_bank, :sk_bend, :sk_kp, :nm_ben, :nm_kp, :thp_cair, :j_cair, :j_terbilang, "
-                                   ":tgl, :no_srt1, :no_srt2, :persentase, :sk_bup, :sk_kam, :sk_pmk, :sk_keu, :nm_kpd, :j_kpd, :nip_kpd, :ket, :thp_l, :jkk , '2' )";
+                                   ":tgl, :no_srt1, :no_srt2, :persentase, :sk_bup, :sk_kam, :sk_pmk, :sk_keu, :nm_kpd, :j_kpd, :nip_kpd, :ket, :thp_l, :jkk , '2', :jbt_kpl_dns )";
 
          query.prepare(cmd);
          query.bindValue(":id_kam",qbx_id_kam->currentText());
@@ -396,6 +401,7 @@ void Form::click_btn2()// Even Klik Save di tambah realisasi alokasi dana desa
          query.bindValue(":ket",thn2);
          query.bindValue(":thp_l",tahap_l);
          query.bindValue(":jkk",j_kk);
+         query.bindValue(":jbt_kpl_dns", jbt_kpl_dns);
 
          bool ok = exec(query);
          if(!ok){rollback(); QMessageBox::information( eb_v,"Error...!!!","Gagal Menambah realisasi , "+query.lastError().text()+"");}
@@ -433,7 +439,6 @@ void Form::click_btn2()// Even Klik Save di tambah realisasi alokasi dana desa
            //Info() << jc;
             if(jc<jc2){ if(((jc3+jc2)-jc)<0){QMessageBox::information(eb_v,"Info....","Nilai yang anda masukkan melebihi pagu .. "); return;}}
             if(jc>jc2){ if(0>((jc3+jc2)-jc)){QMessageBox::information(eb_v,"Info....","Nilai yang anda masukkan melebihi pagu .. "); return;}}
-
 
            //Info() << "j Cair Save Edit"<< j;
             if(j=="Rp 0,00"){le_jml->setText("");QMessageBox::information(eb_v,"Info...!!","Jumlah Pencairan tdk boleh Nilai Rp 0,00,-"); return;}
@@ -479,17 +484,18 @@ void Form::click_btn2()// Even Klik Save di tambah realisasi alokasi dana desa
             boxPesan.setText("<b>Mengubah data Realisasi Kampung "+ui->comboBox_nmKampung->currentText()+" </b>");
             boxPesan.setInformativeText("Pastikan data yang anda input sudah sesuai...");
             QAbstractButton * pBhapus = boxPesan.addButton(tr(" UBAH "), QMessageBox::YesRole) ;
-             boxPesan.addButton(tr(" BATAL "), QMessageBox::NoRole);
-             if (logo.load(":/icon/gbr/kcl.png"))
-             boxPesan.setIconPixmap(logo);
-             boxPesan.exec();
-             if(boxPesan.clickedButton() == pBhapus)
+            boxPesan.addButton(tr(" BATAL "), QMessageBox::NoRole);
+            if (logo.load(":/icon/gbr/kcl.png"))
+            boxPesan.setIconPixmap(logo);
+            boxPesan.exec();
+            if(boxPesan.clickedButton() == pBhapus)
                {
 
                  if(open()==false){open();}
                  QSqlQuery query;
                  begin();
-                 QString cmd = "UPDATE pmk_yhk.t_real_2 SET thp_cair = :thp_cair,  j_cair = :j_cair, tgl = :tgl , no_srt1 = :no_srt1 , no_srt2= :no_srt2 , persentase= :persen , thp_l = :thp_l, j_terbilang= :terbil WHERE id = :id";
+                 QString cmd = "UPDATE pmk_yhk.t_real_2 SET thp_cair = :thp_cair,  j_cair = :j_cair, tgl = :tgl , no_srt1 = :no_srt1 , no_srt2= :no_srt2 , "
+                               "persentase= :persen , thp_l = :thp_l, j_terbilang= :terbil WHERE id = :id";
 
                  query.prepare(cmd);
                  query.bindValue(":id", id);
@@ -546,6 +552,7 @@ if(noBrs!=-1 && menu=="3"){
     QString tgl = ui->tableWidget_cetak_add->item(noBrs,14)->text();
     QString skben= ui->tableWidget_cetak_add->item(noBrs,8)->text();
     QString skkkam= ui->tableWidget_cetak_add->item(noBrs,19)->text();
+    QString jbt_kp_dns= ui->tableWidget_cetak_add->item(noBrs,29)->text();
 
     QString unmdis = nmdis.toUpper();
     QString unmkam = nmkamp.toUpper();
@@ -556,7 +563,8 @@ if(noBrs!=-1 && menu=="3"){
     QString pdfdt2;
 
     pdfdt2 = nmdis +"/n "+ nmkamp+ "/n" +terbilang +"/n"+norek+"/n"+ nmrek +"/n"+nmbank+"/n"+nmkkp+"/n"+nmbenk+"/n"
-                    ""+jkk+"/n"+ tahap+ "/n"+ jml+"/n"+ persen+ "/n" +nmkpdns+ "/n"+ tahap2+ "/n"+ pkpldns +"/n"+ nip +"/n"+ nosrt1 +"/n"+ nosrt2 +"/n"+ tgl +"/n"+ unmdis +"/n"+ unmkam +"/n"+skben+"/n"+skkkam+"/n" +thn2 ;
+                    ""+jkk+"/n"+ tahap+ "/n"+ jml+"/n"+ persen+ "/n" +nmkpdns+ "/n"+ tahap2+ "/n"+ pkpldns +"/n"+ nip +"/n"+ nosrt1 +"/n"
+                    ""+ nosrt2 +"/n"+ tgl +"/n"+ unmdis +"/n"+ unmkam +"/n"+skben+"/n"+skkkam+"/n" +thn2+ "/n"+jbt_kp_dns ;
     QString path = "doc/temp/";
     QString l= pdfdt2;
     QFile fOut(path+"dtpdf2.txt");
@@ -804,10 +812,10 @@ void Form::event_doubleklik_tw_cetak_add()  //Double Klik Edit data realisasi ad
 void Form::header_wt9()
 {
     QStringList headerWidget;
-    ui->tableWidget_cetak_add->setColumnCount(29);
+    ui->tableWidget_cetak_add->setColumnCount(30);
     headerWidget <<"cetak"<<"Id Dis"<<"Id Kam"<<" Nama Distrik"<<"Nama Kampung"<<"No Rekening"<<"Nama Rekening"<<"Nama Bank"<<"SK Bendahara"<<"Nama Kepala Kampung"<<" Nama Bendahara "
                  <<"Tahap Pencairan"<<"Jumlah Pencairan"<<"Terbilang"<<"Tanggal Terima"<<"No Srt 1"<<"No Srt 2"<<"%"<<"SK Bupati"<<"SK Kep.Kampung"
-                <<"SK Men PMK"<<"SK Men Keu"<<"Kepala Dinas" << " Ket " << "Pangkat" << "NIP" <<"Laporan Realisasi"<<"id"<<"jkk";
+                <<"SK Men PMK"<<"SK Men Keu"<<"Kepala Dinas" << " Ket " << "Pangkat" << "NIP" <<"Laporan Realisasi"<<"id"<<"jkk"<<"jbt kpl dns";
     ui->tableWidget_cetak_add->setHorizontalHeaderLabels(headerWidget);
 
     ui->tableWidget_cetak_add->setColumnHidden(0,true);
@@ -839,6 +847,7 @@ void Form::header_wt9()
     //ui->tableWidget_cetak_add->setColumnHidden(26,true);
     ui->tableWidget_cetak_add->setColumnHidden(27,true);
     ui->tableWidget_cetak_add->setColumnHidden(28,true);
+    //ui->tableWidget_cetak_add->setColumnHidden(29,true);
 
    ui->tableWidget_cetak_add->setColumnWidth(3,120);
    ui->tableWidget_cetak_add->setColumnWidth(4,120);

@@ -145,6 +145,7 @@ void Form::muat_real(QString &s_id_kamp) //
         QTableWidgetItem *thp_cair2_ = new QTableWidgetItem;
         QTableWidgetItem *id_ = new QTableWidgetItem;
         QTableWidgetItem *jkk_ = new QTableWidgetItem;
+        QTableWidgetItem *jbt_kpl_dns_ = new QTableWidgetItem;
 
         nm_dis_->setText(query.value(0).toString());
         nm_kam_->setText(query.value(1).toString());
@@ -181,6 +182,7 @@ void Form::muat_real(QString &s_id_kamp) //
         thp_cair2_->setText(query.value(26).toString());
         id_->setText(query.value(27).toString());
         jkk_->setText(query.value(28).toString());
+         jbt_kpl_dns_->setText(query.value(30).toString());
 
         nm_dis_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         nm_kam_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
@@ -210,6 +212,7 @@ void Form::muat_real(QString &s_id_kamp) //
         nip_kpd_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         thp_cair2_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         jkk_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+        jbt_kpl_dns_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
         ui->tableWidget_cetak_dds->setCellWidget(i,0,rb);
         ui->tableWidget_cetak_dds->setItem(i,1,nm_dis_);
@@ -240,6 +243,7 @@ void Form::muat_real(QString &s_id_kamp) //
         ui->tableWidget_cetak_dds->setItem(i,26,thp_cair2_);
         ui->tableWidget_cetak_dds->setItem(i,27,id_);
         ui->tableWidget_cetak_dds->setItem(i,28,jkk_);
+        ui->tableWidget_cetak_dds->setItem(i,29,jbt_kpl_dns_);
        i++;
     }
 }
@@ -310,9 +314,10 @@ void Form::click_btn1() // Even Klik Save di tambah realisasi dana desa
         QString sk_bup = li_sk_bup.at(0); //=====================
         QString sk_kam = s_sk_kp;
 
-        QString nm_kp_dns = li_kp_dns.at(0);
-        QString pg_kp_dns = li_kp_dns.at(1);
-        QString nip_kp_dns = li_kp_dns.at(2);
+        QString nm_kp_dns = li_kp_dns.at(1);
+        QString pg_kp_dns = li_kp_dns.at(2);
+        QString nip_kp_dns = li_kp_dns.at(3);
+        QString jbt_kpl_dns = li_kp_dns.at(0);
 
         QString thn2 = thp.right(4);
     //    QString sk_pmk = qbx_sk_pmk->currentText();
@@ -338,9 +343,9 @@ void Form::click_btn1() // Even Klik Save di tambah realisasi dana desa
              QSqlQuery query;
              begin();
              QString cmd = "INSERT INTO pmk_yhk.t_real (id_kam,nm_dis,nm_kam, no_rek, nm_rek,nm_bank, sk_bend, sk_kp, nm_ben, nm_kp, thp_cair, j_cair, j_terbilang, "
-                                       "tgl, no_srt1, no_srt2,persentase,sk_bup,sk_kam,sk_pmk,sk_keu, nm_kpd, j_kpd, nip_kpd, ket, thp_l, jkk, nos) VALUES "
+                                       "tgl, no_srt1, no_srt2,persentase,sk_bup,sk_kam,sk_pmk,sk_keu, nm_kpd, j_kpd, nip_kpd, ket, thp_l, jkk, nos, jbt_kpl_dns) VALUES "
                                         "(:id_kam, :nm_dis, :nm_kam, :no_rek, :nm_rek, :nm_bank, :sk_bend, :sk_kp, :nm_ben, :nm_kp, :thp_cair, :j_cair, :j_terbilang, "
-                                        ":tgl, :no_srt1, :no_srt2, :persentase, :sk_bup, :sk_kam, :sk_pmk, :sk_keu, :nm_kpd, :j_kpd, :nip_kpd, :ket, :thp_l, :jkk, '2' )";
+                                        ":tgl, :no_srt1, :no_srt2, :persentase, :sk_bup, :sk_kam, :sk_pmk, :sk_keu, :nm_kpd, :j_kpd, :nip_kpd, :ket, :thp_l, :jkk, '2' , :jbt_kpl_dns)";
 
              query.prepare(cmd);
              query.bindValue(":id_kam",qbx_id_kam->currentText());
@@ -372,6 +377,7 @@ void Form::click_btn1() // Even Klik Save di tambah realisasi dana desa
              query.bindValue(":ket",thn2);
              query.bindValue(":thp_l",tahap_l);
              query.bindValue(":jkk",j_kk);
+             query.bindValue(":jbt_kpl_dns", jbt_kpl_dns);
 
              bool ok = exec(query);
              if(!ok){rollback(); QMessageBox::information( eb_v,"Error...!!!","Gagal Menambah realisasi , "+query.lastError().text()+"");}
@@ -523,6 +529,7 @@ void Form::datapdf1()
     QString nosrt1 = ui->tableWidget_cetak_dds->item(noBrs,15)->text();
     QString nosrt2 = ui->tableWidget_cetak_dds->item(noBrs,16)->text();
     QString tgl = ui->tableWidget_cetak_dds->item(noBrs,14)->text();
+    QString jbt_kp_dns= ui->tableWidget_cetak_dds->item(noBrs,29)->text();
 
     QString unmdis = nmdis.toUpper();
     QString unmkam = nmkamp.toUpper();\
@@ -539,7 +546,8 @@ void Form::datapdf1()
 
 
     pdfdt1 = nmdis +"/n "+ nmkamp+ "/n" +terbilang +"/n"+norek+"/n"+ nmrek +"/n"+nmbank+"/n"+nmkkp+"/n"+nmbenk+"/n"
-                     ""+jkk+"/n"+ tahap+ "/n"+ jml+"/n"+ persen+ "/n" +nmkpdns+ "/n"+ tahap2+ "/n"+ pkpldns +"/n"+ nip +"/n"+ nosrt1 +"/n"+ nosrt2 +"/n"+ tgl +"/n"+ unmdis+"/n"+ unmkam +"/n"+ skben +"/n"+ skkkam +"/n"+thn2;
+                     ""+jkk+"/n"+ tahap+ "/n"+ jml+"/n"+ persen+ "/n" +nmkpdns+ "/n"+ tahap2+ "/n"+ pkpldns +"/n"+ nip +"/n"+ nosrt1 +"/n"
+                    ""+ nosrt2 +"/n"+ tgl +"/n"+ unmdis+"/n"+ unmkam +"/n"+ skben +"/n"+ skkkam +"/n"+thn2+ "/n"+jbt_kp_dns;
 
     QString path = "doc/temp/";
     QString l= pdfdt1;
@@ -808,10 +816,10 @@ if(menu=="2"){  menu2="2";
 void Form::header_wt2()
 {
     QStringList headerWidget;
-    ui->tableWidget_cetak_dds->setColumnCount(29);
+    ui->tableWidget_cetak_dds->setColumnCount(30);
     headerWidget <<"cetak"<<"Id Dis"<<"Id Kam"<<" Nama Distrik"<<"Nama Kampung"<<"No Rekening"<<"Nama Rekening"<<"Nama Bank"<<"SK Bendahara"<<"Nama Kepala Kampung"<<" Nama Bendahara "
                  <<"Tahap Pencairan"<<"Jumlah Pencairan"<<"Terbilang"<<"Tanggal Terima"<<"No Srt 1"<<"No Srt 2"<<"%"<<"SK Bupati"<<"SK Kep.Kampung"
-                <<"SK Men PMK"<<"SK Men Keu"<<"Kepala Dinas" << " Ket " << "Pangkat" << "NIP" <<"Laporan Realisasi"<<"id"<<"jkk";
+                <<"SK Men PMK"<<"SK Men Keu"<<"Kepala Dinas" << " Ket " << "Pangkat" << "NIP" <<"Laporan Realisasi"<<"id"<<"jkk"<<"jbt kp dns";
     ui->tableWidget_cetak_dds->setHorizontalHeaderLabels(headerWidget);
 
     ui->tableWidget_cetak_dds->setColumnHidden(0,true);
@@ -835,6 +843,7 @@ void Form::header_wt2()
     ui->tableWidget_cetak_dds->setColumnHidden(25,true);
     ui->tableWidget_cetak_dds->setColumnHidden(27,true);
     ui->tableWidget_cetak_dds->setColumnHidden(28,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(29,true);
 
     ui->tableWidget_cetak_dds->setColumnWidth(3,120);
     ui->tableWidget_cetak_dds->setColumnWidth(4,120);

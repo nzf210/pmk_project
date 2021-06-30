@@ -78,6 +78,8 @@ public:
          htmlContent.replace("#NM11#", nama11 );
          htmlContent.replace("#NM12#", nama12);
          htmlContent.replace("#NM13#", nama13 );
+         htmlContent.replace("#JBTKPDNS#", jbt_klp_dns);
+
 
         QString html = htmlContent;
         htmlFile.close();
@@ -92,7 +94,6 @@ public:
             fOut.close();
            // QMessageBox::information(this,tr("Info"),tr("dds tersimpan"));
          }
-
 //        QFile aa(path2+"add.html");
 //        aa.close();
         htmlFile.close();
@@ -154,6 +155,8 @@ public:
         skben=list.at(21);
         skkam=list.at(22);
         thn2=list.at(23);
+
+        jbt_klp_dns = list.at(24);
 
         nama1 = li_bm.at(0);
         nama2= li_bm.at(1);
@@ -264,7 +267,7 @@ public:
      static void sleep(unsigned long secs){QThread::sleep(secs);}
 
      //===================================================
-
+    QString jbt_klp_dns;
      QString nmdis ;
      QString nmkamp ;
      QString terbilang;
