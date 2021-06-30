@@ -140,9 +140,13 @@ private slots:
 
       //Tambahan untuk Otomatisasi Jumlah Caor, Persen dan Tahap Laporan
       void muatTahap(QString);
+
       void eventQbxadd();
+
       void muatTahap_2(QString);
+
       void eventQbxadd_2();
+
       void on_toolButton_filter_clicked();
 
       void on_toolButton_covid_clicked();
@@ -170,6 +174,7 @@ private slots:
       void on_toolButton_tmbRealblt_clicked();
 
       void on_toolButton_cetakPdfblt_clicked();
+
 
 signals:
      // void myLabelClicked();      // Signal to emit

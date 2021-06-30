@@ -152,7 +152,7 @@ border-style: outset;
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="page">
     <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -969,7 +969,7 @@ bacground-size: 70%</string>
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="toolButton_17">
+            <widget class="QToolButton" name="toolButton_cetakpdfSppd">
              <property name="minimumSize">
               <size>
                <width>56</width>

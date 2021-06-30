@@ -5,8 +5,8 @@
 #include "qrencode.h"
 #include "pdf_dds.h"
 #include "pdf_add.h"
-#include "pdf_sppd_dds.h"
-#include "pdf4.h"
+#include "pdf_sppd_add.h"
+#include "psd_sppd_dds.h"
 #include "mainwindow.h"
 // =======================================================================================
 #include "QDebug"
@@ -183,7 +183,7 @@ void Form::on_toolButton_tmbSppd_clicked() // Button Tambah Realisasi
 }
 
 
-void Form::on_toolButton_Sppd_clicked() // ToolButton 4
+void Form::on_toolButton_Sppd_clicked() // ToolButton menu SPPD
 {
     //Tambahan Filter
     boderToolbar(6);

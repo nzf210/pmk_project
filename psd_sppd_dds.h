@@ -1,5 +1,5 @@
-#ifndef PDF4_H
-#define PDF4_H
+#ifndef PDF_SPPD_DDS_H
+#define PDF_SPPD_DDS_H
 
 #include <QtWebEngineWidgets>
 #include <QThread>
@@ -270,6 +270,4 @@ public:
 
        };
 
-
-
-#endif // PDF4_H
+#endif // PDF_SPPD_DDS_H

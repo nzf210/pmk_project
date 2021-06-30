@@ -5,8 +5,8 @@
 #include "qrencode.h"
 #include "pdf_dds.h"
 #include "pdf_add.h"
-#include "pdf_sppd_dds.h"
-#include "pdf4.h"
+#include "pdf_sppd_add.h"
+#include "psd_sppd_dds.h"
 
 #include "autoconnectQ.h"
 
@@ -195,11 +195,9 @@ QString decryptToString(const QString plaintext)
 }
 
 void Form::onTabChanged(int tabIndex) {
-    if (tabIndex == 0) {
-    } else if (tabIndex == 1) {
-    }
+    if (tabIndex == 0) { qInfo()<< " onTabChange ====  0";
+             } else if (tabIndex == 1) { qInfo()<< " onTabChange ====  1"; }
 }
-
 
 
 //QStringList Form::getSend_cmd2() const
@@ -253,7 +251,6 @@ void Form::Deinitialize()
 
 bool Form::GeneratePixmapFromText(QString &text, QPixmap &pixmap_, int width, int height)
 {
-
     bool result = false;
     if ((false == text.isEmpty())
             && (width == height)
@@ -1532,6 +1529,7 @@ void Form::bil(QString nilai){
    qInfo() << "konvertAngka(ad)" << nilai <<"ad" /* add*/;
    qInfo() << konvertAng(ad);
 }
+
 
 
 

@@ -30,11 +30,11 @@ HEADERS += \
     form.h \
     mainwindow.h \
     page_user.h \
-    pdf4.h \
     pdf_add.h \
     pdf_dds.h \
     pdf_dok.h \
-    pdf_sppd_dds.h \
+    pdf_sppd_add.h \
+    psd_sppd_dds.h \
     qrencode.h
 
 FORMS += \
