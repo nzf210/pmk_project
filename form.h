@@ -77,7 +77,10 @@ public:
 
 
 private slots:
-        // ==== Qr_Code ====
+
+
+
+ // ==== Qr_Code ====
     void on_saveFileButton_pressed(QString);
     void on_generateButton_pressed(QString text);
 // ==== Qr_Code ====
@@ -139,7 +142,7 @@ private slots:
       void updatesppd();
 
       //Tambahan untuk Otomatisasi Jumlah Caor, Persen dan Tahap Laporan
-      void muatTahap(QString);
+      void muatTahap(QString); // memuat tahap pencairan
 
       void eventQbxadd();
 
@@ -224,8 +227,10 @@ private:
     QString thp_2;
     QString tahap__2;
 
-    void  datapdf1();
-    void  datapdf2();
+    QString  pagu_pencairan; // nilai pagu dari database
+
+    void  datapdf1(); // fungsi load data dari twidget buat cetak pdf
+    void  datapdf2(); //
     //void  datapdf3();
     void  databam(QString skam );
     void  muatheadertw12();
@@ -264,6 +269,7 @@ private:
 
     QStringList li_tahap;
     QStringList li_tahap_add;
+    QStringList li_tahap_select;
     QStringList li_srt1;
     QStringList li_srt2;
 
@@ -299,7 +305,7 @@ private:
     QPushButton *btn1;
     QPushButton *c;
 
-    void tahap();
+    void tahap(); // memuat tahap pencairan pada dana desa reguler
     void no_srt1();
     void no_srt2();
     void tahap_add();

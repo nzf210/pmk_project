@@ -37,7 +37,7 @@ public:
 public slots:
 
     QString getdate();
-    QStringList getListDatauser();
+    //QStringList getListDatauser();
 
 
 

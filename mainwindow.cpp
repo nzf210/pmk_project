@@ -253,31 +253,31 @@ void MainWindow::loadusr(QString nm, QString ps)
     //getListDatauser();
 }
 
-QStringList MainWindow::getListDatauser()
-{
-    QString xx = nama_main;
-    QString cc =pass_main;
-    //qDebug ()<< "Data User Main WIndow di getList User"<< nm <<"===" <<ps;
-    QStringList list_data_coba;
-    if(!open()){open();}
-    QSqlQuery query;
-    QString cmd ="SELECT nama,pass,level,type,id,jabatan FROM pmk_yhk.usr WHERE nama = :nm AND pass = :ps " ;
-    query.prepare(cmd);
-    query.bindValue(":nm",xx);
-    query.bindValue(":ps",cc);
-    lg= exec(query);
-    if(!lg) { QMessageBox::information(this,"Error..."," Gagal Memuat Data User... "+query.lastError().text()+""); }
-    while (query.next()) {
-            nama = query.value(0).toString();
-            pas = query.value(1).toString();
-            lvl = query.value(2).toString();
-            type = query.value(3).toString();
-            id = query.value(4).toString();
-            namaL = query.value(5).toString();
-            list_data_coba <<nama<<pas<<lvl<<type<<id<<namaL;
-                                  }
-    return list_data_coba;
-}
+//QStringList MainWindow::getListDatauser()
+//{
+//    QString xx = nama_main;
+//    QString cc =pass_main;
+//    //qDebug ()<< "Data User Main WIndow di getList User"<< nm <<"===" <<ps;
+//    QStringList list_data_coba;
+//    if(!open()){open();}
+//    QSqlQuery query;
+//    QString cmd ="SELECT nama,pass,level,type,id,jabatan FROM pmk_yhk.usr WHERE nama = :nm AND pass = :ps " ;
+//    query.prepare(cmd);
+//    query.bindValue(":nm",xx);
+//    query.bindValue(":ps",cc);
+//    lg= exec(query);
+//    if(!lg) { QMessageBox::information(this,"Error..."," Gagal Memuat Data User... "+query.lastError().text()+""); }
+//    while (query.next()) {
+//            nama = query.value(0).toString();
+//            pas = query.value(1).toString();
+//            lvl = query.value(2).toString();
+//            type = query.value(3).toString();
+//            id = query.value(4).toString();
+//            namaL = query.value(5).toString();
+//            list_data_coba <<nama<<pas<<lvl<<type<<id<<namaL;
+//                                  }
+//    return list_data_coba;
+//}
 
 
 

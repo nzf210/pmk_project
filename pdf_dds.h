@@ -41,7 +41,7 @@ public:
         QString path("doc/html/");
 
         QDir dir(path);
-        QFile  htmlFile (path+ "srt1.html");
+        QFile  htmlFile (path+ "dana_desa_srt_1.html");
 
         if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text))
         {
@@ -95,7 +95,7 @@ public:
            // QMessageBox::information(this,tr("Info"),tr("dds tersimpan"));
          }
 
-        QFile  htmlFile2 (path+ "srt2.html");
+        QFile  htmlFile2 (path+ "dana_desa_srt_2.html");
         if (!htmlFile2.open(QIODevice::ReadOnly | QIODevice::Text))
         {
            qInfo() << "Html File 2 tdk terbuka"; return;
@@ -194,7 +194,7 @@ public:
         QDir dir(path);
 
         //QString Nama Auto
-       QString nmpdf = tahap +" dis "+nmdis+" kam "+nmkamp+".pdf";
+        QString nmpdf = tahap +" "+nmkamp+" Dis "+nmdis+".pdf";
         QFile  pdfFile ( path + "D " + nmpdf+".pdf");
         QString fn = path + "D " + nmpdf +".pdf";
 
@@ -341,7 +341,6 @@ public slots:
      QString unmkam ;
 
      QString thn2;
-
 
      //===================================================
 
