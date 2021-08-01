@@ -41,6 +41,7 @@ void Form::on_toolButton_blt_clicked()
     boderToolbar(5);
     ui->stackedWidget->setCurrentIndex(5);
     sembunyi_subMenu();
+    ui->label_barCode->setVisible(true);
     memuatData_twRealisasiblt("");
     menu="6";
     ui->comboBox->setCurrentIndex(0);

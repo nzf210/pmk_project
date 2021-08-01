@@ -39,6 +39,7 @@
 void Form::on_toolButton_add_clicked()
 {
     boderToolbar(3);
+
     ui->comboBox->setVisible(true);
     ui->comboBox_nmKampung->setVisible(true);
     ui->label->setVisible(true);

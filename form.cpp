@@ -605,7 +605,7 @@ void Form::qbx_id_kam_conn() // dengan SIGNAL SLOT Connect qbx ke ke even id_kam
 
      if(menu=="5"){memuatData_twRealisasicovid(id_kp);}
 
-         if(menu=="6"){memuatData_twRealisasiblt(id_kp);}
+     if(menu=="6"){memuatData_twRealisasiblt(id_kp);}
      //if(menu=="6"){}
 
 
@@ -1085,7 +1085,7 @@ void Form::muat_sppd_2_() // muat No Sppd add
 }
 
 
-void Form::tahap()    { // Memuat daftar tahap penerimaan pada dana desa
+void Form::tahap(int id)    { // Memuat daftar tahap penerimaan pada dana desa
     li_tahap.clear();
     li_tahap_select.clear();
     qInfo() << "Query Tahap Penerimaan" ;
@@ -1096,13 +1096,13 @@ void Form::tahap()    { // Memuat daftar tahap penerimaan pada dana desa
        " FROM "
             "pmk_yhk.t_cair "
         " WHERE "
-            "t_cair.id_thp = 1"
+            "t_cair.id_thp = :id"
         " ORDER BY"
            " t_cair.id_thp_cair" ;
     query.prepare(cmd);
-
+    query.bindValue(":id",id);
     bool ok = exec(query);
-    if(!ok){QMessageBox::information(this,"Error...!!!","Gagal memuat data Bendahara Kampung... "+query.lastError().text()+"..."); return;}
+    if(!ok){QMessageBox::information(this,"Error...!!!","Gagal memuat data Tahap pencairan... "+query.lastError().text()+"..."); return;}
     while (query.next()) {
            QString nama=query.value(0).toString() ; QString jab=query.value(1).toString() ;
             li_tahap << nama;
@@ -1110,37 +1110,7 @@ void Form::tahap()    { // Memuat daftar tahap penerimaan pada dana desa
 }
 }
 
-void Form::no_srt1()    {
-    li_srt1.clear();
-    qInfo() << "Baca File no SRT 1" ;
-     QString path("data/");
-    QFile f_srt1(path+"dds_no_srt_1.txt");
-    if(!f_srt1.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat no Surat 1."); return;}
-     f_srt1.open(QIODevice::ReadOnly|QIODevice::Text);
-     QTextStream str(&f_srt1);
-     while (!str.atEnd()) {
-        QString line = str.readAll();
-        qInfo()<< "lInessss" << line;
-        li_srt1 = line.split("\n");
-    }
-    f_srt1.close();
-}
 
-void Form::no_srt2()    {
-    li_srt2.clear();
-    qInfo() << "Baca File no SRT 2" ;
-     QString path("data/");
-    QFile f_srt2(path+"dds_no_srt_2.txt");
-    if(!f_srt2.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat no Surat 2");return;}
-     f_srt2.open(QIODevice::ReadOnly|QIODevice::Text);
-     QTextStream str(&f_srt2);
-     while (!str.atEnd()) {
-        QString line = str.readAll();
-        qInfo()<< "lInessss" << line;
-        li_srt2 = line.split("\n");
-    }
-    f_srt2.close();
-}
 
 void Form::tahap_add()    {
     li_tahap_add.clear();
@@ -1350,11 +1320,6 @@ void Form::bil(QString nilai){
    qInfo() << "konvertAngka(ad)" << nilai <<"ad" /* add*/;
    qInfo() << konvertAng(ad);
 }
-
-
-
-
-
 
 
 

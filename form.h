@@ -179,6 +179,12 @@ private slots:
       void on_toolButton_cetakPdfblt_clicked();
 
 
+      // ====== dana covid =======
+      void on_toolButton_tmbRealCovid_clicked();
+      void tambah_real_covid();
+
+       // ====== dana covid =======
+
 signals:
      // void myLabelClicked();      // Signal to emit
       void sendData(QString data);
@@ -305,9 +311,25 @@ private:
     QPushButton *btn1;
     QPushButton *c;
 
-    void tahap(); // memuat tahap pencairan pada dana desa reguler
+    void tahap(int id); // memuat tahap pencairan pada dana desa reguler
     void no_srt1();
     void no_srt2();
+    void btnAdd_dds();
+
+
+    void tahap_covid();
+    void no_srt_covid_1();
+    void no_srt_covid_2();
+    void btnAdd_covid();
+    QStringList li_srt_covid1;
+    QStringList li_srt_covid2;
+    void active_eb_covid();
+    void header_realisasi_covid();
+    void header_cetak_covid();
+    void muat_data_realisasi_covid(QString);
+
+
+
     void tahap_add();
     void no_srt4();
     void persen();
