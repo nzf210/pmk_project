@@ -187,6 +187,8 @@ private slots:
 
       void on_tableWidget_cetak_covid_cellDoubleClicked(int row, int column);
 
+      void on_toolButton_cetakPdfcovid_clicked();
+
 signals:
      // void myLabelClicked();      // Signal to emit
       void sendData(QString data);
@@ -320,7 +322,9 @@ private:
 
     QStringList no_srt_covid_1();
     QStringList no_srt_covid_2();
+    QString qcode_covid();
     QStringList li_data_covid;
+    void dataPdf_covid(int row);
     void btnAdd_covid();
     void header_realisasi_covid();
     void header_cetak_covid();

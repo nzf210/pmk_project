@@ -31,6 +31,7 @@ HEADERS += \
     mainwindow.h \
     page_user.h \
     pdf_add.h \
+    pdf_covid.h \
     pdf_dds.h \
     pdf_dok.h \
     pdf_sppd_add.h \

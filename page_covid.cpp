@@ -3,7 +3,7 @@
 //#include "QPdfWriter"
 //#include "pdf_dok.h"
 #include "qrencode.h"
-//#include "pdf_dds.h"
+#include "pdf_covid.h"
 //#include "pdf_add.h"
 //#include "pdf_sppd_add.h"
 //#include "psd_sppd_covid.h"
@@ -657,6 +657,8 @@ QStringList Form::no_srt_covid_2()
 }
 
 
+
+
 void Form::muat_data_realisasi_covid(QString s_id_kamp)
 {
     header_cetak_covid();
@@ -1022,4 +1024,105 @@ void Form::update_data_covid(QString id, QString tahap, QString date, QString jm
                 eb_v->close();
                 memuatData_twRealisasicovid(qbx_id_kam->currentText());
                 }
+}
+
+
+void Form::on_toolButton_cetakPdfcovid_clicked()
+{
+    int noBrs = ui->tableWidget_cetak_covid->currentRow();
+    if(noBrs<0){QMessageBox::information(this,"Info...!!!","Pilih Realisasi yang ingin di cetak...");return;}
+    if(noBrs>=0){
+       dataPdf_covid(noBrs);
+       //qInfo()<<"Ini adalah info pada button klik"<< getLspdf1();
+       on_saveFileButton_pressed(qcode_covid());
+       //qInfo() << "Qinfo Cari Bug===================" <<  on_saveFileButton_pressed(qcode_covid();
+       Widget5 *a = new Widget5;
+       QIcon logo(":/gbr/html/gbr/yhk.png");
+       a->setWindowIcon(logo);
+       a->setWindowTitle("Cetak pdf Realisasi Covid");
+       a->show();
+                        }
+}
+
+
+void Form::dataPdf_covid(int row)
+{
+
+    QString lspdf;
+    if(menu=="5"){
+        for ( int i=1; i<30 ; i++ ) {
+            if(i==1){ lspdf.append(ui->tableWidget_cetak_covid->item(row,i)->text());}else {
+                lspdf.append("/n"+ui->tableWidget_cetak_covid->item(row,i)->text());
+            }
+        }
+
+
+//    QString id_kam =  ui->tableWidget_cetak_dds->item(noBrs,2)->text();
+//    QString nmdis = ui->tableWidget_cetak_dds->item(noBrs,3)->text();
+//    QString nmkamp = ui->tableWidget_cetak_dds->item(noBrs,4)->text();
+//    QString terbilang= ui->tableWidget_cetak_dds->item(noBrs,13)->text();
+//    QString norek = ui->tableWidget_cetak_dds->item(noBrs,5)->text();
+//    QString nmrek = ui->tableWidget_cetak_dds->item(noBrs,6)->text();
+//    QString nmbank = ui->tableWidget_cetak_dds->item(noBrs,7)->text();
+//    QString nmkkp = ui->tableWidget_cetak_dds->item(noBrs,9)->text();
+//    QString nmbenk = ui->tableWidget_cetak_dds->item(noBrs,10)->text();
+//    QString jkk = ui->tableWidget_cetak_dds->item(noBrs,28)->text();
+//    QString tahap = ui->tableWidget_cetak_dds->item(noBrs,11)->text();
+//    QString jml = ui->tableWidget_cetak_dds->item(noBrs,12)->text();
+//    QString persen = ui->tableWidget_cetak_dds->item(noBrs,17)->text();
+//    QString nmkpdns = ui->tableWidget_cetak_dds->item(noBrs,22)->text();
+//    QString tahap2 = ui->tableWidget_cetak_dds->item(noBrs,26)->text();
+//    QString pkpldns = ui->tableWidget_cetak_dds->item(noBrs,24)->text();
+//    QString nip = ui->tableWidget_cetak_dds->item(noBrs,25)->text();
+//    QString nosrt1 = ui->tableWidget_cetak_dds->item(noBrs,15)->text();
+//    QString nosrt2 = ui->tableWidget_cetak_dds->item(noBrs,16)->text();
+//    QString tgl = ui->tableWidget_cetak_dds->item(noBrs,14)->text();
+//    QString jbt_kp_dns= ui->tableWidget_cetak_dds->item(noBrs,29)->text();
+
+//    QString unmdis = nmdis.toUpper();
+//    QString unmkam = nmkamp.toUpper();\
+
+//    QString skben= ui->tableWidget_cetak_dds->item(noBrs,8)->text();
+//    QString skkkam= ui->tableWidget_cetak_dds->item(noBrs,19)->text();
+
+//    //Tambahan thn 2
+//    QString thn2 = ui->tableWidget_cetak_dds->item(noBrs,23)->text();
+//    QString id_real_dds = ui->tableWidget_cetak_dds->item(noBrs,1)->text();
+
+//    lspdf << nmdis << nmkamp << terbilang << norek << nmrek << nmbank <<nmkkp << nmbenk << jkk << tahap << jml << persen
+//          << nmkpdns << tahap2 << pkpldns << nip << nosrt1 << nosrt2 << tgl << unmdis << unmkam <<id_real_dds;
+//    lspdf1 =lspdf;
+//    qInfo() << "Data List Dari PDF 1 at 2" << getLspdf1() << " ============== Data id  ========="+id_real_dds;
+
+//    pdfdt1 = nmdis +"/n "+ nmkamp+ "/n" +terbilang +"/n"+norek+"/n"+ nmrek +"/n"+nmbank+"/n"+nmkkp+"/n"+nmbenk+"/n"
+//                     ""+jkk+"/n"+ tahap+ "/n"+ jml+"/n"+ persen+ "/n" +nmkpdns+ "/n"+ tahap2+ "/n"+ pkpldns +"/n"+ nip +"/n"+ nosrt1 +"/n"
+//                    ""+ nosrt2 +"/n"+ tgl +"/n"+ unmdis+"/n"+ unmkam +"/n"+ skben +"/n"+ skkkam +"/n"+thn2+ "/n"+jbt_kp_dns;
+
+    QString path = "doc/temp/";
+    QString l= lspdf;
+    QFile fOut(path+"dtpdf_covid1.txt");
+    if(fOut.exists()){fOut.remove();}
+    if(!fOut.open(QFile::WriteOnly | QFile::Text))
+        { qInfo()<<"tdk Bisa Buka file dtpdf_covid1.txt ";}
+    else { QTextStream stream(&fOut);
+               stream << l;
+               fOut.flush();
+                fOut.close(); }
+    }
+}
+
+QString Form::qcode_covid()
+{
+    int noBrs = ui->tableWidget_cetak_covid->currentRow();
+    QString a = ui->tableWidget_cetak_covid->item(noBrs,11)->text();
+    QString b = ui->tableWidget_cetak_covid->item(noBrs,14)->text();
+    QString b_ =" "+ b.right(4);
+    QString c = " Distrik " + ui->tableWidget_cetak_covid->item(noBrs,3)->text();
+    QString d = " Kampung " + ui->tableWidget_cetak_covid->item(noBrs,4)->text();
+    QString e = "@" + ui->tableWidget_cetak_covid->item(noBrs,10)->text();
+    QString f = "/" +ui->tableWidget_cetak_covid->item(noBrs,9)->text();
+    QString g = "/" +ui->tableWidget_cetak_covid->item(noBrs,5)->text();
+    QString h = "/" +ui->tableWidget_cetak_covid->item(noBrs,12)->text();
+    qInfo() << "Barcode Text" << a+b_+c+d+e+f+g+h;
+    return a+b_+c+d+e+f+g+h;
 }

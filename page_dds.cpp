@@ -48,8 +48,8 @@ void Form::on_toolButton_cetakPdfdds_clicked()
        QIcon logo(":/gbr/html/gbr/yhk.png");
        a->setWindowIcon(logo);
        a->show();
-
-}}
+                        }
+}
 
 
 // Klik Tambah Pencairan dana desa
