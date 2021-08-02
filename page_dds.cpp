@@ -257,6 +257,7 @@ void Form::click_btn1() // Even Klik Save di tambah realisasi dana desa
     btnAdd_dds();
     btnAdd_covid();
 
+
     //================ 2 ======================
 
 on_toolButton_refResh_clicked();
@@ -1196,7 +1197,7 @@ void Form::btnAdd_dds()
          if(boxPesan.clickedButton() == pBhapus)
            {
 
-             if(open()==false){open();}
+             //if(open()==false){open();}
              QSqlQuery query;
              begin();
              QString cmd = "UPDATE pmk_yhk.t_real SET thp_cair = :thp_cair,  j_cair = :j_cair, tgl = :tgl , no_srt1 = :no_srt1 , no_srt2= :no_srt2 , persentase= :persen , thp_l = :thp_l, j_terbilang= :terbil WHERE id = :id";
@@ -1217,14 +1218,14 @@ void Form::btnAdd_dds()
 
              commit();
              QMessageBox::information(eb_v,"Info....","Berhasil Mengubah data realisasi");  eb_v->close();
-
-            }else { return; }
+             }
+            //}else { return; }
          //menu="2";
          if(menu=="2"){
          QString id = qbx_id_kam->currentText();
          muat_real(id);
-         //nfo()<<"menu=2 Saja";
-         } // }
+
+         }
 }
 }
 

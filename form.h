@@ -185,6 +185,8 @@ private slots:
 
        // ====== dana covid =======
 
+      void on_tableWidget_cetak_covid_cellDoubleClicked(int row, int column);
+
 signals:
      // void myLabelClicked();      // Signal to emit
       void sendData(QString data);
@@ -311,24 +313,21 @@ private:
     QPushButton *btn1;
     QPushButton *c;
 
-    void tahap(int id); // memuat tahap pencairan pada dana desa reguler
+    void tahap(int id); // memuat tahap pencairan pada dana desa, covid, blt
     void no_srt1();
     void no_srt2();
     void btnAdd_dds();
 
-
-    void tahap_covid();
-    void no_srt_covid_1();
-    void no_srt_covid_2();
+    QStringList no_srt_covid_1();
+    QStringList no_srt_covid_2();
+    QStringList li_data_covid;
     void btnAdd_covid();
-    QStringList li_srt_covid1;
-    QStringList li_srt_covid2;
-    void active_eb_covid();
     void header_realisasi_covid();
     void header_cetak_covid();
     void muat_data_realisasi_covid(QString);
-
-
+    void even_dbKlik_tw_covid();
+    void update_data_covid(QString id, QString tahap, QString date, QString jml, QString terbilang, QString noSrt1, QString noSrt2);
+    void data_update_sementara();
 
     void tahap_add();
     void no_srt4();

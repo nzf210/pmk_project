@@ -171,7 +171,10 @@ Form::Form(QWidget *parent) :
 header_wt1(); header_wt2(); header_wt9(); header_wt6(); header_wt11();
 
 menu="1";
-ui->label_4->setText(""); ui->label_5->setText(" Dana Desa"); ui->label_13->setText(""); ui->label_14->setText("Alokasi Dana Desa");
+ui->label_4->setText("");
+ui->label_5->setText(" Dana Desa");
+ui->label_13->setText("");
+ui->label_14->setText("Alokasi Dana Desa");
 
  // === Memua Level Type ===
 modeTampilan_usr();
@@ -201,11 +204,6 @@ void Form::onTabChanged(int tabIndex) {
              } else if (tabIndex == 1) { qInfo()<< " onTabChange ====  1"; }
 }
 
-
-//QStringList Form::getSend_cmd2() const
-//{
-//    return send_cmd2;
-//}
 
 
 // === StringList dari list daftar nama ===S===
@@ -857,10 +855,10 @@ if(menu=="3"){
 
 void Form::active_eb_v()
 {
-if(menu=="2"){
+
 QLocale indo = QLocale(QLocale::Indonesian,QLocale::Indonesia);
 QString j = le_jml->text();
-if(j==""){le_jml->setText("Rp 0,00");QMessageBox::information(eb_v,"Info...!!","Jumlah Pencairan tdk boleh kosong"); return;}
+if(j=="" ||j=="Rp 0,00" || j=="Rp 0" ){le_jml->setText("Rp 0,00");QMessageBox::information(eb_v,"Info...!!","Jumlah Pencairan tdk boleh kosong"); return;}
 qint64 jj = j.toDouble();
 qint64 a =jj;
 QString rp =QString::number(a);
@@ -868,8 +866,8 @@ bilang(rp);
 QString j_ = indo.toCurrencyString(jj,"Rp ");
 if(j.at(0) !="R"){
 le_jml->setText(j_);}
-//nfo() << "Active eb v......,,,llllllllll" << terbilang;
-}}
+}
+
 
 void Form::active_eb_v_2()
 {
@@ -1320,6 +1318,7 @@ void Form::bil(QString nilai){
    qInfo() << "konvertAngka(ad)" << nilai <<"ad" /* add*/;
    qInfo() << konvertAng(ad);
 }
+
 
 
 
