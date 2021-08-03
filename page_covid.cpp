@@ -284,7 +284,6 @@ void Form::header_twRealisasicovid() // Header table widget 6
 void Form::on_toolButton_tmbRealCovid_clicked() // toolButton tambah realisasi dana covid
 {
 tambah_real_covid();
-             qInfo() << "Cari Error covid ===================  03<<" ;
 }
 
 void Form::tambah_real_covid()
@@ -300,7 +299,15 @@ void Form::tambah_real_covid()
             tahap(3);
             muat_bend_kp(id_kam);
             muat_k_kp(id_kam);
-            tambah_realisasi(li_tahap,"Rp 0,00", no_srt_covid_1().at(0),no_srt_covid_2().at(0),"TAMBAH",s_nm_kp, s_nm_bend,"Tambah Realisasi Dana Covid" );
+            muat_nosurat();
+            qInfo() << "Cari Error +++++++++++++++++++++";
+            QString no_srt1 = li_no_surat.at(0);
+            QString no_srt2 = li_no_surat.at(1);
+            no_srt1.replace("****", nosurat());
+            no_srt1.replace("Reg1=> ", "");
+            no_srt2.replace("####", nosurat_2());
+            no_srt2.replace("Reg2=> ", "");
+            tambah_realisasi(li_tahap,"Rp 0,00",  no_srt1  , no_srt2,"TAMBAH",s_nm_kp, s_nm_bend,"Tambah Realisasi Dana Covid" );
         } }
 }
 
@@ -396,9 +403,9 @@ void Form::btnAdd_covid()
              query.bindValue(":j_cair",jj_);
              query.bindValue(":j_terbilang",terbilang+rp);
              query.bindValue(":tgl",tgl_ter);
-             no_srt1.replace("****",nosurat());
+             //no_srt1.replace("****",nosurat());
              query.bindValue(":no_srt1",no_srt1);
-             no_srt2.replace("####",nosurat_2());
+             //no_srt2.replace("####",nosurat_2());
              query.bindValue(":no_srt2",no_srt2);
              query.bindValue(":persentase","100%");
              query.bindValue(":sk_bup",sk_bup);
@@ -425,48 +432,8 @@ void Form::btnAdd_covid()
          memuatData_twRealisasicovid(id);}
                   } }
 
-        if(menu2=="52"){data_update_sementara();}
+        if(menu2=="52"){data_update_sementara_covid();}
 }
-
-
-
-QStringList Form::no_srt_covid_1()
-{
-    QStringList li_srt_covid1;
-    li_srt_covid1.clear();
-    qInfo() << "Baca File covid_no_srt_1.txt" ;
-     QString path("data/");
-    QFile f_srt1(path+"covid_no_srt_1.txt");
-    if(!f_srt1.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat no Surat Covid 1");}
-     f_srt1.open(QIODevice::ReadOnly|QIODevice::Text);
-     QTextStream str(&f_srt1);
-     while (!str.atEnd()) {
-        QString line = str.readAll();
-        li_srt_covid1 = line.split("\n");
-    }
-     f_srt1.close();
-     return  li_srt_covid1;
-}
-
-QStringList Form::no_srt_covid_2()
-{
-    QStringList li_srt_covid2;
-    li_srt_covid2.clear();
-    qInfo() << "Baca File covid_no_srt_2.txt" ;
-     QString path("data/");
-    QFile f_srt2(path+"covid_no_srt_2.txt");
-    if(!f_srt2.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat no Surat Covid 2");}
-     f_srt2.open(QIODevice::ReadOnly|QIODevice::Text);
-     QTextStream str(&f_srt2);
-     while (!str.atEnd()) {
-        QString line = str.readAll();
-        li_srt_covid2 = line.split("\n");
-    }
-     f_srt2.close();
-     return  li_srt_covid2;
-}
-
-
 
 
 void Form::muat_data_realisasi_covid(QString s_id_kamp)
@@ -622,7 +589,6 @@ void Form::muat_data_realisasi_covid(QString s_id_kamp)
         ui->tableWidget_cetak_covid->setItem(i,29,jbt_kpl_dns_);
        i++;
     }
-
 }
 
 
@@ -651,7 +617,7 @@ void Form::even_dbKlik_tw_covid(){
         }
 }
 
-void Form::data_update_sementara() // semua
+void Form::data_update_sementara_covid() // semua
 {
 
     QString tahap = qbx_thp_penc->currentText();
@@ -889,4 +855,10 @@ void Form::update_data_realisasi(QString date, QString tahap ,QString jml,QStrin
 
    //Tambahan untuk auto lap dan persentase nilai pencairan
    connect(qbx_thp_penc, SIGNAL (currentIndexChanged(int)), this, SLOT(eventQbxadd()));
+}
+
+
+void Form::on_tableWidget_realisasi_covid_cellDoubleClicked(int row, int column)
+{
+    qInfo() << "tw double klik realisasi Covid" << row <<"====" << column;
 }

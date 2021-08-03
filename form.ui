@@ -152,7 +152,7 @@ border-style: outset;
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="page">
     <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -240,7 +240,7 @@ border-style: outset;
           </widget>
          </item>
          <item>
-          <widget class="QTableWidget" name="tableWidget_rAnggaran_dds">
+          <widget class="QTableWidget" name="tableWidget_realisasi_dds">
            <property name="minimumSize">
             <size>
              <width>531</width>
@@ -586,7 +586,7 @@ bacground-size: 70%</string>
           </widget>
          </item>
          <item>
-          <widget class="QTableWidget" name="tableWidget_rAnggaran_add">
+          <widget class="QTableWidget" name="tableWidget_realisasi_add">
            <property name="minimumSize">
             <size>
              <width>531</width>
@@ -634,7 +634,7 @@ bacground-size: 70%</string>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_4">
+            <widget class="QLineEdit" name="lineEdit_pagu_add">
              <property name="minimumSize">
               <size>
                <width>181</width>
@@ -676,7 +676,7 @@ bacground-size: 70%</string>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_5">
+            <widget class="QLineEdit" name="lineEdit_realisasi_add">
              <property name="minimumSize">
               <size>
                <width>181</width>
@@ -718,7 +718,7 @@ bacground-size: 70%</string>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_6">
+            <widget class="QLineEdit" name="lineEdit_sisa_add">
              <property name="minimumSize">
               <size>
                <width>181</width>
@@ -1745,7 +1745,7 @@ bacground-size: 70%</string>
        </layout>
       </item>
       <item>
-       <widget class="QTableWidget" name="tableWidget_data_blt">
+       <widget class="QTableWidget" name="tableWidget_cetak_blt">
         <property name="minimumSize">
          <size>
           <width>300</width>

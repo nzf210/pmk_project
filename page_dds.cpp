@@ -66,23 +66,23 @@ void Form::event_klik_tw_6() // Tw 6
    // qInfo()<< "Even Klik tw_6 ";
     if(menu=="2"){
     QClipboard *clipboard = QApplication::clipboard();
-    int tbl_lines = ui->tableWidget_rAnggaran_dds->rowCount();
+    int tbl_lines = ui->tableWidget_realisasi_dds->rowCount();
     QString str =  " No \t Nama Distrik  \t Nama Kampung  \t  Pagu Anggaran  \t  Sisa Anggaran  \t Realisasi \n ";
     for (int i=0; i<tbl_lines; i++)
     {
-    QString mydata0 = ui->tableWidget_rAnggaran_dds->item(i, 0)->text();
-    QString mydata1 = ui->tableWidget_rAnggaran_dds->item(i, 1)->text();
-    QString mydata2 = ui->tableWidget_rAnggaran_dds->item(i, 2)->text();
-    QString mydata3 = ui->tableWidget_rAnggaran_dds->item(i, 3)->text();
+    QString mydata0 = ui->tableWidget_realisasi_dds->item(i, 0)->text();
+    QString mydata1 = ui->tableWidget_realisasi_dds->item(i, 1)->text();
+    QString mydata2 = ui->tableWidget_realisasi_dds->item(i, 2)->text();
+    QString mydata3 = ui->tableWidget_realisasi_dds->item(i, 3)->text();
     mydata3.replace("Rp ",""); mydata3.replace(".",""); mydata3.replace(",",".");
     double p = mydata3.toDouble();
     QString p_ = QString::number(p);
 
-    QString mydata4 = ui->tableWidget_rAnggaran_dds->item(i, 4)->text();
+    QString mydata4 = ui->tableWidget_realisasi_dds->item(i, 4)->text();
     mydata4.replace("Rp ",""); mydata4.replace(".",""); mydata4.replace(",",".");
     double r = mydata4.toDouble();
     QString r_ = QString::number(r);
-    QString mydata5 = ui->tableWidget_rAnggaran_dds->item(i, 5)->text();
+    QString mydata5 = ui->tableWidget_realisasi_dds->item(i, 5)->text();
     mydata5.replace("Rp ",""); mydata5.replace(".",""); mydata5.replace(",",".");
     double s = mydata5.toDouble();
     QString s_ = QString::number(s);
@@ -253,13 +253,9 @@ void Form::muat_real(QString &s_id_kamp) //
 
 void Form::click_btn1() // Even Klik Save di tambah realisasi dana desa
 {
-
     btnAdd_dds();
     btnAdd_covid();
-
-
-    //================ 2 ======================
-
+    btnAdd_blt();
 on_toolButton_refResh_clicked();
 }
 
@@ -403,7 +399,7 @@ if(menu=="2"){  menu2="2";
 //        jcair2.replace("Rp ",""); jcair2.replace(".",""); jcair2.replace(",",".");
 //        double jc2 = jcair2.toDouble();
 
-//        QString jcair3 = ui->tableWidget_rAnggaran_dds->item(0,4)->text();
+//        QString jcair3 = ui->tableWidget_realisasi_dds->item(0,4)->text();
 //        jcair3.replace("Rp ",""); jcair3.replace(".",""); jcair3.replace(",",".");
 //        double jc3 = jcair3.toDouble();
 //        qInfo() << "Doubleklik tw 2";
@@ -430,25 +426,22 @@ if(menu=="2"){  menu2="2";
          muat_bend_kp(id_kam);
          muat_k_kp(id_kam);
          tahap(1);
-         no_srt1();
-         no_srt2();
-         persen();
-         sk_bup();
-        // sk_menteri();
+         muat_nosurat();
+
          kp_dns();
 
         // le_jml->installEventFilter(eb_v);
          qbx_no_srt1->addItem(nosr1);
-         qbx_no_srt1->addItems(li_srt1);
+         qbx_no_srt1->addItem(li_no_surat.at(0));
          qbx_no_srt1->setEditable(true);
 
          qbx_no_srt2->addItem(nosr2);
-         qbx_no_srt2->addItems(li_srt2);
+         qbx_no_srt2->addItem(li_no_surat.at(1));
          qbx_no_srt2->setEditable(true);
 
-         qbx_persen->addItem(persent);
-         qbx_persen->addItems(li_persen);
-         qbx_persen->setEditable(true);
+//         qbx_persen->addItem(persent);
+//         qbx_persen->addItems(li_persen);
+//         qbx_persen->setEditable(true);
 
 //     qbx_sk_pmk->addItem(pmk);
 //     qbx_sk_pmk->addItems(li_menteri);
@@ -620,19 +613,19 @@ void Form::header_wt2()
 void Form::header_wt6() // Header table widget 6
 {
     QStringList headerWidget;
-    ui->tableWidget_rAnggaran_dds->setColumnCount(6);
+    ui->tableWidget_realisasi_dds->setColumnCount(6);
     headerWidget <<"id" <<"Nama Distrik"<<"Nama Kampung" <<"Pagu Anggaran " <<"Sisa Anggaran "<<"Realisasi ";
-    ui->tableWidget_rAnggaran_dds->setHorizontalHeaderLabels(headerWidget);
-    ui->tableWidget_rAnggaran_dds->horizontalHeader()->setStretchLastSection(true);
-    ui->tableWidget_rAnggaran_dds->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->tableWidget_rAnggaran_dds->setColumnWidth(0,8);
-    ui->tableWidget_rAnggaran_dds->setColumnHidden(0,true);
-    ui->tableWidget_rAnggaran_dds->setColumnWidth(1,140);
-    ui->tableWidget_rAnggaran_dds->setColumnWidth(2,150);
+    ui->tableWidget_realisasi_dds->setHorizontalHeaderLabels(headerWidget);
+    ui->tableWidget_realisasi_dds->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget_realisasi_dds->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableWidget_realisasi_dds->setColumnWidth(0,8);
+    ui->tableWidget_realisasi_dds->setColumnHidden(0,true);
+    ui->tableWidget_realisasi_dds->setColumnWidth(1,140);
+    ui->tableWidget_realisasi_dds->setColumnWidth(2,150);
     //ui->tableWidget->setColumnHidden(2,true);
-    ui->tableWidget_rAnggaran_dds->setColumnWidth(3,120);
-    ui->tableWidget_rAnggaran_dds->setColumnWidth(4,120);
-    ui->tableWidget_rAnggaran_dds->setColumnWidth(5,120);
+    ui->tableWidget_realisasi_dds->setColumnWidth(3,120);
+    ui->tableWidget_realisasi_dds->setColumnWidth(4,120);
+    ui->tableWidget_realisasi_dds->setColumnWidth(5,120);
 
 }
 
@@ -640,8 +633,8 @@ void Form::header_wt6() // Header table widget 6
 
 void Form::muat_v_bam(QString &id_kam_s) // Data realisasi kampung
 {
-    while(ui->tableWidget_rAnggaran_dds->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
-   {ui->tableWidget_rAnggaran_dds->removeRow(0);}
+    while(ui->tableWidget_realisasi_dds->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+   {ui->tableWidget_realisasi_dds->removeRow(0);}
     QLocale indo = QLocale(QLocale::Indonesian, QLocale::Indonesia);
     QSqlQuery query;
     QString cmd= " SELECT no, distrik, kampung, pagu, pagu1 AS sisa, realisasi FROM pmk_yhk.v_bam WHERE no= :id ORDER BY no";
@@ -656,7 +649,7 @@ void Form::muat_v_bam(QString &id_kam_s) // Data realisasi kampung
     double Tr=0;
     double Ts=0;
     while (query.next()) {
-            ui->tableWidget_rAnggaran_dds->insertRow(noBrs);
+            ui->tableWidget_realisasi_dds->insertRow(noBrs);
 
             QTableWidgetItem *no_ = new QTableWidgetItem;
             QTableWidgetItem *dis_ = new QTableWidgetItem;
@@ -685,12 +678,12 @@ void Form::muat_v_bam(QString &id_kam_s) // Data realisasi kampung
             real_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
             sisa_->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
 
-            ui->tableWidget_rAnggaran_dds->setItem(noBrs,0,no_);
-            ui->tableWidget_rAnggaran_dds->setItem(noBrs,1,dis_);
-            ui->tableWidget_rAnggaran_dds->setItem(noBrs,2,kam_);
-            ui->tableWidget_rAnggaran_dds->setItem(noBrs,3,pagu_);
-            ui->tableWidget_rAnggaran_dds->setItem(noBrs,4,real_);
-            ui->tableWidget_rAnggaran_dds->setItem(noBrs,5,sisa_);
+            ui->tableWidget_realisasi_dds->setItem(noBrs,0,no_);
+            ui->tableWidget_realisasi_dds->setItem(noBrs,1,dis_);
+            ui->tableWidget_realisasi_dds->setItem(noBrs,2,kam_);
+            ui->tableWidget_realisasi_dds->setItem(noBrs,3,pagu_);
+            ui->tableWidget_realisasi_dds->setItem(noBrs,4,real_);
+            ui->tableWidget_realisasi_dds->setItem(noBrs,5,sisa_);
             noBrs++;
     }
 
@@ -753,10 +746,11 @@ if(menu=="2"){ menu2="1";
          muat_bend_kp(id_kam);
          muat_k_kp(id_kam);
          tahap(1);
-         no_srt1();
-         no_srt2();
-         persen();
-         sk_bup();
+         muat_nosurat();
+//         no_srt1();
+//         no_srt2();
+//         persen();
+//         sk_bup();
          //sk_menteri();
          kp_dns();
 
@@ -778,8 +772,8 @@ if(menu=="2"){ menu2="1";
 //         QString tahap = li_tahap.at(2); // tahap pencairan lama
          //QString tahap = qbx_thp_penc->currentText();
          QString tgl_ter = de->text();
-         QString no_srt1 =li_srt1.at(0);
-         QString no_srt2 = li_srt2.at(0);
+         QString no_srt1 =li_no_surat.at(0);
+         QString no_srt2 = li_no_surat.at(1);
          //QString persen = li_persen.at(2);
          QString sk_bup = li_sk_bup.at(0);
          QString sk_kam = s_sk_kp;
@@ -821,10 +815,10 @@ if(menu=="2"){ menu2="1";
          le_jml->setMaximumWidth(190);
  //    le_jml->installEventFilter(eb_v);
          qbx_no_srt1 = new QComboBox;
-         qbx_no_srt1->addItems(li_srt1);
+         qbx_no_srt1->addItem(li_no_surat.at(0));
          qbx_no_srt1->setEditable(true);
          qbx_no_srt2 = new QComboBox;
-         qbx_no_srt2->addItems(li_srt2);
+         qbx_no_srt2->addItem(li_no_surat.at(1));
          qbx_no_srt2->setEditable(true);
          qbx_persen= new QComboBox;
          qbx_persen->addItems(li_persen);
@@ -948,37 +942,37 @@ if(menu=="2"){ menu2="1";
 }
 
 
-void Form::no_srt1()    {
-    li_srt1.clear();
-    qInfo() << "Baca File no SRT 1" ;
-     QString path("data/");
-    QFile f_srt1(path+"dds_no_srt_1.txt");
-    if(!f_srt1.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat no Surat 1."); return;}
-     f_srt1.open(QIODevice::ReadOnly|QIODevice::Text);
-     QTextStream str(&f_srt1);
-     while (!str.atEnd()) {
-        QString line = str.readAll();
-        qInfo()<< "lInessss" << line;
-        li_srt1 = line.split("\n");
-    }
-    f_srt1.close();
-}
+//void Form::no_srt1()    {
+//    li_srt1.clear();
+//    qInfo() << "Baca File no SRT 1" ;
+//     QString path("data/");
+//    QFile f_srt1(path+"dds_no_srt_1.txt");
+//    if(!f_srt1.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat no Surat 1."); return;}
+//     f_srt1.open(QIODevice::ReadOnly|QIODevice::Text);
+//     QTextStream str(&f_srt1);
+//     while (!str.atEnd()) {
+//        QString line = str.readAll();
+//        qInfo()<< "lInessss" << line;
+//        li_srt1 = line.split("\n");
+//    }
+//    f_srt1.close();
+//}
 
-void Form::no_srt2()    {
-    li_srt2.clear();
-    qInfo() << "Baca File no SRT 2" ;
-     QString path("data/");
-    QFile f_srt2(path+"dds_no_srt_2.txt");
-    if(!f_srt2.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat no Surat 2");return;}
-     f_srt2.open(QIODevice::ReadOnly|QIODevice::Text);
-     QTextStream str(&f_srt2);
-     while (!str.atEnd()) {
-        QString line = str.readAll();
-        qInfo()<< "lInessss" << line;
-        li_srt2 = line.split("\n");
-    }
-     f_srt2.close();
-}
+//void Form::no_srt2()    {
+//    li_srt2.clear();
+//    qInfo() << "Baca File no SRT 2" ;
+//     QString path("data/");
+//    QFile f_srt2(path+"dds_no_srt_2.txt");
+//    if(!f_srt2.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat no Surat 2");return;}
+//     f_srt2.open(QIODevice::ReadOnly|QIODevice::Text);
+//     QTextStream str(&f_srt2);
+//     while (!str.atEnd()) {
+//        QString line = str.readAll();
+//        qInfo()<< "lInessss" << line;
+//        li_srt2 = line.split("\n");
+//    }
+//     f_srt2.close();
+//}
 
 void Form::btnAdd_dds()
 {
@@ -996,7 +990,7 @@ void Form::btnAdd_dds()
         j.replace("Rp ",""); j.replace(".",""); j.replace(",",".");
        //qInfo()  << "qinfo j pada btn1 replace" << j;
         bilang(j);
-         QString jcair3 = ui->tableWidget_rAnggaran_dds->item(0,4)->text();
+         QString jcair3 = ui->tableWidget_realisasi_dds->item(0,4)->text();
         jcair3.replace("Rp ",""); jcair3.replace(".",""); jcair3.replace(",",".");
         double jc3 = jcair3.toDouble();
         double jj = j.toDouble();
@@ -1010,11 +1004,7 @@ void Form::btnAdd_dds()
         muat_bend_kp(id_kam);
 
         tahap(1);
-        no_srt1();
-        no_srt2();
-        persen();
-        sk_bup();
-        //sk_menteri();
+        muat_nosurat();
         kp_dns();
 
         QDate dt = QDate::fromString(de_tgl_terima->text(),"dd-MM-yyyy");
@@ -1140,7 +1130,7 @@ void Form::btnAdd_dds()
         jcair2.replace("Rp ",""); jcair2.replace(".",""); jcair2.replace(",",".");
         double jc2 = jcair2.toDouble();
 
-        QString jcair3 = ui->tableWidget_rAnggaran_dds->item(0,4)->text();
+        QString jcair3 = ui->tableWidget_realisasi_dds->item(0,4)->text();
         jcair3.replace("Rp ",""); jcair3.replace(".",""); jcair3.replace(",",".");
         double jc3 = jcair3.toDouble();
         //nfo() << "Doubleklik tw 2";
@@ -1154,7 +1144,7 @@ void Form::btnAdd_dds()
        //Info()<< "isi Bilang j" << j;
         QString jj_ = j;
         bilang(j);
-        // QString jcair3 = ui->tableWidget_rAnggaran_dds->item(0,4)->text();
+        // QString jcair3 = ui->tableWidget_realisasi_dds->item(0,4)->text();
         jcair3.replace("Rp ",""); jcair3.replace(".",""); jcair3.replace(",",".");
         //double jc3 = jcair3.toDouble();
         //double jj = j.toDouble();

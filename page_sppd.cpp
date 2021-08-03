@@ -288,8 +288,9 @@ void Form::updatesppd() // Update sppd
 void Form::even_dklik_tw13() // Double Klik Event ...................................... ubah sppd
 {
 //disconnect(btnsppd_dk, SIGNAL(pressed()), this, SLOT(updatesppd()));
-muat_sppd();
-muat_sppd_2();
+//muat_sppd();
+//muat_sppd_2();
+    muat_nosurat();
   if(ui->comboBox_realisasi->currentIndex()==0)
   {
     //qInfo() << "qbx  double klik 11....................... ";
@@ -311,9 +312,9 @@ muat_sppd_2();
       qbnosppd->setEditable(true);
       qbhal->setEditable(true);
       qbnosppd->addItem(nosrt);
-      qbnosppd->addItems(li_sppd);
+      qbnosppd->addItem(li_no_surat.at(0));
       qbhal->addItem(hal);
-      qbhal->addItems(li_sppd_2);
+      qbhal->addItem(li_no_surat.at(0));
 
       wg = new QWidget;
 
@@ -459,8 +460,7 @@ void Form::sppd() // Form Cetak Surat Pengantar Pencairan
 {
 
 //disconnect(btnsppd, SIGNAL(pressed()), this, SLOT(sppdbtc()));
-muat_sppd();
-muat_sppd_2();
+muat_nosurat();
 //nfo()<<"Menu cetak Pengantar dds";
 QDate dt = QDate::currentDate();
 desppd = new QDateEdit;
@@ -475,8 +475,8 @@ qbnosppd = new QComboBox;
 qbhal = new QComboBox;
 qbnosppd->setEditable(true);
 qbhal->setEditable(true);
-qbnosppd->addItems(li_sppd);
-qbhal->addItems(li_sppd_2);
+qbnosppd->addItems(li_no_surat);
+qbhal->addItems(li_no_surat);
 
 wg = new QWidget;
 
@@ -562,8 +562,7 @@ wg->close();
 void Form::sppd_2()
 {
 
-muat_sppd_();
-muat_sppd_2_();
+muat_nosurat();
 //nfo()<<"Menu cetak Pengantar add";
 QDate dt = QDate::currentDate();
 desppd_2 = new QDateEdit;
@@ -578,8 +577,8 @@ qbnosppd_2 = new QComboBox;
 qbhal_2 = new QComboBox;
 qbnosppd_2->setEditable(true);
 qbhal_2->setEditable(true);
-qbnosppd_2->addItems(li_sppd_);
-qbhal_2->addItems(li_sppd_2_);
+qbnosppd_2->addItem(li_no_surat.at(0));
+qbhal_2->addItem(li_no_surat.at(0));
 wg_2 = new QWidget;
 
 QLabel *nsrt = new QLabel;

@@ -52,7 +52,7 @@ public:
     void commit();
     void rollback();
     QWidget *eb_v;
-    bool eventFilter(QObject *object, QEvent *event);
+    //bool eventFilter(QObject *object, QEvent *event);
     static bool GeneratePixmapFromText(QString &text, QPixmap &pixmap_,int width, int height);
     const QPixmap *QRCodePixmap;
 
@@ -78,22 +78,20 @@ public:
 
 private slots:
 
-
-
  // ==== Qr_Code ====
     void on_saveFileButton_pressed(QString);
     void on_generateButton_pressed(QString text);
 // ==== Qr_Code ====
-    void muat_lvl_type();
-    void on_toolButton_clicked();
-    void on_toolButton_danaDesa_clicked();
-    void on_comboBox_currentIndexChanged(int index);
+    void muat_lvl_type(); // memuat data kepala dinas
+    void on_toolButton_clicked(); // tool Button Bamuskam
+    void on_toolButton_danaDesa_clicked(); // TB dana Desa
+    //void on_comboBox_currentIndexChanged(int index); //
     void muat_dis();
     void muat_kampung();
     void muat_rek(QString &id_kam_s);
-    void qbx_id_kam_conn();
+    void qbx_id_kam_conn(); // dengan SIGNAL SLOT Connect qbx ke ke even id_kampung
     void even_distrik_combo(QString &id_kam_s);
-    void qbx_id_dis_conn();
+    void qbx_id_dis_conn(); // Connect qbx ke ke even id_distri
     //void on_toolButton_3_clicked();
     void on_toolButton_tmbRealdds_clicked();
     //void on_toolButton_5_clicked();
@@ -110,17 +108,17 @@ private slots:
       void even_dklik_tw13();
       //void headsppd_2(); // Double Klik tw13
       void event_doubleklik_tw_cetak_dds();
-      void event_doubleklik_tw_cetak_add();
+      //void event_doubleklik_tw_cetak_add();
       void event_doubleklik_tw_bamuskam();
       void event_klik_tw_6();
-      void event_klik_tw_11();
+      //void event_klik_tw_11();
       //void event_klik_tw_13();
       void event_klik_tw();
       void click_btn(); //Button di edit data bamuskam;
       void click_btn1(); //Tambah kegiatan ke tw widget
-      void click_btn2();  //Tambah kegiatan ke tw widget add
+      //void click_btn2();  //Tambah kegiatan ke tw widget add
       void active_eb_v();
-      void active_eb_v_2();
+      //void active_eb_v_2();
      // void on_pushButton_clicked();
       void on_toolButton_refResh_clicked();
       void on_toolButton_add_clicked();
@@ -128,7 +126,6 @@ private slots:
 
       void on_toolButton_cetakPdfadd_clicked();
       void muatrealdds();
-      void muatrealadd();
 
       void on_toolButton_Sppd_clicked();
       void on_toolButton_logOut_clicked();
@@ -144,11 +141,7 @@ private slots:
       //Tambahan untuk Otomatisasi Jumlah Caor, Persen dan Tahap Laporan
       void muatTahap(QString); // memuat tahap pencairan
 
-      void eventQbxadd();
-
-      void muatTahap_2(QString);
-
-      void eventQbxadd_2();
+      void eventQbxadd(); // semua
 
       void on_toolButton_filter_clicked();
 
@@ -178,16 +171,27 @@ private slots:
 
       void on_toolButton_cetakPdfblt_clicked();
 
-
+      void on_toolButton_cetakPdfcovid_clicked();
       // ====== dana covid =======
       void on_toolButton_tmbRealCovid_clicked();
-      void tambah_real_covid();
+
+
 
        // ====== dana covid =======
+      void on_tableWidget_realisasi_covid_cellDoubleClicked(int row, int column);
+
+     void tambah_real_add();
+
+      void tambah_real_blt();
+
+      void tambah_real_covid();
+
 
       void on_tableWidget_cetak_covid_cellDoubleClicked(int row, int column);
 
-      void on_toolButton_cetakPdfcovid_clicked();
+      void on_tableWidget_cetak_blt_cellDoubleClicked(int row, int column);
+
+      void on_tableWidget_cetak_add_cellDoubleClicked(int row, int column);
 
 signals:
      // void myLabelClicked();      // Signal to emit
@@ -215,6 +219,9 @@ private:
     void header_twRealisasicovid();
 
     //=========== Data Page Covid =========
+    void memuatData_twRealisasiadd(QString);
+    void header_twRealisasiadd();
+
     void boderToolbar(int);
     void updateTampilan(Mode mode);
     Mode ModeSekarang;
@@ -280,8 +287,8 @@ private:
     QStringList li_tahap;
     QStringList li_tahap_add;
     QStringList li_tahap_select;
-    QStringList li_srt1;
-    QStringList li_srt2;
+//    QStringList li_srt1;
+//    QStringList li_srt2;
 
     QStringList li_srt4;
     QStringList li_persen;
@@ -316,12 +323,11 @@ private:
     QPushButton *c;
 
     void tahap(int id); // memuat tahap pencairan pada dana desa, covid, blt
-    void no_srt1();
-    void no_srt2();
+    //void no_srt1();
+    //void no_srt2();
     void btnAdd_dds();
 
-    QStringList no_srt_covid_1();
-    QStringList no_srt_covid_2();
+    //Covid data
     QString qcode_covid();
     QStringList li_data_covid;
     void dataPdf_covid(int row);
@@ -331,14 +337,39 @@ private:
     void muat_data_realisasi_covid(QString);
     void even_dbKlik_tw_covid();
     void update_data_covid(QString id, QString tahap, QString date, QString jml, QString terbilang, QString noSrt1, QString noSrt2);
+    void data_update_sementara_covid();
+
     void tambah_realisasi(QStringList tahap,QString jml,QString noSrt1,QString noSrt2,QString btnText,QString nmKkap,QString nmBen,QString title);
     void update_data_realisasi(QString date, QString tahap ,QString jml,QString noSrt1,QString noSrt2,QString nmKp, QString nmBk, QString title );
-    void data_update_sementara();
 
-    void tahap_add();
-    void no_srt4();
-    void persen();
-    void sk_bup();
+    //blt data
+    QString qcode_blt();
+    QStringList li_data_blt;
+    void dataPdf_blt(int row);
+    void btnAdd_blt();
+    void header_realisasi_blt();
+    void header_cetak_blt();
+    void muat_data_realisasi_blt(QString);
+    void even_dbKlik_tw_blt();
+    void update_data_blt(QString id, QString tahap, QString date, QString jml, QString terbilang, QString noSrt1, QString noSrt2);
+     void data_update_sementara_blt();
+
+     //ad data
+     QStringList li_data_add;
+     void dataPdf_add(int row);
+     void btnAdd_add();
+     void header_realisasi_add();
+     void header_cetak_add();
+     void muat_data_realisasi_add(QString);
+     void even_dbKlik_tw_add();
+     void update_data_add(QString id, QString tahap, QString date, QString jml, QString terbilang, QString noSrt1, QString noSrt2);
+     void data_update_sementara_add();
+
+
+    //void tahap_add();
+    //void no_srt4();
+    //void persen();
+    //void sk_bup();
     void sk_kampung();
     void sk_menteri();
     void kp_dns();
@@ -346,17 +377,17 @@ private:
     void muat_bm(QString skam);
     void muat_bamuskam(QString &id_kam_s);
     void muat_v_bam( QString &id_kamp_s);
-    void muat_v_bam_2( QString &id_kamp_s);
+    //void muat_v_bam_2( QString &id_kamp_s);
     void muat_bend_kp( QString &id_kamp_s);
     void muat_k_kp(QString &id_kam_s);
     void muat_real(QString &id_kam_s);
-    void muat_real_2(QString &id_kam_s);
+    //void muat_real_2(QString &id_kam_s);
     void header_wt1();
     void header_wt6();
-    void header_wt11();
+    //void header_wt11();
 
     void header_wt2();
-    void header_wt9();
+    //void header_wt9();
     void bilang(QString nilai);
     void bil(QString nilai);
     QPushButton *btn;
@@ -369,7 +400,7 @@ private:
     QString menu2;
     QString terbilang;
     void act();
-    void act_2();
+    //void act_2();
 
     void buat_user();
     void update_user();
@@ -378,11 +409,11 @@ private:
 void instsppd(QString nosrt, QString hal,QString date);
 void instsppd_2(QString nosrt, QString hal,QString date);
 
-void muat_sppd();
-void muat_sppd_2();
+void muat_nosurat();
+//void muat_sppd_2();
 
-void muat_sppd_();
-void muat_sppd_2_();
+//void muat_sppd_();
+//void muat_sppd_2_();
 
 void loadsppd();
 void loadsppd_2();
@@ -405,7 +436,7 @@ QPushButton *btnsppd_2;
 
 QPushButton *btnsppd_dk;
 
-QStringList li_sppd;
+QStringList li_no_surat;
 QStringList li_sppd_2;
 
 QStringList li_sppd_;
@@ -421,7 +452,7 @@ QString tot_sppd;
 QString tot_sppd_2;
 
 void save_sppd();
-QString j1_; QString j2_; QString j3_; QString j4_;
+//QString j1_; QString j2_; QString j3_; QString j4_;
 
 //================= sppd ================
     Ui::Form *ui;
