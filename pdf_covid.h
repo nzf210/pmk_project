@@ -261,7 +261,7 @@ public:
         jml = list.at(11);
         persen = list.at(16);
         nmkpdns = list.at(21);
-        tahap2 = list.at(19); //kosong
+        tahap2 = "list.at(19)"; //kosong
         pkpldns = list.at(23);
         //QString nmkdns;
         nip = list.at(24);
@@ -306,7 +306,7 @@ public:
 public slots:
 
      //===================================================
-    QString jbt_klp_dns;
+     QString jbt_klp_dns;
      QString nmdis ;
      QString nmkamp ;
      QString terbilang;

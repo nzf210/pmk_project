@@ -331,6 +331,8 @@ private:
     void muat_data_realisasi_covid(QString);
     void even_dbKlik_tw_covid();
     void update_data_covid(QString id, QString tahap, QString date, QString jml, QString terbilang, QString noSrt1, QString noSrt2);
+    void tambah_realisasi(QStringList tahap,QString jml,QString noSrt1,QString noSrt2,QString btnText,QString nmKkap,QString nmBen,QString title);
+    void update_data_realisasi(QString date, QString tahap ,QString jml,QString noSrt1,QString noSrt2,QString nmKp, QString nmBk, QString title );
     void data_update_sementara();
 
     void tahap_add();

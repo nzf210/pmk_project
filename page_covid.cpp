@@ -289,9 +289,7 @@ tambah_real_covid();
 
 void Form::tambah_real_covid()
 {
-
     qInfo() << "tambah Real Covid";
-
     if(menu=="5"){ menu2="5";
 
         QString id_dis = qbx_id_dis->currentText();
@@ -299,187 +297,10 @@ void Form::tambah_real_covid()
         if(id_kam == "" && id_dis ==""){QMessageBox::information(this,"Peringatan...!!!","Pilih Distrik dan Kampung");return;}
         if(id_kam!="" && id_dis!=""){
 
-             muat_rek(id_kam);
-             muat_bend_kp(id_kam);
-             muat_k_kp(id_kam);
-
-             tahap(3);
-             //qInfo() << "Cari Error covid ===================  1<<" ;
-             no_srt_covid_1();
-             no_srt_covid_2();
-             kp_dns();
-
-             QDate dt = QDate::currentDate();
-             QDateEdit *de = new QDateEdit;
-             de->setDate(dt);
-             de->setDisplayFormat("dd-MM-yyyy");
-
-             //qInfo() << "Cari Error covid ===================  2<<" ;
-
-             QString terbil = terbilang;
-             QString no_rek = li_norek.at(0);
-             QString nm_rek  = li_nm_rek.at(0);
-             QString nm_bank = li_nm_bank.at(0);
-             QString j_bend = s_j_bend;
-             QString j_kp = s_j_kp;
-             QString nm_kp = s_nm_kp;
-             //qInfo() << "Cari Error covid ===================  3<<" ;
-             QString nm_bend = s_nm_bend;
-             QString tgl_ter = de->text();
-             QString no_srt1 = no_srt_covid_1().at(0);
-             QString no_srt2 = no_srt_covid_2().at(0);
-
-             QString sk_kam = s_sk_kp;
-             QString nm_kp_dns = li_kp_dns.at(1);
-             QString pg_kp_dns = li_kp_dns.at(2);
-             QString nip_kp_dns = li_kp_dns.at(3);
-             QString jbt_kp_dns = li_kp_dns.at(0);
-
-             QString j_kk = li_j_kk.at(0);
-
-             c =new QPushButton;
-             c->setText("C");
-             c->setMaximumWidth(22);
-
-             qbx_thp_penc = new QComboBox;
-             qbx_thp_penc->setEditable(true);
-             //qbx_thp_penc->setMaximumWidth(100);
-
-             qbx_thp_l = new QComboBox;
-             qbx_thp_l->setEditable(true);
-
-             qbx_thp_penc->addItems(li_tahap);
-             qbx_thp_l->addItems(li_tahap);
-             de_tgl_terima = new QDateEdit;
-             de_tgl_terima->setDate(dt);
-             de_tgl_terima->setDisplayFormat("dd-MM-yyyy");
-             de_tgl_terima->setCalendarPopup(true);
-             de_tgl_terima->setMinimumWidth(80);
-
-             le_jml = new QLineEdit;
-             le_jml->setValidator(new QDoubleValidator);
-
-             le_jml->setClearButtonEnabled(true);
-             le_jml->setText("Rp 0,00");
-
-
-             qbx_no_srt1 = new QComboBox;
-             qbx_no_srt1->addItem(no_srt1);
-             qbx_no_srt1->setEditable(true);
-             qbx_no_srt1->setMinimumWidth(140);
-             qbx_no_srt2 = new QComboBox;
-             qbx_no_srt2->addItem(no_srt2);
-             qbx_no_srt2->setEditable(true);
-             qbx_no_srt2->setMinimumWidth(140);
-             qbx_persen= new QComboBox;
-
-
-             btn1= new QPushButton;
-             btn1->setText("TAMBAH");
-             btn1->setStyleSheet("QPushButton{font-weight: bold; }");
-             btn1->setMaximumWidth(145);
-             QLabel *ksg = new QLabel;
-             ksg->setText("");
-             ksg->setMaximumWidth(145);
-             QLabel *thp= new QLabel; thp->setText("Tahap Pencairan :"); thp->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             thp->setMaximumWidth(145);
-             thp->setMinimumWidth(145);
-             QLabel *thp_l= new QLabel; thp_l->setText("Laporan Realisasi :"); thp_l->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             thp_l->setMaximumWidth(145);
-             thp_l->setMinimumWidth(145);
-             QLabel *tgl= new QLabel; tgl->setText("Tanggal :"); tgl->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             tgl->setMaximumWidth(145);
-             tgl->setMinimumWidth(145);
-             QLabel *Jumlah= new QLabel; Jumlah->setText("Jumlah Pencairan :"); Jumlah->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             Jumlah->setMaximumWidth(145);
-             Jumlah->setMinimumWidth(145);
-             QLabel *No_1= new QLabel; No_1->setText("NO SPPD :"); No_1->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             No_1->setMaximumWidth(145);
-             No_1->setMinimumWidth(145);
-             QLabel *No_2= new QLabel; No_2->setText("NO SPPS :"); No_2->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             No_2->setMaximumWidth(145);
-             No_2->setMinimumWidth(145);
-             QLabel *per= new QLabel; per->setText("Persentase Pencairan :"); per->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             per->setMaximumWidth(145);
-             per->setMinimumWidth(145);
-             QLabel *sk1= new QLabel; sk1->setText("SK Menteri PMK :"); sk1->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             sk1->setMaximumWidth(145);
-             sk1->setMinimumWidth(145);
-             QLabel *sk2= new QLabel; sk2->setText("SK Menteri Keu :"); sk2->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             sk2->setMaximumWidth(145);
-             sk2->setMinimumWidth(145);
-             //Tambahan Nama Kepala Kampung dan Bendahara
-             QLabel *nmKkam = new QLabel;nmKkam->setText("Kepala Kampung :"); nmKkam->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             nmKkam->setMaximumWidth(145);
-             nmKkam->setMinimumWidth(145);
-             QLabel *nmBkam = new QLabel;nmBkam->setText("Bendahara :"); nmBkam->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             nmBkam->setMaximumWidth(145);
-             nmBkam->setMinimumWidth(145);
-             QLabel *nmKkam_ = new QLabel; nmKkam_->setStyleSheet(" QLabel { font-weight: bold;}");
-             QLabel *nmBkam_ = new QLabel; nmBkam_->setStyleSheet(" QLabel { font-weight: bold;}");
-             nmKkam_->setText(nm_kp);
-             nmBkam_->setText(nm_bend);
-
-             eb_v = new QWidget;
-             QIcon logo(":/gbr/html/gbr/yhk.png");
-             eb_v->setWindowIcon(logo);
-             eb_v->setWindowTitle("Realisasi Anggaran Covid");
-             eb_v->setMinimumWidth(500);
-             eb_v->setMaximumWidth(500);
-             eb_v->setMaximumHeight(220);
-
-             QVBoxLayout *VL = new QVBoxLayout(eb_v);
-             QHBoxLayout *HL1 = new QHBoxLayout;
-             QHBoxLayout *HL2 = new QHBoxLayout;
-             QHBoxLayout *HL3 = new QHBoxLayout;
-             QHBoxLayout *HL4 = new QHBoxLayout;
-             QHBoxLayout *HL5 = new QHBoxLayout;
-
-             QHBoxLayout *HL8 = new QHBoxLayout;
-             QHBoxLayout *HL9 = new QHBoxLayout;
-             QHBoxLayout *HL10 = new QHBoxLayout;
-
-             VL->addLayout(HL1);
-             VL->addLayout(HL2);
-             VL->addLayout(HL3);
-             VL->addLayout(HL4);
-             VL->addLayout(HL5);
-
-             VL->addLayout(HL8);
-             VL->addLayout(HL9);
-             VL->addLayout(HL10);
-
-             HL1->addWidget(thp);
-             HL1->addWidget(qbx_thp_penc);
-
-             HL2->addWidget(tgl);
-             HL2->addWidget(de_tgl_terima);
-             HL2->addWidget(ksg);
-
-             HL3->addWidget(Jumlah);
-             HL3->addWidget(le_jml);
-             HL3->addWidget(c);
-
-             HL4->addWidget(No_1);
-             HL4->addWidget(qbx_no_srt1);
-
-             HL5->addWidget(No_2);
-             HL5->addWidget(qbx_no_srt2);
-
-             //Tambahan K Kampung dan B Kampung
-             HL8->addWidget(nmKkam);
-             HL8->addWidget(nmKkam_);
-             HL9->addWidget(nmBkam);
-             HL9->addWidget(nmBkam_);
-
-             HL10->addWidget(btn1);
-             eb_v->show();
-
-            connect(btn1, SIGNAL(pressed()), this, SLOT(click_btn1()));
-            connect(c, SIGNAL(pressed()), this, SLOT(active_eb_v()));
-
-            //Tambahan untuk auto lap dan persentase
-            connect(qbx_thp_penc, SIGNAL (currentIndexChanged(int)), this, SLOT(eventQbxadd()));
+            tahap(3);
+            muat_bend_kp(id_kam);
+            muat_k_kp(id_kam);
+            tambah_realisasi(li_tahap,"Rp 0,00", no_srt_covid_1().at(0),no_srt_covid_2().at(0),"TAMBAH",s_nm_kp, s_nm_bend,"Tambah Realisasi Dana Covid" );
         } }
 }
 
@@ -490,33 +311,23 @@ void Form::btnAdd_covid()
     if(menu2=="5"){
          if(menu=="5"){;
 
-             if(qbx_thp_penc->currentIndex() == 0 ){QMessageBox::information(eb_v,"Info...!!"," Pilih Tahap Pencairan... "); return;};
-
+         if(qbx_thp_penc->currentIndex() == 0 ){QMessageBox::information(eb_v,"Info...!!"," Pilih Tahap Pencairan... "); return;};
         QString id_dis = qbx_id_dis->currentText();
         QString id_kam = qbx_id_kam->currentText();
         QString j = le_jml->text();
         if(j=="Rp 0,00"){le_jml->setText("");QMessageBox::information(eb_v,"Info...!!","Jumlah Pencairan tdk boleh Nilai Rp 0,00,-"); return;}
         if(j==""){le_jml->setText("");QMessageBox::information(eb_v,"Info...!!","Jumlah Pencairan tdk boleh kosong,-"); return;}
-
         QString jj_ = j;
         j.replace("Rp ",""); j.replace(".",""); j.replace(",",".");
-
         bilang(j);
-         QString jcair3 = ui->tableWidget_realisasi_covid->item(0,4)->text();
+        QString jcair3 = ui->tableWidget_realisasi_covid->item(0,4)->text();
         jcair3.replace("Rp ",""); jcair3.replace(".",""); jcair3.replace(",",".");
         double jc3 = jcair3.toDouble();
         double jj = j.toDouble();
 
         if((jc3-jj)<0){QMessageBox::information(eb_v,"Info...","Mohon Periksa Ketersediaan Dana"); return;}
-
         jj_.replace("Rp ",""); jj_.replace(".",""); jj_.replace(",",".");
-
         muat_rek(id_kam);
-        muat_bend_kp(id_kam);
-
-        tahap(3);
-        no_srt_covid_1();
-        no_srt_covid_2();
         kp_dns();
 
         QDate dt = QDate::fromString(de_tgl_terima->text(),"dd-MM-yyyy");
@@ -533,7 +344,7 @@ void Form::btnAdd_covid()
         QString nm_bend = s_nm_bend;
         QString tahap = qbx_thp_penc->currentText();
 
-        QString tahap_l = qbx_thp_l->currentText();
+       //String tahap_l = qbx_thp_l->currentText();
         QString tgl_ter = de->text();
         QString no_srt1 =qbx_no_srt1->currentText();
         QString no_srt2 =qbx_no_srt2->currentText();
@@ -553,7 +364,7 @@ void Form::btnAdd_covid()
         QMessageBox boxPesan;
         boxPesan.setWindowIcon(icon);
         boxPesan.setWindowTitle("Info...!!!");
-        boxPesan.setText("<b>Menambah data Realisasi Kampung "+ui->comboBox_nmKampung->currentText()+" </b>");
+        boxPesan.setText("<b>Menambah data Realisasi covid "+ui->comboBox_nmKampung->currentText()+" </b>");
         boxPesan.setInformativeText("Pastikan data yang anda input sudah sesuai...");
         QAbstractButton * pBlanjut = boxPesan.addButton(tr(" LANJUT "), QMessageBox::YesRole) ;
          boxPesan.addButton(tr(" BATAL "), QMessageBox::NoRole);
@@ -589,7 +400,7 @@ void Form::btnAdd_covid()
              query.bindValue(":no_srt1",no_srt1);
              no_srt2.replace("####",nosurat_2());
              query.bindValue(":no_srt2",no_srt2);
-             query.bindValue(":persentase",persen);
+             query.bindValue(":persentase","100%");
              query.bindValue(":sk_bup",sk_bup);
              query.bindValue(":sk_kam",sk_kam);
 
@@ -597,7 +408,7 @@ void Form::btnAdd_covid()
              query.bindValue(":j_kpd",pg_kp_dns);
              query.bindValue(":nip_kpd",nip_kp_dns);
              query.bindValue(":ket",thn2);
-             query.bindValue(":thp_l",tahap_l);
+             query.bindValue(":thp_l","tahap_l");
              query.bindValue(":jkk",j_kk);
              query.bindValue(":jbt_kpl_dns", jbt_kpl_dns);
 
@@ -613,7 +424,6 @@ void Form::btnAdd_covid()
          QString id = qbx_id_kam->currentText();
          memuatData_twRealisasicovid(id);}
                   } }
-
 
         if(menu2=="52"){data_update_sementara();}
 }
@@ -837,144 +647,11 @@ void Form::even_dbKlik_tw_covid(){
     if(menu=="5"){ menu2="52";
     qInfo() << "Dalam Double Klik data covid";
 
-             QDate dt = QDate::currentDate();
-             QDateEdit *de = new QDateEdit;
-             de->setDate(dt);
-             de->setDisplayFormat("dd-MM-yyyy");
-
-             c =new QPushButton;
-             c->setText("C");
-             c->setMaximumWidth(22);
-
-             qbx_thp_penc = new QComboBox;
-             qbx_thp_penc->setEditable(true);
-             qbx_thp_penc->addItem(li_data_covid.at(10));
-             //qbx_thp_l->addItems(li_tahap);
-             de_tgl_terima = new QDateEdit;
-             de_tgl_terima->setDate(dt);
-             de_tgl_terima->setDisplayFormat("dd-MM-yyyy");
-             de_tgl_terima->setCalendarPopup(true);
-             de_tgl_terima->setMinimumWidth(80);
-
-             le_jml = new QLineEdit;
-             le_jml->setValidator(new QDoubleValidator);
-             le_jml->setClearButtonEnabled(true);
-             le_jml->setText(li_data_covid.at(11));
-
-             qbx_no_srt1 = new QComboBox;
-             qbx_no_srt1->addItem(li_data_covid.at(14));
-             qbx_no_srt1->setEditable(true);
-             qbx_no_srt1->setMinimumWidth(140);
-             qbx_no_srt2 = new QComboBox;
-             qbx_no_srt2->addItem(li_data_covid.at(15));
-             qbx_no_srt2->setEditable(true);
-             qbx_no_srt2->setMinimumWidth(140);
-             //qbx_persen= new QComboBox;
-
-             btn1= new QPushButton;
-             btn1->setText("UBAH");
-             btn1->setStyleSheet("QPushButton{font-weight: bold; }");
-             btn1->setMaximumWidth(145);
-             QLabel *ksg = new QLabel;
-             ksg->setText("");
-             ksg->setMaximumWidth(145);
-             QLabel *thp= new QLabel; thp->setText("Tahap Pencairan :"); thp->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             thp->setMaximumWidth(145);
-             thp->setMinimumWidth(145);
-//             QLabel *thp_l= new QLabel; thp_l->setText("Laporan Realisasi :"); thp_l->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-//             thp_l->setMaximumWidth(145);
-//             thp_l->setMinimumWidth(145);
-             QLabel *tgl= new QLabel; tgl->setText("Tanggal :"); tgl->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             tgl->setMaximumWidth(145);
-             tgl->setMinimumWidth(145);
-             QLabel *Jumlah= new QLabel; Jumlah->setText("Jumlah Pencairan :"); Jumlah->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             Jumlah->setMaximumWidth(145);
-             Jumlah->setMinimumWidth(145);
-             QLabel *No_1= new QLabel; No_1->setText("NO SPPD :"); No_1->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             No_1->setMaximumWidth(145);
-             No_1->setMinimumWidth(145);
-             QLabel *No_2= new QLabel; No_2->setText("NO SPPS :"); No_2->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             No_2->setMaximumWidth(145);
-             No_2->setMinimumWidth(145);
-             QLabel *per= new QLabel; per->setText("Persentase Pencairan :"); per->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             per->setMaximumWidth(145);
-             per->setMinimumWidth(145);
-             QLabel *nmKkam = new QLabel;nmKkam->setText("Kepala Kampung :"); nmKkam->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             nmKkam->setMaximumWidth(145);
-             nmKkam->setMinimumWidth(145);
-             QLabel *nmBkam = new QLabel;nmBkam->setText("Bendahara :"); nmBkam->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-             nmBkam->setMaximumWidth(145);
-             nmBkam->setMinimumWidth(145);
-             QLabel *nmKkam_ = new QLabel; nmKkam_->setStyleSheet(" QLabel { font-weight: bold;}");
-             QLabel *nmBkam_ = new QLabel; nmBkam_->setStyleSheet(" QLabel { font-weight: bold;}");
-             nmKkam_->setText(li_data_covid.at(8));
-             nmBkam_->setText(li_data_covid.at(9));
-
-             eb_v = new QWidget;
-             QIcon logo(":/gbr/html/gbr/yhk.png");
-             eb_v->setWindowIcon(logo);
-             eb_v->setWindowTitle("Update Realisasi Anggaran Covid");
-             eb_v->setMinimumWidth(500);
-             eb_v->setMaximumWidth(500);
-             eb_v->setMaximumHeight(220);
-
-             QVBoxLayout *VL = new QVBoxLayout(eb_v);
-             QHBoxLayout *HL1 = new QHBoxLayout;
-             QHBoxLayout *HL2 = new QHBoxLayout;
-             QHBoxLayout *HL3 = new QHBoxLayout;
-             QHBoxLayout *HL4 = new QHBoxLayout;
-             QHBoxLayout *HL5 = new QHBoxLayout;
-
-             QHBoxLayout *HL8 = new QHBoxLayout;
-             QHBoxLayout *HL9 = new QHBoxLayout;
-             QHBoxLayout *HL10 = new QHBoxLayout;
-
-             VL->addLayout(HL1);
-             VL->addLayout(HL2);
-             VL->addLayout(HL3);
-             VL->addLayout(HL4);
-             VL->addLayout(HL5);
-
-             VL->addLayout(HL8);
-             VL->addLayout(HL9);
-             VL->addLayout(HL10);
-
-             HL1->addWidget(thp);
-             HL1->addWidget(qbx_thp_penc);
-
-             HL2->addWidget(tgl);
-             HL2->addWidget(de_tgl_terima);
-             HL2->addWidget(ksg);
-
-             HL3->addWidget(Jumlah);
-             HL3->addWidget(le_jml);
-             HL3->addWidget(c);
-
-             HL4->addWidget(No_1);
-             HL4->addWidget(qbx_no_srt1);
-
-             HL5->addWidget(No_2);
-             HL5->addWidget(qbx_no_srt2);
-
-             HL8->addWidget(nmKkam);
-             HL8->addWidget(nmKkam_);
-             HL9->addWidget(nmBkam);
-             HL9->addWidget(nmBkam_);
-
-             HL10->addWidget(btn1);
-             eb_v->show();
-
-            connect(btn1, SIGNAL(pressed()), this, SLOT(click_btn1()));
-            connect(c, SIGNAL(pressed()), this, SLOT(active_eb_v()));
-
-            //Tambahan untuk auto lap dan persentase nilai pencairan
-            connect(qbx_thp_penc, SIGNAL (currentIndexChanged(int)), this, SLOT(eventQbxadd()));
+     update_data_realisasi(li_data_covid.at(13),li_data_covid.at(10),li_data_covid.at(11),li_data_covid.at(14),li_data_covid.at(15),li_data_covid.at(8), li_data_covid.at(9),"Update Realisasi dana Covid");
         }
-
-
 }
 
-void Form::data_update_sementara()
+void Form::data_update_sementara() // semua
 {
 
     QString tahap = qbx_thp_penc->currentText();
@@ -1047,7 +724,6 @@ void Form::on_toolButton_cetakPdfcovid_clicked()
 
 void Form::dataPdf_covid(int row)
 {
-
     QString lspdf;
     if(menu=="5"){
         for ( int i=1; i<30 ; i++ ) {
@@ -1055,48 +731,6 @@ void Form::dataPdf_covid(int row)
                 lspdf.append("/n"+ui->tableWidget_cetak_covid->item(row,i)->text());
             }
         }
-
-
-//    QString id_kam =  ui->tableWidget_cetak_dds->item(noBrs,2)->text();
-//    QString nmdis = ui->tableWidget_cetak_dds->item(noBrs,3)->text();
-//    QString nmkamp = ui->tableWidget_cetak_dds->item(noBrs,4)->text();
-//    QString terbilang= ui->tableWidget_cetak_dds->item(noBrs,13)->text();
-//    QString norek = ui->tableWidget_cetak_dds->item(noBrs,5)->text();
-//    QString nmrek = ui->tableWidget_cetak_dds->item(noBrs,6)->text();
-//    QString nmbank = ui->tableWidget_cetak_dds->item(noBrs,7)->text();
-//    QString nmkkp = ui->tableWidget_cetak_dds->item(noBrs,9)->text();
-//    QString nmbenk = ui->tableWidget_cetak_dds->item(noBrs,10)->text();
-//    QString jkk = ui->tableWidget_cetak_dds->item(noBrs,28)->text();
-//    QString tahap = ui->tableWidget_cetak_dds->item(noBrs,11)->text();
-//    QString jml = ui->tableWidget_cetak_dds->item(noBrs,12)->text();
-//    QString persen = ui->tableWidget_cetak_dds->item(noBrs,17)->text();
-//    QString nmkpdns = ui->tableWidget_cetak_dds->item(noBrs,22)->text();
-//    QString tahap2 = ui->tableWidget_cetak_dds->item(noBrs,26)->text();
-//    QString pkpldns = ui->tableWidget_cetak_dds->item(noBrs,24)->text();
-//    QString nip = ui->tableWidget_cetak_dds->item(noBrs,25)->text();
-//    QString nosrt1 = ui->tableWidget_cetak_dds->item(noBrs,15)->text();
-//    QString nosrt2 = ui->tableWidget_cetak_dds->item(noBrs,16)->text();
-//    QString tgl = ui->tableWidget_cetak_dds->item(noBrs,14)->text();
-//    QString jbt_kp_dns= ui->tableWidget_cetak_dds->item(noBrs,29)->text();
-
-//    QString unmdis = nmdis.toUpper();
-//    QString unmkam = nmkamp.toUpper();\
-
-//    QString skben= ui->tableWidget_cetak_dds->item(noBrs,8)->text();
-//    QString skkkam= ui->tableWidget_cetak_dds->item(noBrs,19)->text();
-
-//    //Tambahan thn 2
-//    QString thn2 = ui->tableWidget_cetak_dds->item(noBrs,23)->text();
-//    QString id_real_dds = ui->tableWidget_cetak_dds->item(noBrs,1)->text();
-
-//    lspdf << nmdis << nmkamp << terbilang << norek << nmrek << nmbank <<nmkkp << nmbenk << jkk << tahap << jml << persen
-//          << nmkpdns << tahap2 << pkpldns << nip << nosrt1 << nosrt2 << tgl << unmdis << unmkam <<id_real_dds;
-//    lspdf1 =lspdf;
-//    qInfo() << "Data List Dari PDF 1 at 2" << getLspdf1() << " ============== Data id  ========="+id_real_dds;
-
-//    pdfdt1 = nmdis +"/n "+ nmkamp+ "/n" +terbilang +"/n"+norek+"/n"+ nmrek +"/n"+nmbank+"/n"+nmkkp+"/n"+nmbenk+"/n"
-//                     ""+jkk+"/n"+ tahap+ "/n"+ jml+"/n"+ persen+ "/n" +nmkpdns+ "/n"+ tahap2+ "/n"+ pkpldns +"/n"+ nip +"/n"+ nosrt1 +"/n"
-//                    ""+ nosrt2 +"/n"+ tgl +"/n"+ unmdis+"/n"+ unmkam +"/n"+ skben +"/n"+ skkkam +"/n"+thn2+ "/n"+jbt_kp_dns;
 
     QString path = "doc/temp/";
     QString l= lspdf;
@@ -1125,4 +759,134 @@ QString Form::qcode_covid()
     QString h = "/" +ui->tableWidget_cetak_covid->item(noBrs,12)->text();
     qInfo() << "Barcode Text" << a+b_+c+d+e+f+g+h;
     return a+b_+c+d+e+f+g+h;
+}
+
+void Form::update_data_realisasi(QString date, QString tahap ,QString jml,QString noSrt1,QString noSrt2,QString nmKp, QString nmBk, QString title )
+{
+
+    QDate dt = QDate::fromString(date,"dd-MM-yyyy");
+    c =new QPushButton;
+    c->setText("C");
+    c->setMaximumWidth(22);
+
+    qbx_thp_penc = new QComboBox;
+    qbx_thp_penc->setEditable(true);
+    qbx_thp_penc->addItem(tahap);
+    //qbx_thp_l->addItems(li_tahap);
+    de_tgl_terima = new QDateEdit;
+    de_tgl_terima->setDate(dt);
+    de_tgl_terima->setDisplayFormat("dd-MM-yyyy");
+    de_tgl_terima->setCalendarPopup(true);
+    de_tgl_terima->setMinimumWidth(80);
+
+    le_jml = new QLineEdit;
+    le_jml->setValidator(new QDoubleValidator);
+    le_jml->setClearButtonEnabled(true);
+    le_jml->setText(jml);
+
+    qbx_no_srt1 = new QComboBox;
+    qbx_no_srt1->addItem(noSrt1);
+    qbx_no_srt1->setEditable(true);
+    qbx_no_srt1->setMinimumWidth(140);
+    qbx_no_srt2 = new QComboBox;
+    qbx_no_srt2->addItem(noSrt2);
+    qbx_no_srt2->setEditable(true);
+    qbx_no_srt2->setMinimumWidth(140);
+    //qbx_persen= new QComboBox;
+
+    btn1= new QPushButton;
+    btn1->setText("UBAH");
+    btn1->setStyleSheet("QPushButton{font-weight: bold; }");
+    btn1->setMaximumWidth(145);
+    QLabel *ksg = new QLabel;
+    ksg->setText("");
+    ksg->setMaximumWidth(145);
+    QLabel *thp= new QLabel; thp->setText("Tahap Pencairan :"); thp->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
+    thp->setMaximumWidth(145);
+    thp->setMinimumWidth(145);
+    QLabel *tgl= new QLabel; tgl->setText("Tanggal :"); tgl->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
+    tgl->setMaximumWidth(145);
+    tgl->setMinimumWidth(145);
+    QLabel *Jumlah= new QLabel; Jumlah->setText("Jumlah Pencairan :"); Jumlah->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
+    Jumlah->setMaximumWidth(145);
+    Jumlah->setMinimumWidth(145);
+    QLabel *No_1= new QLabel; No_1->setText("NO SPPD :"); No_1->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
+    No_1->setMaximumWidth(145);
+    No_1->setMinimumWidth(145);
+    QLabel *No_2= new QLabel; No_2->setText("NO SPPS :"); No_2->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
+    No_2->setMaximumWidth(145);
+    No_2->setMinimumWidth(145);
+    QLabel *per= new QLabel; per->setText("Persentase Pencairan :"); per->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
+    per->setMaximumWidth(145);
+    per->setMinimumWidth(145);
+    QLabel *nmKkam = new QLabel;nmKkam->setText("Kepala Kampung :"); nmKkam->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
+    nmKkam->setMaximumWidth(145);
+    nmKkam->setMinimumWidth(145);
+    QLabel *nmBkam = new QLabel;nmBkam->setText("Bendahara :"); nmBkam->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
+    nmBkam->setMaximumWidth(145);
+    nmBkam->setMinimumWidth(145);
+    QLabel *nmKkam_ = new QLabel; nmKkam_->setStyleSheet(" QLabel { font-weight: bold;}");
+    QLabel *nmBkam_ = new QLabel; nmBkam_->setStyleSheet(" QLabel { font-weight: bold;}");
+    nmKkam_->setText(nmKp);
+    nmBkam_->setText(nmBk);
+
+    eb_v = new QWidget;
+    QIcon logo(":/gbr/html/gbr/yhk.png");
+    eb_v->setWindowIcon(logo);
+    eb_v->setWindowTitle(title);
+    eb_v->setMinimumWidth(500);
+    eb_v->setMaximumWidth(500);
+    eb_v->setMaximumHeight(220);
+
+    QVBoxLayout *VL = new QVBoxLayout(eb_v);
+    QHBoxLayout *HL1 = new QHBoxLayout;
+    QHBoxLayout *HL2 = new QHBoxLayout;
+    QHBoxLayout *HL3 = new QHBoxLayout;
+    QHBoxLayout *HL4 = new QHBoxLayout;
+    QHBoxLayout *HL5 = new QHBoxLayout;
+
+    QHBoxLayout *HL8 = new QHBoxLayout;
+    QHBoxLayout *HL9 = new QHBoxLayout;
+    QHBoxLayout *HL10 = new QHBoxLayout;
+
+    VL->addLayout(HL1);
+    VL->addLayout(HL2);
+    VL->addLayout(HL3);
+    VL->addLayout(HL4);
+    VL->addLayout(HL5);
+
+    VL->addLayout(HL8);
+    VL->addLayout(HL9);
+    VL->addLayout(HL10);
+
+    HL1->addWidget(thp);
+    HL1->addWidget(qbx_thp_penc);
+
+    HL2->addWidget(tgl);
+    HL2->addWidget(de_tgl_terima);
+    HL2->addWidget(ksg);
+
+    HL3->addWidget(Jumlah);
+    HL3->addWidget(le_jml);
+    HL3->addWidget(c);
+
+    HL4->addWidget(No_1);
+    HL4->addWidget(qbx_no_srt1);
+
+    HL5->addWidget(No_2);
+    HL5->addWidget(qbx_no_srt2);
+
+    HL8->addWidget(nmKkam);
+    HL8->addWidget(nmKkam_);
+    HL9->addWidget(nmBkam);
+    HL9->addWidget(nmBkam_);
+
+    HL10->addWidget(btn1);
+    eb_v->show();
+
+   connect(btn1, SIGNAL(pressed()), this, SLOT(click_btn1()));
+   connect(c, SIGNAL(pressed()), this, SLOT(active_eb_v()));
+
+   //Tambahan untuk auto lap dan persentase nilai pencairan
+   connect(qbx_thp_penc, SIGNAL (currentIndexChanged(int)), this, SLOT(eventQbxadd()));
 }

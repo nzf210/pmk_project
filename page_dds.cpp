@@ -359,8 +359,8 @@ void Form::eventQbxadd() // QCombox even pada tahap pencairan dana desa
       qInfo() << "Tahapan pada dana Desa" << thp;
 
     muatTahap(thp);
-    qbx_thp_l->clear();
-    qbx_persen->clear();
+    //qbx_thp_l->clear();
+    //qbx_persen->clear();
     le_jml->clear();
     QString pagu =  pagu_pencairan;
     double pg = pagu.toDouble();
