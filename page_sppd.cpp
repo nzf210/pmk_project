@@ -830,7 +830,6 @@ if(ui->comboBox_realisasi->currentIndex()>0){
     if(aa=="Realisasi Dana BLT") { a="blt"; }
     if(aa=="Realisasi Dana Covid") { a="covid"; }
 
-
    muatheadertw_realisasi_sppd();
    while(ui->tableWidget_realisasi_sppd->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
    {ui->tableWidget_realisasi_sppd->removeRow(0);}
@@ -1047,20 +1046,19 @@ void Form::select_tgl_sppd(QString tgl)
 
 void Form::on_tableWidget_realisasi_sppd_cellDoubleClicked(int row, int column)
 {
-   // int noBrs = ui->tableWidget_realisasi_sppd->currentRow();
-    /// " << "no_surat" << "perihal" << "tanggal" << "nos";
+   qInfo() << "Column" << column;
     QString id = ui->tableWidget_realisasi_sppd->item(row,0)->text();
     QString noSrt = ui->tableWidget_realisasi_sppd->item(row,1)->text();
     QString perihal = ui->tableWidget_realisasi_sppd->item(row,2)->text();
     QString tanggal = ui->tableWidget_realisasi_sppd->item(row,3)->text();
-    update_data_sppd(tanggal, noSrt, perihal,"coba");
+    update_data_sppd(id,tanggal, noSrt, perihal);
 
 }
 
 
-void Form::update_data_sppd(QString date, QString no_Srt, QString perihal, QString type ){
+void Form::update_data_sppd(QString id, QString date, QString no_Srt, QString perihal){
 
-
+    id_update_sppd = id;
     QDate dt = QDate::fromString(date,"dd-MM-yyyy");
     desppd = new QDateEdit;
     desppd->setDate(dt);
@@ -1131,6 +1129,40 @@ void Form::update_data_sppd(QString date, QString no_Srt, QString perihal, QStri
 void Form::update_sppd_toDB()
 {
     qInfo() << "Insert Update ";
+
+    QString a;
+    QString aa=ui->comboBox_realisasi->currentText();
+
+    if(aa=="Realisasi Dana Desa") {  a="dds"; }
+    if(aa=="Realisasi Alokasi Dana Desa") { a="add"; }
+    if(aa=="Realisasi Dana BLT") { a="blt"; }
+    if(aa=="Realisasi Dana Covid") { a="covid"; }
+
+    if(ui->comboBox_realisasi->currentIndex()>0){
+
+    QString nosrt = qbnosppd->currentText();
+    QString hal = qbhal->currentText();
+    QString tgl =  desppd->text();
+    QDate dt = QDate::fromString(tgl,"dd-MM-yyyy");
+    QString tgl_ = dt.toString("yyyy-MM-dd");
+    //nfo()<< " info 000" << nosrt << "==" << hal << "==" << tgl;
+    QSqlQuery  query;
+    QString cmd = " UPDATE pmk_yhk.sppdd_"+a+" SET no_srt = :no_srt, perihal= :hal, tgl= :tgl  WHERE id= :id " ;
+    query.prepare(cmd);
+    query.bindValue(":no_srt",nosrt);
+    query.bindValue(":hal",hal);
+    query.bindValue(":tgl",tgl_);
+    query.bindValue(":hal",hal);
+    query.bindValue(":id",id_update_sppd);
+    bool ok = exec(query);
+    if(!ok){QMessageBox::information(this,"Error","Gagal Update data Surat Pencairan "+query.lastError().text()+""); return;}
+    if(ok){QMessageBox::information(this,"Info ... ","Berhasil Update data Surat Pencairan");
+    disconnect(btnsppd, SIGNAL(pressed()), this, SLOT(update_sppd_toDB()));}
+     }
+    wg->close();
+    muat_data_realisasi_sppdd("");
+    select_tgl_sppd("");
+
 }
 
 

@@ -71,10 +71,7 @@ public:
         QStringList getLspdf1() const;
         void  rundatapdf1();
         QString getPdfdt1() const;
-
-        //ini percobaan send data
-
-
+        QString id_update_sppd;
 
 private slots:
 
@@ -135,7 +132,7 @@ private slots:
 
       //void qbx3event(); // even qComboBox realisasi pada SPPD
       void updatesppd();
-      void update_data_sppd(QString date, QString noSrt, QString perihal, QString type);
+      void update_data_sppd(QString id,QString date, QString noSrt, QString perihal);
       void update_sppd_toDB();
 
       //Tambahan untuk Otomatisasi Jumlah Caor, Persen dan Tahap Laporan
