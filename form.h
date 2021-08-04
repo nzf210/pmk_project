@@ -122,7 +122,7 @@ private slots:
       void on_toolButton_tmbRealadd_clicked();
 
       void on_toolButton_cetakPdfadd_clicked();
-      void muatrealdds();
+      void muat_nama_header(QString);
 
       void on_toolButton_Sppd_clicked();
       void on_toolButton_logOut_clicked();
@@ -132,11 +132,16 @@ private slots:
 
       void sppdbtc();
       void sppdbtc_2();
-      void qbx3event();
+
+      //void qbx3event(); // even qComboBox realisasi pada SPPD
       void updatesppd();
+      void update_data_sppd(QString date, QString noSrt, QString perihal, QString type);
+      void update_sppd_toDB();
 
       //Tambahan untuk Otomatisasi Jumlah Caor, Persen dan Tahap Laporan
       void muatTahap(QString); // memuat tahap pencairan
+
+      void muat_data_realisasi_sppdd(QString); // memuat data realisasi untuk tw realisasi di sppd
 
       void eventQbxadd(); // semua
 
@@ -202,6 +207,12 @@ private slots:
 
       void on_tableWidget_realisasi_add_cellClicked(int row, int column);
 
+      void on_comboBox_realisasi_currentIndexChanged(const QString &arg1);
+
+      void on_tableWidget_realisasi_sppd_cellClicked(int row, int column);
+
+      void on_tableWidget_realisasi_sppd_cellDoubleClicked(int row, int column);
+
 signals:
      // void myLabelClicked();      // Signal to emit
       void sendData(QString data);
@@ -239,6 +250,8 @@ private:
     QString pdfdt1;
     // === Tambahan Fungsi Buat Getter Ke Cetak PDF1 ===E===
 
+    void select_tgl_sppd(QString tgl);
+
     QString lvl;
     QString type;
     QString id_usr;
@@ -259,8 +272,8 @@ private:
     void  datapdf2(); //
     //void  datapdf3();
     //void  databam(QString skam ); //write data bamuskam ke txt
-    void  muatheadertw12();
-    void  muatheadertw12_2();
+    void  muatheadertw_realisasi_sppd();
+    void  muatheadertw_cetak_sppd();
     void  muatrealdds_();
     void  muatrealdds__();
 
@@ -278,7 +291,7 @@ private:
     QString data;
     QCursor cursor;
 
-    QStringList li_realdds;
+    QStringList li_realdds; // daftar nama header di sppd
     QStringList li_realadd;
     QStringList li_bam;
 
@@ -423,7 +436,7 @@ private:
     void hapus_user();
 //================= sppd ================
 void instsppd(QString nosrt, QString hal,QString date);
-void instsppd_2(QString nosrt, QString hal,QString date);
+void insert_sppd(QString type ,QString nosrt, QString hal,QString date);
 
 void muat_nosurat();
 //void muat_sppd_2();
@@ -434,7 +447,7 @@ void muat_nosurat();
 void loadsppd();
 void loadsppd_2();
 
-void sppd();
+void tambah_sppd(int noSrt1,int noSrt);
 void sppd_2();
 void headsppd();
 

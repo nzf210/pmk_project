@@ -135,8 +135,8 @@ void Form::on_toolButton_refResh_clicked()
                            //muat_v_bam_2(id);
                    }}
  if(menu=="4"){
-                       if (ui->comboBox_realisasi->currentIndex()==0){muatrealdds(); loadsppd(); }
-                       if (ui->comboBox_realisasi->currentIndex()==1){/*muatrealadd();*/ loadsppd_2();}
+                       if (ui->comboBox_realisasi->currentIndex()==0){/*muatrealdds(); loadsppd();*/ }
+                       if (ui->comboBox_realisasi->currentIndex()==1){/*muatrealadd();*/ /*loadsppd_2();*/}
                         }
 }
 
@@ -235,7 +235,7 @@ void Form::conect_slot()
 {
     connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(qbx_id_dis_conn()));
     connect(ui->comboBox_nmKampung, SIGNAL (currentIndexChanged(int)), this, SLOT(qbx_id_kam_conn()));
-    connect(ui->comboBox_realisasi, SIGNAL (currentIndexChanged(int)), this, SLOT(qbx3event()));
+    connect(ui->comboBox_realisasi, SIGNAL (currentIndexChanged(int)), this, SLOT(qbx3event())); // even qComboBox realisasi pada SPPD
     connect(ui->tableWidget_Bamuskam, &QTableWidget::doubleClicked , this, &Form::event_doubleklik_tw_bamuskam);
     connect(ui->tableWidget_Bamuskam, &QTableWidget::cellClicked , this, &Form::event_klik_tw);
     //connect(ui->tableWidget_realisasi_dds, &QTableWidget::cellClicked , this, &Form::event_klik_tw_6);
@@ -396,4 +396,31 @@ void Form::click_btn1() // Even Klik Save di tambah semua realisasi
     btnAdd_add();
 
 on_toolButton_refResh_clicked();
+}
+
+
+
+void Form::muat_nama_header(QString nama)  // Muat Data hedaer  Realisasi Dana Desa
+{
+    qInfo() << id;
+    li_realdds.clear();
+    li_realdds.append("ID");
+    li_realdds.append("Nama Distrik");
+    li_realdds.append("Nama Kampung");
+    li_realdds.append("Pagu Anggaran");
+    QSqlQuery query;
+    QString cmd = "SELECT thp_cair FROM pmk_yhk."+nama+"_cair GROUP BY thp_cair ORDER BY thp_cair ";
+    query.prepare(cmd);
+    bool ok = exec(query);
+    if(!ok){QMessageBox::information(this,"Error...","Gagal Memuat data nama Header ."); return;}
+    while(query.next())
+    {
+        li_realdds.append(query.value(0).toString());
+    }
+    li_realdds.append("Sub Total");
+    li_realdds.append("Sisa Pagu");
+
+    muatheadertw_realisasi_sppd();
+    //muatrealdds_();
+    //muatrealdds__();
 }

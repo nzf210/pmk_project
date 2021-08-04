@@ -435,7 +435,7 @@ void Form::memuatData_twRealisasidds(QString id_kam_s) // Data realisasi kampung
 {
     while(ui->tableWidget_realisasi_dds->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
    {ui->tableWidget_realisasi_dds->removeRow(0);}
-    QLocale indo = QLocale(QLocale::Indonesian, QLocale::Indonesia);
+    //QLocale indo = QLocale(QLocale::Indonesian, QLocale::Indonesia);
 
     double pagu_blt=0;
     double tot_cair_blt=0;
@@ -551,30 +551,6 @@ void Form::memuatData_twRealisasidds(QString id_kam_s) // Data realisasi kampung
 }
 
 
-
-void Form::muatrealdds() // Muat Data Realisasi Dana Desa
-{
-    li_realdds.clear();
-    li_realdds.append("ID");
-    li_realdds.append("Nama Distrik");
-    li_realdds.append("Nama Kampung");
-    li_realdds.append("Pagu Anggaran");
-    QSqlQuery query;
-    QString cmd = "SELECT thp_cair FROM pmk_yhk.dds_cair GROUP BY thp_cair ORDER BY thp_cair ";
-    query.prepare(cmd);
-    bool ok = exec(query);
-    if(!ok){QMessageBox::information(this,"Error...","Gagal Memuat data realisasi Dana Desa ."); return;}
-    while(query.next())
-    {
-        li_realdds.append(query.value(0).toString());
-    }
-    li_realdds.append("Sub Total");
-    li_realdds.append("Sisa Pagu");
-
-    muatheadertw12();
-    muatrealdds_();
-    muatrealdds__();
-}
 
 
 

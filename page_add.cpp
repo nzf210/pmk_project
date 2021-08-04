@@ -368,7 +368,6 @@ void Form::muat_data_realisasi_add(QString s_id_kamp)
         nm_ben_->setText(query.value(9).toString());
         nm_kp_->setText(query.value(10).toString());
         thp_cair_->setText(query.value(11).toString());
-        QLocale indo = QLocale(QLocale::Indonesian, QLocale::Indonesia);
         double jj = (query.value(12).toDouble());
         QString jjj = indo.toCurrencyString(jj,"Rp ");
         j_cair_->setText(jjj);

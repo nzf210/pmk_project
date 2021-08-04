@@ -152,7 +152,7 @@ border-style: outset;
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="page">
     <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -934,6 +934,9 @@ bacground-size: 70%</string>
           <widget class="QTableWidget" name="tableWidget_realisasi_sppd">
            <property name="styleSheet">
             <string notr="true"/>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
            </property>
           </widget>
          </item>

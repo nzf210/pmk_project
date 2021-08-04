@@ -736,9 +736,9 @@ int j1,j2,j3,j4,j5,j6,j7,j8;
 QString cmd;/* = "SELECT sum(nos) AS no1,(SELECT sum(nos) FROM pmk_yhk.sppdd_2) AS no2,(SELECT sum(nos) FROM pmk_yhk.dds_cair) AS no3,"
                            "(SELECT sum(nos) FROM pmk_yhk.dds_cair_2) AS no4 FROM pmk_yhk.sppdd";*/
 
-cmd = "SELECT sum(nos) AS no1,(SELECT sum(nos) FROM pmk_yhk.sppdd_2) AS no2,(SELECT sum(nos) FROM pmk_yhk.dds_cair) AS no3,(SELECT sum(nos) FROM pmk_yhk.add_cair) AS no4,"
+cmd = "SELECT sum(nos) AS no1,(SELECT sum(nos) FROM pmk_yhk.sppdd_add) AS no2,(SELECT sum(nos) FROM pmk_yhk.dds_cair) AS no3,(SELECT sum(nos) FROM pmk_yhk.add_cair) AS no4,"
       "(SELECT sum(nos) FROM pmk_yhk.covid_cair) AS no5,(SELECT sum(nos) FROM pmk_yhk.blt_cair) AS no6 ,(SELECT sum(nos) FROM pmk_yhk.sppdd_covid) AS no7,"
-      "(SELECT sum(nos) FROM pmk_yhk.sppdd_blt) AS no8 FROM pmk_yhk.sppdd";
+      "(SELECT sum(nos) FROM pmk_yhk.sppdd_blt) AS no8 FROM pmk_yhk.sppdd_dds";
 
 query.prepare(cmd);
 //int j1 =0; int j2 =0; int j3 =0; int j4 =0;
@@ -780,9 +780,9 @@ int j1,j2,j3,j4,j5,j6,j7,j8;
 //              "(SELECT count(*) FROM pmk_yhk.sppdd_2) AS j4  FROM pmk_yhk.dds_cair" ;
 QString cmd; /*= "SELECT sum(nos) AS no1,(SELECT sum(nos) FROM pmk_yhk.sppdd_2) AS no2,(SELECT sum(nos) FROM pmk_yhk.dds_cair) AS no3,"
                            "(SELECT sum(nos) FROM pmk_yhk.dds_cair_2) AS no4 FROM pmk_yhk.sppdd";*/
-cmd = "SELECT sum(nos) AS no1,(SELECT sum(nos) FROM pmk_yhk.sppdd_2) AS no2,(SELECT sum(nos) FROM pmk_yhk.dds_cair) AS no3,(SELECT sum(nos) FROM pmk_yhk.add_cair) AS no4,"
+cmd = "SELECT sum(nos) AS no1,(SELECT sum(nos) FROM pmk_yhk.sppdd_add) AS no2,(SELECT sum(nos) FROM pmk_yhk.dds_cair) AS no3,(SELECT sum(nos) FROM pmk_yhk.add_cair) AS no4,"
       "(SELECT sum(nos) FROM pmk_yhk.covid_cair) AS no5,(SELECT sum(nos) FROM pmk_yhk.blt_cair) AS no6 ,(SELECT sum(nos) FROM pmk_yhk.sppdd_covid) AS no7,"
-      "(SELECT sum(nos) FROM pmk_yhk.sppdd_blt) AS no8 FROM pmk_yhk.sppdd";
+      "(SELECT sum(nos) FROM pmk_yhk.sppdd_blt) AS no8 FROM pmk_yhk.sppdd_dds";
 
 query.prepare(cmd);
 bool ok = exec(query);
@@ -1011,6 +1011,10 @@ void Form::bil(QString nilai){
    qInfo() << "konvertAngka(ad)" << nilai <<"ad" /* add*/;
    qInfo() << konvertAng(ad);
 }
+
+
+
+
 
 
 
