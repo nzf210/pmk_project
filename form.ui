@@ -288,7 +288,7 @@ border-style: outset;
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit">
+            <widget class="QLineEdit" name="lineEdit_pagu_dds">
              <property name="minimumSize">
               <size>
                <width>181</width>

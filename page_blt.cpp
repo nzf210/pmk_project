@@ -115,27 +115,27 @@ void Form::memuatData_twRealisasiblt(QString id_kamp){
        " ORDER BY "
            "pmk_yhk.blt.id_k";
 
-    QString cmd_ = "SELECT pmk_yhk.blt.nama_kampung,pmk_yhk.blt.nama_distrik,pmk_yhk.blt.id_dis, pmk_yhk.blt.id_k,pmk_yhk.blt.pagu,"
-                  "SUM ( pmk_yhk.blt_cair.jml_cair_blt ) AS total_pencairan, pmk_yhk.blt.pagu - SUM ( pmk_yhk.blt_cair.jml_cair_blt ) AS sisa_dana "
-       " FROM "
-           " pmk_yhk.blt"
-           " LEFT JOIN pmk_yhk.blt_cair ON pmk_yhk.blt.id_k = pmk_yhk.blt_cair.id_kam "
-                  " WHERE pmk_yhk.blt.id_k = :id "
-        " GROUP BY "
-           " pmk_yhk.blt.nama_kampung,"
-            "pmk_yhk.blt.nama_distrik,"
-            "pmk_yhk.blt.id_dis,"
-            "pmk_yhk.blt.id_k"
-       " ORDER BY "
-           "pmk_yhk.blt.id_k";
+    QString cmd_ = " SELECT pmk_yhk.blt.nama_kampung,pmk_yhk.blt.nama_distrik,pmk_yhk.blt.id_dis, pmk_yhk.blt.id_k,pmk_yhk.blt.pagu, "
+          "  SUM ( pmk_yhk.blt_cair.jml_cair_blt ) AS total_pencairan, pmk_yhk.blt.pagu - SUM ( pmk_yhk.blt_cair.jml_cair_blt ) AS sisa_dana "
+ " FROM "
+      "pmk_yhk.blt"
+      " LEFT JOIN pmk_yhk.blt_cair ON pmk_yhk.blt.id_k = pmk_yhk.blt_cair.id_kam "
+            " WHERE pmk_yhk.blt.id_k = :id "
+   " GROUP BY "
+      "pmk_yhk.blt.nama_kampung,"
+      "pmk_yhk.blt.nama_distrik,"
+      "pmk_yhk.blt.id_dis,"
+      "pmk_yhk.blt.id_k "
+ " ORDER BY "
+     "pmk_yhk.blt.id_k";
 
      if(id_kamp != ""){cmd = cmd_;}
      //if(s_id_kamp==""){cmd =" SELECT	* FROM	pmk_yhk.t_real ORDER BY	id_real ASC, pmk_yhk.t_real.id_real LIMIT 40 ";}
     query.prepare(cmd);
-    query.bindValue(":id",id_kamp);
+    query.bindValue(":id", id_kamp);
     //query.bindValue(":id",s_id_kamp);
     bool ok = exec(query);
-    if(!ok){QMessageBox::information(this,"Error...!!!","Gagal Memuat data realisasi"); return;}
+    if(!ok){QMessageBox::information(this,"Error...!!!","Gagal Memuat realisasi BLT ... "); return;}
     int i=0;
     while (query.next()) {
 
@@ -284,8 +284,7 @@ void Form::muat_data_realisasi_blt(QString s_id_kamp)
    {ui->tableWidget_cetak_blt->removeRow(0);}
     QSqlQuery query;
     QString cmd = "SELECT * FROM pmk_yhk.blt_cair WHERE id_kam = :id ORDER BY id_real ";
-    //if(s_id_kamp==""){cmd ="SELECT * FROM pmk_yhk.t_real ORDER BY id_real ";}
-     if(s_id_kamp==""){cmd =" SELECT	* FROM	pmk_yhk.blt_cair ORDER BY	id_real ASC, pmk_yhk.blt_cair.id_real LIMIT 40 ";}
+    if(s_id_kamp==""){cmd =" SELECT	* FROM	pmk_yhk.blt_cair ORDER BY	id_real ASC, pmk_yhk.blt_cair.id_real LIMIT 40 ";}
     query.prepare(cmd);
     query.bindValue(":id",s_id_kamp);
     bool ok = exec(query);
@@ -434,25 +433,25 @@ void Form::muat_data_realisasi_blt(QString s_id_kamp)
 
 void Form::tambah_real_blt()
 {
-    qInfo() << "tambah Real add";
-    if(menu=="2"){ menu2="2";
+    qInfo() << "tambah Real blt";
+    if(menu=="6"){ menu2="6";
 
         QString id_dis = qbx_id_dis->currentText();
         QString id_kam = qbx_id_kam->currentText();
         if(id_kam == "" && id_dis ==""){QMessageBox::information(this,"Peringatan...!!!","Pilih Distrik dan Kampung");return;}
         if(id_kam!="" && id_dis!=""){
 
-            tahap(4);
+            tahap(2);
             muat_bend_kp(id_kam);
             muat_k_kp(id_kam);
             muat_nosurat();
             qInfo() << "Cari Error +++++++++++++++++++++";
-            QString no_srt1 = li_no_surat.at(2);
-            QString no_srt2 = li_no_surat.at(3);
+            QString no_srt1 = li_no_surat.at(4);
+            QString no_srt2 = li_no_surat.at(5);
             no_srt1.replace("****", nosurat());
-            no_srt1.replace("Add1=> ", "");
+            no_srt1.replace("Blt1=> ", "");
             no_srt2.replace("####", nosurat_2());
-            no_srt2.replace("Add2=> ", "");
+            no_srt2.replace("Blt2=> ", "");
             tambah_realisasi(li_tahap,"Rp 0,00",  no_srt1  , no_srt2,"TAMBAH",s_nm_kp, s_nm_bend,"Tambah Realisasi Dana BLT..." );
         } }
 }
@@ -528,7 +527,7 @@ void Form::btnAdd_blt()
 
              QSqlQuery query;
              begin();
-             QString cmd = "INSERT INTO pmk_yhk.real_2 (id_kam,nm_dis,nm_kam, no_rek, nm_rek,nm_bank, sk_bend, sk_kp, nm_ben, nm_kp, thp_cair, jml_cair_blt, j_terbilang, "
+             QString cmd = "INSERT INTO pmk_yhk.blt_cair (id_kam,nm_dis,nm_kam, no_rek, nm_rek,nm_bank, sk_bend, sk_kp, nm_ben, nm_kp, thp_cair, jml_cair_blt, j_terbilang, "
                                        "tgl, no_srt1, no_srt2,persentase,sk_bup,sk_kam,sk_pmk,sk_keu, nm_kpd, j_kpd, nip_kpd, ket, thp_l, jkk, nos, jbt_kpl_dns) VALUES "
                                         "(:id_kam, :nm_dis, :nm_kam, :no_rek, :nm_rek, :nm_bank, :sk_bend, :sk_kp, :nm_ben, :nm_kp, :thp_cair, :j_cair, :j_terbilang, "
                                         ":tgl, :no_srt1, :no_srt2, :persentase, :sk_bup, :sk_kam, :sk_pmk, :sk_keu, :nm_kpd, :j_kpd, :nip_kpd, :ket, :thp_l, :jkk, '2' , :jbt_kpl_dns)";
@@ -565,7 +564,7 @@ void Form::btnAdd_blt()
              query.bindValue(":jbt_kpl_dns", jbt_kpl_dns);
 
              bool ok = exec(query);
-             if(!ok){rollback(); QMessageBox::information( eb_v,"Error...!!!","Gagal Menambah realisasi BLT, "+query.lastError().text()+"");}
+             if(!ok){rollback(); QMessageBox::information( eb_v,"Error...!!!","Gagal Menambah realisasi BLT, "+query.lastError().text()+""); return;}
              commit();
                 QMessageBox::information( eb_v,"Info...","Berhasil Menambah realisasi BLT... ");
                 eb_v->close();
@@ -574,7 +573,7 @@ void Form::btnAdd_blt()
 
          if(menu=="6"){
          QString id = qbx_id_kam->currentText();
-         memuatData_twRealisasiadd(id);}
+         memuatData_twRealisasiblt(id);}
                   } }
 
         if(menu2=="62"){data_update_sementara_blt();}
@@ -624,7 +623,7 @@ void Form::update_data_blt(QString id, QString tahap, QString date, QString jml,
 
     QSqlQuery query;
     begin();
-    QString cmd = "UPDATE pmk_yhk.real_2 SET thp_cair = :thp_cair,  jml_cair_blt = :j_cair, tgl = :tgl , no_srt1 = :no_srt1 , no_srt2= :no_srt2 , j_terbilang= :terbil WHERE id_real = :id";
+    QString cmd = "UPDATE pmk_yhk.blt_cair SET thp_cair = :thp_cair,  jml_cair_blt = :j_cair, tgl = :tgl , no_srt1 = :no_srt1 , no_srt2= :no_srt2 , j_terbilang= :terbil WHERE id_real = :id";
     query.prepare(cmd);
     query.bindValue(":id", id);
     query.bindValue(":thp_cair", tahap);
@@ -648,7 +647,7 @@ void Form::update_data_blt(QString id, QString tahap, QString date, QString jml,
 void Form::dataPdf_blt(int row)
 {
     QString lspdf;
-    if(menu=="5"){
+    if(menu=="6"){
         for ( int i=1; i<30 ; i++ ) {
             if(i==1){ lspdf.append(ui->tableWidget_cetak_blt->item(row,i)->text());}else {
                 lspdf.append("/n"+ui->tableWidget_cetak_blt->item(row,i)->text());
@@ -664,7 +663,7 @@ void Form::dataPdf_blt(int row)
     else { QTextStream stream(&fOut);
                stream << l;
                fOut.flush();
-                fOut.close(); }
+               fOut.close(); }
     }
 }
 
@@ -683,3 +682,44 @@ QString Form::qcode_blt()
     qInfo() << "Barcode Text" << a+b_+c+d+e+f+g+h;
     return a+b_+c+d+e+f+g+h;
 }
+
+void Form::on_tableWidget_realisasi_blt_cellClicked(int row, int column)
+{
+    qInfo() << row << column;
+    event_copy_twRealisasi_blt();
+}
+
+void Form::event_copy_twRealisasi_blt()
+{
+   // qInfo()<< "Even Klik tw_6 ";
+    if(menu=="6"){
+    QClipboard *clipboard = QApplication::clipboard();
+    int tbl_lines = ui->tableWidget_realisasi_blt->rowCount();
+    QString str =  " No \t Nama Distrik  \t Nama Kampung  \t  Pagu Anggaran  \t  Sisa Anggaran  \t Realisasi \n ";
+    for (int i=0; i<tbl_lines; i++)
+    {
+    QString mydata0 = ui->tableWidget_realisasi_blt->item(i, 0)->text();
+    QString mydata1 = ui->tableWidget_realisasi_blt->item(i, 1)->text();
+    QString mydata2 = ui->tableWidget_realisasi_blt->item(i, 2)->text();
+
+    QString mydata3 = ui->tableWidget_realisasi_blt->item(i, 3)->text();
+    mydata3.replace(",00","");
+    mydata3.replace("Rp ",""); mydata3.replace(".","");
+    double p = mydata3.toDouble();
+    QString p_ = QString::number(p);
+
+    QString mydata4 = ui->tableWidget_realisasi_blt->item(i, 4)->text();
+    mydata4.replace("Rp ",""); mydata4.replace(".",""); mydata4.replace(",00","");
+    double r = mydata4.toDouble();
+    QString r_ = QString::number(r);
+
+    QString mydata5 = ui->tableWidget_realisasi_blt->item(i, 5)->text();
+    mydata5.replace("Rp ",""); mydata5.replace(".",""); mydata5.replace(",00","");
+    double s = mydata5.toDouble();
+
+    QString s_ = QString::number(s);
+
+    QTextStream(&str) << mydata0 << "\t" << mydata1 << "\t"<< mydata2 << "\t" << mydata3 <<"\t"<< mydata4 << "\t" << mydata5 << Qt::endl;
+    }
+    clipboard->setText(str);
+}}

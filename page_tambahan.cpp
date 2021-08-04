@@ -126,7 +126,7 @@ void Form::on_toolButton_refResh_clicked()
  if(menu=="2"){
      if(qbx_id_kam->currentText()!="")
                        { QString id = qbx_id_kam->currentText();
-                           muat_v_bam(id);
+                           memuatData_twRealisasidds(id);
                        }}
 
  if(menu=="3"){
@@ -238,10 +238,10 @@ void Form::conect_slot()
     connect(ui->comboBox_realisasi, SIGNAL (currentIndexChanged(int)), this, SLOT(qbx3event()));
     connect(ui->tableWidget_Bamuskam, &QTableWidget::doubleClicked , this, &Form::event_doubleklik_tw_bamuskam);
     connect(ui->tableWidget_Bamuskam, &QTableWidget::cellClicked , this, &Form::event_klik_tw);
-    connect(ui->tableWidget_realisasi_dds, &QTableWidget::cellClicked , this, &Form::event_klik_tw_6);
+    //connect(ui->tableWidget_realisasi_dds, &QTableWidget::cellClicked , this, &Form::event_klik_tw_6);
     //connect(ui->tableWidget_realisasi_add, &QTableWidget::cellClicked , this, &Form::event_klik_tw_11);
     connect(ui->tableWidget_daftarUser, &QTableWidget::cellClicked , this, &Form::even_klik_tw_user);
-    connect(ui->tableWidget_cetak_dds, &QTableWidget::doubleClicked , this, &Form::event_doubleklik_tw_cetak_dds);
+    //connect(ui->tableWidget_cetak_dds, &QTableWidget::doubleClicked , this, &Form::event_doubleklik_tw_cetak_dds);
     //connect(ui->tableWidget_cetak_add, &QTableWidget::doubleClicked , this, &Form::event_doubleklik_tw_cetak_add);
     connect(ui->tableWidget_cetak_sppd, &QTableWidget::doubleClicked , this, &Form::even_dklik_tw13);
     connect(this, SIGNAL( currentChanged(int)), this, SLOT(onTabChanged(int)));
@@ -386,4 +386,14 @@ void Form::tambah_realisasi(QStringList tahap,QString jml,QString noSrt1,QString
 
    //Tambahan untuk auto lap dan persentase
    connect(qbx_thp_penc, SIGNAL (currentIndexChanged(int)), this, SLOT(eventQbxadd()));
+}
+
+void Form::click_btn1() // Even Klik Save di tambah semua realisasi
+{
+    btnAdd_dds();
+    btnAdd_covid();
+    btnAdd_blt();
+    btnAdd_add();
+
+on_toolButton_refResh_clicked();
 }

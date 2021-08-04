@@ -70,7 +70,7 @@ public:
        htmlContent.replace("****", nosrt1);
        htmlContent.replace("####", nosrt2);
        QDate d = QDate::fromString(tgl,"dd-MM-yyyy");
-       QString tgl_ = d.toString("dd MMMM yyyy");
+       QString tgl_ = QLocale{QLocale::Indonesian}.toString(d, "dd MMMM yyyy");
        htmlContent.replace("#TGL#", tgl_);
        htmlContent.replace("#thn#", thn);
        htmlContent.replace("#thn2#",thn2);

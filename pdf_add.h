@@ -55,7 +55,7 @@ public:
         htmlContent.replace("****", nosrt1);
         htmlContent.replace("####", nosrt2);
         QDate d = QDate::fromString(tgl,"dd-MM-yyyy");
-        QString tgl_ = d.toString("dd MMMM yyyy");
+        QString tgl_ = QLocale{QLocale::Indonesian}.toString(d, "dd MMMM yyyy");
         htmlContent.replace("#TGL#", tgl_);
         htmlContent.replace("#thn#",thn);
         htmlContent.replace("#thn2#",thn2);
@@ -104,6 +104,7 @@ public:
         view->load(url);
 
         auto lay = new QVBoxLayout(this);
+
         lay->addWidget(button);
         lay->addWidget(progressbar);
         //lay->addWidget(view);
@@ -113,10 +114,10 @@ public:
     void loadlspdf1()
     {
         QString pt("doc/temp/");
-        QFile  dtpdf1 (pt+ "dtpdf2.txt");
+        QFile  dtpdf1 (pt+ "dtpdf_add1.txt");
        if (!dtpdf1.open(QIODevice::ReadOnly | QIODevice::Text))
        {
-          qInfo() << "dtpdf1.txt File tdk terbuka"; return;
+          qInfo() << "dtpdf_add1.txt File tdk terbuka"; return;
        }
 
        QTextStream stream(&dtpdf1);
@@ -128,35 +129,35 @@ public:
 
     void loadpdf1()
     {
-        nmdis = list.at(0);
-        nmkamp = list.at(1);
-        terbilang= toCamelCase(list.at(2).toCaseFolded());
-        norek = list.at(3);
-        nmrek = list.at(4);
-        nmbank = list.at(5);;
-        nmkkp = list.at(6);;
-        nmbenk = list.at(7);;
-        jkk = list.at(8);;
-        tahap = list.at(9);
-        jml = list.at(10);
-        persen = list.at(11);
-        nmkpdns = list.at(12);
-        tahap2 = list.at(13);
-        pkpldns = list.at(14);
+        nmdis = list.at(2);
+        nmkamp = list.at(3);
+        terbilang= toCamelCase(list.at(12).toCaseFolded());
+        norek = list.at(4);
+        nmrek = list.at(5);
+        nmbank = list.at(6);
+        nmkkp = list.at(8);
+        nmbenk = list.at(9);
+        jkk = list.at(27);
+        tahap = list.at(10);
+        jml = list.at(11);
+        persen = list.at(16);
+        nmkpdns = list.at(21);
+        tahap2 = "list.at(13)";
+        pkpldns = list.at(23);
         //QString nmkdns;
-        nip = list.at(15);
-        nosrt1 = list.at(16);
-        nosrt2 = list.at(17);
-        tgl = list.at(18);
+        nip = list.at(24);
+        nosrt1 = list.at(14);
+        nosrt2 = list.at(15);
+        tgl = list.at(13);
         thn = tgl.right(4);
-        unmdis = list.at(19);
-        unmkam =list.at(20);
+        unmdis = list.at(2);
+        unmkam =list.at(3);
 
-        skben=list.at(21);
-        skkam=list.at(22);
-        thn2=list.at(23);
+        skben=list.at(7);
+        skkam=list.at(18);
+        thn2="list.at(23)";
 
-        jbt_klp_dns = list.at(24);
+        jbt_klp_dns = list.at(28);
 
         nama1 = li_bm.at(0);
         nama2= li_bm.at(1);

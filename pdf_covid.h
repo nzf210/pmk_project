@@ -70,7 +70,7 @@ public:
        htmlContent.replace("****", nosrt1);
        htmlContent.replace("####", nosrt2);
        QDate d = QDate::fromString(tgl,"dd-MM-yyyy");
-       QString tgl_ = d.toString("dd MMMM yyyy");
+       QString tgl_ = QLocale{QLocale::Indonesian}.toString(d, "dd MMMM yyyy");
        htmlContent.replace("#TGL#", tgl_);
        htmlContent.replace("#thn#", thn);
        htmlContent.replace("#thn2#",thn2);
@@ -194,12 +194,12 @@ public:
         QDir dir(path);
 
         //QString Nama Auto
-        QString nmpdf = tahap +" "+nmkamp+" Dis "+nmdis+".pdf";
-        QFile  pdfFile ( path + "D " + nmpdf+".pdf");
-        QString fn = path + "D " + nmpdf +".pdf";
+        QString nmpdf = tahap +" "+nmkamp+" Dis "+nmdis;
+        QFile  pdfFile ( path + " " + nmpdf+" D.pdf");
+        QString fn = path + " " + nmpdf +" D.pdf";
 
-        QFile  pdfFile2 (path+"K " +nmpdf+".pdf");
-        QString fn2 = path + "K "+nmpdf+".pdf";
+        QFile  pdfFile2 (path+" " +nmpdf+" K.pdf");
+        QString fn2 = path + " "+nmpdf+" K.pdf";
 
         if(pdfFile.exists()){ pdfFile.remove(); }
         if(pdfFile.exists()) {QMessageBox::information(this,"Info...","Tutup File pdf yg terbuka dan Generate Kembali"); qInfo()<<"Silahkan tutup pdf file"; return;}

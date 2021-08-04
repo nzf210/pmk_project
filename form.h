@@ -90,7 +90,7 @@ private slots:
     void muat_kampung();
     void muat_rek(QString &id_kam_s);
     void qbx_id_kam_conn(); // dengan SIGNAL SLOT Connect qbx ke ke even id_kampung
-    void even_distrik_combo(QString &id_kam_s);
+    void even_distrik_combo(QString &id_kam_s); // clear data qCombo Dis dan kamp
     void qbx_id_dis_conn(); // Connect qbx ke ke even id_distri
     //void on_toolButton_3_clicked();
     void on_toolButton_tmbRealdds_clicked();
@@ -104,22 +104,19 @@ private slots:
     void conect_slot();
 
       //private slots:
-      //void even_klik_tw13();
+
       void even_dklik_tw13();
-      //void headsppd_2(); // Double Klik tw13
-      void event_doubleklik_tw_cetak_dds();
-      //void event_doubleklik_tw_cetak_add();
       void event_doubleklik_tw_bamuskam();
-      void event_klik_tw_6();
-      //void event_klik_tw_11();
-      //void event_klik_tw_13();
+
+      void event_copy_twRealisasi_dds(); // dds copy data realisasi ke excel
+      void event_copy_twRealisasi_add();
+      void event_copy_twRealisasi_blt();
+      void event_copy_twRealisasi_covid();
+
       void event_klik_tw();
       void click_btn(); //Button di edit data bamuskam;
       void click_btn1(); //Tambah kegiatan ke tw widget
-      //void click_btn2();  //Tambah kegiatan ke tw widget add
       void active_eb_v();
-      //void active_eb_v_2();
-     // void on_pushButton_clicked();
       void on_toolButton_refResh_clicked();
       void on_toolButton_add_clicked();
       void on_toolButton_tmbRealadd_clicked();
@@ -193,6 +190,16 @@ private slots:
 
       void on_tableWidget_cetak_add_cellDoubleClicked(int row, int column);
 
+      void on_tableWidget_cetak_dds_cellDoubleClicked(int row, int column);
+
+      void on_tableWidget_realisasi_dds_cellClicked(int row, int column);
+
+      void on_tableWidget_realisasi_covid_cellClicked(int row, int column);
+
+      void on_tableWidget_realisasi_blt_cellClicked(int row, int column);
+
+      void on_tableWidget_realisasi_add_cellChanged(int row, int column);
+
 signals:
      // void myLabelClicked();      // Signal to emit
       void sendData(QString data);
@@ -249,7 +256,7 @@ private:
     void  datapdf1(); // fungsi load data dari twidget buat cetak pdf
     void  datapdf2(); //
     //void  datapdf3();
-    void  databam(QString skam );
+    //void  databam(QString skam ); //write data bamuskam ke txt
     void  muatheadertw12();
     void  muatheadertw12_2();
     void  muatrealdds_();
@@ -365,6 +372,13 @@ private:
      void update_data_add(QString id, QString tahap, QString date, QString jml, QString terbilang, QString noSrt1, QString noSrt2);
      void data_update_sementara_add();
 
+//data dds
+     QStringList li_data_dds;
+     void even_dbKlik_tw_dds();
+     void data_update_sementara_dds();
+     void update_data_dds(QString id, QString tahap, QString date, QString jml, QString terbilang, QString noSrt1, QString noSrt2);
+     void memuatData_twRealisasidds( QString);
+
 
     //void tahap_add();
     //void no_srt4();
@@ -374,16 +388,16 @@ private:
     void sk_menteri();
     void kp_dns();
 
-    void muat_bm(QString skam);
+    void muat_bm(QString skam); // Memuat data nama Bamuskam untuk add dan tulis ke txt
     void muat_bamuskam(QString &id_kam_s);
-    void muat_v_bam( QString &id_kamp_s);
+
     //void muat_v_bam_2( QString &id_kamp_s);
     void muat_bend_kp( QString &id_kamp_s);
     void muat_k_kp(QString &id_kam_s);
     void muat_real(QString &id_kam_s);
     //void muat_real_2(QString &id_kam_s);
     void header_wt1();
-    void header_wt6();
+    void header_realisasi_dds();
     //void header_wt11();
 
     void header_wt2();

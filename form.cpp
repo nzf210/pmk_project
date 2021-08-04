@@ -171,7 +171,7 @@ Form::Form(QWidget *parent) :
 header_wt1();
 header_wt2();
 //header_wt9();
-header_wt6();
+header_realisasi_dds();
 //header_wt11();
 
 menu="1";
@@ -396,12 +396,8 @@ void Form::muat_bm(QString skam) // Memuat data nama Bamuskam
     while (query.next()) {
            QString nm=query.value(0).toString() ;
             li_bam << nm; }
-}
 
-void Form::databam(QString skam)
-{
-    muat_bm(skam);
-
+    // untuk mencetak data bamuskam ke txt
     QString pt("doc/temp/");
     QFile fl(pt+"nmbam.txt");
     if(fl.exists()){ fl.remove();};
@@ -414,10 +410,30 @@ void Form::databam(QString skam)
       QTextStream stream(&fl);
       QString a = ";";
        stream << li_bam.at(i) +a;
-       //fl.flush();
     }
     fl.close();
+
 }
+
+//void Form::databam(QString skam)
+//{
+//    muat_bm(skam);
+
+//    QString pt("doc/temp/");
+//    QFile fl(pt+"nmbam.txt");
+//    if(fl.exists()){ fl.remove();};
+//    if(fl.exists()){QMessageBox::information(this,"Error","Gagal Menghapus data bamuskam"); return;};
+//    //if(!fl.exists()){  }
+//    if(!fl.open(QIODevice::WriteOnly | QIODevice::Text)){QMessageBox::information(this,"Error","Gagal Memuat Menyimpan data bamuskam"); return; }
+//    for(int i=0; i<li_bam.count(); i++ )
+//    {
+////  QString a = li_bam.at(i);
+//      QTextStream stream(&fl);
+//      QString a = ";";
+//       stream << li_bam.at(i) +a;
+//    }
+//    fl.close();
+//}
 
 
 void Form::muat_dis()
@@ -487,7 +503,7 @@ void Form::muat_kampung()
 //==== Even Combo DIstrik ===========
 void Form::even_distrik_combo(QString &id_kam_s)
 {
-    qInfo()<< "Even Distrik COmbo ......................... <> "  ;
+    qInfo()<< "Even Distrik COmbo ......................... <> "<<id_kam_s  ;
     if(id_kam_s==""){qInfo()<<"Nilai 0 pada sis combo";
                                  muat_kampung();
                                  return;}
@@ -504,7 +520,7 @@ void Form::even_distrik_combo(QString &id_kam_s)
     query.bindValue(":id",id_kam_s);
 
     bool ok = exec(query);
-    if(!ok){QMessageBox::information(this,"Error...!!!","Gagal Memuat data Kapmpung...!!!");}
+    if(!ok){QMessageBox::information(this,"Error...!!!","Gagal Memuat data Kampung...!!! dis comb");}
     while (query.next()) {
             Kampung << query.value(0).toString();
             id_kam << query.value(1).toString();
@@ -523,6 +539,15 @@ void Form::even_distrik_combo(QString &id_kam_s)
     if(menu=="3"&&ui->comboBox_nmKampung->currentText()==""){
         while(ui->tableWidget_cetak_add->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
        {ui->tableWidget_cetak_add->removeRow(0);}}
+
+    if(menu=="5"&&ui->comboBox_nmKampung->currentText()==""){
+        while(ui->tableWidget_cetak_covid->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+       {ui->tableWidget_cetak_covid->removeRow(0);}}
+
+    if(menu=="6"&&ui->comboBox_nmKampung->currentText()==""){
+        while(ui->tableWidget_cetak_blt->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+       {ui->tableWidget_cetak_blt->removeRow(0);}}
+
 
 }
 
@@ -573,7 +598,7 @@ void Form::rollback()
 
 //================================ DB Conection ===============================
 
-void Form::qbx_id_dis_conn() // Connect qbx ke ke even id_distrik
+void Form::qbx_id_dis_conn()  // Connect qbx ke ke even id_distrik
 {
      qbx_id_dis->setCurrentIndex(ui->comboBox->currentIndex());
      QString id_kam_s = qbx_id_dis->currentText();
@@ -595,14 +620,13 @@ void Form::qbx_id_kam_conn() // dengan SIGNAL SLOT Connect qbx ke ke even id_kam
     if(menu=="2"){
         while(ui->tableWidget_cetak_dds->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
        {ui->tableWidget_cetak_dds->removeRow(0);}
-        muat_v_bam(id_kp);}
+        memuatData_twRealisasidds(id_kp);}
 
     if(menu=="3"){
         while(ui->tableWidget_cetak_add->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
        {ui->tableWidget_cetak_add->removeRow(0);}
-        //muat_v_bam_2(id_kp);
+        memuatData_twRealisasiadd(id_kp);
     }
-
 
      if(menu=="5"){memuatData_twRealisasicovid(id_kp);}
 
@@ -612,13 +636,6 @@ void Form::qbx_id_kam_conn() // dengan SIGNAL SLOT Connect qbx ke ke even id_kam
 
 
 }
-
-
-
-
-
-
-
 
 
 
@@ -643,217 +660,13 @@ void Form::muatTahap(QString a)
     bool ok = exec(query);
     if(!ok){QMessageBox::information(this,"Error","Gagal Memuat Tahapan dana desa");return;}
     while (query.next()) {
-           //persen_2=query.value(0).toString() ;
+           ////persen_2=query.value(0).toString() ;
            //laporan=query.value(1).toString();//
            //thp=query.value(2).toString();;
            //tahap_=tahap_muat;
            pagu_pencairan = query.value(2).toString();
                                      }
 }
-
-//void Form::muatTahap_2(QString a)
-//{
-//    QSqlQuery query;
-//    QString cmd = "SELECT persen,laporan,thp,tahap FROM pmk_yhk.tahap_add WHERE thp = :a  ";
-//    query.prepare(cmd);
-//    query.bindValue(":a", a);
-//    bool ok = exec(query);
-//    if(!ok){QMessageBox::information(this,"Error","Gagal Memuat Tahapan dds");return;}
-//    while (query.next()) {
-//           persen_2_2=query.value(0).toString() ; laporan_2=query.value(1).toString(); thp_2=query.value(2).toString(); tahap__2=query.value(3).toString();
-//                                     }
-//}
-
-
-
-//void Form::act_2()
-//{
-
-//if(menu=="3"){
-//     menu2="3";
-//    QString id_dis = qbx_id_dis->currentText();
-//    QString id_kam = qbx_id_kam->currentText();
-//    if(id_kam!="" && id_dis!=""){
-
-//         muat_rek(id_kam);
-//         muat_bend_kp(id_kam);
-//         muat_k_kp(id_kam);
-//         //tahap_add();
-//         //no_srt1();
-//         //no_srt2();
-//         muat_nosurat();
-//         //persen();
-//         //sk_bup();
-//         //sk_menteri();
-//         kp_dns();
-//         QDate dt = QDate::currentDate();
-//         QDateEdit *de = new QDateEdit;
-//         de->setDate(dt);
-//         de->setDisplayFormat("dd-MM-yyyy");
-
-//         QString terbil = terbilang;
-//         QString no_rek = li_norek.at(0);
-//         QString nm_rek  = li_nm_rek.at(0);
-//         QString nm_bank = li_nm_bank.at(0);
-//         QString j_bend = s_j_bend;
-//         QString j_kp = s_j_kp;
-//         QString nm_kp = s_nm_kp;
-//         QString nm_bend = s_nm_bend;
-//         //QString tahap = li_tahap_add.at(0);
-//         QString tgl_ter = de->text();
-//         QString no_srt1 =li_no_surat.at(0);
-//         QString no_srt2 =li_no_surat.at(0);
-//         QString persen = li_persen.at(2);
-//         QString sk_bup = li_sk_bup.at(0);
-//         QString sk_kam = s_sk_kp;
-//         QString nm_kp_dns = li_kp_dns.at(1);
-//         QString pg_kp_dns = li_kp_dns.at(2);
-//         QString nip_kp_dns = li_kp_dns.at(3);
-//         QString jbt_kp_dns = li_kp_dns.at(0);
-////     QString sk_pmk = li_menteri.at(1);
-////     QString sk_keu =li_menteri.at(0);
-//         QString j_kk = li_j_kk.at(0);
-//         QString thn2 = thp_2.right(4);
-
-//         c =new QPushButton;
-//         c->setText("c");
-//         c->setMaximumWidth(22);
-//         qbx_thp_penc = new QComboBox;
-//         qbx_thp_l = new QComboBox;
-//         qbx_thp_penc->setEditable(true);
-//         qbx_thp_l->setEditable(true);
-//         qbx_thp_l->addItems(li_tahap_add);
-//         qbx_thp_penc->addItems(li_tahap_add);
-//         de_tgl_terima = new QDateEdit;
-//         de_tgl_terima->setDate(dt);
-//         de_tgl_terima->setDisplayFormat("dd-MM-yyyy");
-//         de_tgl_terima->setCalendarPopup(true);
-//         de_tgl_terima->setMaximumWidth(80);
-
-//         le_jml = new QLineEdit;
-//         le_jml->setValidator(new QDoubleValidator);
-//         le_jml->setClearButtonEnabled(true);
-//         le_jml->setText("Rp 0,00");
-//         le_jml->setMaximumWidth(190);
-//        // le_jml->installEventFilter(eb_v);
-
-//         qbx_no_srt1 = new QComboBox;
-//         qbx_no_srt1->addItem(li_no_surat.at(0));
-//         qbx_no_srt1->setEditable(true);
-//         qbx_no_srt2 = new QComboBox;
-//         qbx_no_srt2->addItem(li_no_surat.at(1));
-//         qbx_no_srt2->setEditable(true);
-//         qbx_persen= new QComboBox;
-//         qbx_persen->addItems(li_persen);
-//         qbx_persen->setEditable(true);
-
-//         btn1= new QPushButton;
-//         btn1->setText("TAMBAH");
-//         btn1->setStyleSheet("QPushButton{font-weight: bold; }");
-//         btn1->setMaximumWidth(150);
-//         QLabel *ksg = new QLabel;
-//         ksg->setText("");
-//         ksg->setMaximumWidth(135);
-//         QLabel *thp= new QLabel; thp->setText("Tahap Pencairan :"); thp->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-//         thp->setMaximumWidth(150);
-//         QLabel *thp_l= new QLabel; thp_l->setText("Laporan Realisasi :"); thp_l->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-//         thp_l->setMaximumWidth(150);
-//         QLabel *tgl= new QLabel; tgl->setText("Tanggal :"); tgl->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-//         tgl->setMaximumWidth(150);
-//         QLabel *Jumlah= new QLabel; Jumlah->setText("Jumlah Pencairan :"); Jumlah->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-//         Jumlah->setMaximumWidth(150);
-//         QLabel *No_1= new QLabel; No_1->setText("NO SPPD :"); No_1->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-//         No_1->setMaximumWidth(150);
-//         QLabel *No_2= new QLabel; No_2->setText("NO SPPS :"); No_2->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-//         No_2->setMaximumWidth(150);
-//         QLabel *per= new QLabel; per->setText("Persentase Pencairan :"); per->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-//         per->setMaximumWidth(150);
-//         QLabel *sk1= new QLabel; sk1->setText("SK Menteri PMK :"); sk1->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-//         sk1->setMaximumWidth(150);
-//         QLabel *sk2= new QLabel; sk2->setText("SK Menteri Keu :"); sk2->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-//         sk2->setMaximumWidth(150);
-
-//         //Tambahan Nama Kepala Kampung dan Bendahara
-//         QLabel *nmKkam = new QLabel;nmKkam->setText("Kepala Kampung :"); nmKkam->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-//         nmKkam->setMaximumWidth(150);
-//         QLabel *nmBkam = new QLabel;nmBkam->setText("Bendahara :"); nmBkam->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-//         nmBkam->setMaximumWidth(150);
-//         QLabel *nmKkam_ = new QLabel; nmKkam_->setStyleSheet(" QLabel { font-weight: bold;}");
-//         QLabel *nmBkam_ = new QLabel; nmBkam_->setStyleSheet(" QLabel { font-weight: bold;}");
-//         nmKkam_->setText(nm_kp);
-//         nmBkam_->setText(nm_bend);
-
-//         eb_v = new QWidget;
-//         QIcon logo(":/gbr/html/gbr/yhk.png");
-//         eb_v->setWindowIcon(logo);
-//         eb_v->setWindowTitle("Realisasi Anggaran Desa");
-//         eb_v->setMinimumWidth(400);
-//         eb_v->setMaximumWidth(400);
-//         eb_v->setMaximumHeight(800);
-
-//         QVBoxLayout *VL = new QVBoxLayout(eb_v);
-//         QHBoxLayout *HL1 = new QHBoxLayout;
-//         QHBoxLayout *HL2 = new QHBoxLayout;
-//         QHBoxLayout *HL3 = new QHBoxLayout;
-//         QHBoxLayout *HL4 = new QHBoxLayout;
-//         QHBoxLayout *HL5 = new QHBoxLayout;
-//         QHBoxLayout *HL6 = new QHBoxLayout;
-//         QHBoxLayout *HL7 = new QHBoxLayout;
-//         QHBoxLayout *HL8 = new QHBoxLayout;
-//          QHBoxLayout *HL9 = new QHBoxLayout;
-//          QHBoxLayout *HL10 = new QHBoxLayout;
-
-//         VL->addLayout(HL1);
-//         VL->addLayout(HL2);
-//         VL->addLayout(HL3);
-//         VL->addLayout(HL4);
-//         VL->addLayout(HL5);
-//         VL->addLayout(HL6);
-//         VL->addLayout(HL7);
-//         VL->addLayout(HL8);
-//          VL->addLayout(HL9);
-//          VL->addLayout(HL10);
-
-//         HL1->addWidget(thp);
-//         HL1->addWidget(qbx_thp_penc);
-
-//         HL2->addWidget(tgl);
-//         HL2->addWidget(de_tgl_terima);
-//         HL2->addWidget(ksg);
-
-//         HL3->addWidget(Jumlah);
-//         HL3->addWidget(le_jml);
-//         HL3->addWidget(c);
-
-//         HL4->addWidget(No_1);
-//         HL4->addWidget(qbx_no_srt1);
-
-//         HL5->addWidget(No_2);
-//         HL5->addWidget(qbx_no_srt2);
-
-//         HL6->addWidget(per);
-//         HL6->addWidget(qbx_persen);
-
-//         HL7->addWidget(thp_l);
-//         HL7->addWidget(qbx_thp_l);
-
-//         //Tambahan K Kampung dan B Kampung
-//         HL8->addWidget(nmKkam);
-//         HL8->addWidget(nmKkam_);
-//         HL9->addWidget(nmBkam);
-//         HL9->addWidget(nmBkam_);
-
-//         HL10->addWidget(btn1);
-//         eb_v->show();
-
-//        connect(btn1, SIGNAL(pressed()), this, SLOT(click_btn2()));
-//        connect(c, SIGNAL(pressed()), this, SLOT(active_eb_v_2()));
-
-//        //Tambahan untuk auto lap dan persentase
-//        connect(qbx_thp_penc, SIGNAL (currentIndexChanged(int)), this, SLOT(eventQbxadd_2()));
-
-//    }
-//}}
 
 
 void Form::active_eb_v()
@@ -870,36 +683,6 @@ QString j_ = indo.toCurrencyString(jj,"Rp ");
 if(j.at(0) !="R"){
 le_jml->setText(j_);}
 }
-
-
-//void Form::active_eb_v_2()
-//{
-//if(menu=="3"){
-//QLocale indo = QLocale(QLocale::Indonesian,QLocale::Indonesia);
-//QString j = le_jml->text();
-//if(j==""){le_jml->setText("Rp 0,00");QMessageBox::information(eb_v,"Info...!!","Jumlah Pencairan tdk boleh kosong"); return;}
-//qint64 jj = j.toDouble();
-//qint64 a =jj;
-//QString rp =QString::number(a);
-//bilang(rp);
-//QString j_ = indo.toCurrencyString(jj,"Rp ");
-//if(j.at(0) !="R"){
-//le_jml->setText(j_);}
-//}}
-
-//bool Form::eventFilter(QObject* object, QEvent* event)
-//  {
-//    if(object == eb_v && event->type() == QEvent::MouseButtonPress) {
-//      QMouseEvent *k = static_cast<QMouseEvent *> (event);
-//      if( k->button() == Qt::LeftButton ) {
-//        //ebug() << "Left click";
-//      } else if ( k->button() == Qt::RightButton ) {
-//       //Debug() << "Right click";
-//      }
-//    }
-//    return false;
-//  }
-
 
 
 void Form::klik(QKeyEvent *k) {
@@ -948,12 +731,12 @@ QSqlQuery query;
 QString j1_; QString j2_; QString j3_; QString j4_;
 QString j5_; QString j6_; QString j7_; QString j8_;
 int j1,j2,j3,j4,j5,j6,j7,j8;
-//QString cmd = "SELECT count(*) AS j1 ,( SELECT count(*) FROM pmk_yhk.t_real_2) AS j2 , (SELECT count(*) FROM pmk_yhk.sppdd) AS j3 , "
-//              "(SELECT count(*) FROM pmk_yhk.sppdd_2) AS j4  FROM pmk_yhk.t_real" ;
-QString cmd;/* = "SELECT sum(nos) AS no1,(SELECT sum(nos) FROM pmk_yhk.sppdd_2) AS no2,(SELECT sum(nos) FROM pmk_yhk.t_real) AS no3,"
-                           "(SELECT sum(nos) FROM pmk_yhk.t_real_2) AS no4 FROM pmk_yhk.sppdd";*/
+//QString cmd = "SELECT count(*) AS j1 ,( SELECT count(*) FROM pmk_yhk.dds_cair_2) AS j2 , (SELECT count(*) FROM pmk_yhk.sppdd) AS j3 , "
+//              "(SELECT count(*) FROM pmk_yhk.sppdd_2) AS j4  FROM pmk_yhk.dds_cair" ;
+QString cmd;/* = "SELECT sum(nos) AS no1,(SELECT sum(nos) FROM pmk_yhk.sppdd_2) AS no2,(SELECT sum(nos) FROM pmk_yhk.dds_cair) AS no3,"
+                           "(SELECT sum(nos) FROM pmk_yhk.dds_cair_2) AS no4 FROM pmk_yhk.sppdd";*/
 
-cmd = "SELECT sum(nos) AS no1,(SELECT sum(nos) FROM pmk_yhk.sppdd_2) AS no2,(SELECT sum(nos) FROM pmk_yhk.t_real) AS no3,(SELECT sum(nos) FROM pmk_yhk.t_real_2) AS no4,"
+cmd = "SELECT sum(nos) AS no1,(SELECT sum(nos) FROM pmk_yhk.sppdd_2) AS no2,(SELECT sum(nos) FROM pmk_yhk.dds_cair) AS no3,(SELECT sum(nos) FROM pmk_yhk.add_cair) AS no4,"
       "(SELECT sum(nos) FROM pmk_yhk.covid_cair) AS no5,(SELECT sum(nos) FROM pmk_yhk.blt_cair) AS no6 ,(SELECT sum(nos) FROM pmk_yhk.sppdd_covid) AS no7,"
       "(SELECT sum(nos) FROM pmk_yhk.sppdd_blt) AS no8 FROM pmk_yhk.sppdd";
 
@@ -993,11 +776,11 @@ QSqlQuery query;
 QString j1_; QString j2_; QString j3_; QString j4_;
 QString j5_; QString j6_; QString j7_; QString j8_;
 int j1,j2,j3,j4,j5,j6,j7,j8;
-//QString cmd = "SELECT count(*) AS j1 ,( SELECT count(*) FROM pmk_yhk.t_real_2) AS j2 , (SELECT count(*) FROM pmk_yhk.sppdd) AS j3 , "
-//              "(SELECT count(*) FROM pmk_yhk.sppdd_2) AS j4  FROM pmk_yhk.t_real" ;
-QString cmd; /*= "SELECT sum(nos) AS no1,(SELECT sum(nos) FROM pmk_yhk.sppdd_2) AS no2,(SELECT sum(nos) FROM pmk_yhk.t_real) AS no3,"
-                           "(SELECT sum(nos) FROM pmk_yhk.t_real_2) AS no4 FROM pmk_yhk.sppdd";*/
-cmd = "SELECT sum(nos) AS no1,(SELECT sum(nos) FROM pmk_yhk.sppdd_2) AS no2,(SELECT sum(nos) FROM pmk_yhk.t_real) AS no3,(SELECT sum(nos) FROM pmk_yhk.t_real_2) AS no4,"
+//QString cmd = "SELECT count(*) AS j1 ,( SELECT count(*) FROM pmk_yhk.dds_cair_2) AS j2 , (SELECT count(*) FROM pmk_yhk.sppdd) AS j3 , "
+//              "(SELECT count(*) FROM pmk_yhk.sppdd_2) AS j4  FROM pmk_yhk.dds_cair" ;
+QString cmd; /*= "SELECT sum(nos) AS no1,(SELECT sum(nos) FROM pmk_yhk.sppdd_2) AS no2,(SELECT sum(nos) FROM pmk_yhk.dds_cair) AS no3,"
+                           "(SELECT sum(nos) FROM pmk_yhk.dds_cair_2) AS no4 FROM pmk_yhk.sppdd";*/
+cmd = "SELECT sum(nos) AS no1,(SELECT sum(nos) FROM pmk_yhk.sppdd_2) AS no2,(SELECT sum(nos) FROM pmk_yhk.dds_cair) AS no3,(SELECT sum(nos) FROM pmk_yhk.add_cair) AS no4,"
       "(SELECT sum(nos) FROM pmk_yhk.covid_cair) AS no5,(SELECT sum(nos) FROM pmk_yhk.blt_cair) AS no6 ,(SELECT sum(nos) FROM pmk_yhk.sppdd_covid) AS no7,"
       "(SELECT sum(nos) FROM pmk_yhk.sppdd_blt) AS no8 FROM pmk_yhk.sppdd";
 
@@ -1086,71 +869,6 @@ void Form::tahap(int id)    { // Memuat daftar tahap penerimaan pada dana desa
 }
 
 
-
-//void Form::tahap_add()    {
-//    li_tahap_add.clear();
-//    qInfo() << "Baca tahap add" ;
-//     QString path("data/");
-//    QFile f_tahap_add(path+"tahap_pencairan_add.txt");
-//    if(!f_tahap_add.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat tahap pencairan add"); return;}
-//     f_tahap_add.open(QIODevice::ReadOnly|QIODevice::Text);
-//     QTextStream str(&f_tahap_add);
-//     while (!str.atEnd()) {
-//        QString line = str.readAll();
-//        qInfo()<< "tahap Add" << line;
-//        li_tahap_add = line.split("\n");
-//    }
-//    f_tahap_add.close();
-//}
-
-//void Form::no_srt4()    {
-//    li_srt4.clear();
-//    qInfo() << "Baca File no SRT 4" ;
-//     QString path("data/");
-//    QFile f_srt4(path+"no_srt_4.txt");
-//    if(!f_srt4.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat no Surat 2");return;}
-//     f_srt4.open(QIODevice::ReadOnly|QIODevice::Text);
-//     QTextStream str(&f_srt4);
-//     while (!str.atEnd()) {
-//        QString line = str.readAll();
-//        qInfo()<< "lInessss" << line;
-//        li_srt4 = line.split("\n");
-//    }
-//    f_srt4.close();
-//}
-
-//void Form::persen()    {
-//    li_persen.clear();
-//    qInfo() << "Baca File Persentase" ;
-//     QString path("data/");
-//    QFile f_persen(path+"persen.txt");
-//    if(!f_persen.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat Persentase Tahapan.");return;}
-//     f_persen.open(QIODevice::ReadOnly|QIODevice::Text);
-//     QTextStream str(&f_persen);
-//     while (!str.atEnd()) {
-//        QString line = str.readAll();
-//        qInfo()<< "lInessss" << line;
-//        li_persen = line.split("\n");
-//    }
-//    f_persen.close();
-//}
-
-//void Form::sk_bup()    {
-//    li_sk_bup.clear();
-//    qInfo() << "Baca File sk_bup" ;
-//     QString path("data/");
-//    QFile f_sk_bup(path+"sk_bup.txt");
-//    if(!f_sk_bup.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat SK Bupati...");return;}
-//     f_sk_bup.open(QIODevice::ReadOnly|QIODevice::Text);
-//     QTextStream str(&f_sk_bup);
-//     while (!str.atEnd()) {
-//        QString line = str.readAll();
-//        qInfo()<< "lInessss" << line;
-//        li_sk_bup = line.split("\n");
-//    }
-//    f_sk_bup.close();
-//}
-
 void Form::sk_kampung()    {
     li_sk_kampung.clear();
     qInfo() << "Baca File sk kampung" ;
@@ -1220,7 +938,7 @@ void Form::muat_lvl_type() {
 
 void   Form::muat_bend_kp(QString &id_kam_s)
 {
-    if(open()==false){open();}
+    //if(open()==false){open();}
 
     QSqlQuery query;
     QString cmd = " SELECT nama, jabatan,no_sk FROM pmk_yhk.v_bam_ WHERE id_kam = :id AND id_j = 3" ;
@@ -1237,7 +955,7 @@ void   Form::muat_bend_kp(QString &id_kam_s)
 
 void   Form::muat_k_kp(QString &id_kam_s)
 {
-    if(open()==false){open();}
+    //if(open()==false){open();}
     QSqlQuery query;
     QString cmd = " SELECT nama, jabatan,no_sk FROM pmk_yhk.v_bam_ WHERE id_kam = :id AND id_j = 1" ;
     query.prepare(cmd);
@@ -1253,7 +971,7 @@ void   Form::muat_k_kp(QString &id_kam_s)
 
 void   Form::muat_rek(QString &id_kam_s)
 {
-    if(open()==false){open();}
+    //if(open()==false){open();}
     li_norek.clear();
     li_kas_kam.clear();
     li_nm_rek.clear();
@@ -1293,6 +1011,14 @@ void Form::bil(QString nilai){
    qInfo() << "konvertAngka(ad)" << nilai <<"ad" /* add*/;
    qInfo() << konvertAng(ad);
 }
+
+
+
+
+
+
+
+
 
 
 

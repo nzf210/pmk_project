@@ -861,4 +861,47 @@ void Form::update_data_realisasi(QString date, QString tahap ,QString jml,QStrin
 void Form::on_tableWidget_realisasi_covid_cellDoubleClicked(int row, int column)
 {
     qInfo() << "tw double klik realisasi Covid" << row <<"====" << column;
+
 }
+
+void Form::on_tableWidget_realisasi_covid_cellClicked(int row, int column)
+{
+    qInfo() << "tw klik realisasi Covid" << row <<"====" << column;
+     event_copy_twRealisasi_covid();
+}
+
+
+void Form::event_copy_twRealisasi_covid()
+{
+   // qInfo()<< "Even Klik tw_6 ";
+    if(menu=="5"){
+    QClipboard *clipboard = QApplication::clipboard();
+    int tbl_lines = ui->tableWidget_realisasi_covid->rowCount();
+    QString str =  " No \t Nama Distrik  \t Nama Kampung  \t  Pagu Anggaran  \t  Sisa Anggaran  \t Realisasi \n ";
+    for (int i=0; i<tbl_lines; i++)
+    {
+    QString mydata0 = ui->tableWidget_realisasi_covid->item(i, 0)->text();
+    QString mydata1 = ui->tableWidget_realisasi_covid->item(i, 1)->text();
+    QString mydata2 = ui->tableWidget_realisasi_covid->item(i, 2)->text();
+
+    QString mydata3 = ui->tableWidget_realisasi_covid->item(i, 3)->text();
+    mydata3.replace(",00","");
+    mydata3.replace("Rp ",""); mydata3.replace(".","");
+    double p = mydata3.toDouble();
+    QString p_ = QString::number(p);
+
+    QString mydata4 = ui->tableWidget_realisasi_covid->item(i, 4)->text();
+    mydata4.replace("Rp ",""); mydata4.replace(".",""); mydata4.replace(",00","");
+    double r = mydata4.toDouble();
+    QString r_ = QString::number(r);
+
+    QString mydata5 = ui->tableWidget_realisasi_covid->item(i, 5)->text();
+    mydata5.replace("Rp ",""); mydata5.replace(".",""); mydata5.replace(",00","");
+    double s = mydata5.toDouble();
+
+    QString s_ = QString::number(s);
+
+    QTextStream(&str) << mydata0 << "\t" << mydata1 << "\t"<< mydata2 << "\t" << mydata3 <<"\t"<< mydata4 << "\t" << mydata5 << Qt::endl;
+    }
+    clipboard->setText(str);
+}}
