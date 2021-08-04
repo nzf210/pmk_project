@@ -198,7 +198,9 @@ private slots:
 
       void on_tableWidget_realisasi_blt_cellClicked(int row, int column);
 
-      void on_tableWidget_realisasi_add_cellChanged(int row, int column);
+      //void on_tableWidget_realisasi_add_cellChanged(int row, int column);
+
+      void on_tableWidget_realisasi_add_cellClicked(int row, int column);
 
 signals:
      // void myLabelClicked();      // Signal to emit

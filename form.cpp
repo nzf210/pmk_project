@@ -1032,3 +1032,5 @@ void Form::bil(QString nilai){
 
 
 
+
+

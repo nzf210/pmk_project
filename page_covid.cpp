@@ -887,19 +887,19 @@ void Form::event_copy_twRealisasi_covid()
     QString mydata3 = ui->tableWidget_realisasi_covid->item(i, 3)->text();
     mydata3.replace(",00","");
     mydata3.replace("Rp ",""); mydata3.replace(".","");
-    double p = mydata3.toDouble();
-    QString p_ = QString::number(p);
+//    double p = mydata3.toDouble();
+//    QString p_ = QString::number(p);
 
     QString mydata4 = ui->tableWidget_realisasi_covid->item(i, 4)->text();
     mydata4.replace("Rp ",""); mydata4.replace(".",""); mydata4.replace(",00","");
-    double r = mydata4.toDouble();
-    QString r_ = QString::number(r);
+//    double r = mydata4.toDouble();
+//    QString r_ = QString::number(r);
 
     QString mydata5 = ui->tableWidget_realisasi_covid->item(i, 5)->text();
     mydata5.replace("Rp ",""); mydata5.replace(".",""); mydata5.replace(",00","");
-    double s = mydata5.toDouble();
+//    double s = mydata5.toDouble();
 
-    QString s_ = QString::number(s);
+//    QString s_ = QString::number(s);
 
     QTextStream(&str) << mydata0 << "\t" << mydata1 << "\t"<< mydata2 << "\t" << mydata3 <<"\t"<< mydata4 << "\t" << mydata5 << Qt::endl;
     }
