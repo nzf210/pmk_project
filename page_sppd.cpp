@@ -53,125 +53,77 @@ if(fOut.open(QFile::WriteOnly | QFile::Text)){qInfo()<<"Gagal Menyimpan sppd_tem
 void Form::on_toolButton_cetakpdfSppd_clicked() // Button Clik Generate pdf di sppd =====================================
 {
 
-    int j = ui->tableWidget_cetak_sppd->currentRow();
+    int j = ui->tableWidget_realisasi_sppd->currentRow();
+    int jBrs = ui->tableWidget_cetak_sppd->rowCount() ;
     if(j==-1){QMessageBox::information(this,"Info","Pilih Surat yang akan di cetak... "); return;}
 
-    QString nosrt = ui->tableWidget_cetak_sppd->item(j,1)->text();
-    QString hal = ui->tableWidget_cetak_sppd->item(j,2)->text();
-    QString tgl = ui->tableWidget_cetak_sppd->item(j,3)->text();
+    QString nosrt = ui->tableWidget_realisasi_sppd->item(j,1)->text();
+    QString hal = ui->tableWidget_realisasi_sppd->item(j,2)->text();
+    QString tgl = ui->tableWidget_realisasi_sppd->item(j,3)->text();
     QDate dt = QDate::fromString(tgl,"dd-MM-yyyy");
     QString tgl_ = dt.toString("yyyy-MM-dd");
-    QString tgl_1 = dt.toString("dd MMMM yyyy");
-    QString tgl_2 = dt.toString("dd MMMM yyyy");
+//    QString tgl_1 = dt.toString("dd MMMM yyyy");
+   QString tgl_1 = QLocale{QLocale::Indonesian}.toString(dt, "dd MMMM yyyy");
+    QString tgl_2 = QLocale{QLocale::Indonesian}.toString(dt, "dd MMMM yyyy");
     QString thn = tgl_1.right(4);
+    double jcr=0;
+    kp_dns();
+    ds_sppd_.clear();
+qInfo() << "cek sppd ==============" ;
+    for (int i =0  ; i< jBrs ; i++ ) {
+        QString no_ =QString::number(i+1);
+        QString nm_kampung = ui->tableWidget_cetak_sppd->item(i,1)->text();
+        QString nm_distrik = ui->tableWidget_cetak_sppd->item(i,2)->text();
+        QString nm_kepalak = ui->tableWidget_cetak_sppd->item(i,7)->text();
+        QString nm_benk = ui->tableWidget_cetak_sppd->item(i,6)->text();
+        QString nm_rek = ui->tableWidget_cetak_sppd->item(i,4)->text();
+        QString no_rek = ui->tableWidget_cetak_sppd->item(i,3)->text();
+        QString j_cair = ui->tableWidget_cetak_sppd->item(i,8)->text();
+        QString thp = ui->tableWidget_cetak_sppd->item(i,0)->text();
 
-    if (menu=="4" && ui->comboBox_realisasi->currentIndex()==0)
-    {
-        kp_dns();
-        ds_sppd_.clear();
-        //qInfo() << "generate pdf 000 ............................................................";
-        QSqlQuery query;
-        QString cmd = " SELECT nm_kam, nm_dis, nm_kp, nm_ben, nm_rek, no_rek, j_cair, thp_cair  FROM pmk_yhk.t_real WHERE tgl = :tgl ORDER BY id_real ";
-        query.prepare(cmd);
-        query.bindValue(":tgl",tgl_);
-        bool ok = exec(query);
-        if(!ok){QMessageBox::information(this,"Error....","Gagal memuat data list pencairan pada tanggal "+tgl_2+" Error "+query.lastError().text()+"");}
-        int no = 1;
-        double jcr=0;
-        while(query.next())
-            {
-                QString no_ =QString::number(no);
-                double c = query.value(6).toDouble();
-                QString jc = indo.toCurrencyString(c,"Rp ");
-                ds_sppd_.append("<tr><td>"+no_+"</td><td>"+query.value(0).toString()+"</td><td>"+query.value(1).toString()+"</td><td>"+query.value(2).toString()+"</td>"
-                "<td>"+query.value(3).toString()+"</td><td>"+query.value(4).toString()+"</td><td>"+query.value(5).toString()+"</td><td>"+jc+"</td><td>"+query.value(7).toString()+"</td></tr>" );
-                qInfo() << "generate pdf 000"<< c ;
-                jcr +=c;
-                no++;
-                qInfo() << "generate pdf jcr"<< jcr ;
-            }
+        ds_sppd_.append("<tr><td>"+no_+"</td><td>"+nm_kampung+"</td><td>"+nm_distrik+"</td><td>"+nm_kepalak+"</td>"
+        "<td>"+nm_benk+"</td><td>"+nm_rek+"</td><td>"+no_rek+"</td><td>"+j_cair+"</td><td>"+thp+"</td></tr>" );
 
-        tot_sppd = indo.toCurrencyString(jcr,"Rp ");
-        qInfo() << "generate pdf 000"<< tot_sppd ;
-        QString tot_terbil = tot_sppd;
-        tot_terbil.replace("Rp ",""); tot_terbil.replace(".",""); tot_terbil.replace(",",".");
-        bilang(tot_terbil);
-
-        ds_sppd_.append("#/#"+tot_sppd);
-        ds_sppd_.append("#/#"+tgl);
-        ds_sppd_.append("#/#"+tgl_1);
-        ds_sppd_.append("#/#"+thn);
-        ds_sppd_.append("#/#"+nosrt);
-        ds_sppd_.append("#/#"+hal);
-        ds_sppd_.append("#/#"+li_kp_dns.at(1));
-        ds_sppd_.append("#/#"+li_kp_dns.at(2));
-        ds_sppd_.append("#/#"+li_kp_dns.at(3));
-        ds_sppd_.append("#/#"+terbilang);
-        ds_sppd_.append("#/#"+li_kp_dns.at(0));
-        //setTot_sppd(tot_sppd);
-        save_sppd();
-       Widget3 *pdf3 = new Widget3;
-       QIcon logo(":/gbr/html/gbr/yhk.png");
-       pdf3->setWindowIcon(logo);
-       pdf3->show();
-       qInfo() << "generate pdf 000111"<< tot_sppd ;
+         j_cair.replace(",00",""); j_cair.replace("Rp ",""); j_cair.replace(".","");
+         double jc = j_cair.toDouble();
+         jcr += jc;
+         qInfo() << "cek sppd ==============" << i;
     }
 
-    if (menu=="4" && ui->comboBox_realisasi->currentIndex()==1)
-    {   ds_sppd_.clear();
-        kp_dns();
-        QSqlQuery query;
-        QString cmd = " SELECT nm_kam, nm_dis, nm_kp, nm_ben, nm_rek, no_rek, j_cair, thp_cair  FROM pmk_yhk.t_real_2 WHERE tgl = :tgl ORDER BY id_real ";
-        query.prepare(cmd);
-        query.bindValue(":tgl", tgl_);
-        bool ok = exec(query);
-        if(!ok){QMessageBox::information(this,"Error....","Gagal memuat data list pencairan pada tanggal "+tgl_2+" Error "+query.lastError().text()+"");}
-        ds_sppd_.clear();
-        int no = 1;
-        double jcr=0;
-        while(query.next())
-            {
-                QString no_ =QString::number(no);
-                double c = query.value(6).toDouble();
-                QString jc = indo.toCurrencyString(c,"Rp ");
-                ds_sppd_.append( "<tr> <td>"+no_+"</td><td>"+query.value(0).toString()+"</td><td>"+query.value(1).toString()+"</td><td>"+query.value(2).toString()+"</td>"
-                "<td>"+query.value(3).toString()+"</td><td>"+query.value(4).toString()+"</td><td>"+query.value(5).toString()+"</td><td>"+query.value(6).toString()+""
-                                                                                                                                                                   "</td><td>"+query.value(7).toString()+"</td> </tr>");
-                qInfo() << "generate pdf 1111"<< c ;
-                jcr +=c;
-                no++;
-                qInfo() << "generate pdf jcr"<< jcr ;
-            }
-        tot_sppd = indo.toCurrencyString(jcr,"Rp ");
-        qInfo() << "generate pdf 000"<< tot_sppd ;
-        QString tot_terbil = tot_sppd;
-        tot_terbil.replace("Rp ",""); tot_terbil.replace(".",""); tot_terbil.replace(",",".");
-        bilang(tot_terbil);
-        ds_sppd_.append("#/#"+tot_sppd);
-        ds_sppd_.append("#/#"+tgl);
-        ds_sppd_.append("#/#"+tgl_1);
-        ds_sppd_.append("#/#"+thn);
-        ds_sppd_.append("#/#"+nosrt);
-        ds_sppd_.append("#/#"+hal);
-        ds_sppd_.append("#/#"+li_kp_dns.at(1));
-        ds_sppd_.append("#/#"+li_kp_dns.at(2));
-        ds_sppd_.append("#/#"+li_kp_dns.at(3));
-        ds_sppd_.append("#/#"+terbilang);
-        ds_sppd_.append("#/#"+li_kp_dns.at(0));
-        //setTot_sppd(tot_sppd);
-         save_sppd();
-            Widget4 *pdf4 = new Widget4;
-            pdf4->show();
-    }
+     qInfo() << "cek sppd ============== luar"  ;
+    tot_sppd = indo.toCurrencyString(jcr,"Rp ");
+    qInfo() << "generate pdf 000"<< tot_sppd ;
+    QString tot_terbil = tot_sppd;
+    tot_terbil.replace("Rp ",""); tot_terbil.replace(".",""); tot_terbil.replace(",",".");
+    bilang(tot_terbil);
+
+    ds_sppd_.append("#/#"+tot_sppd);
+    ds_sppd_.append("#/#"+tgl);
+    ds_sppd_.append("#/#"+tgl_1);
+    ds_sppd_.append("#/#"+thn);
+    ds_sppd_.append("#/#"+nosrt);
+    ds_sppd_.append("#/#"+hal);
+    ds_sppd_.append("#/#"+li_kp_dns.at(1));
+    ds_sppd_.append("#/#"+li_kp_dns.at(2));
+    ds_sppd_.append("#/#"+li_kp_dns.at(3));
+    ds_sppd_.append("#/#"+terbilang);
+    ds_sppd_.append("#/#"+li_kp_dns.at(0));
+    //setTot_sppd(tot_sppd);
+    save_sppd();
+   Widget3 *pdf3 = new Widget3;
+   QIcon logo(":/gbr/html/gbr/yhk.png");
+   pdf3->setWindowIcon(logo);
+   pdf3->show();
+
+
 }
 
 // Button Cetak pdf untuk pengantar di main
 void Form::on_toolButton_pdf_main_clicked()
-{
+{/*
  if(ui->comboBox_realisasi->currentIndex()==0){    Widget3 *a = new Widget3;
      a->show();}
- if(ui->comboBox_realisasi->currentIndex()==1){    QMessageBox::information(this,"Info","Menu ini Belum tersedia");}
-
+ if(ui->comboBox_realisasi->currentIndex()==1){    QMessageBox::information(this,"Info","Menu ini Belum tersedia");}*/
 }
 
 void Form::on_toolButton_tmbSppd_clicked() // Button Tambah Realisasi
@@ -1006,7 +958,9 @@ void Form::select_tgl_sppd(QString tgl)
                  nmbank->setText(query.value(5).toString());
                  bend->setText(query.value(6).toString());
                  kkap->setText(query.value(7).toString());
-                 jml->setText(query.value(8).toString());
+                 double jj = (query.value(8).toDouble());
+                 QString jjj = indo.toCurrencyString(jj,"Rp ");
+                 jml->setText(jjj);
                  terbilang->setText(query.value(9).toString());
                  QDate dt = QDate::fromString(query.value(10).toString(),"yyyy-MM-dd");
                  tgl->setText(dt.toString("dd-MM-yyyy"));
