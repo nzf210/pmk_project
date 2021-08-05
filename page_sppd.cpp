@@ -518,6 +518,10 @@ void Form::muatheadertw_realisasi_sppd()
     ui->tableWidget_realisasi_sppd->setHorizontalHeaderLabels(list);
     ui->tableWidget_realisasi_sppd->setColumnHidden(0,true);
     ui->tableWidget_realisasi_sppd->setColumnHidden(4,true);
+
+    ui->tableWidget_realisasi_sppd->setColumnWidth(1,240);
+    ui->tableWidget_realisasi_sppd->setColumnWidth(2,240);
+    ui->tableWidget_realisasi_sppd->setColumnWidth(3,130);
 }
 
 

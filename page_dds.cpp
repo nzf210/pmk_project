@@ -44,10 +44,10 @@ void Form::on_toolButton_cetakPdfdds_clicked()
        //qInfo()<<"Ini adalah info pada button klik"<< getLspdf1();
        on_saveFileButton_pressed(qcode());
        //qInfo() << "Qinfo Cari Bug===========================================================================================";
-       Widget1 *a = new Widget1;
+       Widget1 *d = new Widget1;
        QIcon logo(":/gbr/html/gbr/yhk.png");
-       a->setWindowIcon(logo);
-       a->show();
+       d->setWindowIcon(logo);
+       d->show();
                         }
 }
 

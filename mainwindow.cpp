@@ -55,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
     QDate thn = QDate::currentDate();
     QString thn_ = thn.toString("yyyy");
     this->setWindowTitle("Sistem Infomasi Pengelolaan Keuangan Desa Kab. Yahukimo "+thn_+" ");
-    this->setFixedSize(this->width(),this->height());
+    this->setFixedSize(this->width(),this->height()); // untuk mematikan maximum window
     QIcon logo(":/gbr/html/gbr/yhk.png");
     this->setWindowIcon(logo);
 

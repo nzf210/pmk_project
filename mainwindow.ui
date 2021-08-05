@@ -72,6 +72,9 @@
       <height>16777215</height>
      </size>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(15, 0, 0, 10)</string>
+    </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
     </property>

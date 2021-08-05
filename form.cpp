@@ -138,7 +138,8 @@ Form::Form(QWidget *parent) :
     QDate thn = QDate::currentDate();
     QString thn_ = thn.toString("yyyy");
     this->setWindowTitle("Sistem Infomasi Pengelolaan Keuangan Desa Kab. Yahukimo "+thn_+" ");
-
+    //this->showMaximized();
+    //this->showMinimized();
     QIcon logo(":/gbr/html/gbr/yhk.png");
     this->setWindowIcon(logo);
 

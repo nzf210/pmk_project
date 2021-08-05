@@ -9,7 +9,13 @@ class Widget2 : public QWidget
 public:
     QStringList list; QStringList li_bm;
     explicit Widget2(QWidget *parent = nullptr):
-        QWidget(parent),  button2(new QPushButton),button(new QPushButton),progressbar(new QProgressBar),  progressbar2(new QProgressBar), view(new QWebEngineView), view2(new QWebEngineView)
+    QWidget(parent),
+    button2(new QPushButton),
+    button(new QPushButton),
+    progressbar(new QProgressBar),
+    progressbar2(new QProgressBar),
+    view(new QWebEngineView),
+    view2(new QWebEngineView)
     {
 
         button->setText(tr("generate pdf add"));
@@ -18,6 +24,8 @@ public:
         connect(button, &QPushButton::clicked, this, &Widget2::onClicked);
         connect(view, &QWebEngineView::loadFinished, this, &Widget2::onLoadFinished);
         connect(view->page(), &QWebEnginePage::pdfPrintingFinished, this, &Widget2::onPdfPrintingFinished);
+        //this->setFixedSize(this->setw , this->height());
+        progressbar->setMinimumSize(QSize(10,300));
 
         //!=================================================================================
          loadmbam();
@@ -107,8 +115,9 @@ public:
 
         lay->addWidget(button);
         lay->addWidget(progressbar);
+
         //lay->addWidget(view);
-         resize(330, 280);
+         //resize(330, 280);
     }
 
     void loadlspdf1()
@@ -210,10 +219,6 @@ public:
         QString path("laporan/add/");
 
         QDir dir(path);
-//        Nama Lama
-//        QFile  pdfFile (path+ "ADD_SRT.pdf");
-//        QString fn = path+"ADD_SRT.pdf";
-//        Nama Auto
         QString nmpdf ="Honor"+ tahap+ " dis "+nmdis+" kam "+nmkamp+".pdf";
         QFile  pdfFile (path + nmpdf);
         QString fn = path + nmpdf;
