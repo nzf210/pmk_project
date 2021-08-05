@@ -139,7 +139,9 @@ Form::Form(QWidget *parent) :
     QString thn_ = thn.toString("yyyy");
     this->setWindowTitle("Sistem Infomasi Pengelolaan Keuangan Desa Kab. Yahukimo "+thn_+" ");
     //this->showMaximized();
-    //this->showMinimized();
+    //this->showMinimized();]
+    ///this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);  menu menghilangkan frame window
+    ///this->setAttribute(Qt::WA_TranslucentBackground, true); .. menjadikan tranparant
     QIcon logo(":/gbr/html/gbr/yhk.png");
     this->setWindowIcon(logo);
 
@@ -185,9 +187,6 @@ ui->label_14->setText("Alokasi Dana Desa");
 modeTampilan_usr();
 ui->label_space_1->setText("Selamat Datang : "+nama_l);
  // === Memuat Level Type ===
-
-//Percobaan Signal and Slot
-
 
 #ifdef Q_OS_WINDOWS
     Form::Initialize();
@@ -378,12 +377,7 @@ QString Form::muatreal()
 
 }
 
-//=========== Combo Box Nama Distrik ============
-//void Form::on_comboBox_currentIndexChanged(int index)
-//{
-//    qInfo () << " Indexx Combo Box " << index;
-//    qInfo () << " isi ComBox  " << ui->comboBox->currentText();
-//}
+
 
 void Form::muat_bm(QString skam) // Memuat data nama Bamuskam
 {
@@ -415,26 +409,6 @@ void Form::muat_bm(QString skam) // Memuat data nama Bamuskam
     fl.close();
 
 }
-
-//void Form::databam(QString skam)
-//{
-//    muat_bm(skam);
-
-//    QString pt("doc/temp/");
-//    QFile fl(pt+"nmbam.txt");
-//    if(fl.exists()){ fl.remove();};
-//    if(fl.exists()){QMessageBox::information(this,"Error","Gagal Menghapus data bamuskam"); return;};
-//    //if(!fl.exists()){  }
-//    if(!fl.open(QIODevice::WriteOnly | QIODevice::Text)){QMessageBox::information(this,"Error","Gagal Memuat Menyimpan data bamuskam"); return; }
-//    for(int i=0; i<li_bam.count(); i++ )
-//    {
-////  QString a = li_bam.at(i);
-//      QTextStream stream(&fl);
-//      QString a = ";";
-//       stream << li_bam.at(i) +a;
-//    }
-//    fl.close();
-//}
 
 
 void Form::muat_dis()
