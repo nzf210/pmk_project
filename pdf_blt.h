@@ -255,12 +255,12 @@ public:
         nmbank = list.at(6);;
         nmkkp = list.at(8);;
         nmbenk = list.at(9);;
-        jkk = list.at(24);;
+        jkk = list.at(27);;
         tahap = list.at(10);
         jml = list.at(11);
         persen = list.at(16);
         nmkpdns = list.at(21);
-        tahap2 = "list.at(19)"; //kosong
+        tahap2 = list.at(25);
         pkpldns = list.at(23);
         //QString nmkdns;
         nip = list.at(24);

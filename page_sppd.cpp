@@ -80,6 +80,7 @@ qInfo() << "cek sppd ==============" ;
         QString no_rek = ui->tableWidget_cetak_sppd->item(i,3)->text();
         QString j_cair = ui->tableWidget_cetak_sppd->item(i,8)->text();
         QString thp = ui->tableWidget_cetak_sppd->item(i,0)->text();
+        //QString wnorek = " width=140px; ";
 
         ds_sppd_.append("<tr><td>"+no_+"</td><td>"+nm_kampung+"</td><td>"+nm_distrik+"</td><td>"+nm_kepalak+"</td>"
         "<td>"+nm_benk+"</td><td>"+nm_rek+"</td><td>"+no_rek+"</td><td>"+j_cair+"</td><td>"+thp+"</td></tr>" );
@@ -114,7 +115,6 @@ qInfo() << "cek sppd ==============" ;
    QIcon logo(":/gbr/html/gbr/yhk.png");
    pdf3->setWindowIcon(logo);
    pdf3->show();
-
 
 }
 
@@ -172,9 +172,7 @@ void Form::on_toolButton_Sppd_clicked() // ToolButton menu SPPD
     QString de = d.toString("yyyy");
     QString de_ = "01-01-"+de;
     QDate dd = QLocale{QLocale::Indonesian}.toDate(de_,"dd MMMM yyyy");
-    //QDate d_ =QDate::fromString(de_,"dd-MM-yyyy");
-    //QString tgl_ = QLocale{QLocale::Indonesian}.toString(d_, "dd MMMM yyyy");
-    //QDate d_2 =QDate::fromString(tgl_,"dd MMMM yyyy");
+
     ui->dateEdit->setDate(dd);
     ui->dateEdit->setLocale(QLocale::Indonesian);
     ui->dateEdit->setDisplayFormat("dd MMMM yyyy");
@@ -201,211 +199,14 @@ void Form::on_toolButton_Sppd_clicked() // ToolButton menu SPPD
 
 void Form::updatesppd() // Update sppd
 {
-    qInfo() << "=====" << "updatesppd" ;
-    if(ui->comboBox_realisasi->currentIndex()==0)
-    {
-       int b = ui->tableWidget_cetak_sppd->currentRow();
-       QString id = ui->tableWidget_cetak_sppd->item(b,0)->text();
-       QString nosrt = qbnosppd->currentText();
-       QString hal = qbhal->currentText();
-       QString tgl =  desppd->text();
-       QDate dt = QDate::fromString(tgl,"dd-MM-yyyy");
-       QString tgl_ = dt.toString("yyyy-MM-dd");
-       //nfo()<< " info 000" << nosrt << "==" << hal << "==" << tgl;
-       QSqlQuery  query;
-       QString cmd = " UPDATE pmk_yhk.sppdd SET no_srt = :no_srt, perihal= :hal, tgl= :tgl  WHERE id= :id " ;
-       query.prepare(cmd);
-       query.bindValue(":no_srt",nosrt);
-       query.bindValue(":hal",hal);
-       query.bindValue(":tgl",tgl_);
-       query.bindValue(":hal",hal);
-       query.bindValue(":id",id);
-       bool ok = exec(query);
-       if(!ok){QMessageBox::information(this,"Error","Gagal Update data Surat Pencairan dds "+query.lastError().text()+""); return;}
-       wg->close();
-       loadsppd();
 
-    }
-
-    if(ui->comboBox_realisasi->currentIndex()==1)
-    {
-        int b = ui->tableWidget_cetak_sppd->currentRow();
-        QString id = ui->tableWidget_cetak_sppd->item(b,0)->text();
-        QString nosrt = qbnosppd_2->currentText();
-        QString hal = qbhal_2->currentText();
-        QString tgl =  desppd_2->text();
-        QDate dt = QDate::fromString(tgl,"dd-MM-yyyy");
-        QString tgl_ = dt.toString("yyyy-MM-dd");
-
-        //nfo()<< " info 111" << nosrt << "==" << hal << "==" << tgl;
-        QSqlQuery  query;
-        QString cmd = " UPDATE pmk_yhk.sppdd_2 SET no_srt = :no_srt, perihal= :hal, tgl= :tgl  WHERE id= :id " ;
-        query.prepare(cmd);
-        query.bindValue(":no_srt",nosrt);
-        query.bindValue(":hal",hal);
-        query.bindValue(":tgl",tgl_);
-        query.bindValue(":id",id);
-        bool ok = exec(query);
-        if(!ok){QMessageBox::information(this,"Error","Gagal Update data Surat Pencairan add "+query.lastError().text()+""); return;}
-        wg_2->close();
-        loadsppd_2();
-    }
-    disconnect(btnsppd_dk, SIGNAL(pressed()), this, SLOT(updatesppd()));
 }
 
 
 void Form::even_dklik_tw13() // Double Klik Event ...................................... ubah sppd
 {
-//disconnect(btnsppd_dk, SIGNAL(pressed()), this, SLOT(updatesppd()));
-//muat_sppd();
-//muat_sppd_2();
-    muat_nosurat();
-  if(ui->comboBox_realisasi->currentIndex()==0)
-  {
-    //qInfo() << "qbx  double klik 11....................... ";
-      int b = ui->tableWidget_cetak_sppd->currentRow();
-      QString id = ui->tableWidget_cetak_sppd->item(b,0)->text();
-      QString nosrt = ui->tableWidget_cetak_sppd->item(b,1)->text();
-      QString hal = ui->tableWidget_cetak_sppd->item(b,2)->text();
-      QString tgl = ui->tableWidget_cetak_sppd->item(b,3)->text();
 
-      QDate dt = QDate::fromString(tgl,"dd-MM-yyyy");
-      desppd = new QDateEdit;
-      desppd->setDate(dt);
-      desppd->setDisplayFormat("dd-MM-yyyy");
-      desppd->setCalendarPopup(true);
 
-      QString thn = tgl.right(4);
-      qbnosppd = new QComboBox;
-      qbhal = new QComboBox;
-      qbnosppd->setEditable(true);
-      qbhal->setEditable(true);
-      qbnosppd->addItem(nosrt);
-      qbnosppd->addItem(li_no_surat.at(0));
-      qbhal->addItem(hal);
-      qbhal->addItem(li_no_surat.at(0));
-
-      wg = new QWidget;
-
-      QLabel *nsrt = new QLabel;
-      nsrt->setText("No Surat :"); nsrt->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-      nsrt->setMaximumWidth(95);
-      QLabel *hal_= new QLabel; hal_->setText("Perihal :"); hal_->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-      hal_->setMaximumWidth(95);
-      QLabel *tgll= new QLabel; tgll->setText("Tanggal :"); tgll->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-      tgll->setMaximumWidth(95);
-
-      QLabel *ls1 = new QLabel; ls1->setMinimumWidth(65);
-      QIcon logo(":/gbr/html/gbr/yhk.png");
-      wg->setWindowIcon(logo);
-      wg->setWindowTitle("Ubah Surat Pengantar Pencairan Dana Desa "+thn+"");
-      wg->setMinimumWidth(400);
-      wg->setMaximumWidth(400);
-      wg->setMaximumHeight(800);
-
-      QVBoxLayout *VL = new QVBoxLayout(wg);
-      QHBoxLayout *HL1 = new QHBoxLayout;
-      QHBoxLayout *HL2 = new QHBoxLayout;
-      QHBoxLayout *HL3 = new QHBoxLayout;
-      QHBoxLayout *HL4 = new QHBoxLayout;
-
-      VL->addLayout(HL1);
-      VL->addLayout(HL2);
-      VL->addLayout(HL3);
-      VL->addLayout(HL4);
-
-      HL1->addWidget(nsrt);
-      HL1->addWidget(qbnosppd);
-
-      HL2->addWidget(hal_);
-      HL2->addWidget(qbhal);
-
-      HL3->addWidget(tgll);
-      desppd->setMaximumWidth(140);
-      HL3->addWidget(desppd);
-      HL3->addWidget(ls1);
-
-      btnsppd_dk->setText("UBAH");
-      btnsppd_dk->setMaximumWidth(140);
-      HL4->addWidget(btnsppd_dk);
-      wg->show();
-      connect(btnsppd_dk, SIGNAL(pressed()), this, SLOT(updatesppd()));
-
-  }
-
-  if(ui->comboBox_realisasi->currentIndex()==1)
-  {
-
-    //qInfo() << "qbx  double klik 22....................... ";
-      int b = ui->tableWidget_cetak_sppd->currentRow();
-      QString id = ui->tableWidget_cetak_sppd->item(b,0)->text();
-      QString nosrt = ui->tableWidget_cetak_sppd->item(b,1)->text();
-      QString hal = ui->tableWidget_cetak_sppd->item(b,2)->text();
-      QString tgl = ui->tableWidget_cetak_sppd->item(b,3)->text();
-
-      QDate dt = QDate::fromString(tgl,"dd-MM-yyyy");
-      desppd_2 = new QDateEdit;
-      desppd_2->setDate(dt);
-      desppd_2->setDisplayFormat("dd-MM-yyyy");
-      desppd_2->setCalendarPopup(true);
-
-      QString thn = tgl.right(4);
-      qbnosppd_2 = new QComboBox;
-      qbhal_2 = new QComboBox;
-      qbnosppd_2->setEditable(true);
-      qbhal_2->setEditable(true);
-      qbnosppd_2->addItem(nosrt);
-      qbnosppd_2->addItems(li_sppd_);
-      qbhal_2->addItem(hal);
-      qbhal_2->addItems(li_sppd_2_);
-
-      wg_2 = new QWidget;
-
-      QLabel *nsrt = new QLabel;
-      nsrt->setText("No Surat :"); nsrt->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-      nsrt->setMaximumWidth(95);
-      QLabel *hal_= new QLabel; hal_->setText("Perihal :"); hal_->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-      hal_->setMaximumWidth(95);
-      QLabel *tgll= new QLabel; tgll->setText("Tanggal :"); tgll->setStyleSheet(" QLabel { font-weight: bold; qproperty-alignment: AlignRight; }");
-      tgll->setMaximumWidth(95);
-
-      QLabel *ls1 = new QLabel; ls1->setMinimumWidth(65);
-
-      QIcon logo(":/gbr/html/gbr/yhk.png");
-      wg_2->setWindowIcon(logo);
-      wg_2->setWindowTitle("Ubah Surat Pengantar Pencairan Dana Desa "+thn+"");
-      wg_2->setMinimumWidth(400);
-      wg_2->setMaximumWidth(400);
-      wg_2->setMaximumHeight(800);
-
-      QVBoxLayout *VL = new QVBoxLayout(wg_2);
-      QHBoxLayout *HL1 = new QHBoxLayout;
-      QHBoxLayout *HL2 = new QHBoxLayout;
-      QHBoxLayout *HL3 = new QHBoxLayout;
-      QHBoxLayout *HL4 = new QHBoxLayout;
-
-      VL->addLayout(HL1);
-      VL->addLayout(HL2);
-      VL->addLayout(HL3);
-      VL->addLayout(HL4);
-
-      HL1->addWidget(nsrt);
-      HL1->addWidget(qbnosppd_2);
-
-      HL2->addWidget(hal_);
-      HL2->addWidget(qbhal_2);
-
-      HL3->addWidget(tgll);
-      desppd_2->setMaximumWidth(140);
-      HL3->addWidget(desppd_2);
-      HL3->addWidget(ls1);
-
-      btnsppd_dk->setText("UBAH");
-      btnsppd_dk->setMaximumWidth(140);
-      HL4->addWidget(btnsppd_dk);
-      wg_2->show();
-      connect(btnsppd_dk, SIGNAL(pressed()), this, SLOT(updatesppd()));
-  }
 }
 
 
@@ -525,22 +326,6 @@ void Form::sppdbtc()
 
     disconnect(btnsppd, SIGNAL(pressed()), this, SLOT(sppdbtc()));
 }
-
-void Form::instsppd(QString nosrt, QString hal,QString date)
-{
-
-}
-
-void Form::sppd_2()
-{
-
-}
-
-void Form::sppdbtc_2()
-{
-
-}
-
 
 
 
@@ -738,17 +523,14 @@ void Form::muatheadertw_realisasi_sppd()
 
 void Form::muatheadertw_cetak_sppd()
 {
-
     QStringList head;
     head << "Tahap" << "Kampung" << "Distrik" << "No Rek" << "Nama Rek" << "Nama Bank" << "Bendahara" << "Kepala Kampung" << "Jml Cair" << "Terbilang" << "Tgl" << "Thp II";
     ui->tableWidget_cetak_sppd->setColumnCount(head.count());
     ui->tableWidget_cetak_sppd->setHorizontalHeaderLabels(head);
-    //ui->tableWidget_realisasi_sppd->setColumnHidden(0,true);
 }
 
 void Form::on_comboBox_realisasi_currentIndexChanged(const QString &arg1)
 {
-
     qInfo() << "qCombo realisai " << arg1;
     QString a = arg1;
     QString b="";
@@ -765,8 +547,6 @@ void Form::on_comboBox_realisasi_currentIndexChanged(const QString &arg1)
         { ui->tableWidget_realisasi_sppd->removeRow(0); }
     }
     if(ui->comboBox_realisasi->currentIndex() > 0) { select_tgl_sppd("");  muat_data_realisasi_sppdd("");}
-
-
 }
 
 void Form::muat_data_realisasi_sppdd(QString ppdd)
@@ -1006,7 +786,6 @@ void Form::on_tableWidget_realisasi_sppd_cellDoubleClicked(int row, int column)
     QString perihal = ui->tableWidget_realisasi_sppd->item(row,2)->text();
     QString tanggal = ui->tableWidget_realisasi_sppd->item(row,3)->text();
     update_data_sppd(id,tanggal, noSrt, perihal);
-
 }
 
 
@@ -1075,9 +854,7 @@ void Form::update_data_sppd(QString id, QString date, QString no_Srt, QString pe
     btnsppd->setMaximumWidth(140);
     HL4->addWidget(btnsppd);
     wg->show();
-
     connect(btnsppd, SIGNAL(pressed()), this, SLOT(update_sppd_toDB()));
-
 }
 
 void Form::update_sppd_toDB()
@@ -1116,7 +893,6 @@ void Form::update_sppd_toDB()
     wg->close();
     muat_data_realisasi_sppdd("");
     select_tgl_sppd("");
-
 }
 
 

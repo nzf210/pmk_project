@@ -161,11 +161,11 @@ public:
         if(pdfFile2.exists()){ pdfFile2.remove(); }
         if(pdfFile2.exists()) {QMessageBox::information(this,"Info...","Tutup File pdf yg terbuka"); qInfo()<<"Silahkan tutup pdf file"; return;}
 
-        view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(743,987))), QPageLayout::Portrait, QMargins(55,25,15,25)) );
-        view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(40,15,15,20)) );
+       // view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(743,987))), QPageLayout::Portrait, QMargins(55,25,15,25)) );
+       // view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(40,15,15,20)) );
 
-//        view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Landscape, QMargins(25,15,15,15)) );
-//        view2->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Landscape, QMargins(25,15,15,15)) );
+        view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0))); // fix sppd
+        view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,0,15,15))); // fix sppd
 
         view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","<b>Generating pdf file...</b>"));
         bool ok;
@@ -259,9 +259,7 @@ public slots:
      QString nipkpdns;
      QString terbilang;
      QString jbt_klp_dns;
-
      //===================================================
-
     QPushButton *button2;
     QPushButton *button;
     QProgressBar *progressbar;

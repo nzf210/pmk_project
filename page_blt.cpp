@@ -495,7 +495,7 @@ void Form::btnAdd_blt()
         QString nm_bend = s_nm_bend;
         QString tahap = qbx_thp_penc->currentText();
 
-       //String tahap_l = qbx_thp_l->currentText();
+        QString tahap_l = li_tahap_ii.at(qbx_thp_penc->currentIndex());
         QString tgl_ter = de->text();
         QString no_srt1 =qbx_no_srt1->currentText();
         QString no_srt2 =qbx_no_srt2->currentText();
@@ -559,7 +559,7 @@ void Form::btnAdd_blt()
              query.bindValue(":j_kpd",pg_kp_dns);
              query.bindValue(":nip_kpd",nip_kp_dns);
              query.bindValue(":ket",thn2);
-             query.bindValue(":thp_l","tahap_l");
+             query.bindValue(":thp_l", tahap_l);
              query.bindValue(":jkk",j_kk);
              query.bindValue(":jbt_kpl_dns", jbt_kpl_dns);
 

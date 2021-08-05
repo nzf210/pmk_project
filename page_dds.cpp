@@ -573,7 +573,7 @@ if(menu=="2"){ menu2="2";
         no_srt1.replace("Reg1=> ", "");
         no_srt2.replace("####", nosurat_2());
         no_srt2.replace("Reg2=> ", "");
-        tambah_realisasi(li_tahap,"Rp 0,00",  no_srt1  , no_srt2,"TAMBAH",s_nm_kp, s_nm_bend,"Tambah Realisasi Dana Covid" );
+        tambah_realisasi(li_tahap,"Rp 0,00",  no_srt1  , no_srt2,"TAMBAH",s_nm_kp, s_nm_bend,"Tambah Realisasi Dana Desa Reguler" );
 
     } }
 }

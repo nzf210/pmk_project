@@ -128,7 +128,7 @@ private slots:
       void on_toolButton_cetakpdfSppd_clicked();
 
       void sppdbtc();
-      void sppdbtc_2();
+      //void sppdbtc_2();
 
       //void qbx3event(); // even qComboBox realisasi pada SPPD
       void updatesppd();
@@ -136,7 +136,7 @@ private slots:
       void update_sppd_toDB();
 
       //Tambahan untuk Otomatisasi Jumlah Caor, Persen dan Tahap Laporan
-      void muatTahap(QString); // memuat tahap pencairan
+      void muatTahap(QString); // memuat tahap pencairan pada master pagu
 
       void muat_data_realisasi_sppdd(QString); // memuat data realisasi untuk tw realisasi di sppd
 
@@ -309,7 +309,7 @@ private:
 //    QStringList li_srt1;
 //    QStringList li_srt2;
 
-    QStringList li_srt4;
+    QStringList li_tahap_ii;
     QStringList li_persen;
 
     QStringList li_sk_bup;
@@ -432,7 +432,7 @@ private:
     void update_user();
     void hapus_user();
 //================= sppd ================
-void instsppd(QString nosrt, QString hal,QString date);
+//void instsppd(QString nosrt, QString hal,QString date);
 void insert_sppd(QString type ,QString nosrt, QString hal,QString date);
 
 void muat_nosurat();

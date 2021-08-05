@@ -846,11 +846,13 @@ void Form::muat_nosurat() // muat No Sppd dds
 void Form::tahap(int id)    { // Memuat daftar tahap penerimaan pada dana desa
     li_tahap.clear();
     li_tahap_select.clear();
+    li_tahap_ii.clear();
     qInfo() << "Query Tahap Penerimaan" ;
     QSqlQuery query;
     QString cmd = " SELECT "
             " t_cair.tahap_cair,"
-            " t_cair.tahap_select"
+            " t_cair.tahap_select, "
+            " t_cair.tahap"
        " FROM "
             "pmk_yhk.t_cair "
         " WHERE "
@@ -862,9 +864,11 @@ void Form::tahap(int id)    { // Memuat daftar tahap penerimaan pada dana desa
     bool ok = exec(query);
     if(!ok){QMessageBox::information(this,"Error...!!!","Gagal memuat data Tahap pencairan... "+query.lastError().text()+"..."); return;}
     while (query.next()) {
-           QString nama=query.value(0).toString() ; QString jab=query.value(1).toString() ;
-            li_tahap << nama;
-            li_tahap_select << jab;
+           QString thp_cair=query.value(0).toString() ; QString thp_select=query.value(1).toString() ; QString thp_=query.value(2).toString() ;
+            li_tahap << thp_cair;
+            li_tahap_select << thp_select;
+            li_tahap_ii << thp_;
+            qInfo() << "tahap II pada tahap ========================= " <<thp_  ;
 }
 }
 

@@ -301,8 +301,10 @@ void Form::tambah_real_covid()
             muat_k_kp(id_kam);
             muat_nosurat();
             qInfo() << "Cari Error +++++++++++++++++++++";
-            QString no_srt1 = li_no_surat.at(0);
-            QString no_srt2 = li_no_surat.at(1);
+            QString no_srt1 = li_no_surat.at(2);
+            no_srt1.replace("Covid1=> ","");
+            QString no_srt2 = li_no_surat.at(3);
+            no_srt2.replace("Covid2=> ","");
             no_srt1.replace("****", nosurat());
             no_srt1.replace("Reg1=> ", "");
             no_srt2.replace("####", nosurat_2());

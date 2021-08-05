@@ -935,6 +935,12 @@ bacground-size: 70%</string>
            <property name="styleSheet">
             <string notr="true"/>
            </property>
+           <property name="locale">
+            <locale language="Indonesian" country="Indonesia"/>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
            <property name="selectionBehavior">
             <enum>QAbstractItemView::SelectRows</enum>
            </property>
@@ -1049,8 +1055,14 @@ bacground-size: 70%</string>
            <property name="styleSheet">
             <string notr="true"/>
            </property>
+           <property name="locale">
+            <locale language="Indonesian" country="Indonesia"/>
+           </property>
            <property name="alternatingRowColors">
             <bool>true</bool>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
            </property>
           </widget>
          </item>
@@ -1101,6 +1113,9 @@ bacground-size: 70%</string>
           <width>531</width>
           <height>400</height>
          </size>
+        </property>
+        <property name="locale">
+         <locale language="Indonesian" country="Indonesia"/>
         </property>
         <property name="alternatingRowColors">
          <bool>true</bool>
@@ -1401,6 +1416,9 @@ bacground-size: 70%</string>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klik 2x untuk Mengedit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="locale">
+         <locale language="Indonesian" country="Indonesia"/>
         </property>
         <property name="alternatingRowColors">
          <bool>true</bool>
