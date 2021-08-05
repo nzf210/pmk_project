@@ -86,6 +86,8 @@ void Form::header_cetak_covid()
     ui->tableWidget_cetak_covid->setColumnHidden(28,true);
     ui->tableWidget_cetak_covid->setColumnHidden(29,true);
     ui->tableWidget_cetak_covid->setColumnHidden(30,true);
+    ui->tableWidget_cetak_covid->setColumnHidden(26,true);
+    ui->tableWidget_cetak_covid->setColumnHidden(17,true);
 
     ui->tableWidget_cetak_covid->setColumnWidth(3,120);
     ui->tableWidget_cetak_covid->setColumnWidth(4,120);
@@ -95,8 +97,8 @@ void Form::header_cetak_covid()
    ui->tableWidget_cetak_covid->setColumnWidth(14,90);
    ui->tableWidget_cetak_covid->setColumnWidth(15,230);
    ui->tableWidget_cetak_covid->setColumnWidth(16,230);
-   ui->tableWidget_cetak_covid->setColumnWidth(17,50);
-   ui->tableWidget_cetak_covid->setColumnWidth(26,120);
+   //ui->tableWidget_cetak_covid->setColumnWidth(17,50);
+   //ui->tableWidget_cetak_covid->setColumnWidth(26,120);
 
 }
 

@@ -193,12 +193,12 @@ public:
         QDir dir(path);
 
         //QString Nama Auto
-        QString nmpdf = tahap +" "+nmkamp+" Dis "+nmdis;
-        QFile  pdfFile ( path + " " + nmpdf+" D.pdf");
-        QString fn = path + " " + nmpdf +" D.pdf";
+        QString nmpdf = "BLT "+tahap +" "+nmkamp+" Dis "+nmdis;
+        QFile  pdfFile ( path + nmpdf+ " D.pdf");
+        QString fn = path +  nmpdf +" D.pdf";
 
-        QFile  pdfFile2 (path+" " +nmpdf+" K.pdf");
-        QString fn2 = path + " "+nmpdf+" K.pdf";
+        QFile  pdfFile2 (path+nmpdf+" K.pdf");
+        QString fn2 = path +nmpdf+" K.pdf";
 
         if(pdfFile.exists()){ pdfFile.remove(); }
         if(pdfFile.exists()) {QMessageBox::information(this,"Info...","Tutup File pdf yg terbuka dan Generate Kembali"); qInfo()<<"Silahkan tutup pdf file"; return;}

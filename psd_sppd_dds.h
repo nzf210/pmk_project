@@ -175,7 +175,7 @@ public:
                view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0))); // fix sppd
                view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,0,15,15))); // fix sppd
 
-               view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","<b>Generating pdf file...</b>"));
+               view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info..."," Menyiapkan file, <b>Tekan OK setelah loading selesai...</b>" ));
                bool ok;
                view2->page()->pdfPrintingFinished(fn2, (ok=true));
               // if(ok==false){QMessageBox::information(this,"Info...","Generating pdf file Gagal, Coba Kembali"); return; }

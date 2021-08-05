@@ -259,9 +259,9 @@ void Form::header_cetak_add()
     QStringList headerWidget;
     ui->tableWidget_cetak_add->setColumnCount(30);
     headerWidget <<"cetak"<<"Id Dis"<<"Id Kam"<<" Nama Distrik"<<"Nama Kampung"<<"No Rekening"<<"Nama Rekening"<<"Nama Bank"<<"SK Bendahara"
-                <<"Nama Kepala Kampung"<<" Nama Bendahara "
-                 <<"Tahap Pencairan"<<"Jumlah Pencairan"<<"Terbilang"<<"Tanggal Terima"<<"No Srt 1"<<"No Srt 2"<<"%"<<"SK Bupati"<<"SK Kep.Kampung"
-                <<"SK Men PMK"<<"SK Men Keu"<<"Kepala Dinas" << " Ket " << "Pangkat" << "NIP" <<"Laporan Realisasi"<<"id"<<"jkk"<<"jbt kp dns" << "id_realisasi";
+                <<"Nama Kepala Kampung"<<" Nama Bendahara "<<"Tahap Pencairan"<<"Jumlah Pencairan"<<"Terbilang"<<"Tanggal Terima"<<"No Srt 1"<<"No Srt 2"
+               <<"%"<<"SK Bupati"<<"SK Kep.Kampung" <<"SK Men PMK"<<"SK Men Keu"<<"Kepala Dinas" << " Ket " << "Pangkat" << "NIP"
+              <<"Laporan Realisasi"<<"id"<<"jkk"<<"jbt kp dns" << "id_realisasi";
     ui->tableWidget_cetak_add->setHorizontalHeaderLabels(headerWidget);
 
     ui->tableWidget_cetak_add->setColumnHidden(0,true);
@@ -287,6 +287,8 @@ void Form::header_cetak_add()
     ui->tableWidget_cetak_add->setColumnHidden(28,true);
     ui->tableWidget_cetak_add->setColumnHidden(29,true);
     ui->tableWidget_cetak_add->setColumnHidden(30,true);
+    ui->tableWidget_cetak_add->setColumnHidden(26,true);
+    ui->tableWidget_cetak_add->setColumnHidden(17,true);
 
     ui->tableWidget_cetak_add->setColumnWidth(3,120);
     ui->tableWidget_cetak_add->setColumnWidth(4,120);
@@ -296,8 +298,8 @@ void Form::header_cetak_add()
    ui->tableWidget_cetak_add->setColumnWidth(14,90);
    ui->tableWidget_cetak_add->setColumnWidth(15,230);
    ui->tableWidget_cetak_add->setColumnWidth(16,230);
-   ui->tableWidget_cetak_add->setColumnWidth(17,50);
-   ui->tableWidget_cetak_add->setColumnWidth(26,120);
+   //ui->tableWidget_cetak_add->setColumnWidth(17,50);
+   //ui->tableWidget_cetak_add->setColumnWidth(26,120);
 
 }
 

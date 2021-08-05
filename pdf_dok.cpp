@@ -31,7 +31,6 @@
  using namespace std::placeholders;
 
 
-
 void writePdf()
 {
     const QString fileName("output.pdf");
@@ -105,33 +104,14 @@ int print(){
     printer.setOutputFormat(QPrinter::PdfFormat);
     printer.setOrientation(QPrinter::Landscape);
     document->setHtml(htmlContent);
-
- //p.setBrush(Qt::transparent);
     printer.setOutputFileName(path+"output.pdf");
-//p.drawPixmap(0,0,100,100, QPixmap(":/gbr/html/gbr/yhk.jpg"));
-//p.drawPixmap(150,150,300,300, QPixmap(":/gbr/html/gbr/yhk.jpg"));
-//p.end();
+
 
     document->print(&printer);
 
     delete document;
     return 0;
 }
-
-
-
-//pdf_dok::pdf_dok(QString inputPath, QString outputPath)
-//    : m_inputPath(move(inputPath))
-//    , m_outputPath(move(outputPath))
-//    , m_page(new QWebEnginePage)
-//{
-//    connect(m_page.data(), &QWebEnginePage::loadFinished,
-//            this, &pdf_dok::loadFinished);
-//    connect(m_page.data(), &QWebEnginePage::pdfPrintingFinished,
-//            this, &pdf_dok::pdfPrintingFinished);
-//}
-
-
 
 
 pdf_dok::pdf_dok(QWidget *parent) : QWidget(parent), ui(new Ui::pdf_dok)

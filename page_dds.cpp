@@ -395,6 +395,8 @@ void Form::header_wt2()
     ui->tableWidget_cetak_dds->setColumnHidden(28,true);
     ui->tableWidget_cetak_dds->setColumnHidden(29,true);
     ui->tableWidget_cetak_dds->setColumnHidden(30,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(26,true);
+    ui->tableWidget_cetak_dds->setColumnHidden(17,true);
 
     ui->tableWidget_cetak_dds->setColumnWidth(3,120);
     ui->tableWidget_cetak_dds->setColumnWidth(4,120);
@@ -404,8 +406,8 @@ void Form::header_wt2()
    ui->tableWidget_cetak_dds->setColumnWidth(14,90);
    ui->tableWidget_cetak_dds->setColumnWidth(15,230);
    ui->tableWidget_cetak_dds->setColumnWidth(16,230);
-   ui->tableWidget_cetak_dds->setColumnWidth(17,50);
-   ui->tableWidget_cetak_dds->setColumnWidth(26,120);
+   //ui->tableWidget_cetak_dds->setColumnWidth(17,50);
+   //ui->tableWidget_cetak_dds->setColumnWidth(26,120);
 
 }
 
@@ -442,32 +444,32 @@ void Form::memuatData_twRealisasidds(QString id_kam_s) // Data realisasi kampung
     double sisa_blt=0;
 
     QSqlQuery query;
-    QString cmd= " SELECT pmk_yhk.dds_2021.nama_kampung, pmk_yhk.dds_2021.nama_distrik, pmk_yhk.dds_2021.id_dis, pmk_yhk.dds_2021.id, pmk_yhk.dds_2021.pagu_dana_desa, SUM ( pmk_yhk.dds_cair.j_cair ) "
-                 "AS total_pencairan, pmk_yhk.dds_2021.pagu_dana_desa - SUM ( pmk_yhk.dds_cair.j_cair ) AS sisa_dana "
+    QString cmd= " SELECT pmk_yhk.m_dds_2021.nama_kampung, pmk_yhk.m_dds_2021.nama_distrik, pmk_yhk.m_dds_2021.id_dis, pmk_yhk.m_dds_2021.id, pmk_yhk.m_dds_2021.pagu_dana_desa, SUM ( pmk_yhk.dds_cair.j_cair ) "
+                 "AS total_pencairan, pmk_yhk.m_dds_2021.pagu_dana_desa - SUM ( pmk_yhk.dds_cair.j_cair ) AS sisa_dana "
            " FROM "
-                "pmk_yhk.dds_2021 "
-              " LEFT JOIN pmk_yhk.dds_cair ON pmk_yhk.dds_2021.id = pmk_yhk.dds_cair.id_kam "
+                "pmk_yhk.m_dds_2021 "
+              " LEFT JOIN pmk_yhk.dds_cair ON pmk_yhk.m_dds_2021.id = pmk_yhk.dds_cair.id_kam "
             " GROUP BY "
-                "pmk_yhk.dds_2021.nama_kampung,"
-             "   pmk_yhk.dds_2021.nama_distrik,"
-              "  pmk_yhk.dds_2021.id_dis,"
-              "  pmk_yhk.dds_2021.id"
+                "pmk_yhk.m_dds_2021.nama_kampung,"
+             "   pmk_yhk.m_dds_2021.nama_distrik,"
+              "  pmk_yhk.m_dds_2021.id_dis,"
+              "  pmk_yhk.m_dds_2021.id"
           "  ORDER BY "
-            "  pmk_yhk.dds_2021.id ";
+            "  pmk_yhk.m_dds_2021.id ";
 
-    QString cmd_ = " SELECT pmk_yhk.dds_2021.nama_kampung, pmk_yhk.dds_2021.nama_distrik, pmk_yhk.dds_2021.id_dis, pmk_yhk.dds_2021.id, pmk_yhk.dds_2021.pagu_dana_desa, SUM ( pmk_yhk.dds_cair.j_cair ) "
-                   "AS total_pencairan, pmk_yhk.dds_2021.pagu_dana_desa - SUM ( pmk_yhk.dds_cair.j_cair ) AS sisa_dana "
+    QString cmd_ = " SELECT pmk_yhk.m_dds_2021.nama_kampung, pmk_yhk.m_dds_2021.nama_distrik, pmk_yhk.m_dds_2021.id_dis, pmk_yhk.m_dds_2021.id, pmk_yhk.m_dds_2021.pagu_dana_desa, SUM ( pmk_yhk.dds_cair.j_cair ) "
+                   "AS total_pencairan, pmk_yhk.m_dds_2021.pagu_dana_desa - SUM ( pmk_yhk.dds_cair.j_cair ) AS sisa_dana "
              " FROM "
-                  "pmk_yhk.dds_2021 "
-                " LEFT JOIN pmk_yhk.dds_cair ON pmk_yhk.dds_2021.id = pmk_yhk.dds_cair.id_kam "
-             " WHERE pmk_yhk.dds_2021.id = :id "
+                  "pmk_yhk.m_dds_2021 "
+                " LEFT JOIN pmk_yhk.dds_cair ON pmk_yhk.m_dds_2021.id = pmk_yhk.dds_cair.id_kam "
+             " WHERE pmk_yhk.m_dds_2021.id = :id "
               " GROUP BY "
-                  "pmk_yhk.dds_2021.nama_kampung,"
-               "   pmk_yhk.dds_2021.nama_distrik,"
-                "  pmk_yhk.dds_2021.id_dis,"
-                "  pmk_yhk.dds_2021.id"
+                  "pmk_yhk.m_dds_2021.nama_kampung,"
+               "   pmk_yhk.m_dds_2021.nama_distrik,"
+                "  pmk_yhk.m_dds_2021.id_dis,"
+                "  pmk_yhk.m_dds_2021.id"
             "  ORDER BY "
-              "  pmk_yhk.dds_2021.id " ;
+              "  pmk_yhk.m_dds_2021.id " ;
 
     if (id_kam_s != ""){cmd=cmd_;}
 
@@ -522,7 +524,6 @@ void Form::memuatData_twRealisasidds(QString id_kam_s) // Data realisasi kampung
         tot_cair_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         sisa_dana_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
-        //ui->tableWidget_realisasi_blt->setCellWidget(i,0,rb);
         ui->tableWidget_realisasi_dds->setItem(i,2,nm_kampung_);
         ui->tableWidget_realisasi_dds->setItem(i,1,nm_distrik_);
         ui->tableWidget_realisasi_dds->setItem(i,6,id_dis_);
@@ -530,9 +531,7 @@ void Form::memuatData_twRealisasidds(QString id_kam_s) // Data realisasi kampung
         ui->tableWidget_realisasi_dds->setItem(i,3,pagu_);
         ui->tableWidget_realisasi_dds->setItem(i,5,tot_cair_);
         ui->tableWidget_realisasi_dds->setItem(i,4,sisa_dana_);
-
         i++;
-
        pagu_blt += pagu_d;
        tot_cair_blt += tot_cair_d;
 

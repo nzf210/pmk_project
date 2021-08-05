@@ -214,7 +214,7 @@ public:
 //        QFile  pdfFile (path+ "ADD_SRT.pdf");
 //        QString fn = path+"ADD_SRT.pdf";
 //        Nama Auto
-        QString nmpdf =tahap+ " dis "+nmdis+" kam "+nmkamp+".pdf";
+        QString nmpdf ="Honor"+ tahap+ " dis "+nmdis+" kam "+nmkamp+".pdf";
         QFile  pdfFile (path + nmpdf);
         QString fn = path + nmpdf;
 

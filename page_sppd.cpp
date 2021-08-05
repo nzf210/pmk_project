@@ -212,17 +212,17 @@ void Form::even_dklik_tw13() // Double Klik Event ..............................
 
 void Form::headsppd()
 {
-    QStringList headerWidget;
-    ui->tableWidget_cetak_sppd->setColumnCount(4);
-    headerWidget <<"id" <<"No Surat"<<"Perihal" <<"Tanggal ";
-    ui->tableWidget_cetak_sppd->setHorizontalHeaderLabels(headerWidget);
-    ui->tableWidget_cetak_sppd->horizontalHeader()->setStretchLastSection(true);
-    ui->tableWidget_cetak_sppd->setSelectionBehavior(QAbstractItemView::SelectRows);
+//    QStringList headerWidget;
+//    ui->tableWidget_cetak_sppd->setColumnCount(4);
+//    headerWidget <<"id" <<"No Surat"<<"Perihal" <<"Tanggal ";
+//    ui->tableWidget_cetak_sppd->setHorizontalHeaderLabels(headerWidget);
+//    ui->tableWidget_cetak_sppd->horizontalHeader()->setStretchLastSection(true);
+//    ui->tableWidget_cetak_sppd->setSelectionBehavior(QAbstractItemView::SelectRows);
 
-    ui->tableWidget_cetak_sppd->setColumnHidden(0,true);
-    ui->tableWidget_cetak_sppd->setColumnWidth(1,230);
-    ui->tableWidget_cetak_sppd->setColumnWidth(2,330);
-    ui->tableWidget_cetak_sppd->setColumnWidth(3,70);
+//    ui->tableWidget_cetak_sppd->setColumnHidden(0,true);
+//    ui->tableWidget_cetak_sppd->setColumnWidth(1,230);
+//   // ui->tableWidget_cetak_sppd->setColumnWidth(2,330);
+//    //ui->tableWidget_cetak_sppd->setColumnWidth(3,70);
 }
 
 
@@ -527,6 +527,20 @@ void Form::muatheadertw_cetak_sppd()
     head << "Tahap" << "Kampung" << "Distrik" << "No Rek" << "Nama Rek" << "Nama Bank" << "Bendahara" << "Kepala Kampung" << "Jml Cair" << "Terbilang" << "Tgl" << "Thp II";
     ui->tableWidget_cetak_sppd->setColumnCount(head.count());
     ui->tableWidget_cetak_sppd->setHorizontalHeaderLabels(head);
+    ui->tableWidget_cetak_sppd->setColumnHidden(11,true);
+
+    ui->tableWidget_cetak_sppd->setColumnWidth(0,70);
+    ui->tableWidget_cetak_sppd->setColumnWidth(1,120);
+    ui->tableWidget_cetak_sppd->setColumnWidth(2,120);
+    ui->tableWidget_cetak_sppd->setColumnWidth(3,130);
+    ui->tableWidget_cetak_sppd->setColumnWidth(4,230);
+    ui->tableWidget_cetak_sppd->setColumnWidth(5,230);
+    ui->tableWidget_cetak_sppd->setColumnWidth(6,150);
+    ui->tableWidget_cetak_sppd->setColumnWidth(7,150);
+    ui->tableWidget_cetak_sppd->setColumnWidth(8,100);
+    ui->tableWidget_cetak_sppd->setColumnWidth(9,250);
+    ui->tableWidget_cetak_sppd->setColumnWidth(10,100);
+   // ui->tableWidget_cetak_sppd->setColumnWidth(11,100);
 }
 
 void Form::on_comboBox_realisasi_currentIndexChanged(const QString &arg1)

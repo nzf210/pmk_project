@@ -263,6 +263,8 @@ void Form::header_cetak_blt()
     ui->tableWidget_cetak_blt->setColumnHidden(28,true);
     ui->tableWidget_cetak_blt->setColumnHidden(29,true);
     ui->tableWidget_cetak_blt->setColumnHidden(30,true);
+    ui->tableWidget_cetak_blt->setColumnHidden(26,true);
+    ui->tableWidget_cetak_blt->setColumnHidden(17,true);
 
     ui->tableWidget_cetak_blt->setColumnWidth(3,120);
     ui->tableWidget_cetak_blt->setColumnWidth(4,120);
@@ -272,8 +274,8 @@ void Form::header_cetak_blt()
    ui->tableWidget_cetak_blt->setColumnWidth(14,90);
    ui->tableWidget_cetak_blt->setColumnWidth(15,230);
    ui->tableWidget_cetak_blt->setColumnWidth(16,230);
-   ui->tableWidget_cetak_blt->setColumnWidth(17,50);
-   ui->tableWidget_cetak_blt->setColumnWidth(26,120);
+   //ui->tableWidget_cetak_blt->setColumnWidth(17,50);
+   //ui->tableWidget_cetak_blt->setColumnWidth(26,120);
 
 }
 

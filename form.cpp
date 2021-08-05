@@ -647,13 +647,13 @@ void Form::muatTahap(QString a)
     QSqlQuery query;
     QString id_kampung_tahap = qbx_id_kam->currentText();
     QString cmd = "SELECT "
-            "dds_2021.nama_distrik, "
-            "dds_2021.nama_kampung, "
-            "dds_2021."+a+
+            "m_dds_2021.nama_distrik, "
+            "m_dds_2021.nama_kampung, "
+            "m_dds_2021."+a+
         " FROM "
-            "pmk_yhk.dds_2021"
+            "pmk_yhk.m_dds_2021"
         " WHERE "
-            "dds_2021.id = :b  ";
+            "m_dds_2021.id = :b  ";
     query.prepare(cmd);
     query.bindValue(":b", id_kampung_tahap);
 
