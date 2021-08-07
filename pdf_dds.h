@@ -219,12 +219,11 @@ bool ok_()
         if(pdfFile2.exists()) {QMessageBox::information(this,"Info...","Tutup File pdf yg terbuka dan Generate Kembali"); qInfo()<<"Silahkan tutup pdf file"; return;}
 
 //    view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Portrait, QMargins(25,15,15,15)) );
-         view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,0,15,15)) ); // fix old
-
-       // view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Landscape, QMargins(0,0,0,0)));
+        view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,0,15,15)) ); // fix old
+        view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)));
+//    view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Landscape, QMargins(0,0,0,0)));
 //    view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4Extra), QPageLayout::Landscape, QMargins(25,15,15,15)) );
         //view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(25,1,15,10)));
-         view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)));
         //view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0))); new Ver
 
         view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan OK setelah loading selesai</b>")); // old fix
@@ -321,13 +320,13 @@ bool ok_()
     void onPdfPrintingFinished(const QString & filename, bool ok)
     {
         qDebug() <<"pdf Finish"<< filename << ok;
-        progressbar->setRange(0, 1);
+        progressbar->setRange(0, 100);
     }
 
     void onPdfPrintingFinished2(const QString & filename, bool ok)
     {
         qDebug() <<"pdf Finish 2"<< filename << ok;
-        progressbar2->setRange(0, 1);
+        progressbar2->setRange(0, 100);
     }
 
      static void usleep(unsigned long usecs){QThread::usleep(usecs);}
