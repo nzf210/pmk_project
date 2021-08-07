@@ -92,7 +92,8 @@ void Form::on_toolButton_cetakPdfadd_clicked()
        QIcon logo(":/gbr/html/gbr/yhk.png");
        a->setWindowIcon(logo);
        a->setWindowTitle("Cetak pdf Realisasi Alokasi Dana Desa.");
-       a->show();
+       //a->show();
+       a->hide();
                         }
 }
 

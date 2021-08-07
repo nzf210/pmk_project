@@ -9,6 +9,8 @@ class Widget2 : public QWidget
 public:
     QStringList list;
     QStringList li_bm;
+    QTimer* timer;
+    QMessageBox *msgBox;
     explicit Widget2(QWidget *parent = nullptr):
     QWidget(parent),
     button2(new QPushButton),
@@ -101,24 +103,20 @@ public:
             stream << l;
             fOut.flush();
             fOut.close();
-           // QMessageBox::information(this,tr("Info"),tr("dds tersimpan"));
          }
-//        QFile aa(path2+"add.html");
-//        aa.close();
         htmlFile.close();
         QUrl url = QUrl::fromLocalFile("/doc/temp/add.html");
-
-       // view->load(url);
         view->setHtml(html);
         view->load(url);
 
         auto lay = new QVBoxLayout(this);
 
         lay->addWidget(button);
-        lay->addWidget(progressbar);
+        //lay->addWidget(progressbar);
 
         //lay->addWidget(view);
          resize(330, 280);
+         run();
     }
 
     void loadlspdf1()
@@ -216,7 +214,9 @@ public:
 
     void onClicked()
     {
-        progressbar->setRange(0, 0);
+        msgBox = new QMessageBox;
+        msgBox->setWindowTitle("Buka pdf File dds Reg...");
+        //progressbar->setRange(0, 0);
         QString path("laporan/add/");
 
         QDir dir(path);
@@ -229,20 +229,30 @@ public:
 
 //        view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(743,987))), QPageLayout::Portrait, QMargins(65,0,15,15)) ); ini fix ukuran 2020
         view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)) );
-        view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan ok setelah loading selesai</b>"));
-        sleep(1);
+        //view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan ok setelah loading selesai</b>"));
+        view->page()->pdfPrintingFinished(fn,msgBox->exec());
+        //sleep(1);
         QDesktopServices::openUrl(QUrl::fromLocalFile(fn));
         view->close();
         this->close();
     }
 
     void run() {
-            QTimer* timer = new QTimer(this);
-            timer->setInterval(500);
-            timer->connect(timer, SIGNAL(timeout()), this, SLOT(doIt()));
+            qInfo() << "runnnn runnnnnnnnnnn";
+            timer = new QTimer(this);
+            timer->setInterval(4300);
+            //timer->connect(timer, SIGNAL(timeout()), this, SLOT(klik_buton()));
+             timer->connect(timer, &QTimer::timeout, this, &Widget2::klik_buton);
             timer->start();
-                     }
-
+        }
+    void klik_buton()
+    {
+        qInfo() << "dtpdf1.txt File tdk terbuka runnnnnnnnnnn button clik";
+        //button = new QPushButton;
+        //button->click();
+        timer->stop();
+        onClicked();
+    }
 //    void onClicked2()
 //    {
 //        progressbar2->setRange(0, 0);

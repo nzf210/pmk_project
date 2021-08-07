@@ -10,6 +10,8 @@ class Widget5 : public QWidget
 
 public:
  QStringList list;
+ QTimer* timer;
+ QMessageBox *msgBox;
     explicit Widget5(QWidget *parent = nullptr):
         QWidget(parent),  button2(new QPushButton),button(new QPushButton),progressbar(new QProgressBar),  progressbar2(new QProgressBar), view(new QWebEngineView), view2(new QWebEngineView)
     {

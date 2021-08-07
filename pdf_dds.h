@@ -11,6 +11,8 @@ public slots:
 
 public:
         QStringList list;
+        QTimer* timer;
+        QMessageBox *msgBox;
         explicit Widget1(QWidget *parent = nullptr):
         QWidget(parent),
 
@@ -36,9 +38,6 @@ public:
         connect(view2, &QWebEngineView::loadFinished, this, &Widget1::onLoadFinished2);
         connect(view2->page(), &QWebEnginePage::pdfPrintingFinished, this, &Widget1::onPdfPrintingFinished2);
         //connect(progressbar, &QProgressBar::valueChanged, this, &Widget1::openFile);
-
-
-
 
 //!=================================================================================
        loadlspdf1();
@@ -168,12 +167,12 @@ public:
 
         auto lay = new QVBoxLayout(this);
         lay->addWidget(button);
-        lay->addWidget(progressbar);
+        //lay->addWidget(progressbar);
         //lay->addWidget(view);
         //lay->addWidget(view2);
         //resize(630, 780);
         resize(330, 280);
-
+        run();
     }
 
  QStringList pdfForm()
@@ -201,6 +200,11 @@ bool ok_()
 
     void onClicked()
     {
+
+        msgBox = new QMessageBox;
+        msgBox->setWindowTitle("Buka pdf File dds Reg...");
+
+
         progressbar->setRange(0, 0);
         QString path("laporan/dds/");
         QDir dir(path);
@@ -218,15 +222,10 @@ bool ok_()
         if(pdfFile2.exists()){ pdfFile2.remove(); }
         if(pdfFile2.exists()) {QMessageBox::information(this,"Info...","Tutup File pdf yg terbuka dan Generate Kembali"); qInfo()<<"Silahkan tutup pdf file"; return;}
 
-//    view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Portrait, QMargins(25,15,15,15)) );
         view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,0,15,15)) ); // fix old
         view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)));
-//    view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Landscape, QMargins(0,0,0,0)));
-//    view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4Extra), QPageLayout::Landscape, QMargins(25,15,15,15)) );
-        //view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(25,1,15,10)));
-        //view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0))); new Ver
 
-        view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan OK setelah loading selesai</b>")); // old fix
+        //view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan OK setelah loading selesai</b>")); // old fix
 
 
         //QEventLoop loop;
@@ -235,7 +234,7 @@ bool ok_()
         ///QObject::connect(progressbar, SIGNAL(valueChanged(int)), this, &Widget1::openFile);
        // bool ok = loop.exec();
 
-//        view->page()->pdfPrintingFinished(fn, ok);
+        view->page()->pdfPrintingFinished(fn, msgBox->exec());
 
         view2->page()->pdfPrintingFinished(fn2, true);
         //sleep(5);
@@ -251,9 +250,11 @@ bool ok_()
     }
 
     void run() {
-            QTimer* timer = new QTimer(this);
-            timer->setInterval(1);
-            timer->connect(timer, SIGNAL(timeout()), this, SLOT(doIt()));
+            qInfo() << "runnnn runnnnnnnnnnn";
+            timer = new QTimer(this);
+            timer->setInterval(4300);
+            //timer->connect(timer, SIGNAL(timeout()), this, SLOT(klik_buton()));
+             timer->connect(timer, &QTimer::timeout, this, &Widget1::klik_buton);
             timer->start();
         }
 
@@ -348,7 +349,14 @@ public slots:
          QDesktopServices::openUrl(QUrl::fromLocalFile(fn2));
      }
 
-
+void klik_buton()
+{
+    qInfo() << "dtpdf1.txt File tdk terbuka runnnnnnnnnnn button clik";
+    //button = new QPushButton;
+    //button->click();
+    timer->stop();
+    onClicked();
+}
 
    //  bool ok_();
 
