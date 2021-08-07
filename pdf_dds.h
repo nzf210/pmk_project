@@ -7,14 +7,24 @@
 
 class Widget1 : public QWidget
 {
+public slots:
 
 public:
- QStringList list;
-    explicit Widget1(QWidget *parent = nullptr):
-        QWidget(parent),  button2(new QPushButton),button(new QPushButton),progressbar(new QProgressBar),  progressbar2(new QProgressBar), view(new QWebEngineView), view2(new QWebEngineView)
-    {
+        QStringList list;
+        explicit Widget1(QWidget *parent = nullptr):
+        QWidget(parent),
 
-        pdfForm();
+        button2(new QPushButton),
+        button(new QPushButton),
+        progressbar(new QProgressBar),
+        progressbar2(new QProgressBar),
+        view(new QWebEngineView),
+        view2(new QWebEngineView)
+
+
+  {
+
+        //pdfForm();
         button->setText(tr("generate pdf dds"));
         button->setEnabled(false);
 
@@ -25,12 +35,10 @@ public:
         //connect(button, &QPushButton::clicked, this, &Widget::onClicked2);
         connect(view2, &QWebEngineView::loadFinished, this, &Widget1::onLoadFinished2);
         connect(view2->page(), &QWebEnginePage::pdfPrintingFinished, this, &Widget1::onPdfPrintingFinished2);
+        //connect(progressbar, &QProgressBar::valueChanged, this, &Widget1::openFile);
 
 
-// === Load List Dari form pdf1 ===S===
-        QStringList form = pdfForm();
-        qInfo() << "Coba List String dari Form" << form;
-// === Load List Dari form pdf1 ===S===
+
 
 //!=================================================================================
        loadlspdf1();
@@ -176,6 +184,10 @@ public:
  }
 
 //private:
+bool ok_()
+{
+    return true;
+}
 
     void onLoadFinished(bool ok)
     {
@@ -196,10 +208,10 @@ public:
         //QString Nama Auto
         QString nmpdf = "Reg "+tahap +" "+nmkamp+" Dis "+nmdis;
         QFile  pdfFile ( path + nmpdf+ " D.pdf");
-        QString fn = path +  nmpdf +" D.pdf";
+        fn = path +  nmpdf +" D.pdf";
 
         QFile  pdfFile2 (path+nmpdf+" K.pdf");
-        QString fn2 = path +nmpdf+" K.pdf";
+        fn2 = path +nmpdf+" K.pdf";
 
         if(pdfFile.exists()){ pdfFile.remove(); }
         if(pdfFile.exists()) {QMessageBox::information(this,"Info...","Tutup File pdf yg terbuka dan Generate Kembali"); qInfo()<<"Silahkan tutup pdf file"; return;}
@@ -215,14 +227,28 @@ public:
          view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)));
         //view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0))); new Ver
 
-        view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan ok setelah loading selesai</b>"));
-        bool ok ;
-        view2->page()->pdfPrintingFinished(fn2, (ok=true));
-        sleep(2);
-        QDesktopServices::openUrl(QUrl::fromLocalFile(fn));  msleep(1); QDesktopServices::openUrl(QUrl::fromLocalFile(fn2));
+        view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan OK setelah loading selesai</b>")); // old fix
+
+
+        //QEventLoop loop;
+///         connect(ui->tableWidget_cetak_sppd, &QTableWidget::doubleClicked , this, &Form::even_dklik_tw13);
+///         connect(this, SIGNAL( currentChanged(int)), this, SLOT(onTabChanged(int)));
+        ///QObject::connect(progressbar, SIGNAL(valueChanged(int)), this, &Widget1::openFile);
+       // bool ok = loop.exec();
+
+//        view->page()->pdfPrintingFinished(fn, ok);
+
+        view2->page()->pdfPrintingFinished(fn2, true);
+        //sleep(5);
+
         view->close();
         view2->close();
         this->close();
+        QDesktopServices::openUrl(QUrl::fromLocalFile(fn));  sleep(1);
+        QDesktopServices::openUrl(QUrl::fromLocalFile(fn2));
+
+//connect(progressbar, &QProgressBar::valueChanged, this, &Widget1::openFile);
+ //openFile();
     }
 
     void run() {
@@ -310,6 +336,25 @@ public:
 
 public slots:
 
+ void openFile()
+     {
+        qInfo() << "Jalan Kah tdk ini" ;
+         view->page()->pdfPrintingFinished(fn, true);
+         view2->page()->pdfPrintingFinished(fn2, true);
+         //sleep(5);
+         view->close();
+         view2->close();
+         this->close();
+         QDesktopServices::openUrl(QUrl::fromLocalFile(fn));  //msleep(1);
+         QDesktopServices::openUrl(QUrl::fromLocalFile(fn2));
+     }
+
+
+
+   //  bool ok_();
+
+      QString fn;
+       QString fn2;
      //===================================================
     QString jbt_klp_dns;
      QString nmdis ;

@@ -129,8 +129,8 @@ private slots:
 
       void sppdbtc();
       //void sppdbtc_2();
+     void refresh_data_sppd();
 
-      //void qbx3event(); // even qComboBox realisasi pada SPPD
       void updatesppd();
       void update_data_sppd(QString id,QString date, QString noSrt, QString perihal);
       void update_sppd_toDB();

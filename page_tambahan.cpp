@@ -1,6 +1,7 @@
 #include "form.h"
 #include "ui_form.h"
 #include "mainwindow.h"
+//#include "pdf_dds.h"
 // =======================================================================================
 #include "QDebug"
 #include <QFile>
@@ -134,10 +135,15 @@ void Form::on_toolButton_refResh_clicked()
                        { QString id = qbx_id_kam->currentText();
                            //muat_v_bam_2(id);
                    }}
- if(menu=="4"){
-                       if (ui->comboBox_realisasi->currentIndex()==0){/*muatrealdds(); loadsppd();*/ }
-                       if (ui->comboBox_realisasi->currentIndex()==1){/*muatrealadd();*/ /*loadsppd_2();*/}
+ if(menu=="4"){ int qbxreal = ui->comboBox_realisasi->currentIndex();
+                       if ( qbxreal <= 0){
+                            QMessageBox::information(this,"Info ..." , "Pilih data Realisasi ...");
+                       }
+                       if ( qbxreal > 0){
+                            qInfo() << " ini adalah menu refres 4 ";
+                            refresh_data_sppd();
                         }
+}
 }
 
 //logout Button
@@ -233,6 +239,10 @@ void Form::modeTampilan_usr()
 
 void Form::conect_slot()
 {
+
+
+
+
     connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(qbx_id_dis_conn()));
     connect(ui->comboBox_nmKampung, SIGNAL (currentIndexChanged(int)), this, SLOT(qbx_id_kam_conn()));
     connect(ui->comboBox_realisasi, SIGNAL (currentIndexChanged(int)), this, SLOT(qbx3event())); // even qComboBox realisasi pada SPPD
@@ -245,6 +255,7 @@ void Form::conect_slot()
     //connect(ui->tableWidget_cetak_add, &QTableWidget::doubleClicked , this, &Form::event_doubleklik_tw_cetak_add);
     connect(ui->tableWidget_cetak_sppd, &QTableWidget::doubleClicked , this, &Form::even_dklik_tw13);
     connect(this, SIGNAL( currentChanged(int)), this, SLOT(onTabChanged(int)));
+
 }
 
 

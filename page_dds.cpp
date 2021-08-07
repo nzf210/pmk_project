@@ -47,7 +47,10 @@ void Form::on_toolButton_cetakPdfdds_clicked()
        Widget1 *d = new Widget1;
        QIcon logo(":/gbr/html/gbr/yhk.png");
        d->setWindowIcon(logo);
+       d->setWindowTitle("Cetak pdf Dana Desa Reguler");
        d->show();
+       //d->hide();
+
                         }
 }
 

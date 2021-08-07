@@ -7,7 +7,8 @@
 class Widget2 : public QWidget
 {
 public:
-    QStringList list; QStringList li_bm;
+    QStringList list;
+    QStringList li_bm;
     explicit Widget2(QWidget *parent = nullptr):
     QWidget(parent),
     button2(new QPushButton),
@@ -25,7 +26,7 @@ public:
         connect(view, &QWebEngineView::loadFinished, this, &Widget2::onLoadFinished);
         connect(view->page(), &QWebEnginePage::pdfPrintingFinished, this, &Widget2::onPdfPrintingFinished);
         //this->setFixedSize(this->setw , this->height());
-        progressbar->setMinimumSize(QSize(10,300));
+        //progressbar->setMinimumSize(QSize(10,300));
 
         //!=================================================================================
          loadmbam();
@@ -117,7 +118,7 @@ public:
         lay->addWidget(progressbar);
 
         //lay->addWidget(view);
-         //resize(330, 280);
+         resize(330, 280);
     }
 
     void loadlspdf1()
@@ -229,7 +230,7 @@ public:
 //        view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(743,987))), QPageLayout::Portrait, QMargins(65,0,15,15)) ); ini fix ukuran 2020
         view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)) );
         view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan ok setelah loading selesai</b>"));
-        sleep(2);
+        sleep(1);
         QDesktopServices::openUrl(QUrl::fromLocalFile(fn));
         view->close();
         this->close();

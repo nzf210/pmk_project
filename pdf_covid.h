@@ -14,8 +14,8 @@ public:
         QWidget(parent),  button2(new QPushButton),button(new QPushButton),progressbar(new QProgressBar),  progressbar2(new QProgressBar), view(new QWebEngineView), view2(new QWebEngineView)
     {
 
-        pdfForm();
-        button->setText(tr("generate pdf dds"));
+        //pdfForm();
+        button->setText(tr("generate pdf Covid"));
         button->setEnabled(false);
 
         connect(button, &QPushButton::clicked, this, &Widget5::onClicked);
@@ -25,12 +25,6 @@ public:
         //connect(button, &QPushButton::clicked, this, &Widget::onClicked2);
         connect(view2, &QWebEngineView::loadFinished, this, &Widget5::onLoadFinished2);
         connect(view2->page(), &QWebEnginePage::pdfPrintingFinished, this, &Widget5::onPdfPrintingFinished2);
-
-
-// === Load List Dari form pdf1 ===S===
-        QStringList form = pdfForm();
-        qInfo() << "Coba List String dari Form" << form;
-// === Load List Dari form pdf1 ===S===
 
 //!=================================================================================
        loadlspdf1();
@@ -213,8 +207,8 @@ public:
         view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan ok setelah loading selesai</b>"));
         bool ok ;
         view2->page()->pdfPrintingFinished(fn2, (ok=true));
-        sleep(2);
-        QDesktopServices::openUrl(QUrl::fromLocalFile(fn));  msleep(1); QDesktopServices::openUrl(QUrl::fromLocalFile(fn2));
+        //sleep(2);
+        QDesktopServices::openUrl(QUrl::fromLocalFile(fn));  sleep(1); QDesktopServices::openUrl(QUrl::fromLocalFile(fn2));
         view->close();
         view2->close();
         this->close();

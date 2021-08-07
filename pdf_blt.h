@@ -13,8 +13,8 @@ public:
         QWidget(parent),  button2(new QPushButton),button(new QPushButton),progressbar(new QProgressBar),  progressbar2(new QProgressBar), view(new QWebEngineView), view2(new QWebEngineView)
     {
 
-        pdfForm();
-        button->setText(tr("generate pdf dds"));
+        //pdfForm();
+        button->setText(tr("generate pdf BLT"));
         button->setEnabled(false);
 
         connect(button, &QPushButton::clicked, this, &Widget6::onClicked);
@@ -212,8 +212,8 @@ public:
         view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan ok setelah loading selesai</b>"));
         bool ok ;
         view2->page()->pdfPrintingFinished(fn2, (ok=true));
-        sleep(2);
-        QDesktopServices::openUrl(QUrl::fromLocalFile(fn));  msleep(1); QDesktopServices::openUrl(QUrl::fromLocalFile(fn2));
+        //sleep(2);
+        QDesktopServices::openUrl(QUrl::fromLocalFile(fn));  sleep(1); QDesktopServices::openUrl(QUrl::fromLocalFile(fn2));
         view->close();
         view2->close();
         this->close();

@@ -138,7 +138,8 @@ Form::Form(QWidget *parent) :
     QDate thn = QDate::currentDate();
     QString thn_ = thn.toString("yyyy");
     this->setWindowTitle("Sistem Infomasi Pengelolaan Keuangan Desa Kab. Yahukimo "+thn_+" ");
-    //this->showMaximized();
+    //
+   if(menu==""){this->showMaximized();}
     //this->showMinimized();]
     ///this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);  menu menghilangkan frame window
     ///this->setAttribute(Qt::WA_TranslucentBackground, true); .. menjadikan tranparant
@@ -187,6 +188,10 @@ ui->label_14->setText("Alokasi Dana Desa");
 modeTampilan_usr();
 ui->label_space_1->setText("Selamat Datang : "+nama_l);
  // === Memuat Level Type ===
+
+
+
+
 
 #ifdef Q_OS_WINDOWS
     Form::Initialize();

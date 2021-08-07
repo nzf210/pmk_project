@@ -170,8 +170,10 @@ void Form::on_toolButton_Sppd_clicked() // ToolButton menu SPPD
 
     QDate d =QDate::currentDate();
     QString de = d.toString("yyyy");
+    //qInfo() << " de ..........." << de;
     QString de_ = "01-01-"+de;
-    QDate dd = QLocale{QLocale::Indonesian}.toDate(de_,"dd MMMM yyyy");
+    qInfo() << " de ..........." << de_;
+    QDate dd = QLocale{QLocale::Indonesian}.toDate(de_,"dd-MM-yyyy");
 
     ui->dateEdit->setDate(dd);
     ui->dateEdit->setLocale(QLocale::Indonesian);
@@ -326,6 +328,8 @@ void Form::sppdbtc()
 
     disconnect(btnsppd, SIGNAL(pressed()), this, SLOT(sppdbtc()));
 }
+
+
 
 
 
@@ -913,4 +917,74 @@ void Form::update_sppd_toDB()
     select_tgl_sppd("");
 }
 
+void Form::refresh_data_sppd()
+{
+    QString a;
+    QString aa=ui->comboBox_realisasi->currentText();
+
+    if(aa=="Realisasi Dana Desa") {  a="dds"; }
+    if(aa=="Realisasi Alokasi Dana Desa") { a="add"; }
+    if(aa=="Realisasi Dana BLT") { a="blt"; }
+    if(aa=="Realisasi Dana Covid") { a="covid"; }
+
+
+    muatheadertw_realisasi_sppd();
+/// QLocale{QLocale::Indonesian}.toString(d, "dd MMMM yyyy");
+    QString date1 = ui->dateEdit->text();
+    QString date2 = ui->dateEdit_2->text();
+    qInfo() << "=========" << date1 << "Date 2" << date2;
+    QDate dt11 = indo.toDate(date1,"dd MMMM yyyy");
+    //QDate dt1 = QDate::fromString(date1,"dd MMMM yyyy");
+    QString date1_ = dt11.toString("yyyy-MM-dd");
+    QDate dt2 = indo.toDate(date2,"dd MMMM yyyy");
+    QString date2_ = dt2.toString("yyyy-MM-dd");
+
+    qInfo() << "========= Date 1" << date1_ << "Date 2" << date2_;
+
+    while(ui->tableWidget_realisasi_sppd->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+    {ui->tableWidget_realisasi_sppd->removeRow(0);}
+     QSqlQuery query;
+     QString cmd;
+
+     cmd = "SELECT  * "
+         "FROM"
+            " pmk_yhk.sppdd_"+a+""
+        " WHERE "
+             " pmk_yhk.sppdd_"+a+".tgl >=  :date1   AND "
+             " pmk_yhk.sppdd_"+a+".tgl <=  :date2  "
+         " ORDER BY "
+           "  pmk_yhk.sppdd_"+a+".tgl DESC " ;
+
+     query.prepare(cmd);
+     query.bindValue(":date1", date1_ );
+     query.bindValue(":date2", date2_ );
+     bool ok = exec(query);
+     if(!ok){QMessageBox::information(this,"Error...","Gagal Memuat Data tw Realisasi range Tanggal ... ");return;}
+     int i=0;
+     while(query.next())
+     {
+                 ui->tableWidget_realisasi_sppd->insertRow(i);
+                 QTableWidgetItem *no_ = new QTableWidgetItem;
+                 QTableWidgetItem *nosrt_ = new QTableWidgetItem;
+                 QTableWidgetItem *hal_ = new QTableWidgetItem;
+                 QTableWidgetItem *tgl_ = new QTableWidgetItem;
+                 no_->setText(query.value(0).toString());
+                 nosrt_->setText(query.value(1).toString());
+                 hal_->setText(query.value(2).toString());
+                 QDate dt = QDate::fromString(query.value(3).toString(),"yyyy-MM-dd");
+                 tgl_->setText(dt.toString("dd-MM-yyyy"));
+
+                 no_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+                 nosrt_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+                 hal_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+                 tgl_->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+
+                 ui->tableWidget_realisasi_sppd->setItem(i,0,no_);
+                 ui->tableWidget_realisasi_sppd->setItem(i,1,nosrt_);
+                 ui->tableWidget_realisasi_sppd->setItem(i,2,hal_);
+                 ui->tableWidget_realisasi_sppd->setItem(i,3,tgl_);
+                 i++;
+     }
+
+}
 
