@@ -161,12 +161,12 @@ public:
 
         auto lay = new QVBoxLayout(this);
         lay->addWidget(button);
-        lay->addWidget(progressbar);
+        //lay->addWidget(progressbar);
         //lay->addWidget(view);
         //lay->addWidget(view2);
         //resize(630, 780);
-        resize(330, 280);
-
+        //resize(330, 280);
+        run();
     }
 
  QStringList pdfForm()
@@ -190,7 +190,9 @@ public:
 
     void onClicked()
     {
-        progressbar->setRange(0, 0);
+        msgBox = new QMessageBox;
+        msgBox->setWindowTitle("Buka pdf File BLT...");
+        //progressbar->setRange(0, 0);
         QString path("laporan/blt/");
         QDir dir(path);
 
@@ -211,8 +213,9 @@ public:
 
          view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)));
 
-        view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan ok setelah loading selesai</b>"));
-        bool ok ;
+        ///view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan ok setelah loading selesai</b>"));
+        view->page()->pdfPrintingFinished(fn,msgBox->exec());
+         bool ok ;
         view2->page()->pdfPrintingFinished(fn2, (ok=true));
         //sleep(2);
         QDesktopServices::openUrl(QUrl::fromLocalFile(fn));  sleep(1); QDesktopServices::openUrl(QUrl::fromLocalFile(fn2));
@@ -222,11 +225,21 @@ public:
     }
 
     void run() {
-            QTimer* timer = new QTimer(this);
-            timer->setInterval(1);
-            timer->connect(timer, SIGNAL(timeout()), this, SLOT(doIt()));
+            qInfo() << "runnnn runnnnnnnnnnn";
+            timer = new QTimer(this);
+            timer->setInterval(4300);
+            //timer->connect(timer, SIGNAL(timeout()), this, SLOT(klik_buton()));
+             timer->connect(timer, &QTimer::timeout, this, &Widget6::klik_buton);
             timer->start();
         }
+    void klik_buton()
+    {
+        qInfo() << "dtpdf1.txt File tdk terbuka runnnnnnnnnnn button clik";
+        //button = new QPushButton;
+        //button->click();
+        timer->stop();
+        onClicked();
+    }
 
     void loadlspdf1()
     {

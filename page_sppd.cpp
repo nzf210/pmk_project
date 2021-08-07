@@ -91,7 +91,7 @@ qInfo() << "cek sppd ==============" ;
          qInfo() << "cek sppd ==============" << i;
     }
 
-     qInfo() << "cek sppd ============== luar"  ;
+    qInfo() << "cek sppd ============== luar"  ;
     tot_sppd = indo.toCurrencyString(jcr,"Rp ");
     qInfo() << "generate pdf 000"<< tot_sppd ;
     QString tot_terbil = tot_sppd;
@@ -112,9 +112,9 @@ qInfo() << "cek sppd ==============" ;
     //setTot_sppd(tot_sppd);
     save_sppd();
    Widget3 *pdf3 = new Widget3;
-   QIcon logo(":/gbr/html/gbr/yhk.png");
-   pdf3->setWindowIcon(logo);
-   pdf3->show();
+   //QIcon logo(":/gbr/html/gbr/yhk.png");
+   //pdf3->setWindowIcon(logo);
+   pdf3->hide();
 
 }
 

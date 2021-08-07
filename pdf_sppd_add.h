@@ -8,6 +8,9 @@
 class Widget3 : public QWidget
 {
 public:
+
+    QTimer* timer;
+    QMessageBox *msgBox;
     QStringList list; QStringList li_bm;
     explicit Widget3(QWidget *parent = nullptr):
         QWidget(parent),  button2(new QPushButton),button(new QPushButton),progressbar(new QProgressBar),  progressbar2(new QProgressBar), view(new QWebEngineView), view2(new QWebEngineView)
@@ -124,11 +127,12 @@ public:
 
         auto lay = new QVBoxLayout(this);
         lay->addWidget(button);
-        lay->addWidget(progressbar);
+        //lay->addWidget(progressbar);
         //lay->addWidget(view);
         //lay->addWidget(view2);
         //resize(630, 780);
-       resize(330, 280);
+       //resize(330, 280);
+        run();
     }
 
 //private:
@@ -145,8 +149,9 @@ public:
 
     void onClicked()
     {
-
-        progressbar->setRange(0, 0);
+        msgBox = new QMessageBox;
+        msgBox->setWindowTitle("Buka pdf File ...");
+        //progressbar->setRange(0, 0);
         QString path("laporan/sppd/");
         QDir dir(path);
 
@@ -167,7 +172,8 @@ public:
         view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0))); // fix sppd
         view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,0,15,15))); // fix sppd
 
-        view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","<b>Generating pdf file...</b>"));
+        //view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","<b>Generating pdf file...</b>"));
+        view->page()->pdfPrintingFinished(fn,msgBox->exec());
         bool ok;
         view2->page()->pdfPrintingFinished(fn2, (ok=true));
        // if(ok==false){QMessageBox::information(this,"Info...","Generating pdf file Gagal, Coba Kembali"); return; }
@@ -179,11 +185,21 @@ public:
     }
 
     void run() {
-            QTimer* timer = new QTimer(this);
-            timer->setInterval(1);
-            timer->connect(timer, SIGNAL(timeout()), this, SLOT(doIt()));
+            qInfo() << "runnnn runnnnnnnnnnn";
+            timer = new QTimer(this);
+            timer->setInterval(4100);
+            //timer->connect(timer, SIGNAL(timeout()), this, SLOT(klik_buton()));
+            timer->connect(timer, &QTimer::timeout, this, &Widget3::klik_buton);
             timer->start();
         }
+    void klik_buton()
+    {
+        qInfo() << "dtpdf1.txt File tdk terbuka runnnnnnnnnnn button clik";
+        //button = new QPushButton;
+        //button->click();
+        timer->stop();
+        onClicked();
+    }
 
     void loadlspdf1()
     {

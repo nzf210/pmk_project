@@ -65,10 +65,10 @@ void Form::on_toolButton_cetakPdfblt_clicked()
        on_saveFileButton_pressed(qcode_blt());
        //qInfo() << "Qinfo Cari Bug===================" <<  on_saveFileButton_pressed(qcode_covid();
        Widget6 *a = new Widget6;
-       QIcon logo(":/gbr/html/gbr/yhk.png");
-       a->setWindowIcon(logo);
-       a->setWindowTitle("Cetak pdf Realisasi BLT...");
-       a->show();
+       //QIcon logo(":/gbr/html/gbr/yhk.png");
+       //a->setWindowIcon(logo);
+       //a->setWindowTitle("Cetak pdf Realisasi BLT...");
+       a->hide();
                         }
 }
 

@@ -684,10 +684,10 @@ void Form::on_toolButton_cetakPdfcovid_clicked()
        on_saveFileButton_pressed(qcode_covid());
        //qInfo() << "Qinfo Cari Bug===================" <<  on_saveFileButton_pressed(qcode_covid();
        Widget5 *a = new Widget5;
-       QIcon logo(":/gbr/html/gbr/yhk.png");
-       a->setWindowIcon(logo);
-       a->setWindowTitle("Cetak pdf Realisasi Covid");
-       a->show();
+//       QIcon logo(":/gbr/html/gbr/yhk.png");
+//       a->setWindowIcon(logo);
+//       a->setWindowTitle("Cetak pdf Realisasi Covid");
+       a->hide();
                         }
 }
 

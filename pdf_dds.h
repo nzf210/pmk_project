@@ -26,7 +26,6 @@ public:
 
   {
 
-        //pdfForm();
         button->setText(tr("generate pdf dds"));
         button->setEnabled(false);
 
