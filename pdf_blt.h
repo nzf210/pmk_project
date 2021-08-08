@@ -166,21 +166,21 @@ public:
         //lay->addWidget(view2);
         //resize(630, 780);
         //resize(330, 280);
-        run();
+        //run();
     }
 
- QStringList pdfForm()
+ bool ok_()
  {
-     Form *f = new Form;
-     f->rundatapdf1();
-     return  f->getLspdf1();
+     qInfo() << "Run bool";
+     msleep(4300);
+      qInfo() << "Run bool 222";
+     return true;
  }
-
 //private:
 
     void onLoadFinished(bool ok)
     {
-        button->setEnabled(ok);
+        button->setEnabled(ok); run();
      }
 
     void onLoadFinished2(bool ok)
@@ -191,7 +191,11 @@ public:
     void onClicked()
     {
         msgBox = new QMessageBox;
-        msgBox->setWindowTitle("Buka pdf File BLT...");
+        msgBox->setWindowTitle("Info ... ");
+        QIcon logo(":/gbr/html/gbr/yhk.png");
+        msgBox->setWindowIcon(logo);
+        msgBox->setIcon(QMessageBox::Information);
+        msgBox->setText("Open File pdf BLT ... ");
         //progressbar->setRange(0, 0);
         QString path("laporan/blt/");
         QDir dir(path);
@@ -209,14 +213,14 @@ public:
         if(pdfFile2.exists()){ pdfFile2.remove(); }
         if(pdfFile2.exists()) {QMessageBox::information(this,"Info...","Tutup File pdf yg terbuka dan Generate Kembali"); qInfo()<<"Silahkan tutup pdf file"; return;}
 
+        view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)));
         view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,0,15,15)) ); // fix old
 
-         view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)));
+        msgBox->exec();
 
         ///view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan ok setelah loading selesai</b>"));
-        view->page()->pdfPrintingFinished(fn,msgBox->exec());
-         bool ok ;
-        view2->page()->pdfPrintingFinished(fn2, (ok=true));
+        view->page()->pdfPrintingFinished(fn,ok_());
+        view2->page()->pdfPrintingFinished(fn2, true);
         //sleep(2);
         QDesktopServices::openUrl(QUrl::fromLocalFile(fn));  sleep(1); QDesktopServices::openUrl(QUrl::fromLocalFile(fn2));
         view->close();
@@ -227,7 +231,7 @@ public:
     void run() {
             qInfo() << "runnnn runnnnnnnnnnn";
             timer = new QTimer(this);
-            timer->setInterval(4300);
+            timer->setInterval(3500);
             //timer->connect(timer, SIGNAL(timeout()), this, SLOT(klik_buton()));
              timer->connect(timer, &QTimer::timeout, this, &Widget6::klik_buton);
             timer->start();

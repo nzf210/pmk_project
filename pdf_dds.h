@@ -171,25 +171,30 @@ public:
         //lay->addWidget(view2);
         //resize(630, 780);
         resize(330, 280);
-        run();
+        //run();
     }
 
- QStringList pdfForm()
- {
-     Form *f = new Form;
-     f->rundatapdf1();
-     return  f->getLspdf1();
- }
+// QStringList pdfForm()
+// {
+//     Form *f = new Form;
+//     f->rundatapdf1();
+//     return  f->getLspdf1();
+// }
 
 //private:
 bool ok_()
 {
+    qInfo() << "Run bool";
+    msleep(4300);
+     qInfo() << "Run bool 222";
     return true;
 }
 
+
+
     void onLoadFinished(bool ok)
     {
-        button->setEnabled(ok);
+        button->setEnabled(ok); run();
      }
 
     void onLoadFinished2(bool ok)
@@ -201,7 +206,11 @@ bool ok_()
     {
 
         msgBox = new QMessageBox;
-        msgBox->setWindowTitle("Buka pdf File dds Reg...");
+        msgBox->setWindowTitle("Info ... ");
+        QIcon logo(":/gbr/html/gbr/yhk.png");
+        msgBox->setWindowIcon(logo);
+        msgBox->setIcon(QMessageBox::Information);
+        msgBox->setText("Open File pdf DDS ... ");
 
 
         progressbar->setRange(0, 0);
@@ -220,41 +229,44 @@ bool ok_()
         if(pdfFile.exists()) {QMessageBox::information(this,"Info...","Tutup File pdf yg terbuka dan Generate Kembali"); qInfo()<<"Silahkan tutup pdf file"; return;}
         if(pdfFile2.exists()){ pdfFile2.remove(); }
         if(pdfFile2.exists()) {QMessageBox::information(this,"Info...","Tutup File pdf yg terbuka dan Generate Kembali"); qInfo()<<"Silahkan tutup pdf file"; return;}
-
-        view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,0,15,15)) ); // fix old
         view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)));
+        view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,0,15,15)) ); // fix old
 
         //view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan OK setelah loading selesai</b>")); // old fix
-
-
         //QEventLoop loop;
 ///         connect(ui->tableWidget_cetak_sppd, &QTableWidget::doubleClicked , this, &Form::even_dklik_tw13);
 ///         connect(this, SIGNAL( currentChanged(int)), this, SLOT(onTabChanged(int)));
         ///QObject::connect(progressbar, SIGNAL(valueChanged(int)), this, &Widget1::openFile);
        // bool ok = loop.exec();
-
-        view->page()->pdfPrintingFinished(fn, msgBox->exec());
-
+        //sleep(3);
+        qInfo() << "runnnn runnnnnnnnnnn exec";
+        //sleep(20);
+        msgBox->exec();
+        view->page()->pdfPrintingFinished(fn,ok_());
+        //sleep(2);
         view2->page()->pdfPrintingFinished(fn2, true);
-        //sleep(5);
+        //sleep(20);
+        qInfo() << "runnnn runnnnnnnnnnn exec sebelum slepp";
+        //while (chech_finish()) { continue;}
 
         view->close();
         view2->close();
         this->close();
-        QDesktopServices::openUrl(QUrl::fromLocalFile(fn));  sleep(1);
+        //sleep(2);
+        QDesktopServices::openUrl(QUrl::fromLocalFile(fn));  msleep(500);
         QDesktopServices::openUrl(QUrl::fromLocalFile(fn2));
 
-//connect(progressbar, &QProgressBar::valueChanged, this, &Widget1::openFile);
- //openFile();
     }
+
 
     void run() {
             qInfo() << "runnnn runnnnnnnnnnn";
             timer = new QTimer(this);
-            timer->setInterval(4300);
+            timer->setInterval(3500);
             //timer->connect(timer, SIGNAL(timeout()), this, SLOT(klik_buton()));
-             timer->connect(timer, &QTimer::timeout, this, &Widget1::klik_buton);
+            timer->connect(timer, &QTimer::timeout, this, &Widget1::klik_buton);
             timer->start();
+            qInfo() << "runnnn runnnnnnnnnnn start";
         }
 
     void loadlspdf1()

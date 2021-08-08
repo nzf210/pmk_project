@@ -115,8 +115,8 @@ public:
         //lay->addWidget(progressbar);
 
         //lay->addWidget(view);
-         resize(330, 280);
-         run();
+        // resize(330, 280);
+         //run();
     }
 
     void loadlspdf1()
@@ -209,18 +209,25 @@ public:
         return parts.join(" ");
     }
 
-    void onLoadFinished(bool ok) {button->setEnabled(ok);}
+    void onLoadFinished(bool ok) {button->setEnabled(ok); run();}
     void onLoadFinished2(bool ok){button2->setEnabled(ok);}
 
     void onClicked()
     {
+
+        //a->setWindowIcon(logo);
         msgBox = new QMessageBox;
-        msgBox->setWindowTitle("Buka pdf File dds Reg...");
+        msgBox->setWindowTitle("Info ... ");
+        QIcon logo(":/gbr/html/gbr/yhk.png");
+        msgBox->setWindowIcon(logo);
+        msgBox->setIcon(QMessageBox::Information);
+        msgBox->setText("Open File pdf add ... ");
+        //msgBox->seti
         //progressbar->setRange(0, 0);
         QString path("laporan/add/");
 
         QDir dir(path);
-        QString nmpdf ="Honor"+ tahap+ " dis "+nmdis+" kam "+nmkamp+".pdf";
+        QString nmpdf ="Honor "+ tahap+ " dis "+nmdis+" kam "+nmkamp+".pdf";
         QFile  pdfFile (path + nmpdf);
         QString fn = path + nmpdf;
 
@@ -230,17 +237,24 @@ public:
 //        view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(743,987))), QPageLayout::Portrait, QMargins(65,0,15,15)) ); ini fix ukuran 2020
         view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)) );
         //view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan ok setelah loading selesai</b>"));
-        view->page()->pdfPrintingFinished(fn,msgBox->exec());
+       msgBox->exec();
+        view->page()->pdfPrintingFinished(fn,ok_());
         //sleep(1);
         QDesktopServices::openUrl(QUrl::fromLocalFile(fn));
         view->close();
         this->close();
     }
-
+    bool ok_()
+    {
+        qInfo() << "Run bool";
+        msleep(4300);
+         qInfo() << "Run bool 222";
+        return true;
+    }
     void run() {
             qInfo() << "runnnn runnnnnnnnnnn";
             timer = new QTimer(this);
-            timer->setInterval(4300);
+            timer->setInterval(3500);
             //timer->connect(timer, SIGNAL(timeout()), this, SLOT(klik_buton()));
              timer->connect(timer, &QTimer::timeout, this, &Widget2::klik_buton);
             timer->start();

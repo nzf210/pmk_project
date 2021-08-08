@@ -132,14 +132,20 @@ public:
         //lay->addWidget(view2);
         //resize(630, 780);
        //resize(330, 280);
-        run();
+        //run();
     }
 
 //private:
-
+    bool ok_()
+    {
+        qInfo() << "Run bool";
+        msleep(4300);
+         qInfo() << "Run bool 222";
+        return true;
+    }
     void onLoadFinished(bool ok)
     {
-        button->setEnabled(ok);
+        button->setEnabled(ok); run();
      }
 
     void onLoadFinished2(bool ok)
@@ -150,7 +156,11 @@ public:
     void onClicked()
     {
         msgBox = new QMessageBox;
-        msgBox->setWindowTitle("Buka pdf File ...");
+        msgBox->setWindowTitle("Info ... ");
+        QIcon logo(":/gbr/html/gbr/yhk.png");
+        msgBox->setWindowIcon(logo);
+        msgBox->setIcon(QMessageBox::Information);
+        msgBox->setText("Open File pdf Surat Pengantar ... ");
         //progressbar->setRange(0, 0);
         QString path("laporan/sppd/");
         QDir dir(path);
@@ -172,12 +182,13 @@ public:
         view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0))); // fix sppd
         view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,0,15,15))); // fix sppd
 
-        //view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","<b>Generating pdf file...</b>"));
-        view->page()->pdfPrintingFinished(fn,msgBox->exec());
-        bool ok;
-        view2->page()->pdfPrintingFinished(fn2, (ok=true));
+        //sleep(2);//view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","<b>Generating pdf file...</b>"));
+        msgBox->exec();
+        view->page()->pdfPrintingFinished(fn,ok_());
+
+        view2->page()->pdfPrintingFinished(fn2, true);
        // if(ok==false){QMessageBox::information(this,"Info...","Generating pdf file Gagal, Coba Kembali"); return; }
-        sleep(2);
+
         QDesktopServices::openUrl(QUrl::fromLocalFile(fn));  msleep(1);   QDesktopServices::openUrl(QUrl::fromLocalFile(fn2));
         view->close();
         view2->close();
@@ -187,7 +198,7 @@ public:
     void run() {
             qInfo() << "runnnn runnnnnnnnnnn";
             timer = new QTimer(this);
-            timer->setInterval(4100);
+            timer->setInterval(3500);
             //timer->connect(timer, SIGNAL(timeout()), this, SLOT(klik_buton()));
             timer->connect(timer, &QTimer::timeout, this, &Widget3::klik_buton);
             timer->start();

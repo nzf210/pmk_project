@@ -89,9 +89,9 @@ void Form::on_toolButton_cetakPdfadd_clicked()
        //on_saveFileButton_pressed(qcode_add());
        //qInfo() << "Qinfo Cari Bug===================" <<  on_saveFileButton_pressed(qcode_covid();
        Widget2 *a = new Widget2;
-       QIcon logo(":/gbr/html/gbr/yhk.png");
-       a->setWindowIcon(logo);
-       a->setWindowTitle("Cetak pdf Realisasi Alokasi Dana Desa.");
+      // QIcon logo(":/gbr/html/gbr/yhk.png");
+       //a->setWindowIcon(logo);
+      // a->setWindowTitle("Cetak pdf Realisasi Alokasi Dana Desa.");
        //a->show();
        a->hide();
                         }
