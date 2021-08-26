@@ -161,7 +161,6 @@ void Form::updateTampilan(Mode mode)
    ModeSekarang = mode;
 
    switch (ModeSekarang) {
-
    case SuperMode:
        qInfo()<<"Ini adalah Mode Super USER";
        break;
@@ -176,6 +175,11 @@ void Form::updateTampilan(Mode mode)
        qInfo()<<"Ini adalah Mode Admin Mode_2";
        ui->toolButton_danaDesa->setVisible(false);
        ui->label_danaDesa->setVisible(false);
+
+       ui->label_Blt->setVisible(false);
+       ui->label_Covid->setVisible(false);
+       ui->toolButton_blt->setVisible(false);
+       ui->toolButton_covid->setVisible(false);
        break;
 
    case UserMode_1:
@@ -192,6 +196,10 @@ void Form::updateTampilan(Mode mode)
 //        ui->label_User->setVisible(false);
        ui->toolButton_danaDesa->setVisible(false);
        ui->label_danaDesa->setVisible(false);
+       ui->toolButton_blt->setVisible(false);
+       ui->toolButton_covid->setVisible(false);
+       ui->label_Blt->setVisible(false);
+       ui->label_Covid->setVisible(false);
        break;
    }
 }
@@ -228,13 +236,13 @@ void Form::modeTampilan_usr()
         updateTampilan(SuperMode);
     }
        else if( lvl=="admin" && type=="dds" )
-                   {updateTampilan(AdminMode_1);}
-                   else if(lvl=="admin" && type=="add")
-                                 {updateTampilan(AdminMode_2);}
-                                else if(lvl=="usr" && type=="dds")
-                                              {updateTampilan(UserMode_1);}
-                                                else if(lvl=="usr" && type=="add")
-    {updateTampilan(UserMode_2);}
+                 {updateTampilan(AdminMode_1);}
+       else if(lvl=="admin" && type=="add")
+                {updateTampilan(AdminMode_2);}
+       else if(lvl=="usr" && type=="dds")
+                 {updateTampilan(UserMode_1);}
+       else if(lvl=="usr" && type=="add")
+                {updateTampilan(UserMode_2);}
 }
 
 void Form::conect_slot()

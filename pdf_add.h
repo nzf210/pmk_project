@@ -150,7 +150,7 @@ public:
         jml = list.at(11);
         persen = list.at(16);
         nmkpdns = list.at(21);
-        tahap2 = "list.at(13)";
+        tahap2 = list.at(25);
         pkpldns = list.at(23);
         //QString nmkdns;
         nip = list.at(24);
@@ -163,7 +163,7 @@ public:
 
         skben=list.at(7);
         skkam=list.at(18);
-        thn2="list.at(23)";
+        thn2=skkam.right(4);
 
         jbt_klp_dns = list.at(28);
 
@@ -227,7 +227,8 @@ public:
         QString path("laporan/add/");
 
         QDir dir(path);
-        QString nmpdf ="Honor "+ tahap+ " dis "+nmdis+" kam "+nmkamp+".pdf";
+        tahap.replace("Triwulan","Trw");
+        QString nmpdf ="Hnr "+ tahap+ " kam "+nmkamp+" dis "+nmdis+".pdf";
         QFile  pdfFile (path + nmpdf);
         QString fn = path + nmpdf;
 
@@ -237,7 +238,9 @@ public:
 //        view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(743,987))), QPageLayout::Portrait, QMargins(65,0,15,15)) ); ini fix ukuran 2020
         view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)) );
         //view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan ok setelah loading selesai</b>"));
-       msgBox->exec();
+        msgBox->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+        msgBox->setStandardButtons(QMessageBox::Open);
+        qInfo() << " === msgBox === " <<msgBox->exec();
         view->page()->pdfPrintingFinished(fn,ok_());
         //sleep(1);
         QDesktopServices::openUrl(QUrl::fromLocalFile(fn));
@@ -247,14 +250,14 @@ public:
     bool ok_()
     {
         qInfo() << "Run bool";
-        msleep(4300);
+        sleep(4);
          qInfo() << "Run bool 222";
         return true;
     }
     void run() {
             qInfo() << "runnnn runnnnnnnnnnn";
             timer = new QTimer(this);
-            timer->setInterval(3500);
+            timer->setInterval(50);
             //timer->connect(timer, SIGNAL(timeout()), this, SLOT(klik_buton()));
              timer->connect(timer, &QTimer::timeout, this, &Widget2::klik_buton);
             timer->start();
@@ -267,19 +270,6 @@ public:
         timer->stop();
         onClicked();
     }
-//    void onClicked2()
-//    {
-//        progressbar2->setRange(0, 0);
-//        QString path("html/");
-//        QDir dir(path);
-//        //QFile  htmlFile (path+ "srt1.html");
-//        QFile  pdfFile2 (path+ "DD SRT KAMPUNG.pdf");
-//        QString fn2 = path+"DD SRT KAMPUNG.pdf";
-//        if(pdfFile2.exists()){ pdfFile2.remove(); }
-//        if(pdfFile2.exists()) {QMessageBox::information(this,"Info...","Tutup File pdf yg terbuka"); qInfo()<<"Silahkan tutup pdf file"; return;}
-//        view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Portrait, QMargins(15,15,15,50)) );
-//        QDesktopServices::openUrl(QUrl::fromLocalFile(fn2));
-//    }
 
     void onPdfPrintingFinished(const QString & filename, bool ok)
     {

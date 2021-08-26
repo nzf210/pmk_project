@@ -96,6 +96,7 @@ public:
          htmlContent2.replace("#terbilang#", toCamelCase(terbilang));
         htmlContent2.replace("#hal#", hal);
         htmlContent2.replace("#JBTKPDNS#",jbt_klp_dns);
+        htmlContent2.replace("#SPASI#",spasi_br);
          qInfo() << "Terbilang pdf 3" << terbilang;
 
         QString html2 = htmlContent2;
@@ -139,7 +140,7 @@ public:
     bool ok_()
     {
         qInfo() << "Run bool";
-        msleep(4300);
+        sleep(4);
          qInfo() << "Run bool 222";
         return true;
     }
@@ -180,10 +181,11 @@ public:
        // view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(40,15,15,20)) );
 
         view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0))); // fix sppd
-        view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,0,15,15))); // fix sppd
+        view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,30,15,30))); // fix sppd
 
         //sleep(2);//view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","<b>Generating pdf file...</b>"));
-        msgBox->exec();
+        msgBox->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+        qInfo() << " === msgBox === " <<msgBox->exec();
         view->page()->pdfPrintingFinished(fn,ok_());
 
         view2->page()->pdfPrintingFinished(fn2, true);
@@ -198,7 +200,7 @@ public:
     void run() {
             qInfo() << "runnnn runnnnnnnnnnn";
             timer = new QTimer(this);
-            timer->setInterval(3500);
+            timer->setInterval(50);
             //timer->connect(timer, SIGNAL(timeout()), this, SLOT(klik_buton()));
             timer->connect(timer, &QTimer::timeout, this, &Widget3::klik_buton);
             timer->start();
@@ -243,6 +245,7 @@ public:
         nipkpdns = list.at(9);
         terbilang = list.at(10);
          jbt_klp_dns = list.at(11);
+         spasi_br = list.at(12);
 
     }
 
@@ -286,6 +289,7 @@ public slots:
      QString nipkpdns;
      QString terbilang;
      QString jbt_klp_dns;
+     QString spasi_br;
      //===================================================
     QPushButton *button2;
     QPushButton *button;

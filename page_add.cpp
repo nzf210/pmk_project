@@ -498,6 +498,7 @@ void Form::btnAdd_add()
         QString j = le_jml->text();
         if(j=="Rp 0,00"){le_jml->setText("");QMessageBox::information(eb_v,"Info...!!","Jumlah Pencairan tdk boleh Nilai Rp 0,00,-"); return;}
         if(j==""){le_jml->setText("");QMessageBox::information(eb_v,"Info...!!","Jumlah Pencairan tdk boleh kosong,-"); return;}
+
         QString jj_ = j;
         j.replace("Rp ",""); j.replace(".",""); j.replace(",",".");
         bilang(j);
@@ -508,6 +509,9 @@ void Form::btnAdd_add()
 
         if((jc3-jj)<0){QMessageBox::information(eb_v,"Info...","Mohon Periksa Ketersediaan Dana"); return;}
         jj_.replace("Rp ",""); jj_.replace(".",""); jj_.replace(",",".");
+        bila(j.right(2));
+
+
         muat_rek(id_kam);
         kp_dns();
 
@@ -539,7 +543,7 @@ void Form::btnAdd_add()
         QString thn2 = "thp.right(4)";
 
         QString j_kk = li_j_kk.at(0); //====================
-        QString rp ="rupiah";
+        //QString rp ="rupiah";
         QPixmap logo;
         QIcon icon(":/icon/gbr/kcl.png");
         QMessageBox boxPesan;
@@ -575,13 +579,13 @@ void Form::btnAdd_add()
              query.bindValue(":nm_kp",nm_kp);
              query.bindValue(":thp_cair", tahap );
              query.bindValue(":j_cair",jj_);
-             query.bindValue(":j_terbilang",terbilang+rp);
+             query.bindValue(":j_terbilang",terbilang+terbila);
              query.bindValue(":tgl",tgl_ter);
              //no_srt1.replace("****",nosurat());
              query.bindValue(":no_srt1",no_srt1);
              //no_srt2.replace("####",nosurat_2());
              query.bindValue(":no_srt2",no_srt2);
-             query.bindValue(":persentase","100%");
+             query.bindValue(":persentase",li_persen.at(qbx_thp_penc->currentIndex()));
              query.bindValue(":sk_bup",sk_bup);
              query.bindValue(":sk_kam",sk_kam);
 
@@ -589,7 +593,7 @@ void Form::btnAdd_add()
              query.bindValue(":j_kpd",pg_kp_dns);
              query.bindValue(":nip_kpd",nip_kp_dns);
              query.bindValue(":ket",thn2);
-             query.bindValue(":thp_l","tahap_l");
+             query.bindValue(":thp_l",li_tahap_ii.at(qbx_thp_penc->currentIndex()));
              query.bindValue(":jkk",j_kk);
              query.bindValue(":jbt_kpl_dns", jbt_kpl_dns);
 
@@ -625,6 +629,7 @@ void Form::data_update_sementara_add()
     QString tahap = qbx_thp_penc->currentText();
     QString j = le_jml->text();
     j.replace("Rp ",""); j.replace(".",""); j.replace(",",".");
+    bila(j.right(2));
     QString jj_ = j;
     bilang(j);
     QString tgl_ = de_tgl_terima->text();
@@ -643,7 +648,8 @@ void Form::data_update_sementara_add()
          c =  jml2 + jml4 - j_;
          if( c<0 ) { QMessageBox::information(this,"Info...","Periksa Ketersediaan Dana...");  return;  }
     }
-    update_data_add(li_data_add.at(0), tahap, tgl, jj_, terbilang, noSrt1, noSrt2);
+    QString terbilang_ = terbilang+terbila;
+    update_data_add(li_data_add.at(0), tahap, tgl, jj_, terbilang_, noSrt1, noSrt2);
 }
 
 
@@ -660,7 +666,7 @@ void Form::update_data_add(QString id, QString tahap, QString date, QString jml,
     query.bindValue(":tgl",date);
     query.bindValue(":no_srt1",noSrt1);
     query.bindValue(":no_srt2",noSrt2);
-    query.bindValue(":terbil", terbilang+" rupiah");
+    query.bindValue(":terbil", terbilang);
 
     bool ok = exec(query);
     if(!ok){rollback(); QMessageBox::information( eb_v,"Error...!!!","Gagal Mengubah data realisasi addT, "+query.lastError().text()+""); return;}
@@ -692,7 +698,7 @@ void Form::dataPdf_add(int row)
     else { QTextStream stream(&fOut);
                stream << l;
                fOut.flush();
-                fOut.close(); }
+               fOut.close(); }
     }
 }
 

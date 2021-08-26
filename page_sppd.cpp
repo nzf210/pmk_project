@@ -57,6 +57,10 @@ void Form::on_toolButton_cetakpdfSppd_clicked() // Button Clik Generate pdf di s
     int jBrs = ui->tableWidget_cetak_sppd->rowCount() ;
     if(j==-1){QMessageBox::information(this,"Info","Pilih Surat yang akan di cetak... "); return;}
 
+    QString jBrs_ = ui->lineEdit_br->text();
+    int brs = jBrs_.toInt();
+    if(brs>20){QMessageBox::information(this,"Info ... ","Maksimal angka 20"); return;}
+
     QString nosrt = ui->tableWidget_realisasi_sppd->item(j,1)->text();
     QString hal = ui->tableWidget_realisasi_sppd->item(j,2)->text();
     QString tgl = ui->tableWidget_realisasi_sppd->item(j,3)->text();
@@ -69,7 +73,7 @@ void Form::on_toolButton_cetakpdfSppd_clicked() // Button Clik Generate pdf di s
     double jcr=0;
     kp_dns();
     ds_sppd_.clear();
-qInfo() << "cek sppd ==============" ;
+    qInfo() << "cek sppd ==============" ;
     for (int i =0  ; i< jBrs ; i++ ) {
         QString no_ =QString::number(i+1);
         QString nm_kampung = ui->tableWidget_cetak_sppd->item(i,1)->text();
@@ -85,7 +89,7 @@ qInfo() << "cek sppd ==============" ;
         ds_sppd_.append("<tr><td>"+no_+"</td><td>"+nm_kampung+"</td><td>"+nm_distrik+"</td><td>"+nm_kepalak+"</td>"
         "<td>"+nm_benk+"</td><td>"+nm_rek+"</td><td>"+no_rek+"</td><td>"+j_cair+"</td><td>"+thp+"</td></tr>" );
 
-         j_cair.replace(",00",""); j_cair.replace("Rp ",""); j_cair.replace(".","");
+         j_cair.replace(",00",""); j_cair.replace("Rp ",""); j_cair.replace(".","");  j_cair.replace(",",".");
          double jc = j_cair.toDouble();
          jcr += jc;
          qInfo() << "cek sppd ==============" << i;
@@ -95,6 +99,7 @@ qInfo() << "cek sppd ==============" ;
     tot_sppd = indo.toCurrencyString(jcr,"Rp ");
     qInfo() << "generate pdf 000"<< tot_sppd ;
     QString tot_terbil = tot_sppd;
+    bila(tot_terbil.right(2));
     tot_terbil.replace("Rp ",""); tot_terbil.replace(".",""); tot_terbil.replace(",",".");
     bilang(tot_terbil);
 
@@ -107,14 +112,16 @@ qInfo() << "cek sppd ==============" ;
     ds_sppd_.append("#/#"+li_kp_dns.at(1));
     ds_sppd_.append("#/#"+li_kp_dns.at(2));
     ds_sppd_.append("#/#"+li_kp_dns.at(3));
-    ds_sppd_.append("#/#"+terbilang);
+    ds_sppd_.append("#/#"+terbilang+terbila);
     ds_sppd_.append("#/#"+li_kp_dns.at(0));
+    ds_sppd_.append("#/#"+spasi_br(ui->lineEdit_br->text()));
     //setTot_sppd(tot_sppd);
     save_sppd();
    Widget3 *pdf3 = new Widget3;
    //QIcon logo(":/gbr/html/gbr/yhk.png");
    //pdf3->setWindowIcon(logo);
    pdf3->hide();
+   ui->lineEdit_br->setText("0");
 
 }
 
@@ -164,6 +171,7 @@ void Form::on_toolButton_Sppd_clicked() // ToolButton menu SPPD
     ui->dateEdit->setVisible(true);
     ui->dateEdit_2->setVisible(true);
     ui->stackedWidget->setCurrentIndex(3);
+    ui->lineEdit_br->setText("0");
 
 
     //QDate d = QDate::fromString(tgl,"dd-MM-yyyy");
@@ -192,7 +200,11 @@ void Form::on_toolButton_Sppd_clicked() // ToolButton menu SPPD
      while(ui->tableWidget_cetak_sppd->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
               {ui->tableWidget_cetak_sppd->removeRow(0);}
      QStringList qb3;
-     qb3 <<"Pilih ... " << "Realisasi Dana Desa" << "Realisasi Dana BLT" << "Realisasi Dana Covid" << "Realisasi Alokasi Dana Desa" ;
+     qInfo()<< "id type" << id_type;
+     if(id_type=="1") {qb3 <<"Pilih ... " << "Realisasi Dana Desa" << "Realisasi Dana BLT" << "Realisasi Dana Covid" ;}
+     else if (id_type=="2") { qb3 <<"Pilih ... "  << "Realisasi Alokasi Dana Desa" ;}
+     else {qb3 <<"Pilih ... " << "Realisasi Dana Desa" << "Realisasi Dana BLT" << "Realisasi Dana Covid" << "Realisasi Alokasi Dana Desa" ;}
+
      ui->comboBox_realisasi->clear();
      ui->comboBox_realisasi->addItems(qb3);
      ui->comboBox_realisasi->setCurrentIndex(0);
@@ -797,6 +809,32 @@ void Form::select_tgl_sppd(QString tgl)
                  i++;
      }
     }
+}
+
+QString Form::spasi_br(QString jBrs)
+{
+
+    if(jBrs=="0"){return "";}
+    else if(jBrs=="1"){return "<br>";}
+    else if(jBrs=="2"){return "<br><br>";}
+    else if(jBrs=="3"){return "<br><br><br>";}
+    else if(jBrs=="4"){return "<br><br><br><br>";}
+    else if(jBrs=="5"){return "<br><br><br><br><br>";}
+    else if(jBrs=="6"){return "<br><br><br><br><br><br>";}
+    else if(jBrs=="7"){return "<br><br><br><br><br><br><br>";}
+    else if(jBrs=="8"){return "<br><br><br><br><br><br><br><br>";}
+    else if(jBrs=="9"){return "<br><br><br><br><br><br><br><br><br>";}
+    else if(jBrs=="10"){return "<br><br><br><br><br><br><br><br><br><br>";}
+    else if(jBrs=="11"){return "<br><br><br><br><br><br><br><br><br><br><br>";}
+    else if(jBrs=="12"){return "<br><br><br><br><br><br><br><br><br><br><br><br>";}
+    else if(jBrs=="13"){return "<br><br><br><br><br><br><br><br><br><br><br><br><br>";}
+    else if(jBrs=="14"){return "<br><br><br><br><br><br><br><br><br><br><br><br><br><br>";}
+    else if(jBrs=="15"){return "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";}
+    else if(jBrs=="16"){return "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";}
+    else if(jBrs=="17"){return "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";}
+    else if(jBrs=="18"){return "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";}
+    else if(jBrs=="19"){return "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";}
+    else if(jBrs=="20"){return "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";}else{return "";}
 }
 
 

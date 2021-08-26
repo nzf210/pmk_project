@@ -511,7 +511,7 @@ void Form::btnAdd_blt()
         QString thn2 = "thp.right(4)";
 
         QString j_kk = li_j_kk.at(0); //====================
-        QString rp ="rupiah";
+        //QString rp ="rupiah";
         QPixmap logo;
         QIcon icon(":/icon/gbr/kcl.png");
         QMessageBox boxPesan;
@@ -547,7 +547,7 @@ void Form::btnAdd_blt()
              query.bindValue(":nm_kp",nm_kp);
              query.bindValue(":thp_cair", tahap );
              query.bindValue(":j_cair",jj_);
-             query.bindValue(":j_terbilang",terbilang+rp);
+             query.bindValue(":j_terbilang",terbilang);
              query.bindValue(":tgl",tgl_ter);
              //no_srt1.replace("****",nosurat());
              query.bindValue(":no_srt1",no_srt1);
@@ -633,7 +633,7 @@ void Form::update_data_blt(QString id, QString tahap, QString date, QString jml,
     query.bindValue(":tgl",date);
     query.bindValue(":no_srt1",noSrt1);
     query.bindValue(":no_srt2",noSrt2);
-    query.bindValue(":terbil", terbilang+" rupiah");
+    query.bindValue(":terbil", terbilang);
 
     bool ok = exec(query);
     if(!ok){rollback(); QMessageBox::information( eb_v,"Error...!!!","Gagal Mengubah data realisasi BLT, "+query.lastError().text()+""); return;}

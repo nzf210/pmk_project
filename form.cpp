@@ -53,11 +53,21 @@ extern "C"
 #endif
 
 QString satuan[] = { "", "satu ", "dua ", "tiga ", "empat ", "lima ", "enam ", "tuju ", "delapan ", "sembilan " };
-QString sat[] = { "Nol", "satu ", "dua ", "tiga ", "empat ", "lima ", "enam ", "tuju ", "delapan ", "sembilan " };
+QString sat[] = { "", "satu ", "dua ", "tiga ", "empat ", "lima ", "enam ", "tuju ", "delapan ", "sembilan " };
 
 QString konvertAng(int n) {
-  QString st = QString::number('.',n);
-  return st;
+  //QString sen = QString::number(n);
+    if (n < 10) {
+        return sat[n];
+    } else if (n == 10) { // khusus untuk sepuluh
+      return "sepuluh ";
+    } else if (n == 11) { // khusus untuk sebelas
+        return "sebelas ";
+    } else if (n < 20) {
+        return sat[n-10] + "belas ";
+    } else if (n < 100) {
+        return sat[(n-(n%10))/10] + "puluh " + konvertAng(n % 10);
+    } else{ return "";}
 }
 
 QString konvertAngka(qint64 n) {
@@ -188,10 +198,6 @@ ui->label_14->setText("Alokasi Dana Desa");
 modeTampilan_usr();
 ui->label_space_1->setText("Selamat Datang : "+nama_l);
  // === Memuat Level Type ===
-
-
-
-
 
 #ifdef Q_OS_WINDOWS
     Form::Initialize();
@@ -832,7 +838,8 @@ void Form::tahap(int id)    { // Memuat daftar tahap penerimaan pada dana desa
     QString cmd = " SELECT "
             " t_cair.tahap_cair,"
             " t_cair.tahap_select, "
-            " t_cair.tahap"
+            " t_cair.tahap,"
+            " t_cair.persen"
        " FROM "
             "pmk_yhk.t_cair "
         " WHERE "
@@ -844,10 +851,11 @@ void Form::tahap(int id)    { // Memuat daftar tahap penerimaan pada dana desa
     bool ok = exec(query);
     if(!ok){QMessageBox::information(this,"Error...!!!","Gagal memuat data Tahap pencairan... "+query.lastError().text()+"..."); return;}
     while (query.next()) {
-           QString thp_cair=query.value(0).toString() ; QString thp_select=query.value(1).toString() ; QString thp_=query.value(2).toString() ;
+           QString thp_cair=query.value(0).toString() ; QString thp_select=query.value(1).toString() ; QString thp_=query.value(2).toString() ; QString per =query.value(3).toString() ;
             li_tahap << thp_cair;
             li_tahap_select << thp_select;
             li_tahap_ii << thp_;
+            li_persen << per;
             qInfo() << "tahap II pada tahap ========================= " <<thp_  ;
 }
 }
@@ -905,7 +913,7 @@ void Form::muat_lvl_type() {
     QString path("doc/temp/");
     QDir dir(path);
     QFile lvl_type(path+"lvl_type.txt");
-    if(!lvl_type.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat Nama Kepala Dinas PMK YHK.");return;}
+    if(!lvl_type.exists()) {QMessageBox::information(this,"Error...!!!","Gagal Memuat adminNama Kepala Dinas PMK YHK.");return;}
      lvl_type.open(QIODevice::ReadOnly|QIODevice::Text);
      QTextStream str(&lvl_type);
      while (!str.atEnd()) {
@@ -915,6 +923,7 @@ void Form::muat_lvl_type() {
         type = li_lvl_type.at(1);
         id_usr = li_lvl_type.at(2);
         nama_l = li_lvl_type.at(3);
+        id_type = li_lvl_type.at(4);
     }
     lvl_type.close();
 }
@@ -981,10 +990,13 @@ void   Form::muat_rek(QString &id_kam_s)
 
 
 void Form::bilang(QString nilai){
-
 qint64 ad = nilai.toDouble();
-terbilang = konvertAngka(ad);
+if(ad==0){terbilang="";} else{terbilang = konvertAngka(ad)+"rupiah ";}
+}
 
+void Form::bila(QString nilai){
+int ad = nilai.toDouble();
+if (ad==0){terbila="";} else{terbila = konvertAng(ad)+"sen";}
 }
 
 void Form::bil(QString nilai){

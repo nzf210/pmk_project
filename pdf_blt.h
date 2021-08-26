@@ -172,7 +172,7 @@ public:
  bool ok_()
  {
      qInfo() << "Run bool";
-     msleep(4300);
+     sleep(4);
       qInfo() << "Run bool 222";
      return true;
  }
@@ -216,7 +216,8 @@ public:
         view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)));
         view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,0,15,15)) ); // fix old
 
-        msgBox->exec();
+        msgBox->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+        qInfo() << " === msgBox === " <<msgBox->exec();
 
         ///view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan ok setelah loading selesai</b>"));
         view->page()->pdfPrintingFinished(fn,ok_());
@@ -231,7 +232,7 @@ public:
     void run() {
             qInfo() << "runnnn runnnnnnnnnnn";
             timer = new QTimer(this);
-            timer->setInterval(3500);
+            timer->setInterval(50);
             //timer->connect(timer, SIGNAL(timeout()), this, SLOT(klik_buton()));
              timer->connect(timer, &QTimer::timeout, this, &Widget6::klik_buton);
             timer->start();

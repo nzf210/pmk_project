@@ -253,6 +253,7 @@ private:
     QString type;
     QString id_usr;
     QString nama_l;
+    QString id_type;
     //Tambahan untuk Otomatisasi Jumlah Caor, Persen dan Tahap Laporan
     QString persen_2;
     QString laporan;
@@ -262,6 +263,8 @@ private:
     QString laporan_2;
     QString thp_2;
     QString tahap__2;
+
+    QString spasi_br(QString);
 
     QString  pagu_pencairan; // nilai pagu dari database
 
@@ -415,6 +418,7 @@ private:
     void header_wt2();
     //void header_wt9();
     void bilang(QString nilai);
+    void bila(QString nilai);
     void bil(QString nilai);
     QPushButton *btn;
     QString id; //Bamuskam
@@ -425,6 +429,7 @@ private:
     QString menu;
     QString menu2;
     QString terbilang;
+    QString terbila;
     void act();
     //void act_2();
 

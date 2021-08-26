@@ -208,17 +208,18 @@ void MainWindow::on_pushButton_clicked()  // Button Login ...
     if(nama_i=="" && pass==""){QMessageBox::information(this,"Perhatian...","Nama atau Password tdk boleh kosong"); return;}
     QByteArray hash = QCryptographicHash::hash(nama_i.toLocal8Bit(),QCryptographicHash::Sha256).toHex();
     QByteArray hash2 = QCryptographicHash::hash(pass.toLocal8Bit(),QCryptographicHash::Sha256).toHex();
-    QString pass_= QString::fromLocal8Bit(hash);
-    QString nama_ = QString::fromLocal8Bit(hash2);
+    QString nama_= QString::fromLocal8Bit(hash);
+    QString pass_ = QString::fromLocal8Bit(hash2);
 
     loadusr(nama_i,pass_);
+    qInfo()<<"nama pass" << nama_i <<"dan"<<pass_;
 
-    if(nama_i==nama_i  && pass_==pas)
+    if(nama==nama_i  && pass_==pas)
     {
         Form  *form = new Form();
         form->show();
         this->hide();
-    } else {if(!lg) {return;}  QMessageBox::information(this, "Gagal Login" , "User atau Pass Salah...!!! ");}
+    } else {if(!lg) {return;}  QMessageBox::information(this, "Gagal Login ... " , "Username atau Password Salah...!!! ");}
 }
 
 void MainWindow::loadusr(QString nm, QString ps)
@@ -226,7 +227,7 @@ void MainWindow::loadusr(QString nm, QString ps)
     QStringList list_data_coba;
     if(!open()){open();}
     QSqlQuery query;
-    QString cmd ="SELECT nama,pass,level,type,id,jabatan FROM pmk_yhk.usr WHERE nama = :nm AND pass = :ps " ;
+    QString cmd ="SELECT nama,pass,level,type,id,jabatan,id_type FROM pmk_yhk.usr WHERE nama = :nm AND pass = :ps " ;
     query.prepare(cmd);
     query.bindValue(":nm",nm);
     query.bindValue(":ps",ps);
@@ -239,7 +240,8 @@ void MainWindow::loadusr(QString nm, QString ps)
             type = query.value(3).toString();
             id = query.value(4).toString();
             namaL = query.value(5).toString();
-            list_data_coba <<nama<<pas<<lvl<<type<<id<<namaL;
+            id_type = query.value(6).toString();
+            list_data_coba <<nama<<pas<<lvl<<type<<id<<namaL<<id_type;
                                   }
     listDatauser = list_data_coba;
     //qInfo() << "NIlai List Data User" << listDatauser;
@@ -251,7 +253,7 @@ void MainWindow::loadusr(QString nm, QString ps)
     if(fOut.open(QFile::WriteOnly | QFile::Text)){qInfo()<<"Gagal Menyimpan lvl_type.txt"; return;} else
     {
         QTextStream stream(&fOut);
-        stream << lvl <<"/n"<<type << "/n" << id <<"/n" <<namaL;
+        stream << lvl <<"/n"<<type << "/n" << id <<"/n" <<namaL<<"/n" <<id_type;
         fOut.flush();
         fOut.close(); }
 

@@ -61,6 +61,7 @@ private:
     QString type;
     QString id;
     QString namaL;
+    QString id_type;
     QStringList listDatauser;
 
 

@@ -13,6 +13,7 @@ public:
         QStringList list;
         QTimer* timer;
         QMessageBox *msgBox;
+        QPushButton* myButton =new QPushButton("Open Pdf ...");
         explicit Widget1(QWidget *parent = nullptr):
         QWidget(parent),
 
@@ -174,18 +175,12 @@ public:
         //run();
     }
 
-// QStringList pdfForm()
-// {
-//     Form *f = new Form;
-//     f->rundatapdf1();
-//     return  f->getLspdf1();
-// }
 
 //private:
 bool ok_()
 {
     qInfo() << "Run bool";
-    msleep(4300);
+    sleep(4);
      qInfo() << "Run bool 222";
     return true;
 }
@@ -232,37 +227,52 @@ bool ok_()
         view2->page()->printToPdf(fn2,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)));
         view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(780,1154))), QPageLayout::Landscape, QMargins(50,0,15,15)) ); // fix old
 
-        //view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan OK setelah loading selesai</b>")); // old fix
-        //QEventLoop loop;
+//      view->page()->pdfPrintingFinished(fn, QMessageBox::information(this,"Info...","Menyiapkan file, <b>Tekan OK setelah loading selesai</b>")); // old fix
+//      QEventLoop loop;
 ///         connect(ui->tableWidget_cetak_sppd, &QTableWidget::doubleClicked , this, &Form::even_dklik_tw13);
 ///         connect(this, SIGNAL( currentChanged(int)), this, SLOT(onTabChanged(int)));
-        ///QObject::connect(progressbar, SIGNAL(valueChanged(int)), this, &Widget1::openFile);
+///         QObject::connect(progressbar, SIGNAL(valueChanged(int)), this, &Widget1::openFile);
        // bool ok = loop.exec();
         //sleep(3);
+///        QMessageBox msgBox2(  QMessageBox::Information,"Message","I'm a message box",QMessageBox::addButton(myButton, QMessageBox:: ));
+
         qInfo() << "runnnn runnnnnnnnnnn exec";
-        //sleep(20);
+        msgBox->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+        qInfo() << " === msgBox === " ;//<<msgBox->exec();  //sleep(10);
+        //msgBox->addButton(myButton ,QMessageBox::AcceptRole);
+        //myButton->setEnabled(false);
+        //msgBox->addButton(myButton, QMessageBox::);
+       // msgBox->(QMessageBox::Information,"Message","I'm a message box", QMessageBox::Ok)
+        ///msgBox->setWindowModality(Qt::WindowModal); menambah tanda tanya di bar
         msgBox->exec();
+        qInfo() << "sebelum finish pdf ";
         view->page()->pdfPrintingFinished(fn,ok_());
-        //sleep(2);
+        qInfo() << "runnnn runnnnnnnnnnn exec sebelum slepp 1";
         view2->page()->pdfPrintingFinished(fn2, true);
         //sleep(20);
-        qInfo() << "runnnn runnnnnnnnnnn exec sebelum slepp";
-        //while (chech_finish()) { continue;}
+        qInfo() << "runnnn runnnnnnnnnnn exec sebelum slepp 2";
+          //while (chech_finish()) { continue;}
+        //sleep(2);
 
+
+        open();
         view->close();
         view2->close();
         this->close();
-        //sleep(2);
-        QDesktopServices::openUrl(QUrl::fromLocalFile(fn));  msleep(500);
-        QDesktopServices::openUrl(QUrl::fromLocalFile(fn2));
 
+    }
+
+    void open(){
+       // sleep(3);
+        QDesktopServices::openUrl(QUrl::fromLocalFile(fn));  msleep(50);
+        QDesktopServices::openUrl(QUrl::fromLocalFile(fn2));
     }
 
 
     void run() {
             qInfo() << "runnnn runnnnnnnnnnn";
             timer = new QTimer(this);
-            timer->setInterval(3500);
+            timer->setInterval(50);
             //timer->connect(timer, SIGNAL(timeout()), this, SLOT(klik_buton()));
             timer->connect(timer, &QTimer::timeout, this, &Widget1::klik_buton);
             timer->start();
