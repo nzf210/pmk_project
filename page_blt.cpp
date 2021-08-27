@@ -553,7 +553,7 @@ void Form::btnAdd_blt()
              query.bindValue(":no_srt1",no_srt1);
              //no_srt2.replace("####",nosurat_2());
              query.bindValue(":no_srt2",no_srt2);
-             query.bindValue(":persentase","100%");
+             query.bindValue(":persentase",li_persen.at(qbx_thp_penc->currentIndex()));
              query.bindValue(":sk_bup",sk_bup);
              query.bindValue(":sk_kam",sk_kam);
 
@@ -561,7 +561,7 @@ void Form::btnAdd_blt()
              query.bindValue(":j_kpd",pg_kp_dns);
              query.bindValue(":nip_kpd",nip_kp_dns);
              query.bindValue(":ket",thn2);
-             query.bindValue(":thp_l", tahap_l);
+             query.bindValue(":thp_l", li_tahap_ii.at(qbx_thp_penc->currentIndex()));
              query.bindValue(":jkk",j_kk);
              query.bindValue(":jbt_kpl_dns", jbt_kpl_dns);
 

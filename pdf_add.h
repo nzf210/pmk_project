@@ -63,6 +63,8 @@ public:
         htmlContent.replace("#PKPLD#", pkpldns);
         //QString nmkdns;
         htmlContent.replace("#NIPKDNS#", nip);
+        nosrt1.replace("#%#", persen); /// Mereplace tulisan persen untuk triwulan
+        nosrt2.replace("#%#", persen);
         htmlContent.replace("****", nosrt1);
         htmlContent.replace("####", nosrt2);
         QDate d = QDate::fromString(tgl,"dd-MM-yyyy");

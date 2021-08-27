@@ -14,5 +14,7 @@
         <file>html/gbr/icons8-resume-50-2.png</file>
         <file>html/gbr/icons8-settings-50.png</file>
         <file>html/gbr/yhk.ico</file>
+        <file>html/gbr/la-yhk.jpg</file>
+        <file>html/gbr/yhks.png</file>
     </qresource>
 </RCC>

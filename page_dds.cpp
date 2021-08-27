@@ -350,12 +350,19 @@ void Form::eventQbxadd() // QCombox even pada tahap pencairan dana desa
        return;
       }
      qInfo() << "Tahapan index dana Desa" << indextahap;
-    QString   thp = li_tahap_select.at(indextahap);
-      qInfo() << "Tahapan pada dana Desa" << thp;
+     QString   thp = li_tahap_select.at(indextahap);
+     qInfo() << "Tahapan pada dana Desa" << thp;
 
     muatTahap(thp);
     //qbx_thp_l->clear();
     //qbx_persen->clear();
+//    QString srt1 = qbx_no_srt1->currentText();
+//    QString srt2 = qbx_no_srt2->currentText();
+//    srt1.replace("#%#", li_persen.at(qbx_thp_penc->currentIndex()));
+//    srt2.replace("#%#", li_persen.at(qbx_thp_penc->currentIndex()));
+//    qbx_no_srt1->setCurrentText(srt1);
+//    qbx_no_srt2->setCurrentText(srt2);
+
     le_jml->clear();
     QString pagu =  pagu_pencairan;
     double pg = pagu.toDouble();

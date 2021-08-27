@@ -149,6 +149,23 @@ Form::Form(QWidget *parent) :
     QString thn_ = thn.toString("yyyy");
     this->setWindowTitle("Sistem Infomasi Pengelolaan Keuangan Desa Kab. Yahukimo "+thn_+" ");
     //
+    //this->
+//    centralWidget()->setStyleSheet(
+//             "background-image:url(\"bkg.jpg\"); background-position: center;" );
+
+//       QPixmap bkgnd("::/gbr/html/gbr/la-pago-kab-yahukimo.jpg");
+//       bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+//       QPalette palette;
+//       palette.setBrush(QPalette::Background, bkgnd);
+//       this->setPalette(palette);
+
+
+    this->setStyleSheet(
+                "QWidget#Form { "
+                " border-image: url(:/gbr/html/gbr/la-yhk.jpg) 0 0 0 0 stretch stretch;"
+                "}");
+
+
    if(menu==""){this->showMaximized();}
     //this->showMinimized();]
     ///this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);  menu menghilangkan frame window
@@ -197,6 +214,8 @@ ui->label_14->setText("Alokasi Dana Desa");
  // === Memua Level Type ===
 modeTampilan_usr();
 ui->label_space_1->setText("Selamat Datang : "+nama_l);
+ui->label_dinas->setText("DINAS PEMBERDAYAAN MASYARAKAT KAMPUNG  \n                           KAB. YAHUKIMO");
+
  // === Memuat Level Type ===
 
 #ifdef Q_OS_WINDOWS

@@ -473,9 +473,7 @@ void Form::tambah_real_add()
             muat_k_kp(id_kam);
             muat_nosurat();
             qInfo() << "Cari Error +++++++++++++++++++++";
-
             muat_bm(id_kam); // memuat data bamuskam dan write
-
             QString no_srt1 = li_no_surat.at(6);
             QString no_srt2 = li_no_surat.at(7);
             no_srt1.replace("****", nosurat());
@@ -533,7 +531,7 @@ void Form::btnAdd_add()
         QString tgl_ter = de->text();
         QString no_srt1 =qbx_no_srt1->currentText();
         QString no_srt2 =qbx_no_srt2->currentText();
-        QString persen = "100%";
+        //QString persen = "100%";
         QString sk_bup = "li_sk_bup.at(0)"; //=====================
         QString sk_kam = s_sk_kp;
         QString nm_kp_dns = li_kp_dns.at(1);
