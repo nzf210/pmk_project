@@ -42,6 +42,7 @@ void Form::on_toolButton_covid_clicked()
     sembunyi_subMenu();
 
     ui->label_barCode->setVisible(true);
+    ui->toolButton_logOut->setVisible(true);
 
     menu="5";
     ui->comboBox->setCurrentIndex(0);
@@ -285,6 +286,7 @@ void Form::header_twRealisasicovid() // Header table widget 6
 
 void Form::on_toolButton_tmbRealCovid_clicked() // toolButton tambah realisasi dana covid
 {
+check_qbx_kam_dis();
 tambah_real_covid();
 }
 
@@ -295,7 +297,7 @@ void Form::tambah_real_covid()
 
         QString id_dis = qbx_id_dis->currentText();
         QString id_kam = qbx_id_kam->currentText();
-        if(id_kam == "" && id_dis ==""){QMessageBox::information(this,"Peringatan...!!!","Pilih Distrik dan Kampung");return;}
+        //if(id_kam == "" && id_dis ==""){QMessageBox::information(this,"Peringatan...!!!","Pilih Distrik dan Kampung");return;}
         if(id_kam!="" && id_dis!=""){
 
             tahap(3);
@@ -354,6 +356,7 @@ void Form::btnAdd_covid()
         QString nm_kp = s_nm_kp;
         QString nm_bend = s_nm_bend;
         QString tahap = qbx_thp_penc->currentText();
+        QString tahap_adv = li_tahap_advis.at(qbx_thp_penc->currentIndex());
 
        //String tahap_l = qbx_thp_l->currentText();
         QString tgl_ter = de->text();
@@ -414,7 +417,7 @@ void Form::btnAdd_covid()
              query.bindValue(":persentase","100%");
              query.bindValue(":sk_bup",sk_bup);
              query.bindValue(":sk_kam",sk_kam);
-
+             query.bindValue(":sk_pmk",tahap_adv);
              query.bindValue(":nm_kpd",nm_kp_dns);
              query.bindValue(":j_kpd",pg_kp_dns);
              query.bindValue(":nip_kpd",nip_kp_dns);
@@ -599,9 +602,7 @@ void Form::muat_data_realisasi_covid(QString s_id_kamp)
 void Form::on_tableWidget_cetak_covid_cellDoubleClicked(int i, int column)
 {
     qInfo() << "ini adalah even change tw Covid ============== " << i <<" === " <<column;
-    if(qbx_id_dis->currentText() == "" && qbx_id_kam->currentText() == "" ){ QMessageBox::information(this, "Info...","Pilih Kampung dan Distrik ..."); return; }
-    if(qbx_id_dis->currentText() != "" && qbx_id_kam->currentText() == "" ){ QMessageBox::information(this, "Info...","Pilih Kampung dan Distrik ..."); return; }
-    if(qbx_id_dis->currentText() == "" && qbx_id_kam->currentText() != "" ){ QMessageBox::information(this, "Info...","Pilih Kampung dan Distrik ..."); return; }
+    check_qbx_kam_dis();
     li_data_covid.clear();
     QString list;
     for (int ii=1; ii<30; ii++) {

@@ -47,11 +47,13 @@ void Form::on_toolButton_blt_clicked()
     ui->comboBox->setCurrentIndex(0);
     ui->comboBox_nmKampung->setCurrentIndex(0);
     muat_data_realisasi_blt("");
+    ui->toolButton_logOut->setVisible(true);
     qInfo() << "Nilai Menu untuk ====" << menu;
 }
 
 void Form::on_toolButton_tmbRealblt_clicked()
 {
+check_qbx_kam_dis();
 tambah_real_blt();
 }
 
@@ -239,6 +241,7 @@ void Form::header_cetak_blt()
                  <<"Tahap Pencairan"<<"Jumlah Pencairan"<<"Terbilang"<<"Tanggal Terima"<<"No Srt 1"<<"No Srt 2"<<"%"<<"SK Bupati"<<"SK Kep.Kampung"
                 <<"SK Men PMK"<<"SK Men Keu"<<"Kepala Dinas" << " Ket " << "Pangkat" << "NIP" <<"Laporan Realisasi"<<"id"<<"jkk"<<"jbt kp dns" << "id_realisasi";
     ui->tableWidget_cetak_blt->setHorizontalHeaderLabels(headerWidget);
+    ui->tableWidget_cetak_blt->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     ui->tableWidget_cetak_blt->setColumnHidden(0,true);
     ui->tableWidget_cetak_blt->setColumnHidden(1,true);
@@ -440,7 +443,7 @@ void Form::tambah_real_blt()
 
         QString id_dis = qbx_id_dis->currentText();
         QString id_kam = qbx_id_kam->currentText();
-        if(id_kam == "" && id_dis ==""){QMessageBox::information(this,"Peringatan...!!!","Pilih Distrik dan Kampung");return;}
+        //if(id_kam == "" && id_dis ==""){QMessageBox::information(this,"Peringatan...!!!","Pilih Distrik dan Kampung");return;}
         if(id_kam!="" && id_dis!=""){
 
             tahap(2);
@@ -496,6 +499,7 @@ void Form::btnAdd_blt()
         QString nm_kp = s_nm_kp;
         QString nm_bend = s_nm_bend;
         QString tahap = qbx_thp_penc->currentText();
+        QString tahap_adv = li_tahap_advis.at(qbx_thp_penc->currentIndex());
 
         QString tahap_l = li_tahap_ii.at(qbx_thp_penc->currentIndex());
         QString tgl_ter = de->text();
@@ -556,7 +560,7 @@ void Form::btnAdd_blt()
              query.bindValue(":persentase",li_persen.at(qbx_thp_penc->currentIndex()));
              query.bindValue(":sk_bup",sk_bup);
              query.bindValue(":sk_kam",sk_kam);
-
+             query.bindValue(":sk_pmk",tahap_adv);
              query.bindValue(":nm_kpd",nm_kp_dns);
              query.bindValue(":j_kpd",pg_kp_dns);
              query.bindValue(":nip_kpd",nip_kp_dns);

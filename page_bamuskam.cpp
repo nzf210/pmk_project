@@ -6,7 +6,7 @@
 #include "pdf_dds.h"
 #include "pdf_add.h"
 #include "pdf_sppd_add.h"
-#include "psd_sppd_dds.h"
+//#include "pdf_sppd_dds.h"
 #include "mainwindow.h"
 // =======================================================================================
 #include "QDebug"
@@ -60,6 +60,7 @@ void Form::on_toolButton_clicked() //tb 1
     ui->comboBox_filter->setVisible(true);
     ui->label_filter->setVisible(true);
     ui->toolButton_filter->setVisible(true);
+    ui->toolButton_logOut->setVisible(true);
     ui->comboBox_filter->clear();
     muatListFilter();
 
@@ -113,10 +114,8 @@ void Form::event_doubleklik_tw_bamuskam() // Double Klik tw data bamuskam menu 1
 
                                  L_nm->setMaximumSize(200,25); Le_nm->setMaximumSize(200,25);
                                  L_nm->setMinimumSize(200,25); Le_nm->setMinimumSize(200,25);
-
                                  L_jbtn->setMaximumSize(170,25); Le_jbtn->setMaximumSize(170,25);
                                  L_jbtn->setMinimumSize(170,25); Le_jbtn->setMinimumSize(170,25);
-
                                  L_no_sk->setMaximumSize(260,25); Le_no_sk->setMaximumSize(260,25);
                                  L_no_sk->setMinimumSize(260,25); Le_no_sk->setMinimumSize(260,25);
 
@@ -139,9 +138,6 @@ void Form::event_doubleklik_tw_bamuskam() // Double Klik tw data bamuskam menu 1
                                  Le_jbtn->setText(jbtn);
                                  Le_no_sk->setText(no_sk);
 
-
-                                 //this->setWindowIcon(logo);
-
                                  QWidget *eb_v = new QWidget;
                                  QIcon logo(":/gbr/html/gbr/yhk.png");
                                  eb_v->setWindowIcon(logo);
@@ -149,7 +145,6 @@ void Form::event_doubleklik_tw_bamuskam() // Double Klik tw data bamuskam menu 1
                                  eb_v->setMinimumWidth(800);
                                  eb_v->setMaximumWidth(800);
                                  eb_v->setMaximumHeight(150);
-
 
                                  QVBoxLayout *VL = new QVBoxLayout(eb_v);
                                  QHBoxLayout *HL1 = new QHBoxLayout;

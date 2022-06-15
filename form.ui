@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1632</width>
+    <width>1638</width>
     <height>833</height>
    </rect>
   </property>
@@ -66,6 +66,20 @@ border-style: outset;
 	
 }
 
+QToolButton#toolButton { background-image: url(:/gbr/html/gbr/icons8-create-50.png);
+image: no-repeate;
+background-size:100%;
+width: 60%;
+height: 60%;
+border-style: outset;
+    border-width: 1px;
+    border-radius: 7px;
+    border-color: beige;
+    font: bold 10px;
+   text-align: bottom-center;background-repeat: no-repeat; 
+	
+}
+
 QToolButton#toolButton_danaDesa { background-image: url(:/gbr/html/gbr/icons8-resume-50-2.png);
 
 image: no-repeate;
@@ -80,6 +94,54 @@ border-style: outset;
    text-align: bottom-center;background-repeat: no-repeat; 
 	
 }
+
+QToolButton#toolButton_gab_add { background-image: ;
+	background-image: url(:/gbr/html/gbr/icons8-create-archive-50.png);
+
+image: no-repeate;
+background-size:100%;
+width: 60%;
+height: 60%;
+border-style: outset;
+    border-width: 1px;
+    border-radius: 7px;
+    border-color: beige;
+    font: bold 10px;
+   text-align: bottom-center;background-repeat: no-repeat; 
+	
+}
+
+QToolButton#toolButton_danaDesa { background-image: url(:/gbr/html/gbr/icons8-resume-50-2.png);
+
+image: no-repeate;
+background-size:100%;
+width: 60%;
+height: 60%;
+border-style: outset;
+    border-width: 1px;
+    border-radius: 7px;
+    border-color: beige;
+    font: bold 10px;
+   text-align: bottom-center;background-repeat: no-repeat; 
+	
+}
+
+QToolButton#toolButton_gab { background-image: ;
+	background-image: url(:/gbr/html/gbr/icons8-create-archive-50.png);
+
+image: no-repeate;
+background-size:100%;
+width: 60%;
+height: 60%;
+border-style: outset;
+    border-width: 1px;
+    border-radius: 7px;
+    border-color: beige;
+    font: bold 10px;
+   text-align: bottom-center;background-repeat: no-repeat; 
+	
+}
+
 QToolButton#toolButton_add { background-image: url(:/gbr/html/gbr/icons8-resume-50.png);
 image: no-repeate;
 background-size:100%;
@@ -152,15 +214,11 @@ border-style: outset;
 	
 }</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_10">
+  <layout class="QVBoxLayout" name="verticalLayout_33">
    <item>
     <widget class="QFrame" name="frame">
      <property name="styleSheet">
-      <string notr="true">QFrame#frame{
-/*background: url(:/gbr/html/gbr/la-yhk.jpg) no-repeat; background-size: 100%; border: 6px solid #333;margin: 0px;*/
-background-image: url(:/gbr/html/gbr/la-yhk.jpg); background-repeat: no-repeat; background-size: cover;
-border-image: url(:/gbr/html/gbr/la-yhk.jpg) 0 0 0 0 stretch stretch;
-}</string>
+      <string notr="true"/>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -168,11 +226,11 @@ border-image: url(:/gbr/html/gbr/la-yhk.jpg) 0 0 0 0 stretch stretch;
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_26">
+     <layout class="QVBoxLayout" name="verticalLayout_29">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_9">
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_25">
+         <layout class="QVBoxLayout" name="verticalLayout_26">
           <item>
            <widget class="QGroupBox" name="groupBox_2">
             <property name="minimumSize">
@@ -186,6 +244,9 @@ border-image: url(:/gbr/html/gbr/la-yhk.jpg) 0 0 0 0 stretch stretch;
               <width>3425345</width>
               <height>90</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border-style: none!important;</string>
             </property>
             <property name="title">
              <string/>
@@ -373,7 +434,7 @@ border-image: url(:/gbr/html/gbr/la-yhk.jpg) 0 0 0 0 stretch stretch;
                   </size>
                  </property>
                  <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Realisasi&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bantuan Covid&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string/>
@@ -428,7 +489,7 @@ border-image: url(:/gbr/html/gbr/la-yhk.jpg) 0 0 0 0 stretch stretch;
                   </size>
                  </property>
                  <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Realisasi&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bantuan Langsung Tunai&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string/>
@@ -458,6 +519,116 @@ border-image: url(:/gbr/html/gbr/la-yhk.jpg) 0 0 0 0 stretch stretch;
                  </property>
                  <property name="text">
                   <string>BLT</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_25">
+               <item>
+                <widget class="QToolButton" name="toolButton_gab">
+                 <property name="minimumSize">
+                  <size>
+                   <width>55</width>
+                   <height>55</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>55</width>
+                   <height>55</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Realisasi Gabungan&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_gab">
+                 <property name="minimumSize">
+                  <size>
+                   <width>55</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>55</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>6</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>GAB</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_34">
+               <item>
+                <widget class="QToolButton" name="toolButton_gab_add">
+                 <property name="minimumSize">
+                  <size>
+                   <width>55</width>
+                   <height>55</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>55</width>
+                   <height>55</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Realisasi Gabungan&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_gab_add">
+                 <property name="minimumSize">
+                  <size>
+                   <width>55</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>55</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>6</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>GAB</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
@@ -538,7 +709,7 @@ border-image: url(:/gbr/html/gbr/la-yhk.jpg) 0 0 0 0 stretch stretch;
                   </size>
                  </property>
                  <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Realisasi&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kelola User&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string/>
@@ -605,7 +776,7 @@ border-image: url(:/gbr/html/gbr/la-yhk.jpg) 0 0 0 0 stretch stretch;
                </property>
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>12</pointsize>
                  <weight>75</weight>
                  <bold>true</bold>
                 </font>
@@ -614,6 +785,33 @@ border-image: url(:/gbr/html/gbr/la-yhk.jpg) 0 0 0 0 stretch stretch;
                 <string>-----------------------------</string>
                </property>
               </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_waktu">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>00:00:00</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_12">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
@@ -631,6 +829,9 @@ border-image: url(:/gbr/html/gbr/la-yhk.jpg) 0 0 0 0 stretch stretch;
               <width>1521</width>
               <height>51</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border-style: none!important;</string>
             </property>
             <property name="title">
              <string/>
@@ -850,7 +1051,7 @@ bacground-size: 70%</string>
                <property name="minimumSize">
                 <size>
                  <width>50</width>
-                 <height>42</height>
+                 <height>40</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -1026,6 +1227,10 @@ background-repeat: no-repeat; /* Do not repeat the image */
                 <bold>true</bold>
                </font>
               </property>
+              <property name="styleSheet">
+               <string notr="true">border: 0.5px solid rgba(255,255,255,.5); 
+border-color: white;</string>
+              </property>
               <property name="text">
                <string>QrCode</string>
               </property>
@@ -1120,10 +1325,10 @@ background-repeat: no-repeat; /* Do not repeat the image */
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">QStackedWidget#stackedWidget{border: 2px solid rgba(255,255,255,.5);} </string>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1168,6 +1373,9 @@ background-repeat: no-repeat; /* Do not repeat the image */
               </property>
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klik 2x item yang akan di edit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
               </property>
               <property name="editTriggers">
                <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::SelectedClicked</set>
@@ -1223,6 +1431,9 @@ background-repeat: no-repeat; /* Do not repeat the image */
                   <width>531</width>
                   <height>400</height>
                  </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
                 </property>
                 <property name="alternatingRowColors">
                  <bool>true</bool>
@@ -1476,7 +1687,6 @@ bacground-size: 70%</string>
                   </property>
                   <property name="font">
                    <font>
-                    <family>MS Shell Dlg 2</family>
                     <pointsize>14</pointsize>
                     <weight>75</weight>
                     <bold>true</bold>
@@ -1512,6 +1722,9 @@ bacground-size: 70%</string>
                 </property>
                 <property name="toolTip">
                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klik 2x untuk Mengedit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
                 </property>
                 <property name="alternatingRowColors">
                  <bool>true</bool>
@@ -1569,6 +1782,9 @@ bacground-size: 70%</string>
                   <width>531</width>
                   <height>400</height>
                  </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
                 </property>
                 <property name="alternatingRowColors">
                  <bool>true</bool>
@@ -1858,6 +2074,9 @@ bacground-size: 70%</string>
                 <property name="toolTip">
                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klik 2x Untuk Mengedit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                 <property name="alternatingRowColors">
                  <bool>true</bool>
                 </property>
@@ -2107,6 +2326,9 @@ bacground-size: 70%</string>
                   <width>531</width>
                   <height>400</height>
                  </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
                 </property>
                 <property name="locale">
                  <locale language="Indonesian" country="Indonesia"/>
@@ -2363,7 +2585,6 @@ bacground-size: 70%</string>
                   </property>
                   <property name="font">
                    <font>
-                    <family>MS Shell Dlg 2</family>
                     <pointsize>14</pointsize>
                     <weight>75</weight>
                     <bold>true</bold>
@@ -2402,6 +2623,9 @@ bacground-size: 70%</string>
                 </property>
                 <property name="toolTip">
                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klik 2x untuk Mengedit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
                 </property>
                 <property name="locale">
                  <locale language="Indonesian" country="Indonesia"/>
@@ -2462,6 +2686,9 @@ bacground-size: 70%</string>
                   <width>531</width>
                   <height>400</height>
                  </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
                 </property>
                 <property name="alternatingRowColors">
                  <bool>true</bool>
@@ -2715,7 +2942,6 @@ bacground-size: 70%</string>
                   </property>
                   <property name="font">
                    <font>
-                    <family>MS Shell Dlg 2</family>
                     <pointsize>14</pointsize>
                     <weight>75</weight>
                     <bold>true</bold>
@@ -2755,14 +2981,17 @@ bacground-size: 70%</string>
                 <property name="toolTip">
                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klik 2x untuk Mengedit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                 <property name="alternatingRowColors">
                  <bool>true</bool>
                 </property>
                 <property name="selectionMode">
-                 <enum>QAbstractItemView::SingleSelection</enum>
+                 <enum>QAbstractItemView::ExtendedSelection</enum>
                 </property>
                 <property name="selectionBehavior">
-                 <enum>QAbstractItemView::SelectRows</enum>
+                 <enum>QAbstractItemView::SelectItems</enum>
                 </property>
                </widget>
               </item>
@@ -2781,6 +3010,10 @@ bacground-size: 70%</string>
               <width>701</width>
               <height>611</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">
+border: none !important;</string>
             </property>
             <property name="title">
              <string/>
@@ -2813,6 +3046,12 @@ bacground-size: 70%</string>
                <bold>true</bold>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">border: 2px solid rgba(255,255,255,.5); 
+color: white;
+text-shadow: 2px 2px 5px red;
+</string>
+             </property>
              <property name="text">
               <string>DAFTAR USER</string>
              </property>
@@ -2829,6 +3068,10 @@ bacground-size: 70%</string>
                <height>561</height>
               </rect>
              </property>
+             <property name="styleSheet">
+              <string notr="true">border: none !important;
+/*border: 2px solid rgba(255,255,255,.5);*/ </string>
+             </property>
              <property name="title">
               <string/>
              </property>
@@ -2840,6 +3083,9 @@ bacground-size: 70%</string>
                 <width>451</width>
                 <height>301</height>
                </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
               </property>
              </widget>
              <widget class="QGroupBox" name="groupBox_5">
@@ -2863,6 +3109,11 @@ bacground-size: 70%</string>
                 <height>161</height>
                </size>
               </property>
+              <property name="styleSheet">
+               <string notr="true">
+
+border: 3px solid rgba(255,255,255,.5);</string>
+              </property>
               <property name="title">
                <string/>
               </property>
@@ -2883,6 +3134,9 @@ bacground-size: 70%</string>
                      <weight>75</weight>
                      <bold>true</bold>
                     </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: white;</string>
                    </property>
                    <property name="text">
                     <string>Nama :</string>
@@ -2906,6 +3160,9 @@ bacground-size: 70%</string>
                      <height>16777215</height>
                     </size>
                    </property>
+                   <property name="styleSheet">
+                    <string notr="true">/*order-color: black;*/</string>
+                   </property>
                   </widget>
                  </item>
                  <item row="1" column="0">
@@ -2922,6 +3179,9 @@ bacground-size: 70%</string>
                      <weight>75</weight>
                      <bold>true</bold>
                     </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: white;</string>
                    </property>
                    <property name="text">
                     <string>usr Name :</string>
@@ -2962,6 +3222,9 @@ bacground-size: 70%</string>
                      <bold>true</bold>
                     </font>
                    </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: white;</string>
+                   </property>
                    <property name="text">
                     <string>Pass :</string>
                    </property>
@@ -2997,6 +3260,9 @@ bacground-size: 70%</string>
                      <weight>75</weight>
                      <bold>true</bold>
                     </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: white;</string>
                    </property>
                    <property name="text">
                     <string>v Pass  :</string>
@@ -3034,6 +3300,9 @@ bacground-size: 70%</string>
                      <bold>true</bold>
                     </font>
                    </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: white;</string>
+                   </property>
                    <property name="text">
                     <string>Level :</string>
                    </property>
@@ -3061,6 +3330,9 @@ bacground-size: 70%</string>
                    <property name="toolTip">
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;tekan Bersihkan lebih dahulu...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: white;</string>
+                   </property>
                    <property name="text">
                     <string>Buat</string>
                    </property>
@@ -3068,6 +3340,9 @@ bacground-size: 70%</string>
                  </item>
                  <item>
                   <widget class="QPushButton" name="pushButton_update_usr">
+                   <property name="styleSheet">
+                    <string notr="true">color: white;</string>
+                   </property>
                    <property name="text">
                     <string>perbaharui</string>
                    </property>
@@ -3075,6 +3350,9 @@ bacground-size: 70%</string>
                  </item>
                  <item>
                   <widget class="QPushButton" name="pushButton_hapus_usr">
+                   <property name="styleSheet">
+                    <string notr="true">color: white;</string>
+                   </property>
                    <property name="text">
                     <string>Hapus</string>
                    </property>
@@ -3082,6 +3360,9 @@ bacground-size: 70%</string>
                  </item>
                  <item>
                   <widget class="QPushButton" name="pushButton_bersihkan_usr">
+                   <property name="styleSheet">
+                    <string notr="true">color: white;</string>
+                   </property>
                    <property name="text">
                     <string>Bersihkan</string>
                    </property>
@@ -3113,6 +3394,732 @@ bacground-size: 70%</string>
                </size>
               </property>
              </widget>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page_6">
+         <layout class="QVBoxLayout" name="verticalLayout_32">
+          <item>
+           <widget class="QSplitter" name="splitter_6">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <widget class="QWidget" name="layoutWidget">
+             <layout class="QVBoxLayout" name="verticalLayout_31">
+              <item>
+               <widget class="QLabel" name="label_realisasi_gab_2">
+                <property name="minimumSize">
+                 <size>
+                  <width>431</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Daftar Surat Realisasi Gabungan</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTableWidget" name="tableWidget_realisasi_gab">
+                <property name="minimumSize">
+                 <size>
+                  <width>531</width>
+                  <height>400</height>
+                 </size>
+                </property>
+                <property name="toolTip">
+                 <string>Klik 2x untuk Mengedit</string>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::ExtendedSelection</enum>
+                </property>
+                <property name="selectionBehavior">
+                 <enum>QAbstractItemView::SelectRows</enum>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="layoutWidget">
+             <layout class="QVBoxLayout" name="verticalLayout_30">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_22">
+                <item>
+                 <widget class="QLabel" name="label_pagu_gab">
+                  <property name="minimumSize">
+                   <size>
+                    <width>51</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>51</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Pagu :</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="lineEdit_pagu_gab">
+                  <property name="minimumSize">
+                   <size>
+                    <width>181</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>181</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_realisasi_gab">
+                  <property name="minimumSize">
+                   <size>
+                    <width>71</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>71</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Realisasi :</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="lineEdit_realisasi_gab">
+                  <property name="minimumSize">
+                   <size>
+                    <width>181</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>181</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_sisa_gab">
+                  <property name="minimumSize">
+                   <size>
+                    <width>41</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>41</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>sisa :</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="lineEdit_sisa_gab">
+                  <property name="minimumSize">
+                   <size>
+                    <width>181</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>181</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_30">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_23">
+                <item>
+                 <widget class="QLabel" name="label_19">
+                  <property name="minimumSize">
+                   <size>
+                    <width>5</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>5</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="toolButton_tmbRealgab">
+                  <property name="minimumSize">
+                   <size>
+                    <width>56</width>
+                    <height>61</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tambah Realisasi&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">
+background-image: url(:/gbr/html/gbr/icons8-add-list-50.png);
+background-repeat: no-repeat; 
+position: fixed; 
+width: 40%; 
+height:50%; 
+bacground-size: 70%</string>
+                  </property>
+                  <property name="text">
+                   <string>+</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="toolButton_cetakPdfgab">
+                  <property name="minimumSize">
+                   <size>
+                    <width>56</width>
+                    <height>61</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">
+background-image: url(:/gbr/html/gbr/icons8-export-pdf-50.png);
+background-repeat: no-repeat; 
+position: fixed; 
+width: 40%; 
+height:50%; 
+bacground-size: 70%</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_31">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_data_gab">
+                  <property name="minimumSize">
+                   <size>
+                    <width>331</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>331</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Data Realisasi Gabungan</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_32">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QTableWidget" name="tableWidget_cetak_gab">
+                <property name="minimumSize">
+                 <size>
+                  <width>300</width>
+                  <height>200</height>
+                 </size>
+                </property>
+                <property name="toolTip">
+                 <string/>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::ExtendedSelection</enum>
+                </property>
+                <property name="selectionBehavior">
+                 <enum>QAbstractItemView::SelectRows</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page_8">
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
+           <widget class="QSplitter" name="splitter_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <widget class="QWidget" name="layoutWidget_13">
+             <layout class="QVBoxLayout" name="verticalLayout_36">
+              <item>
+               <widget class="QLabel" name="label_realisasi_gab_add_">
+                <property name="minimumSize">
+                 <size>
+                  <width>431</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Daftar Surat Realisasi Gabungan</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTableWidget" name="tableWidget_realisasi_gab_add">
+                <property name="minimumSize">
+                 <size>
+                  <width>531</width>
+                  <height>400</height>
+                 </size>
+                </property>
+                <property name="toolTip">
+                 <string>Klik 2x untuk Mengedit</string>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::ExtendedSelection</enum>
+                </property>
+                <property name="selectionBehavior">
+                 <enum>QAbstractItemView::SelectRows</enum>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="layoutWidget_12">
+             <layout class="QVBoxLayout" name="verticalLayout_35">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_24">
+                <item>
+                 <widget class="QLabel" name="label_pagu_gab_add">
+                  <property name="minimumSize">
+                   <size>
+                    <width>51</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>51</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Pagu :</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="lineEdit_pagu_gab_add">
+                  <property name="minimumSize">
+                   <size>
+                    <width>181</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>181</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_realisasi_gab_add">
+                  <property name="minimumSize">
+                   <size>
+                    <width>71</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>71</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Realisasi :</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="lineEdit_realisasi_gab_add">
+                  <property name="minimumSize">
+                   <size>
+                    <width>181</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>181</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_sisa_gab_add">
+                  <property name="minimumSize">
+                   <size>
+                    <width>41</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>41</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>sisa :</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="lineEdit_sisa_gab_add">
+                  <property name="minimumSize">
+                   <size>
+                    <width>181</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>181</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_33">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_25">
+                <item>
+                 <widget class="QLabel" name="label_21">
+                  <property name="minimumSize">
+                   <size>
+                    <width>5</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>5</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="toolButton_tmbRealgab_add">
+                  <property name="minimumSize">
+                   <size>
+                    <width>56</width>
+                    <height>61</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tambah Realisasi&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">
+background-image: url(:/gbr/html/gbr/icons8-add-list-50.png);
+background-repeat: no-repeat; 
+position: fixed; 
+width: 40%; 
+height:50%; 
+bacground-size: 70%</string>
+                  </property>
+                  <property name="text">
+                   <string>+</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="toolButton_cetakPdfgab_add">
+                  <property name="minimumSize">
+                   <size>
+                    <width>56</width>
+                    <height>61</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">
+background-image: url(:/gbr/html/gbr/icons8-export-pdf-50.png);
+background-repeat: no-repeat; 
+position: fixed; 
+width: 40%; 
+height:50%; 
+bacground-size: 70%</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_34">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_data_gab_add">
+                  <property name="minimumSize">
+                   <size>
+                    <width>331</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>331</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Data Realisasi Gabungan</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_35">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QTableWidget" name="tableWidget_cetak_gab_add">
+                <property name="minimumSize">
+                 <size>
+                  <width>300</width>
+                  <height>200</height>
+                 </size>
+                </property>
+                <property name="toolTip">
+                 <string/>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::ExtendedSelection</enum>
+                </property>
+                <property name="selectionBehavior">
+                 <enum>QAbstractItemView::SelectRows</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </widget>
           </item>

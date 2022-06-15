@@ -70,6 +70,17 @@ void Form::on_toolButton_user_clicked()
     ui->comboBox_nmKampung->setCurrentIndex(0);
     qInfo() << "Nilai Menu untuk ====" << menu;
 
+
+    //Tambahan Sembunyi Line Edit Label
+    ui->label->setVisible(false);
+    ui->comboBox->setVisible(false);
+    ui->label_namaKampung->setVisible(false);
+    ui->comboBox_nmKampung->setVisible(false);
+    ui->toolButton_refResh->setVisible(false);
+    ui->toolButton_logOut->setVisible(false);
+    //Tambahan Sembunyi Line Edit Label
+
+
 }
 
 void Form::on_pushButton_buat_usr_clicked()

@@ -127,6 +127,14 @@ private slots:
       void on_toolButton_tmbSppd_clicked();
       void on_toolButton_cetakpdfSppd_clicked();
 
+      QString toCamelCase(const QString &s)
+      {
+          QStringList parts = s.split(' ',QString::SkipEmptyParts );
+          for (int i = 0; i < parts.size(); ++i)
+              parts[i].replace(0, 1, parts[i][0].toUpper());
+          return parts.join(" ");
+      }
+
       void sppdbtc();
       //void sppdbtc_2();
      void refresh_data_sppd();
@@ -174,8 +182,6 @@ private slots:
       // ====== dana covid =======
       void on_toolButton_tmbRealCovid_clicked();
 
-
-
        // ====== dana covid =======
       void on_tableWidget_realisasi_covid_cellDoubleClicked(int row, int column);
 
@@ -210,17 +216,54 @@ private slots:
 
       void on_tableWidget_realisasi_sppd_cellDoubleClicked(int row, int column);
 
+      void on_toolButton_gab_clicked();
+
+      void on_toolButton_tmbRealgab_clicked();
+
+      //Data Realisasi GAB
+      void muatheadertw_realisasi_gab();
+      void muatheadertw_cetak_gab();
+      void muatData_realisasi_gab(QString &id_kp);
+      void muatData_realisasi_gab2(QString id_kp, int row);
+      void muat_data_realisasi_gab(QString &id_kp);
+
+      void on_tableWidget_realisasi_gab_cellClicked(int row, int column);
+
+      void on_tableWidget_realisasi_gab_cellDoubleClicked(int row, int column);
+
+      void on_toolButton_cetakPdfgab_clicked();
+
+      void save_gab();
+
+      void on_toolButton_gab_add_released();
+
+      void on_toolButton_tmbRealgab_add_released();
+
+      void on_toolButton_cetakPdfgab_add_released();
+
+      void on_tableWidget_realisasi_gab_add_cellClicked(int row, int column);
+
+      void on_tableWidget_realisasi_gab_add_cellDoubleClicked(int row, int column);
+
+      void muatheadertw_realisasi_gab_add();
+
+      void muatheadertw_cetak_gab_add();
+
+      void muatData_realisasi_gab_add(QString &id_kp);
+
+      void muatData_realisasi_gab2_add(QString id_kp, int row);
+
+      void muat_data_realisasi_gab_add(QString &id_kp);
+
 signals:
      // void myLabelClicked();      // Signal to emit
       void sendData(QString data);
-
       //ini percobaan Slot signal
-
 
 public slots:
       // void slotLabelClicked();    // Slot which will consume signal
     void onTabChanged(int tabIndex);
-
+    void update_waktu();
 
 
 private:
@@ -280,6 +323,8 @@ private:
     void  muatrealadd_();
     void  muatrealadd__();
 
+    void save_spp();
+
     //Tambah Filter
     QStringList li_lvl_type;
     QStringList li_dftBams;
@@ -309,7 +354,7 @@ private:
     QStringList li_tahap;
     QStringList li_tahap_add;
     QStringList li_tahap_select;
-//    QStringList li_srt1;
+    QStringList li_tahap_advis;;
 //    QStringList li_srt2;
 
     QStringList li_tahap_ii;
@@ -348,6 +393,7 @@ private:
     //void no_srt1();
     //void no_srt2();
     void btnAdd_dds();
+    void check_qbx_kam_dis();
 
     //Covid data
     QString qcode_covid();
@@ -394,11 +440,6 @@ private:
      void update_data_dds(QString id, QString tahap, QString date, QString jml, QString terbilang, QString noSrt1, QString noSrt2);
      void memuatData_twRealisasidds( QString);
 
-
-    //void tahap_add();
-    //void no_srt4();
-    //void persen();
-    //void sk_bup();
     void sk_kampung();
     void sk_menteri();
     void kp_dns();
@@ -406,17 +447,17 @@ private:
     void muat_bm(QString skam); // Memuat data nama Bamuskam untuk add dan tulis ke txt
     void muat_bamuskam(QString &id_kam_s);
 
-    //void muat_v_bam_2( QString &id_kamp_s);
+
     void muat_bend_kp( QString &id_kamp_s);
     void muat_k_kp(QString &id_kam_s);
     void muat_real(QString &id_kam_s);
-    //void muat_real_2(QString &id_kam_s);
+
     void header_wt1();
     void header_realisasi_dds();
-    //void header_wt11();
+
 
     void header_wt2();
-    //void header_wt9();
+
     void bilang(QString nilai);
     void bila(QString nilai);
     void bil(QString nilai);
@@ -431,7 +472,6 @@ private:
     QString terbilang;
     QString terbila;
     void act();
-    //void act_2();
 
     void buat_user();
     void update_user();

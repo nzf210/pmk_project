@@ -28,18 +28,18 @@ bool openDB2(QSqlDatabase &db2)
             db2.setPort(porto);
             db2.setDatabaseName("yhk_2021");
             db2.setUserName(nm); //Change the username
-            //db2.setPassword("megarezst_yhk"); //Change the password
             db2.setPassword(pass); } //Change the password
-    //db2.setConnectOptions("connect_timeout=8");
+            db2.setConnectOptions("connect_timeout=8");
     bool ok = db2.open();
     if(ok)
     {
         qInfo() << "Opening Database bool main window" ;
         return true;
     }
-    qInfo() << "Failed to open connection!";
+    qInfo() << "Failed to open connection!!!";
     qInfo() << db2.lastError().text();return false;
  }
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -55,8 +55,6 @@ MainWindow::MainWindow(QWidget *parent)
     this->setFixedSize(this->width(),this->height()); // untuk mematikan maximum window
     QIcon logo(":/gbr/html/gbr/yhk.png");
     this->setWindowIcon(logo);
-
-
 
     QSqlDatabase db2 = QSqlDatabase::addDatabase("QPSQL");
     openDB2(db2);
@@ -76,11 +74,6 @@ MainWindow::MainWindow(QWidget *parent)
     const QIcon passwordIcon(":/gbr/html/gbr/icons8-lock-50-2.png");
     ui->lineEdit_2->addAction(passwordIcon, QLineEdit::LeadingPosition);
 
-
-
-
-
-    //connect(ui->lineEdit_2->editingFinished(), &QLineEdit::returnPressed, this, MainWindow::on_pushButton_clicked());
 
     QDateTime wkt2 = QDateTime::fromString(getdate(),"yyyy-MM-dd");
     //QDateTime wkt3 = QDateTime::fromString(getdate(),"yyyy-MM-dd");
@@ -206,9 +199,9 @@ void MainWindow::on_pushButton_clicked()  // Button Login ...
     QString pass = ui->lineEdit_2->text();
 
     if(nama_i=="" && pass==""){QMessageBox::information(this,"Perhatian...","Nama atau Password tdk boleh kosong"); return;}
-    QByteArray hash = QCryptographicHash::hash(nama_i.toLocal8Bit(),QCryptographicHash::Sha256).toHex();
+    //QByteArray hash = QCryptographicHash::hash(nama_i.toLocal8Bit(),QCryptographicHash::Sha256).toHex();
     QByteArray hash2 = QCryptographicHash::hash(pass.toLocal8Bit(),QCryptographicHash::Sha256).toHex();
-    QString nama_= QString::fromLocal8Bit(hash);
+    //QString nama_= QString::fromLocal8Bit(hash);
     QString pass_ = QString::fromLocal8Bit(hash2);
 
     loadusr(nama_i,pass_);
@@ -246,7 +239,7 @@ void MainWindow::loadusr(QString nm, QString ps)
     listDatauser = list_data_coba;
     //qInfo() << "NIlai List Data User" << listDatauser;
     QString path("doc/temp/");
-    QDir dir(path);
+    //QDir dir(path);
     QFile fOut(path+"lvl_type.txt");
     if(!fOut.exists()){fOut.remove(); }
     fOut.open(QFile::WriteOnly | QFile::Text);

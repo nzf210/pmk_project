@@ -1,12 +1,12 @@
 #include "form.h"
 #include "ui_form.h"
 #include "QPdfWriter"
-#include "pdf_dok.h"
+//#include "pdf_dok.h"
 #include "qrencode.h"
 #include "pdf_dds.h"
-#include "pdf_add.h"
-#include "pdf_sppd_add.h"
-#include "psd_sppd_dds.h"
+//#include "pdf_add.h"
+//#include "pdf_sppd_add.h"
+//#include "psf_sppd_dds.h"
 #include "mainwindow.h"
 // =======================================================================================
 #include "QDebug"
@@ -58,8 +58,8 @@ void Form::on_toolButton_cetakPdfdds_clicked()
 void Form::on_toolButton_tmbRealdds_clicked()
 {
       if(menu=="2"){
-      if(ui->comboBox->currentText()==""&&ui->comboBox_nmKampung->currentText()==""){ QMessageBox::information(this,"Info...!!!","Pilih distrik dan kampung...");     return;}
-                            act(); }
+         check_qbx_kam_dis();
+         act(); }
 }
 
 
@@ -330,6 +330,7 @@ void Form::on_toolButton_danaDesa_clicked()
 {
     boderToolbar(2);
     ui->label_barCode->setVisible(true);
+    ui->toolButton_logOut->setVisible(true);
     sembunyi_subMenu();
 
     ui->stackedWidget->setCurrentIndex(1);
@@ -343,17 +344,16 @@ void Form::on_toolButton_danaDesa_clicked()
 }
 
 
-void Form::eventQbxadd() // QCombox even pada tahap pencairan dana desa
+void Form::eventQbxadd() // QCombox even pada  pencairan dana desa
 {
-      int indextahap = qbx_thp_penc->currentIndex();
-      if(indextahap == 0){ le_jml->setText("");
-       return;
-      }
-     qInfo() << "Tahapan index dana Desa" << indextahap;
-     QString   thp = li_tahap_select.at(indextahap);
+      int index = qbx_thp_penc->currentIndex();
+      if(index == 0){ le_jml->setText("");return;}
+
+     qInfo() << "an index dana Desa" << index;
+     QString   thp = li_tahap_select.at(index);
      qInfo() << "Tahapan pada dana Desa" << thp;
 
-    muatTahap(thp);
+      muatTahap(thp);
     //qbx_thp_l->clear();
     //qbx_persen->clear();
 //    QString srt1 = qbx_no_srt1->currentText();
@@ -562,7 +562,7 @@ void Form::memuatData_twRealisasidds(QString id_kam_s) // Data realisasi kampung
 
 
 
-void Form::act()  // form event pada saat add tealisasi dana desa reguler
+void Form::act()  // form event pada saat add realisasi dana desa reguler
 {
 
 if(menu=="2"){ menu2="2";
@@ -582,7 +582,6 @@ if(menu=="2"){ menu2="2";
         no_srt2.replace("####", nosurat_2());
         no_srt2.replace("Reg2=> ", "");
         tambah_realisasi(li_tahap,"Rp 0,00",  no_srt1  , no_srt2,"TAMBAH",s_nm_kp, s_nm_bend,"Tambah Realisasi Dana Desa Reguler" );
-
     } }
 }
 
@@ -607,6 +606,7 @@ void Form::btnAdd_dds()
 
            if((jc3-jj)<0){QMessageBox::information(eb_v,"Info...","Mohon Periksa Ketersediaan Dana"); return;}
            jj_.replace("Rp ",""); jj_.replace(".",""); jj_.replace(",",".");
+           bila(j.right(2));
            muat_rek(id_kam);
            kp_dns();
 
@@ -623,8 +623,8 @@ void Form::btnAdd_dds()
            QString nm_kp = s_nm_kp;
            QString nm_bend = s_nm_bend;
            QString tahap = qbx_thp_penc->currentText();
+           QString tahap_adv = li_tahap_advis.at(qbx_thp_penc->currentIndex());
 
-          //String tahap_l = qbx_thp_l->currentText();
            QString tgl_ter = de->text();
            QString no_srt1 =qbx_no_srt1->currentText();
            QString no_srt2 =qbx_no_srt2->currentText();
@@ -639,7 +639,6 @@ void Form::btnAdd_dds()
     //    QString sk_pmk = qbx_sk_pmk->currentText();
     //    QString sk_keu =qbx_sk_keu->currentText();
         QString j_kk = li_j_kk.at(0); //====================
-        //QString rp ="rupiah";
         QPixmap logo;
         QIcon icon(":/icon/gbr/kcl.png");
         QMessageBox boxPesan;
@@ -676,7 +675,7 @@ void Form::btnAdd_dds()
              query.bindValue(":nm_kp",nm_kp);
              query.bindValue(":thp_cair", tahap );
              query.bindValue(":j_cair",jj_);
-             query.bindValue(":j_terbilang",terbilang);
+             query.bindValue(":j_terbilang",terbilang+terbila);
              query.bindValue(":tgl",tgl_ter);
              no_srt1.replace("****",nosurat());
              query.bindValue(":no_srt1",no_srt1);
@@ -685,7 +684,7 @@ void Form::btnAdd_dds()
              query.bindValue(":persentase","persen");
              query.bindValue(":sk_bup","sk_bup");
              query.bindValue(":sk_kam",sk_kam);
-    //         query.bindValue(":sk_pmk",sk_pmk);
+             query.bindValue(":sk_pmk", tahap_adv);
     //         query.bindValue(":sk_keu",sk_keu);
              query.bindValue(":nm_kpd",nm_kp_dns);
              query.bindValue(":j_kpd",pg_kp_dns);
@@ -711,9 +710,7 @@ void Form::btnAdd_dds()
 void Form::on_tableWidget_cetak_dds_cellDoubleClicked(int i, int column)
 {
     qInfo() << "ini adalah even change tw dds ============== " << i <<" === " <<column;
-    if(qbx_id_dis->currentText() == "" && qbx_id_kam->currentText() == "" ){ QMessageBox::information(this, "Info...","Pilih Kampung dan Distrik ..."); return; }
-    if(qbx_id_dis->currentText() != "" && qbx_id_kam->currentText() == "" ){ QMessageBox::information(this, "Info...","Pilih Kampung dan Distrik ..."); return; }
-    if(qbx_id_dis->currentText() == "" && qbx_id_kam->currentText() != "" ){ QMessageBox::information(this, "Info...","Pilih Kampung dan Distrik ..."); return; }
+    check_qbx_kam_dis();
     li_data_dds.clear();
     //QString list;
     for (int ii=1; ii<30; ii++) {
@@ -738,6 +735,7 @@ void Form::data_update_sementara_dds()
     QString tahap = qbx_thp_penc->currentText();
     QString j = le_jml->text();
     j.replace("Rp ",""); j.replace(".",""); j.replace(",",".");
+    bila(j.right(2));
     QString jj_ = j;
     bilang(j);
     QString tgl_ = de_tgl_terima->text();
@@ -758,9 +756,9 @@ void Form::data_update_sementara_dds()
          c =  jml2 + jml4 - j_;
          if( c<0 ) { QMessageBox::information(this,"Info...","Periksa Ketersediaan Dana...");  return;  }
     }
-    qInfo() << "upate dds ================ 1111111111";
-    update_data_dds(li_data_dds.at(0), tahap, tgl, jj_, terbilang, noSrt1, noSrt2);
-    qInfo() << "upate dds ================ 22222222222222";
+
+    QString terbilang_ = terbilang+terbila;
+    update_data_dds(li_data_dds.at(0), tahap, tgl, jj_, terbilang_, noSrt1, noSrt2);
 }
 
 

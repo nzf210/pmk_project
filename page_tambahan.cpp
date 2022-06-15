@@ -39,7 +39,9 @@ void Form::boderToolbar(int a)
                 ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid rgba(255,255,255,.5); }" );
                 ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid rgba(255,255,255,.5); }" );
                 ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid rgba(255,255,255,.5); }" );
-                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );                
+                ui->toolButton_gab->setStyleSheet("QToolButton#toolButton_gab{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_gab_add->setStyleSheet("QToolButton#toolButton_gab_add{ border: 2px solid rgba(255,255,255,.5); }" );
     }
 
     if(a==2){ui->toolButton->setStyleSheet("QToolButton#toolButton{ border: 2px solid rgba(255,255,255,.5); }" );
@@ -48,7 +50,9 @@ void Form::boderToolbar(int a)
                 ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid rgba(255,255,255,.5); }" );
                 ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid rgba(255,255,255,.5); }" );
                 ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid rgba(255,255,255,.5); }" );
-                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );                
+                ui->toolButton_gab->setStyleSheet("QToolButton#toolButton_gab{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_gab_add->setStyleSheet("QToolButton#toolButton_gab_add{ border: 2px solid rgba(255,255,255,.5); }" );
     }
 
     if(a==3){ui->toolButton->setStyleSheet("QToolButton#toolButton{ border: 2px solid rgba(255,255,255,.5); }" );
@@ -57,7 +61,9 @@ void Form::boderToolbar(int a)
                 ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid rgba(255,255,255,.5); }" );
                 ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid rgba(255,255,255,.5); }" );
                 ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid rgba(255,255,255,.5); }" );
-                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );                
+                ui->toolButton_gab->setStyleSheet("QToolButton#toolButton_gab{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_gab_add->setStyleSheet("QToolButton#toolButton_gab_add{ border: 2px solid rgba(255,255,255,.5); }" );
     }
 
     if(a==4){ui->toolButton->setStyleSheet("QToolButton#toolButton{ border: 2px solid rgba(255,255,255,.5); }" );
@@ -66,7 +72,9 @@ void Form::boderToolbar(int a)
                 ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid #FFD700; }" );
                 ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid rgba(255,255,255,.5); }" );
                 ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid rgba(255,255,255,.5); }" );
-                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );                
+                ui->toolButton_gab->setStyleSheet("QToolButton#toolButton_gab{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_gab_add->setStyleSheet("QToolButton#toolButton_gab_add{ border: 2px solid rgba(255,255,255,.5); }" );
     }
 
     if(a==5){ui->toolButton->setStyleSheet("QToolButton#toolButton{ border: 2px solid rgba(255,255,255,.5); }" );
@@ -75,7 +83,9 @@ void Form::boderToolbar(int a)
                 ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid rgba(255,255,255,.5); }" );
                 ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid #FFD700; }" );
                 ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid rgba(255,255,255,.5); }" );
-                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );                
+                ui->toolButton_gab->setStyleSheet("QToolButton#toolButton_gab{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_gab_add->setStyleSheet("QToolButton#toolButton_gab_add{ border: 2px solid rgba(255,255,255,.5); }" );
     }
 
     if(a==6){ui->toolButton->setStyleSheet("QToolButton#toolButton{ border: 2px solid rgba(255,255,255,.5); }" );
@@ -83,8 +93,10 @@ void Form::boderToolbar(int a)
                 ui->toolButton_add->setStyleSheet("QToolButton#toolButton_add{ border: 2px solid rgba(255,255,255,.5); }" );
                 ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid rgba(255,255,255,.5); }" );
                 ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid rgba(255,255,255,.5);}" );
-                ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid #FFD700; }" );
+                ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid #FFD700; }" );                
+                ui->toolButton_gab->setStyleSheet("QToolButton#toolButton_gab{ border: 2px solid rgba(255,255,255,.5); }" );
                 ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_gab_add->setStyleSheet("QToolButton#toolButton_gab_add{ border: 2px solid rgba(255,255,255,.5); }" );
     }
 
     if(a==7){ui->toolButton->setStyleSheet("QToolButton#toolButton{ border: 2px solid rgba(255,255,255,.5); }" );
@@ -93,7 +105,30 @@ void Form::boderToolbar(int a)
                 ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid rgba(255,255,255,.5); }" );
                 ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid rgba(255,255,255,.5); }" );
                 ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_gab->setStyleSheet("QToolButton#toolButton_gab{ border: 2px solid rgba(255,255,255,.5); }" );
                 ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid #FFD700; }" );
+                ui->toolButton_gab_add->setStyleSheet("QToolButton#toolButton_gab_add{ border: 2px solid rgba(255,255,255,.5); }" );
+    }
+
+    if(a==8){ui->toolButton->setStyleSheet("QToolButton#toolButton{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_danaDesa->setStyleSheet("QToolButton#toolButton_danaDesa{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_add->setStyleSheet("QToolButton#toolButton_add{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_gab->setStyleSheet("QToolButton#toolButton_gab{ border: 2px solid #FFD700; }" );
+                ui->toolButton_gab_add->setStyleSheet("QToolButton#toolButton_gab{ border: 2px solid rgba(255,255,255,.5); }" );
+    }
+    if(a==9){ui->toolButton->setStyleSheet("QToolButton#toolButton{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_danaDesa->setStyleSheet("QToolButton#toolButton_danaDesa{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_add->setStyleSheet("QToolButton#toolButton_add{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_covid->setStyleSheet("QToolButton#toolButton_covid{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_blt->setStyleSheet("QToolButton#toolButton_blt{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_Sppd->setStyleSheet("QToolButton#toolButton_Sppd{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_user->setStyleSheet("QToolButton#toolButton_user{ border: 2px solid rgba(255,255,255,.5); }" );
+                ui->toolButton_gab->setStyleSheet( "QToolButton#toolButton_gab{ border: 2px solid rgba(255,255,255,.5 }" );
+                ui->toolButton_gab_add->setStyleSheet("QToolButton#toolButton_gab_add{ border: 2px solid #FFD700; }");
     }
 }
 // === Border ToolButton selected ==========
@@ -132,8 +167,8 @@ void Form::on_toolButton_refResh_clicked()
 
  if(menu=="3"){
      if(qbx_id_kam->currentText()!="")
-                       { QString id = qbx_id_kam->currentText();
-                           //muat_v_bam_2(id);
+                       { //QString id = qbx_id_kam->currentText();
+
                    }}
  if(menu=="4"){ int qbxreal = ui->comboBox_realisasi->currentIndex();
                        if ( qbxreal <= 0){
@@ -173,33 +208,39 @@ void Form::updateTampilan(Mode mode)
 
    case AdminMode_2:
        qInfo()<<"Ini adalah Mode Admin Mode_2";
-       ui->toolButton_danaDesa->setVisible(false);
-       ui->label_danaDesa->setVisible(false);
 
+
+       ui->label_danaDesa->setVisible(false);
        ui->label_Blt->setVisible(false);
        ui->label_Covid->setVisible(false);
+       ui->label_gab->setVisible(false);
+
+       ui->toolButton_danaDesa->setVisible(false);
        ui->toolButton_blt->setVisible(false);
        ui->toolButton_covid->setVisible(false);
+       ui->toolButton_gab->setVisible(false);
        break;
 
    case UserMode_1:
        qInfo()<<"Ini adalah Mode User MODE 1";
-//       ui->toolButton_user->setVisible(false);
-//       ui->label_User->setVisible(false);
       ui->toolButton_add->setVisible(false);
       ui->label_Add->setVisible(false);
+      ui->label_gab_add->setVisible(false);
+      ui->toolButton_gab_add->setVisible(false);
+
        break;
 
    case UserMode_2:
        qInfo()<<"Ini adalah Mode User MODE 2";
-//        ui->toolButton_user->setVisible(false);
-//        ui->label_User->setVisible(false);
        ui->toolButton_danaDesa->setVisible(false);
        ui->label_danaDesa->setVisible(false);
        ui->toolButton_blt->setVisible(false);
        ui->toolButton_covid->setVisible(false);
        ui->label_Blt->setVisible(false);
        ui->label_Covid->setVisible(false);
+       ui->label_gab->setVisible(false);
+       ui->toolButton_gab->setVisible(false);
+
        break;
    }
 }
@@ -241,15 +282,11 @@ void Form::modeTampilan_usr()
                 {updateTampilan(AdminMode_2);}
        else if(lvl=="usr" && type=="dds")
                  {updateTampilan(UserMode_1);}
-       else if(lvl=="usr" && type=="add")
-                {updateTampilan(UserMode_2);}
+       else  {updateTampilan(UserMode_2);}
 }
 
 void Form::conect_slot()
 {
-
-
-
 
     connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(qbx_id_dis_conn()));
     connect(ui->comboBox_nmKampung, SIGNAL (currentIndexChanged(int)), this, SLOT(qbx_id_kam_conn()));
@@ -414,7 +451,7 @@ void Form::click_btn1() // Even Klik Save di tambah semua realisasi
     btnAdd_blt();
     btnAdd_add();
 
-on_toolButton_refResh_clicked();
+   on_toolButton_refResh_clicked();
 }
 
 
@@ -442,4 +479,11 @@ void Form::muat_nama_header(QString nama)  // Muat Data hedaer  Realisasi Dana D
     muatheadertw_realisasi_sppd();
     //muatrealdds_();
     //muatrealdds__();
+}
+
+void Form::check_qbx_kam_dis()
+{
+    if(ui->comboBox->currentText()=="" && ui->comboBox_nmKampung->currentText()==""){ QMessageBox::information(this,"Info...!!!","Pilih Distrik dan Kampung ...");}
+    else if(ui->comboBox->currentText()=="" && ui->comboBox_nmKampung->currentText()!=""){ QMessageBox::information(this,"Info...!!!","Pilih Distrik ...");}
+    else if(ui->comboBox->currentText()!="" && ui->comboBox_nmKampung->currentText()==""){ QMessageBox::information(this,"Info...!!!","Pilih Kampung ...");}
 }

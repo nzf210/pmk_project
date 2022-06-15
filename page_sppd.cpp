@@ -6,7 +6,7 @@
 #include "pdf_dds.h"
 #include "pdf_add.h"
 #include "pdf_sppd_add.h"
-#include "psd_sppd_dds.h"
+#include "pdf_sppd_dds.h"
 #include "mainwindow.h"
 // =======================================================================================
 #include "QDebug"
@@ -50,6 +50,19 @@ if(fOut.open(QFile::WriteOnly | QFile::Text)){qInfo()<<"Gagal Menyimpan sppd_tem
     fOut.close();
 }}
 
+void Form::save_spp(){
+QString path("doc/temp/");
+QFile fOut(path+"spp_temp.txt");
+//if(!fOut.exists()){ QMessageBox::information(this,"Error..","Gagal Creat Data spp_temp.txt"); return; }
+fOut.open(QFile::WriteOnly | QFile::Text);
+if(fOut.open(QFile::WriteOnly | QFile::Text)){qInfo()<<"Gagal Menyimpan spp_temp.txt"; return;} else
+{
+    QTextStream stream(&fOut);
+    stream << ds_sppd_;
+    fOut.flush();
+    fOut.close();
+}}
+
 void Form::on_toolButton_cetakpdfSppd_clicked() // Button Clik Generate pdf di sppd =====================================
 {
 
@@ -67,27 +80,40 @@ void Form::on_toolButton_cetakpdfSppd_clicked() // Button Clik Generate pdf di s
     QDate dt = QDate::fromString(tgl,"dd-MM-yyyy");
     QString tgl_ = dt.toString("yyyy-MM-dd");
 //    QString tgl_1 = dt.toString("dd MMMM yyyy");
-   QString tgl_1 = QLocale{QLocale::Indonesian}.toString(dt, "dd MMMM yyyy");
+    QString tgl_1 = QLocale{QLocale::Indonesian}.toString(dt, "dd MMMM yyyy");
     QString tgl_2 = QLocale{QLocale::Indonesian}.toString(dt, "dd MMMM yyyy");
     QString thn = tgl_1.right(4);
     double jcr=0;
     kp_dns();
     ds_sppd_.clear();
     qInfo() << "cek sppd ==============" ;
+    QString aa=ui->comboBox_realisasi->currentText();
+
+
     for (int i =0  ; i< jBrs ; i++ ) {
         QString no_ =QString::number(i+1);
+        QString thp = ui->tableWidget_cetak_sppd->item(i,0)->text();
         QString nm_kampung = ui->tableWidget_cetak_sppd->item(i,1)->text();
         QString nm_distrik = ui->tableWidget_cetak_sppd->item(i,2)->text();
-        QString nm_kepalak = ui->tableWidget_cetak_sppd->item(i,7)->text();
-        QString nm_benk = ui->tableWidget_cetak_sppd->item(i,6)->text();
-        QString nm_rek = ui->tableWidget_cetak_sppd->item(i,4)->text();
         QString no_rek = ui->tableWidget_cetak_sppd->item(i,3)->text();
-        QString j_cair = ui->tableWidget_cetak_sppd->item(i,8)->text();
-        QString thp = ui->tableWidget_cetak_sppd->item(i,0)->text();
-        //QString wnorek = " width=140px; ";
+        QString nm_rek = ui->tableWidget_cetak_sppd->item(i,4)->text();
 
-        ds_sppd_.append("<tr><td>"+no_+"</td><td>"+nm_kampung+"</td><td>"+nm_distrik+"</td><td>"+nm_kepalak+"</td>"
-        "<td>"+nm_benk+"</td><td>"+nm_rek+"</td><td>"+no_rek+"</td><td>"+j_cair+"</td><td>"+thp+"</td></tr>" );
+        QString nm_benk = ui->tableWidget_cetak_sppd->item(i,6)->text();
+        QString nm_kepalak = ui->tableWidget_cetak_sppd->item(i,7)->text();
+        QString j_cair = ui->tableWidget_cetak_sppd->item(i,8)->text();
+        QString terbilang = ui->tableWidget_cetak_sppd->item(i,9)->text();
+        QString tgl = ui->tableWidget_cetak_sppd->item(i,10)->text();
+        QString thp_advis = ui->tableWidget_cetak_sppd->item(i,11)->text();
+        QString no_srt = ui->tableWidget_cetak_sppd->item(i,12)->text();
+
+
+        if(aa=="Realisasi Semua") { ds_sppd_.append("<tr><td style='text-align:center'>"+no_+"</td><td>"+nm_kampung+"</td><td>"+nm_distrik+"</td><td>"+nm_kepalak+"</td>"
+            "<td>"+nm_benk+"</td><td style='font-size: 1 px; text-align: center;'>"+thp_advis+"</td><td style='text-align:right'>"+j_cair+"</td><td style='font-size: 2 px'><i>"+toCamelCase(terbilang)+"</i></td><td>"+no_rek+
+                                                    "</td><td style='font-size: 2 px'>"+nm_rek+"</td><td>"+no_srt+", "+tgl+ "</td></tr>" ); }
+
+        else {ds_sppd_.append("<tr><td style='text-align:center'>"+no_+"</td><td>"+nm_kampung+"</td><td>"+nm_distrik+"</td><td>"+nm_kepalak+"</td>"
+                   "<td>"+nm_benk+"</td><td>"+nm_rek+"</td><td>"+no_rek+"</td><td style='text-align:right'>"+j_cair+"</td><td>"+thp+"</td></tr>" );}
+
 
          j_cair.replace(",00",""); j_cair.replace("Rp ",""); j_cair.replace(".","");  j_cair.replace(",",".");
          double jc = j_cair.toDouble();
@@ -108,6 +134,9 @@ void Form::on_toolButton_cetakpdfSppd_clicked() // Button Clik Generate pdf di s
     ds_sppd_.append("#/#"+tgl_1);
     ds_sppd_.append("#/#"+thn);
     ds_sppd_.append("#/#"+nosrt);
+    QString th=" I ";
+    bool ok = nosrt.contains(th);
+    qInfo() <<"Jumlah Cair dari form --------SPP----------- " <<  ok;
     ds_sppd_.append("#/#"+hal);
     ds_sppd_.append("#/#"+li_kp_dns.at(1));
     ds_sppd_.append("#/#"+li_kp_dns.at(2));
@@ -116,12 +145,20 @@ void Form::on_toolButton_cetakpdfSppd_clicked() // Button Clik Generate pdf di s
     ds_sppd_.append("#/#"+li_kp_dns.at(0));
     ds_sppd_.append("#/#"+spasi_br(ui->lineEdit_br->text()));
     //setTot_sppd(tot_sppd);
+
+    if(aa=="Realisasi Semua"){save_spp();
+        Widget4 *pdf4 = new Widget4;
+       //QIcon logo(":/gbr/html/gbr/yhk.png");
+       //pdf3->setWindowIcon(logo);
+       pdf4->hide();
+       ui->lineEdit_br->setText("0");
+    }else{
     save_sppd();
-   Widget3 *pdf3 = new Widget3;
+    Widget3 *pdf3 = new Widget3;
    //QIcon logo(":/gbr/html/gbr/yhk.png");
    //pdf3->setWindowIcon(logo);
    pdf3->hide();
-   ui->lineEdit_br->setText("0");
+   ui->lineEdit_br->setText("0");}
 
 }
 
@@ -146,6 +183,7 @@ void Form::on_toolButton_tmbSppd_clicked() // Button Tambah Realisasi
        if(aa=="Realisasi Alokasi Dana Desa") { a=10; b=11; }
        if(aa=="Realisasi Dana BLT") { a=12; b=13; }
        if(aa=="Realisasi Dana Covid") { a=14; b=15; }
+       if(aa=="Realisasi Semua") { a=16; b=17; }
 
        tambah_sppd(a,b);
 
@@ -170,6 +208,8 @@ void Form::on_toolButton_Sppd_clicked() // ToolButton menu SPPD
     ui->toolButton_pdf_main->setVisible(false);
     ui->dateEdit->setVisible(true);
     ui->dateEdit_2->setVisible(true);
+    ui->toolButton_logOut->setVisible(true);
+    ui->toolButton_refResh->setVisible(true);
     ui->stackedWidget->setCurrentIndex(3);
     ui->lineEdit_br->setText("0");
 
@@ -201,9 +241,9 @@ void Form::on_toolButton_Sppd_clicked() // ToolButton menu SPPD
               {ui->tableWidget_cetak_sppd->removeRow(0);}
      QStringList qb3;
      qInfo()<< "id type" << id_type;
-     if(id_type=="1") {qb3 <<"Pilih ... " << "Realisasi Dana Desa" << "Realisasi Dana BLT" << "Realisasi Dana Covid" ;}
+     if(id_type=="1") {qb3 <<"Pilih ... " << "Realisasi Dana Desa" << "Realisasi Dana BLT" << "Realisasi Dana Covid" << "Realisasi Semua" ;}
      else if (id_type=="2") { qb3 <<"Pilih ... "  << "Realisasi Alokasi Dana Desa" ;}
-     else {qb3 <<"Pilih ... " << "Realisasi Dana Desa" << "Realisasi Dana BLT" << "Realisasi Dana Covid" << "Realisasi Alokasi Dana Desa" ;}
+     else {qb3 <<"Pilih ... " << "Realisasi Dana Desa" << "Realisasi Dana BLT" << "Realisasi Dana Covid" << "Realisasi Alokasi Dana Desa" << "Realisasi Semua" ;}
 
      ui->comboBox_realisasi->clear();
      ui->comboBox_realisasi->addItems(qb3);
@@ -243,16 +283,18 @@ void Form::headsppd()
 void Form::tambah_sppd(int noSrt1,int noSrt2) // Form Cetak Surat Pengantar Pencairan
 {
 
-
-muat_nosurat();
+QString id_dis = qbx_id_dis->currentText();
+QString id_kam = qbx_id_kam->currentText();
+if(id_kam!="" && id_dis!=""){
 //nfo()<<"Menu cetak Pengantar dds";
 QDate dt = QDate::currentDate();
 desppd = new QDateEdit;
 desppd->setDate(dt);
 desppd->setDisplayFormat("dd-MM-yyyy");
 desppd->setCalendarPopup(true);
-
-QString nosrt;
+muat_nosurat();
+//qInfo()<<"11111111111111111111 Coba";
+//QString nosrt;
 QString tgl = desppd->text();
 QString thn = tgl.right(4);
 qbnosppd = new QComboBox;
@@ -265,13 +307,22 @@ noSrt.replace("no_sppd_dds=> ","");
 noSrt.replace("no_sppd_add=> ","");
 noSrt.replace("no_sppd_blt=> ","");
 noSrt.replace("no_sppd_covid=> ","");
+noSrt.replace("no_sppd_gabungan=> ","");
+noSrt.replace("no_sppd_gab=> ","");
+noSrt.replace("no_add_gab=> ","");
+
 qbnosppd->addItem(noSrt);
+
+//if (li_no_surat.length()<20){QMessageBox::information(this,"Info...","Nomor surat atau Perihal Belum Tersedia"); return;}
 
 QString ha = li_no_surat.at(noSrt2);
 ha.replace("Perihal_dds=> ","");
 ha.replace("Perihal_add=> ","");
 ha.replace("Perihal_blt=> ","");
 ha.replace("Perihal_covid=> ","");
+ha.replace("Perihal_gabungan=> ","");
+ha.replace("Perihal_gab=> ","");
+ha.replace("Perihal_add_gab=> ","");
 qbhal->addItem(ha);
 
 wg = new QWidget;
@@ -320,8 +371,9 @@ HL4->addWidget(btnsppd);
 wg->show();
 
 connect(btnsppd, SIGNAL(pressed()), this, SLOT(sppdbtc()));
-
+    }
 }
+
 
 void Form::sppdbtc()
 {
@@ -332,22 +384,22 @@ void Form::sppdbtc()
     QString a;
     QString aa=ui->comboBox_realisasi->currentText();
 
-    if(aa=="Realisasi Dana Desa") {  a="dds"; }
-    if(aa=="Realisasi Alokasi Dana Desa") { a="add"; }
-    if(aa=="Realisasi Dana BLT") { a="blt"; }
-    if(aa=="Realisasi Dana Covid") { a="covid"; }
+    if(menu=="4"){  if(aa=="Realisasi Dana Desa") {  a="dds"; }
+        else if(aa=="Realisasi Alokasi Dana Desa") { a="add"; }
+        else if(aa=="Realisasi Dana BLT") { a="blt"; }
+        else if(aa=="Realisasi Dana Covid") { a="covid"; }
+        else if(aa=="Realisasi Semua") { a="all"; }
+        else {a="all_cair";}    }else if(menu=="9"){a="add_gab"; } else{ a="all_cair";  }
+
     insert_sppd(a,nosrt, hal, date);
 
     disconnect(btnsppd, SIGNAL(pressed()), this, SLOT(sppdbtc()));
 }
 
 
-
-
-
 void Form::insert_sppd(QString type ,QString nosrt, QString hal,QString date)
 {
-
+QString id_kam = qbx_id_kam->currentText();
 QString a = nosrt;
 //a.replace("****",nosurat());
 QString b = hal;
@@ -355,17 +407,24 @@ QString c = date;
 QDate dt = QDate::fromString(c,"dd-MM-yyyy");
 QString d = dt.toString("yyyy-MM-dd");
 
-//nfo() << "sppd btc 2 2 ..................."<< a <<"==" << b << "==" << c;
+qInfo() << "Check AAAAAAAAAAAA ..................."<< type;
 QSqlQuery query;
-QString cmd = "INSERT INTO pmk_yhk.sppdd_"+type+" (no_srt,perihal,tgl,nos) VALUES (:nosrt, :hal, :tgl, '1') ";
+QString cmd;
+if(type=="all_cair"){ cmd = "INSERT INTO pmk_yhk.all_cair (no_srt,perihal,tgl,nos,id_kam) VALUES (:nosrt, :hal, :tgl, '1', :id_kam) "; }
+else if(type=="add_gab"){cmd = "INSERT INTO pmk_yhk.all_cair_add (no_srt,perihal,tgl,nos,id_kam) VALUES (:nosrt, :hal, :tgl, '1', :id_kam) "; }
+else {cmd = "INSERT INTO pmk_yhk.sppdd_"+type+" (no_srt,perihal,tgl,nos) VALUES (:nosrt, :hal, :tgl, '1') ";}
+
 query.prepare(cmd);
 query.bindValue(":nosrt", a);
 query.bindValue(":hal",b);
 query.bindValue(":tgl",d);
+query.bindValue(":id_kam",id_kam );
+
 bool ok = exec(query);
 if(!ok){QMessageBox::information(this,"Error","Gagal Menyimpan data nosppd add");return;}
 wg->close();
-muat_data_realisasi_sppdd("");
+
+if(type=="all_cair"){muatData_realisasi_gab(id_kam);}else if(type=="add_gab"){ muatData_realisasi_gab_add(id_kam); } else{muat_data_realisasi_sppdd("");}
 
 }
 
@@ -408,16 +467,10 @@ void Form::loadsppd()
 }
 
 void Form::loadsppd_2()
-{
-}
-
+{}
 
 void Form::muatrealadd__()
-{
-}
-
-
-
+{}
 
 void Form::muatrealdds__()
 {
@@ -544,10 +597,12 @@ void Form::muatheadertw_realisasi_sppd()
 void Form::muatheadertw_cetak_sppd()
 {
     QStringList head;
-    head << "Tahap" << "Kampung" << "Distrik" << "No Rek" << "Nama Rek" << "Nama Bank" << "Bendahara" << "Kepala Kampung" << "Jml Cair" << "Terbilang" << "Tgl" << "Thp II";
+    head << "Tahap" << "Kampung" << "Distrik" << "No Rek" << "Nama Rek" << "Nama Bank" << "Bendahara" << "Kepala Kampung" << "Jml Cair" << "Terbilang" << "Tgl" << "Thp II"<< "no_srt";
     ui->tableWidget_cetak_sppd->setColumnCount(head.count());
     ui->tableWidget_cetak_sppd->setHorizontalHeaderLabels(head);
     ui->tableWidget_cetak_sppd->setColumnHidden(11,true);
+    ui->tableWidget_cetak_sppd->setColumnHidden(12,true);
+
 
     ui->tableWidget_cetak_sppd->setColumnWidth(0,70);
     ui->tableWidget_cetak_sppd->setColumnWidth(1,120);
@@ -565,6 +620,7 @@ void Form::muatheadertw_cetak_sppd()
 
 void Form::on_comboBox_realisasi_currentIndexChanged(const QString &arg1)
 {
+
     qInfo() << "qCombo realisai " << arg1;
     QString a = arg1;
     QString b="";
@@ -573,6 +629,7 @@ void Form::on_comboBox_realisasi_currentIndexChanged(const QString &arg1)
     if(a=="Realisasi Dana Covid") { qInfo() << "dana Covid"; b="covid"; }
     if(a=="Realisasi Dana Desa") { qInfo() << "dana Desa" ; b="dds"; }
     if(a=="Realisasi Alokasi Dana Desa") { qInfo() << "dana Alokasi Dana Desa" ; b="add"; }
+    if(a=="Realisasi Semua") { qInfo() << "Realisasi tiga Kegiatan" ; b="all"; }
 
     if(ui->comboBox_realisasi->currentIndex() == 0) {
         while( ui->tableWidget_cetak_sppd->rowCount()>0 )// untuk Hilangkan Tambahan jika button di klik ulang
@@ -586,27 +643,28 @@ void Form::on_comboBox_realisasi_currentIndexChanged(const QString &arg1)
 void Form::muat_data_realisasi_sppdd(QString ppdd)
 {
 
-if(ui->comboBox_realisasi->currentIndex()>0){
-    qInfo() << ppdd;
-    QString a;
-    QString aa=ui->comboBox_realisasi->currentText();
+   if(ui->comboBox_realisasi->currentIndex()>0){
+        qInfo() << ppdd;
+        QString a;
+        QString aa=ui->comboBox_realisasi->currentText();
 
-    if(aa=="Realisasi Dana Desa") {  a="dds"; }
-    if(aa=="Realisasi Alokasi Dana Desa") { a="add"; }
-    if(aa=="Realisasi Dana BLT") { a="blt"; }
-    if(aa=="Realisasi Dana Covid") { a="covid"; }
+        if(aa=="Realisasi Dana Desa") {  a="dds"; }
+        if(aa=="Realisasi Alokasi Dana Desa") { a="add"; }
+        if(aa=="Realisasi Dana BLT") { a="blt"; }
+        if(aa=="Realisasi Dana Covid") { a="covid"; }
+        if(aa=="Realisasi Semua") { a="all"; }
 
-   muatheadertw_realisasi_sppd();
-   while(ui->tableWidget_realisasi_sppd->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
-   {ui->tableWidget_realisasi_sppd->removeRow(0);}
+    muatheadertw_realisasi_sppd();
+    while(ui->tableWidget_realisasi_sppd->rowCount()>0)// untuk Hilangkan Tambahan jika button di klik ulang
+    {ui->tableWidget_realisasi_sppd->removeRow(0);}
     QSqlQuery query;
     QString cmd = "SELECT * FROM pmk_yhk.sppdd_"+a+" ORDER BY sppdd_"+a+".tgl DESC";
     query.prepare(cmd);
     bool ok = exec(query);
     if(!ok){QMessageBox::information(this,"Error...","Gagal Memuat Data tw Realisasi ... ");return;}
     int i=0;
-    while(query.next())
-    {
+        while(query.next())
+        {
                 ui->tableWidget_realisasi_sppd->insertRow(i);
                 QTableWidgetItem *no_ = new QTableWidgetItem;
                 QTableWidgetItem *nosrt_ = new QTableWidgetItem;
@@ -628,7 +686,7 @@ if(ui->comboBox_realisasi->currentIndex()>0){
                 ui->tableWidget_realisasi_sppd->setItem(i,2,hal_);
                 ui->tableWidget_realisasi_sppd->setItem(i,3,tgl_);
                 i++;
-    }
+        }
 }}
 
 
@@ -637,7 +695,6 @@ void Form::on_tableWidget_realisasi_sppd_cellClicked(int row, int column)
  if(ui->comboBox_realisasi->currentIndex()==0){ QMessageBox::information(this,"Info...","Pilih data realisasi"); return; }
  qInfo () << "Even cell klik tw realisasi" << row << "===" << column;
  QDate tg = QDate::fromString(ui->tableWidget_realisasi_sppd->item(row,3)->text(),"dd-MM-yyyy");
- //QString tgl = tg.toString("yyyy-MM-dd");
  QString tgl_ = tg.toString("yyyy-MM-dd");
  select_tgl_sppd(tgl_);
 }
@@ -650,7 +707,7 @@ void Form::select_tgl_sppd(QString tgl)
     while( ui->tableWidget_cetak_sppd->rowCount()>0 )// untuk Hilangkan Tambahan jika button di klik ulang
     { ui->tableWidget_cetak_sppd->removeRow(0); }
 
-    QString dds, dds_,add, add_,blt, blt_,covid, covid_;
+    QString dds, dds_,add, add_,blt, blt_,covid, covid_, all, all_;
     QSqlQuery query;
     QString cmd;
 
@@ -723,6 +780,8 @@ void Form::select_tgl_sppd(QString tgl)
           " pmk_yhk.blt_cair.nm_kp, pmk_yhk.blt_cair.jml_cair_blt, pmk_yhk.blt_cair.j_terbilang, pmk_yhk.blt_cair.tgl, pmk_yhk.blt_cair.thp_l  FROM pmk_yhk.sppdd_blt RIGHT JOIN  pmk_yhk.blt_cair  ON  "
           " pmk_yhk.sppdd_blt.tgl = pmk_yhk.blt_cair.tgl WHERE  pmk_yhk.blt_cair.jml_cair_blt > 0  LIMIT 300";
 
+    all = " SELECT * FROM pmk_yhk.v_sppdd_all_2 WHERE v_sppdd_all_2.tgl = :tgl  ORDER BY   v_sppdd_all_2.nm_dis ASC,  v_sppdd_all_2.nm_kam ASC,v_sppdd_all_2.tgl DESC ";
+
      QString aa=ui->comboBox_realisasi->currentText();
     if(tgl == "")
     {
@@ -731,6 +790,7 @@ void Form::select_tgl_sppd(QString tgl)
         if(aa=="Realisasi Alokasi Dana Desa") { cmd=add_; }
         if(aa=="Realisasi Dana BLT") { cmd=blt_; }
         if(aa=="Realisasi Dana Covid") { cmd=covid_; }
+        if(aa=="Realisasi Semua") { return; }
 
     }
 
@@ -741,6 +801,7 @@ void Form::select_tgl_sppd(QString tgl)
         if(aa=="Realisasi Alokasi Dana Desa") { cmd=add; }
         if(aa=="Realisasi Dana BLT") { cmd=blt; }
         if(aa=="Realisasi Dana Covid") { cmd=covid; }
+        if(aa=="Realisasi Semua") { cmd=all; }
     }
 
      query.prepare(cmd);
@@ -763,6 +824,8 @@ void Form::select_tgl_sppd(QString tgl)
                  QTableWidgetItem *terbilang = new QTableWidgetItem;
                  QTableWidgetItem *tgl = new QTableWidgetItem;
                  QTableWidgetItem *thpII = new QTableWidgetItem;
+                 QTableWidgetItem *no_srt = new QTableWidgetItem;
+
 
                  tahap->setText(query.value(0).toString());
                  kmp->setText(query.value(1).toString());
@@ -779,6 +842,9 @@ void Form::select_tgl_sppd(QString tgl)
                  QDate dt = QDate::fromString(query.value(10).toString(),"yyyy-MM-dd");
                  tgl->setText(dt.toString("dd-MM-yyyy"));
                  thpII->setText(query.value(11).toString());
+                 no_srt->setText(query.value(12).toString());
+
+
 
                  tahap->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
                  kmp->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
@@ -805,6 +871,7 @@ void Form::select_tgl_sppd(QString tgl)
                  ui->tableWidget_cetak_sppd->setItem(i,9,terbilang);
                  ui->tableWidget_cetak_sppd->setItem(i,10,tgl);
                  ui->tableWidget_cetak_sppd->setItem(i,11,thpII);
+                 ui->tableWidget_cetak_sppd->setItem(i,12,no_srt);
 
                  i++;
      }
@@ -840,7 +907,7 @@ QString Form::spasi_br(QString jBrs)
 
 void Form::on_tableWidget_realisasi_sppd_cellDoubleClicked(int row, int column)
 {
-   qInfo() << "Column" << column;
+    qInfo() << "Column" << column;
     QString id = ui->tableWidget_realisasi_sppd->item(row,0)->text();
     QString noSrt = ui->tableWidget_realisasi_sppd->item(row,1)->text();
     QString perihal = ui->tableWidget_realisasi_sppd->item(row,2)->text();
@@ -923,22 +990,32 @@ void Form::update_sppd_toDB()
 
     QString a;
     QString aa=ui->comboBox_realisasi->currentText();
+    QString id_kp = qbx_id_kam->currentText();
 
+    if(menu=="9"){a="gab_add";}else{
     if(aa=="Realisasi Dana Desa") {  a="dds"; }
-    if(aa=="Realisasi Alokasi Dana Desa") { a="add"; }
-    if(aa=="Realisasi Dana BLT") { a="blt"; }
-    if(aa=="Realisasi Dana Covid") { a="covid"; }
-
-    if(ui->comboBox_realisasi->currentIndex()>0){
+    else if(aa=="Realisasi Alokasi Dana Desa") { a="add"; }
+    else if(aa=="Realisasi Dana BLT") { a="blt"; }
+    else if(aa=="Realisasi Dana Covid") { a="covid"; }
+    else if(aa=="Realisasi Semua") { a="all";} else{ a="all_cair"; }
+    }
 
     QString nosrt = qbnosppd->currentText();
     QString hal = qbhal->currentText();
     QString tgl =  desppd->text();
     QDate dt = QDate::fromString(tgl,"dd-MM-yyyy");
     QString tgl_ = dt.toString("yyyy-MM-dd");
+    if(ui->comboBox_realisasi->currentIndex()>0){
+
+
     //nfo()<< " info 000" << nosrt << "==" << hal << "==" << tgl;
     QSqlQuery  query;
-    QString cmd = " UPDATE pmk_yhk.sppdd_"+a+" SET no_srt = :no_srt, perihal= :hal, tgl= :tgl  WHERE id= :id " ;
+    QString cmd;
+
+
+    cmd= " UPDATE pmk_yhk.sppdd_"+a+" SET no_srt = :no_srt, perihal= :hal, tgl= :tgl  WHERE id= :id " ;
+
+
     query.prepare(cmd);
     query.bindValue(":no_srt",nosrt);
     query.bindValue(":hal",hal);
@@ -949,10 +1026,37 @@ void Form::update_sppd_toDB()
     if(!ok){QMessageBox::information(this,"Error","Gagal Update data Surat Pencairan "+query.lastError().text()+""); return;}
     if(ok){QMessageBox::information(this,"Info ... ","Berhasil Update data Surat Pencairan");
     disconnect(btnsppd, SIGNAL(pressed()), this, SLOT(update_sppd_toDB()));}
-     }
-    wg->close();
-    muat_data_realisasi_sppdd("");
-    select_tgl_sppd("");
+     }else{
+
+            QSqlQuery  query;
+            QString cmd;
+
+            if(a=="gab_add"){cmd= " UPDATE pmk_yhk.all_cair_add SET no_srt = :no_srt, perihal= :hal, tgl= :tgl  WHERE id= :id " ;}else{
+            cmd= " UPDATE pmk_yhk.all_cair SET no_srt = :no_srt, perihal= :hal, tgl= :tgl  WHERE id= :id " ;}
+
+            query.prepare(cmd);
+            query.bindValue(":no_srt",nosrt);
+            query.bindValue(":hal",hal);
+            query.bindValue(":tgl",tgl_);
+            query.bindValue(":hal",hal);
+            query.bindValue(":id",id_update_sppd);
+            bool ok = exec(query);
+            if(!ok){QMessageBox::information(this,"Error","Gagal Update data Surat Pencairan "+query.lastError().text()+""); return;}
+            if(ok){QMessageBox::information(this,"Info ... ","Berhasil Update data Surat Pencairan");
+
+                muatData_realisasi_gab(id_kp);
+             disconnect(btnsppd, SIGNAL(pressed()), this, SLOT(update_sppd_toDB()));
+                                }
+
+
+         }
+
+     wg->close();
+    if(a=="gab_add"){ muat_data_realisasi_gab_add(id_kp); }
+    else if(a!="all_cair"){
+       muat_data_realisasi_sppdd("");
+        select_tgl_sppd("");
+    }
 }
 
 void Form::refresh_data_sppd()
@@ -964,6 +1068,7 @@ void Form::refresh_data_sppd()
     if(aa=="Realisasi Alokasi Dana Desa") { a="add"; }
     if(aa=="Realisasi Dana BLT") { a="blt"; }
     if(aa=="Realisasi Dana Covid") { a="covid"; }
+    if(aa=="Realisasi Semua") { a="all"; }
 
 
     muatheadertw_realisasi_sppd();

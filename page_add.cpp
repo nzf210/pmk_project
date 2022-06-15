@@ -58,13 +58,13 @@ void Form::on_toolButton_add_clicked()
     ui->comboBox_filter->setVisible(false);
     ui->label_filter->setVisible(false);
     ui->toolButton_filter->setVisible(false);
+    ui->toolButton_logOut->setVisible(true);
 
     ui->stackedWidget->setCurrentIndex(2);
     menu="3";
     muat_kampung();
     muat_dis();
     ui->comboBox->setCurrentIndex(0);
-
     memuatData_twRealisasiadd("");
 
 }
@@ -75,7 +75,10 @@ void Form::on_toolButton_add_clicked()
 
 void Form::on_toolButton_tmbRealadd_clicked()
 {
+    check_qbx_kam_dis();
+    qInfo() << "cek addd return";
     tambah_real_add();
+
 }
 
 
@@ -94,7 +97,7 @@ void Form::on_toolButton_cetakPdfadd_clicked()
       // a->setWindowTitle("Cetak pdf Realisasi Alokasi Dana Desa.");
        //a->show();
        a->hide();
-                        }
+                 }
 }
 
 
@@ -460,14 +463,13 @@ void Form::muat_data_realisasi_add(QString s_id_kamp)
 
 void Form::tambah_real_add()
 {
-    qInfo() << "tambah Real Alokasi Dana Desa";
+    qInfo() << "tambah Real Alokasi Dana Desa a";
     if(menu=="3"){ menu2="3";
-
+        qInfo() << "tambah Real Alokasi Dana Desa 1";
         QString id_dis = qbx_id_dis->currentText();
         QString id_kam = qbx_id_kam->currentText();
-        if(id_kam == "" && id_dis ==""){QMessageBox::information(this,"Peringatan...!!!","Pilih Distrik dan Kampung");return;}
+        //if(id_kam == "" && id_dis ==""){QMessageBox::information(this,"Peringatan...!!!","Pilih Distrik dan Kampung");return;}
         if(id_kam!="" && id_dis!=""){
-
             tahap(4);
             muat_bend_kp(id_kam);
             muat_k_kp(id_kam);
@@ -481,6 +483,7 @@ void Form::tambah_real_add()
             no_srt2.replace("####", nosurat_2());
             no_srt2.replace("Add2=> ", "");
             tambah_realisasi(li_tahap,"Rp 0,00",  no_srt1  , no_srt2,"TAMBAH",s_nm_kp, s_nm_bend,"Tambah Realisasi Dana ADD..." );
+            qInfo() << "tambah Real Alokasi Dana Desa 22";
         } }
 }
 
@@ -526,6 +529,7 @@ void Form::btnAdd_add()
         QString nm_kp = s_nm_kp;
         QString nm_bend = s_nm_bend;
         QString tahap = qbx_thp_penc->currentText();
+        QString tahap_adv = li_tahap_advis.at(qbx_thp_penc->currentIndex());
 
        //String tahap_l = qbx_thp_l->currentText();
         QString tgl_ter = de->text();
@@ -586,7 +590,7 @@ void Form::btnAdd_add()
              query.bindValue(":persentase",li_persen.at(qbx_thp_penc->currentIndex()));
              query.bindValue(":sk_bup",sk_bup);
              query.bindValue(":sk_kam",sk_kam);
-
+             query.bindValue(":sk_pmk",tahap_adv);
              query.bindValue(":nm_kpd",nm_kp_dns);
              query.bindValue(":j_kpd",pg_kp_dns);
              query.bindValue(":nip_kpd",nip_kp_dns);
@@ -667,7 +671,7 @@ void Form::update_data_add(QString id, QString tahap, QString date, QString jml,
     query.bindValue(":terbil", terbilang);
 
     bool ok = exec(query);
-    if(!ok){rollback(); QMessageBox::information( eb_v,"Error...!!!","Gagal Mengubah data realisasi addT, "+query.lastError().text()+""); return;}
+    if(!ok){rollback(); QMessageBox::information( eb_v,"Error...!!!","Gagal Mengubah data realisasi add, "+query.lastError().text()+""); return;}
     if(ok) { commit();
                 QMessageBox::information(eb_v,"Info....","Berhasil Mengubah data realisasi add");
                 eb_v->close();

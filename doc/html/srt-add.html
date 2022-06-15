@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+/* Kode CSS Untuk PAGE ini dibuat oleh http://jsfiddle.net/2wk6Q/1/ */
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #FFFFFF;
+        font: 12pt "Tahoma";
+    }
+    * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+    .page {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 0mm 0mm 0mm 0mm;
+        margin: 0mm 0mm;
+        border: 0.5px rgba(0, 0, 0, 0) solid;
+        border-radius: 5px;
+        background: white;
+       /* box-shadow: 0 0 3px rgba(0, 0, 0, 0.1); #D3D3D3*/
+    }
+    .subpage {
+        padding: -1cm 1cm 1cm 1cm;
+        margin: 0cm 1cm 0cm 1cm;
+        /*border-top: 2px black solid;*/
+        /*border: 5px red solid;*/
+        height: 257mm;
+        outline: 0cm #FFEAEA solid;
+    }
+    
+    @page {
+        size: A4;
+        margin: 0;
+    }
+    @media print {
+        html, body {
+            width: 210mm;
+            height: 297mm;        
+        }
+        .page {
+            margin: 0;
+            border: initial;
+            border-radius: initial;
+            width: initial;
+            min-height: initial;
+            box-shadow: initial;
+            background: initial;
+            page-break-after: always;
+        }
+    }
+</style>
+</head>
+<br>
+
+<body>
+    <div class="book">
+    <div class="page">
+    <div class="subpage">
+        <!-- ini adalah blok Header A4 Halamn 1 -->
+        <div style="margin-bottom: -10px;">
+            <table>
+                <tr> <td rowspan="3"><img src="gbr/yhk.png" height="70px" width="70px;" style="float:left; margin: -5px 0px 0px 50px; "/></td> 
+                     <td style="padding-left: 60px; text-align: center;"><b>PEMERINTAH KABUPATEN YAHUKIMO</b></td></tr>
+                <tr> <td style="padding-left: 60px; text-align: center;"> <b>DINAS PEMBERDAYAAN MASYARAKAT KAMPUNG</b> </td></tr>
+                <tr> <td style="padding-left: 60px; text-align: center;"> <p style="font-size: 8px;padding-left:0%;"> Jln. Kurima Komplex Gedung Serbaguna Dekai, <i>Email:bpmkkabyahukimo@gmail.com</i></p>  </td> </tr>
+            </table>
+        </div>
+        <div width="700px"><hr height="3px" color= #00000;></div>
+        <!-- ini adalah blok Header A4 -->
+
+        <p style="padding-left: 70%; margin-top: -10px;" >Sumhai, #TGL#</p>
+        <div style="margin-top: -15px;">
+            <table>
+                <tr> <td>Nomor</td> <td>:</td> <td>****</td> </tr>
+                <tr> <td>Lampiran</td> <td>:</td> <td> 1 (satu) berkas </td> </tr>
+                <tr> <td style="vertical-align: text-top;">Perihal</td> <td style="vertical-align: text-top;">:</td> <td> <b><u>Surat Pengantar Pencairan Alokasi Dana Desa (ADD) #tahap# TA.2020</u></b> </td> </tr>
+            </table>
+        </div>
+        
+        <div style="width: 80%; text-align: left; scroll-padding: 90px; margin-top: -10px; ">
+            
+             <p style="text-align: center; width: 45% ;" >      Kepada, <br>Yth. <b>Kepala Bank Papua Cabang Dekai</b> <br> di <br>Sumohai
+            </p> 
+        </div>
+
+        <div style="margin-top: -10px;">
+            <p>Dengan Hormat,</p>
+            <p>Sehubungan dengan pencairan Alokasi Dana Desa (ADD) #tahap#, dan setelah dilakukan Validasi atas berkas pengajuan pencairan, maka:</p>
+        </div>
+
+        <div style="padding-left: 0%; margin-top: -10px;">
+                <table style="margin-left: 22px;">
+                    <tr style="width: 9em; padding-bottom: 10px;"> <td >Desa / Kampung</td> <td>:</td> <td >#KMP#</td> </tr>
+                    <tr> <td >Distrik</td> <td >:</td> <td >#DSTR#</td> </tr>
+                    <tr> <td>Kepala Kampung</td> <td>:</td> <td> #NKKP# </td> </tr>
+                    <tr style="width: 9em; padding-bottom: 10px;"> <td >Bendahara</td> <td>:</td> <td > #NBENK# </td> </tr>
+                    <tr> <td style="vertical-align: text-top;">Rincian Dana</td> <td style="vertical-align: text-top;">:</td> <td> Alokasi Dana Desa Tahun Anggaran #thn# #tahap# </td> </tr>
+                    <tr> <td>Nilai SPP</td> <td>:</td> <td> #JML# - </td> </tr>
+                    <tr> <td style="vertical-align: text-top;">Terbilang </td> <td>:</td> <td > <i>#TERBILANG#</i> </td> </tr>
+                    <tr style="margin-top: -5px;"> <td style="vertical-align: text-top;  ">Nama dan Nomor Rekening</td> <td style="vertical-align: text-top;">:</td> <td style="vertical-align: text-top;" > <p style="margin-top: -5px;"> #NOREK# </p> <p style="margin-top: -12px;">#NMREK#</p> </td> </tr>
+                </table>
+        </div>
+
+
+
+        <div style="margin-top: -15px;">
+        <p style="margin: -15px 0px -15px 0px;">Bahwa Desa/Kampung tersebut telah melengkapi berkas sebagai berikut :</p>
+        <ol >
+            <li>Surat Keputusan (SK) Pengangkatan Kepala Kampung dengan Nomor :   75 Tahun 2018 Tanggal 26 April 2018   </li>
+            <li>Kartu Tanda Penduduk (Asli), Melampirkan Fotocopyan KTP kepala Kampung dan Bendahara sebanyak 2 (Dua) Rangkap</li>
+            <li>Surat Pergantian Bendahara (jika dilakukan pergantian) Nomor : 04 TAHUN 2020, Tanggal 02 Oktober 2020</li>
+            <li>Pas Photo Ukuran 3 x 4 untuk Kepala Kampung dan Bendahara sebanyak 2 Lembar </li>
+            <li>Berkas Pengajuan Surat Permintaan Pembayaran (SPP) #%#, Sebanyak 4 (Empat) Rangkap yang telah di Evaluasi  
+                Kepala Distrik #DSTR#</li>
+            <li>Laporan Pertanggung Jawaban Kegiatan (LPJ) Alokasi Dana Desa #tahap2#,yang telah di evaluasi oleh kepala distrik #DSTR#</li>
+            
+        </ol>
+        <p style="margin-top: -10px;">Maka dengan ini kami memberikan Surat pengantar Lepas Blokir atas rekening yang dimaksud diatas, agar Kepala Kampung dan Bendahara dapat melakukan pencairan Alokasi Dana Desa #tahap#.<br>
+        Demikian surat pengantar ini dibuat, atas kerjasama di sampaikan terima kasih.</p>
+        </div>
+
+        <div style="padding-left: 65%; text-align: center; margin-top: -10px;">
+        <p class=""><b style="font-size: 14px;">#JBTKPDNS#</b></p>
+        <br><br>
+        <p><b><u style="font-size: 14px; margin-top: -40px;">#KPDNS#</u></b><br>#PKPLD#<br>#NIPKDNS#</p>
+        </div>
+
+    </div> <!-- end subPage 1 -->
+    </div> <!-- end Page 1 -->
+
+    <div class="page">
+    <div class="subpage">
+        <!-- ini adalah blok Header A4 Halaman 2-->
+        <br>
+        <div style="margin-bottom: -10px;">
+            <table>
+                <tr> <td rowspan="3"><img src="gbr/yhk.png" height="70px" width="70px;" style="float:left; margin: -5px 0px 0px 50px; "/></td> 
+                     <td style="padding-left: 60px; text-align: center;"><b>PEMERINTAH KABUPATEN YAHUKIMO</b></td></tr>
+                <tr> <td style="padding-left: 60px; text-align: center;"> <b>DINAS PEMBERDAYAAN MASYARAKAT KAMPUNG</b> </td></tr>
+                <tr> <td style="padding-left: 60px; text-align: center;"> <p style="font-size: 8px;padding-left:0%;"> Jln. Kurima Komplex Gedung Serbaguna Dekai, <i>Email:bpmkkabyahukimo@gmail.com</i></p>  </td> </tr>
+            </table>
+        </div>
+        <div width="700px"><hr height="3px" color= #00000;></div>
+        <!-- ini adalah blok Header A4 Halaman 2 -->
+
+        <p style="padding-left: 70%; margin-top: -10px;" >Sumhai, #TGL#</p>
+        <div>
+            <table>
+                <tr> <td>Nomor</td> <td>:</td> <td style="width: 8em;"> #### </td> <td style="text-align: center;"> Kepada </td> </tr>
+                <tr> <td>Lampiran</td> <td>:</td> <td> - </td> <td style="text-align: center;"> Yth. <b>Kepala Bank Papua</b>  </td>  </tr>
+                <tr> <td style="vertical-align: text-top;">Perihal</td> <td style="vertical-align: text-top;">:</td> <td style="width: 27em; vertical-align: text-top;">Surat  Pengantar Pergantian Specimen Kepala Kampung dan Bendahara Kampung #KMP# DISTRIK #DSTR#</td> <td style="vertical-align: text-top; width: 12em;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;di- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Sumohai</b> </td></tr>
+                <tr> <td></td> <td></td> <td></td> <td></td> </tr>                
+            </table>
+        </div>
+
+        <div>
+            <br>
+            <p>Dengan Hormat,</p>
+            <p>Sesuai dengan perihal diatas, Berdasarkan Surat Keputusan Bupati Nomor : 75 Tahun 2018 Tanggal 26 April 2018 Tentang Pengangkatan dan Pengukuhan Kepala
+                Kampung di Yahukimo Tahun 2018 dan Berdasarkan Surat Nomor : 02 TAHUN 2020, Tanggal 03 Agustus 2020 Perihal Penunjukan Penggantian Bendahara Kampung #KMP# Distrik
+                #DSTR# Sebagai berikut: </p>
+        </div>
+
+        <div style="padding-left: 10%;">
+            <table>
+                <tr> <td>Desa / Kampung</td> <td>:</td> <td>#KMP#</td> </tr>
+                <tr> <td>Distrik</td> <td>:</td> <td>#DSTR#</td>  </tr>
+                <tr> <td>Kepala Kampung</td> <td>:</td> <td>#NKKP#</td>  </tr>
+                <tr> <td>Bendahara</td> <td>:</td> <td>#NBENK#</td>  </tr>
+                <tr> <td>Nama Rekening</td> <td>:</td> <td>#NMREK#</td>  </tr>
+                <tr> <td>Nama dan Nomor</td> <td>:</td> <td>#NOREK#</td>  </tr>
+                <tr> <td></td> <td></td> <td>Bank Papua Cab.Dekai</td>  </tr>
+            </table>
+        </div>
+
+        <div>
+            <p>Maka bersama ini kami sampaikan agar pihak Bank Papua Kantor Cabang Dekai untuk dapat menindaklanjuti permohonan perubahan Spesimen dimaksud jika
+                terdapat perbedaan Nama Kepala Kampung atau Bendahara Kampung pada Buku Tabungan dengan Nomor Rekening diatas.
+            </p>
+            <p>Demikian atas kerjasamanya, di sampaikan terima kasih.</p>
+        </div>
+
+        <div style="padding-left: 65%; text-align: center;">
+            <p class=""><b style="font-size: 14px;">#JBTKPDNS#</b></p>
+            <br><br><br>
+            <p><b><u style="font-size: 14px;">#KPDNS#</u></b><br>#PKPLD#<br>#NIPKDNS#</p>
+        </div>
+
+    </div> <!-- end subPage 2 -->
+    </div> <!-- end Page 2 -->     
+
+
+    <div class="page">
+    <div class="subpage">
+        <!-- ini adalah blok Header A4 Halaman 3-->
+        <br>
+        <div >
+            <table>
+                <tr> <td rowspan="3"><img src="gbr/yhk.png" height="70px" width="70px;" style="float:left; margin: -5px 0px 0px 70px; "/></td> 
+                     <td style="padding-left: 60px; text-align: center;"><b>PEMERINTAH KABUPATEN YAHUKIMO</b></td></tr>
+                <tr> <td style="padding-left: 60px; text-align: center;"> <b>DISTRIK #UDSTR#</b> </td></tr>
+                <tr> <td style="padding-left: 60px; text-align: center;"> <b>KAMPUNG #UKMP#</b> </td> </tr>
+            </table>
+        </div>
+        <div width="700px"><hr></div>
+        <!-- ini adalah blok Header A4 -->
+            <p style="text-align: center;" > <u>SURAT PERNYATAAN</u></p>
+    <div>
+        <p>Yang bertandatangan dibawah ini:</p>       
+    </div>
+       <div style="padding-left: 10%;">
+        <table>
+            <tr> <td>Nama</td> <td>:</td> <td>#NKKP#</td> </tr>
+            <tr> <td>Jabatan</td> <td>:</td> <td>KEPALA KAMPUNG #UKMP#</td> </tr>
+            <tr> <td>Nama</td> <td>:</td> <td>#NBENK#</td> </tr>
+            <tr> <td>Jabatan</td> <td>:</td> <td>BENDAHARA KAMPUNG #UKMP#</td> </tr>
+            <tr> <td>Distrik</td> <td>:</td> <td>#UDSTR#</td> </tr>
+            <tr> <td>Kampung</td> <td>:</td> <td>#UKMP#</td> </tr>
+        </table>
+        </div>
+
+    <div>
+        <p>Dengan ini menyatakan bahwa, setelah menerima Alokasi Dana Desa (ADD) Semseter I yang berupa Honor Aparat dan Perangkat Kampung selama 6 (Enam) Bulan,
+             akan melaksanakan ketentuan sebagai berikut   :</p>
+        <ol>
+            <li>Setelah Menerima Alokasi Dana Desa (ADD) #tahap# Sesuai Dengan Peraturan Bupati nomor ................... Tahun 2021 Tanggal ....................
+                Tentang penetapan Besaaran dan Rincian Alokasi Dana Desa (ADD) setiap kampung di kabupaten Yahukimo yang Bersumber dari Anggaran dan Pendapatan Belanja Daerah 
+                Tahun Anggaran #thn#, yang berupa Honor Aparat dan Perangkat Kampung selama 6 (Enam) Bulan akan segera kembali ke kampung untuk membayar Pengahasilan Tetap Kepala Kampung,
+                Peranhkat Kampung, Staf Administrasi Kampung, Satgas Kampung Serta Ketua dan Anggota. 
+            </li>
+            <li>Akan Membuat Laporan Pertanggungjawaban kegiatan dengan menggunakan Aplikasi Sistem Keuagan Desa (SISKEUDES) yang dibuat oleh Badan Pemeriksa Keuangan Pembangunan
+                (BPKP) sesuai dengan Rekomendasi Komisi Pemberantasan Korupsi (KPK);
+             </li>
+            <li>Apabila dikemudian hari terjadi penyalahgunaan/penyimpang Alokasi Dana Desa, maka KAMI siap mempertanggungjawabkan di hadapan Hukum.</li>
+            <li>Akan Membuat Laporan Pertanggungjawaban Dana Desa berdasarkan peraturan yang berlaku;</li>  
+        </ol>
+        <p>Demikian Suarat pernyataan ini dibuat, dan akan di pergunakan sebagaimana mestinya.</p>
+    </div>
+
+    <div style="padding-left: 55%; text-align: center;">
+        <p>#UKMP#, ................... #thn#</p>
+    </div>
+
+    <div style="padding-left:3%;">
+        <table>
+                <tr style="text-align: center; height: 6em; width: 170px;"  >
+                    <td style="width: 12em;" ><b>Kepala Kampung</b></td>
+                    <td style="width: 8em;" ><b>  </b></td>
+                    <td ><b>  </b></td>
+                    <td style="width: 4em;"><b>  </b></td>
+                    <td style="width: 12em;"  ><b>Bendahara Kampung</b></td>
+                </tr>
+                <tr style="text-align: center; "  >
+                    <td ><b>  </b></td>
+                    <td ><b>  </b></td>
+                    <td ><b>  </b></td>
+                    <td ><b>  </b></td>
+                    <td ><b>  </b></td>
+                </tr>
+                <tr style="text-align: center; "  >
+                    <td ><b>  </b></td>
+                    <td ><b>  </b></td>
+                    <td style="border: 1px dotted black; width: 5em;  height: 4em;" ><b> Materai 10000 </b></td>
+                    <td ><b>  </b></td>
+                    <td ><b>  </b></td>
+                </tr>
+                <tr style="text-align: center; "  >
+                    <td ><b>  </b></td>
+                    <td ><b>  </b></td>
+                    <td ><b>  </b></td>
+                    <td ><b>  </b></td>
+                    <td ><b>  </b></td>
+                </tr>
+                <tr style="text-align: center; height: 40px width: 170px;" >
+                    <td><u> <b>#NKKP#</b></u></td>
+                    <td ><b>  </b></td>
+                    <td ><b>  </b></td>
+                    <td ><b>  </b></td>
+                    <td style="width: 18em;"   ><b> <u> #NBENK#</b> </u> </td>
+                </tr>
+        </table>
+    </div>
+
+    </div>  <!-- end subPage 3 -->
+    </div>  <!-- end Page 3 -->
+
+
+    <div class="page">
+    <div class="subpage">
+        <!-- ini adalah blok Header A4 Halaman 4-->
+        <br>
+        <div>
+            <table style="padding: -0.5px; ">
+                <tr> <td rowspan="3"><img src="gbr/yhk.png" height="70px" width="70px;" style="float:left; margin: -5px 0px 0px 70px; "/></td> 
+                     <td style="padding-left: 60px; text-align: center;"><b>PEMERINTAH KABUPATEN YAHUKIMO</b></td></tr>
+                <tr> <td style="padding-left: 60px; text-align: center;"> <b>DISTRIK #UDSTR#</b> </td></tr>
+                <tr> <td style="padding-left: 60px; text-align: center;"> <b>KAMPUNG #UKMP#</b> </td> </tr>
+            </table>
+        </div>
+        <div width="700px"><hr></div>
+        <!-- ini adalah blok Header A4 -->
+        <div>
+            <table>
+                <tr> <td>Bidang</td> <td>:</td> <td>2.1. Penyelenggaran Pemerintahan Desa</td> </tr>
+                <tr> <td>Kegiatan</td> <td>:</td> <td>Penghasilan Tetap (SILTAP)</td> </tr>
+                <tr> <td>Waktu Pelaksanaan</td> <td>:</td> <td>3 Bulan</td> </tr>
+                <tr> <td>Pendanaan</td> <td>:</td> <td>Rp 33.300.000</td> </tr>
+                <tr> <td>Sumber Dana</td> <td>:</td> <td>Alokasi Dana Desa (ADD) Tahun Anggaran 2021</td> </tr>
+                <tr> <td>Rincian</td> <td>:</td> <td></td> </tr>
+            </table>
+        </div>
+
+<div>
+  <table  class="ttd" style=" border: 1px solid black ; border-spacing: 0%; padding: 0%;text-align: center; font: bold; "cellspacing="0" >
+      <thead style="font-weight: bold; border: 1px solid black ;
+      border-spacing: 0%;
+      padding: 0%;  
+      text-align: center;" class="ttd" >
+          <tr> 
+            <b>
+              <td style="border: 1px solid black ;">No</td>
+              <td style="border: 1px solid black ;" width="180px;">Nama</td>
+              <td style="border: 1px solid black ;" width="180px;">Jabatan</td>
+              <td style="border: 1px solid black ;" width="50px;">VOL (BULAN)</td>
+              <td style="border: 1px solid black ;" width="50px;">SAT</td>
+              <td style="border: 1px solid black ;" width="55px;">HARGA SATUAN (Rp)</td>
+              <td style="border: 1px solid black ;" width="65px;">Jumlah Harga (Rp)</td>
+              <td style="border: 1px solid black ;" width="155px;">Tanda Tangan / Paraf</td>
+            </b>
+          </tr>
+          <tr>
+              <td style="border: 1px solid black ;"  colspan="6" >PEMRINTAHAN KAMPUNG</td>
+              <td style="border: 1px solid black ;" >17.700.000</td>
+              <td style="border: 1px solid black ;" ></td>
+          </tr>
+      </thead>
+        <tbody style="border: 1px solid black ;"  >
+          <tr style="height: 2em;"> 
+              <td style="border: 1px solid black ;" >1</td>
+              <td style="border: 1px solid black ;"width="120px;">#NM1#</td>
+              <td style="border: 1px solid black ;"width="120px;">Kepala Kampung</td>
+              <td style="border: 1px solid black ;"width="50px;">3</td>
+              <td style="border: 1px solid black ;"width="50px;">OB</td>
+              <td style="border: 1px solid black ;"width="55px;">1.500.000</td>
+              <td style="border: 1px solid black ;"width="65px;">4.500.000</td>
+              <td style="border: 1px solid black ;"width="125px;"></td>
+          </tr>
+          <tr style="height: 2em;"> 
+              <td style="border: 1px solid black ;">2</td>
+              <td style="border: 1px solid black ;"width="120px;">#NM2#</td>
+              <td style="border: 1px solid black ;"width="120px;">Sekertaris</td>
+              <td style="border: 1px solid black ;"width="50px;">3</td>
+              <td style="border: 1px solid black ;"width="50px;">OB</td>
+              <td style="border: 1px solid black ;"width="55px;">800.000</td>
+              <td style="border: 1px solid black ;"width="65px;">2.400.000</td>
+              <td style="border: 1px solid black ;"width="125px;"></td>
+          </tr>
+          <tr style="height: 2em;"> 
+              <td style="border: 1px solid black ;">3</td>
+              <td style="border: 1px solid black ;"width="120px;">#NM3#</td>
+              <td style="border: 1px solid black ;"width="120px;">Bendahara Kampung</td>
+              <td style="border: 1px solid black ;"width="50px;">3</td>
+              <td style="border: 1px solid black ;"width="50px;">OB</td>
+              <td style="border: 1px solid black ;"width="55px;">800.000</td>
+              <td style="border: 1px solid black ;"width="65px;">2.400.000</td>
+              <td style="border: 1px solid black ;"width="125px;"></td>
+          </tr>
+          <tr style="height: 2em;"> 
+              <td style="border: 1px solid black ;">4</td>
+              <td style="border: 1px solid black ;"width="120px;">#NM4#</td>
+              <td style="border: 1px solid black ;"width="120px;">Kaur Pemerintahan</td>
+              <td style="border: 1px solid black ;"width="50px;">3</td>
+              <td style="border: 1px solid black ;"width="50px;">OB</td>
+              <td style="border: 1px solid black ;"width="55px;">700.000</td>
+              <td style="border: 1px solid black ;"width="65px;">2.100.000</td>
+              <td style="border: 1px solid black ;"width="125px;"></td>
+          </tr>
+          <tr style="height: 2em;"> 
+              <td style="border: 1px solid black ;">5</td>
+              <td style="border: 1px solid black ;"width="120px;">#NM5#</td>
+              <td style="border: 1px solid black ;"width="120px;">Kaur Umum</td>
+              <td style="border: 1px solid black ;"width="50px;">3</td>
+              <td style="border: 1px solid black ;"width="50px;">OB</td>
+              <td style="border: 1px solid black ;"width="55px;">700.000</td>
+              <td style="border: 1px solid black ;"width="65px;">2.100.000</td>
+              <td style="border: 1px solid black ;"width="125px;"></td>
+          </tr>
+          <tr style="height: 2em;"> 
+              <td style="border: 1px solid black ;">6</td>
+              <td style="border: 1px solid black ;"width="120px;">#NM6#</td>
+              <td style="border: 1px solid black ;"width="120px;">Kaur Kesejahteraan Rakyat</td>
+              <td style="border: 1px solid black ;"width="50px;">3</td>
+              <td style="border: 1px solid black ;"width="50px;">OB</td>
+              <td style="border: 1px solid black ;"width="55px;">700.000</td>
+              <td style="border: 1px solid black ;"width="65px;">2.100.000</td>
+              <td style="border: 1px solid black ;"width="125px;"></td>
+          </tr>
+          <tr style="height: 2em;"> 
+              <td style="border: 1px solid black ;">7</td>
+              <td style="border: 1px solid black ;"width="120px;">#NM7#</td>
+              <td style="border: 1px solid black ;"width="120px;">Kaur Pembangunan</td>
+              <td style="border: 1px solid black ;"width="50px;">3</td>
+              <td style="border: 1px solid black ;"width="50px;">OB</td>
+              <td style="border: 1px solid black ;"width="55px;">700.000</td>
+              <td style="border: 1px solid black ;"width="65px;">2.100.000</td>
+              <td style="border: 1px solid black ;"width="125px;"></td>
+          </tr>
+      </tbody>
+      <thead> <tr  style="border: 1px solid black ; font-weight: bold; " >
+              <td style="border: 1px solid black ;"colspan="6"  >BADAN MUSYAWARAH KAMPUNG</td>
+              <td style="border: 1px solid black ;">15.600.000</td>
+              <td style="border: 1px solid black ;"></td>
+              </tr>
+      </thead>
+      <tbody>
+          <tr style="height: 2em;"> 
+              <td style="border: 1px solid black ;">1</td>
+              <td style="border: 1px solid black ;"width="120px;">#NM8#</td>
+              <td style="border: 1px solid black ;"width="120px;">Ketua Bamuskam</td>
+              <td style="border: 1px solid black ;"width="50px;">3</td>
+              <td style="border: 1px solid black ;"width="50px;">OB</td>
+              <td style="border: 1px solid black ;"width="55px;">1.500.000</td>
+              <td style="border: 1px solid black ;"width="65px;">4.500.000</td>
+              <td style="border: 1px solid black ;"width="125px;"></td>
+          </tr>
+          <tr style="height: 2em;"> 
+              <td style="border: 1px solid black ;">2</td>
+              <td style="border: 1px solid black ;"width="120px;">#NM9#</td>
+              <td style="border: 1px solid black ;"width="120px;">Wakil Ketua Bamuskam</td>
+              <td style="border: 1px solid black ;"width="50px;">3</td>
+              <td style="border: 1px solid black ;"width="50px;">OB</td>
+              <td style="border: 1px solid black ;"width="55px;">800.000</td>
+              <td style="border: 1px solid black ;"width="65px;">2.400.000</td>
+              <td style="border: 1px solid black ;"width="125px;"></td>
+          </tr>
+          <tr style="height: 2em;"> 
+              <td style="border: 1px solid black ;">3</td>
+              <td style="border: 1px solid black ;"width="120px;">#NM10#</td>
+              <td style="border: 1px solid black ;"width="120px;">Sekertaris Bamuskam</td>
+              <td style="border: 1px solid black ;"width="50px;">3</td>
+              <td style="border: 1px solid black ;"width="50px;">OB</td>
+              <td style="border: 1px solid black ;"width="55px;">800.000</td>
+              <td style="border: 1px solid black ;"width="65px;">2.400.000</td>
+              <td style="border: 1px solid black ;"width="125px;"></td>
+          </tr>
+          <tr style="height: 2em;"> 
+              <td style="border: 1px solid black ;">4</td>
+              <td style="border: 1px solid black ;"width="120px;">#NM11#</td>
+              <td style="border: 1px solid black ;"width="120px;">Ketua Bidang PPK & PK</td>
+              <td style="border: 1px solid black ;"width="50px;">3</td>
+              <td style="border: 1px solid black ;"width="50px;">OB</td>
+              <td style="border: 1px solid black ;"width="55px;">800.000</td>
+              <td style="border: 1px solid black ;"width="65px;">2.400.000</td>
+              <td style="border: 1px solid black ;"width="125px;"></td>
+          </tr>
+          <tr style="height: 2em;"> 
+              <td style="border: 1px solid black ;">5</td>
+              <td style="border: 1px solid black ;"width="120px;">#NM11#</td>
+              <td style="border: 1px solid black ;"width="120px;">Ketua Bidang PK & PMK</td>
+              <td style="border: 1px solid black ;"width="50px;">3</td>
+              <td style="border: 1px solid black ;"width="50px;">OB</td>
+              <td style="border: 1px solid black ;"width="55px;">800.000</td>
+              <td style="border: 1px solid black ;"width="65px;">2.400.000</td>
+              <td style="border: 1px solid black ;"width="125px;"></td>
+          </tr>
+          <tr style="height: 2em;"> 
+              <td style="border: 1px solid black ;">6</td>
+              <td style="border: 1px solid black ;"width="120px;">#NM13#</td>
+              <td style="border: 1px solid black ;"width="120px;">Hansip</td>
+              <td style="border: 1px solid black ;"width="50px;">3</td>
+              <td style="border: 1px solid black ;"width="50px;">OB</td>
+              <td style="border: 1px solid black ;"width="55px;">500.000</td>
+              <td style="border: 1px solid black ;"width="65px;">1.500.000</td>
+              <td style="border: 1px solid black ;"width="125px;"></td>
+          </tr>
+          <tr style="border: 1px solid black ; font-weight: bold;" >
+              <td style="border: 1px solid black ;"colspan="6"  >TOTAL</td>
+              <td style="border: 1px solid black ; font-weight: bold;" >33.300.000</td>
+              <td style="border: 1px solid black ;"></td>
+              </tr>
+      </tbody>
+  </table>
+</div>
+
+<div style="padding-left: 50%; text-align: center; margin-top: -10px;">
+  <p>#KMP#, ..................... #thn#</p>
+</div>
+
+<div style="padding-left: 13%; text-align: left; margin-bottom: -15px; margin-top: -10px;">
+  <p>Setuju Di Bayar</p>
+</div>
+
+<div style="padding-left:6%; margin-top: -10px;" > 
+    <table >
+            <tr style="text-align: center; height: 0em;"  >
+                <td style="width: 14em;" ><b>Kepala Kampung</b></td>
+                <td style="width: 14em;  " ><b>  </b></td>
+                <td ><b>  </b></td>
+                <td style="width: 4em; "><b>  </b></td>
+                <td ><b>Bendahara Kampung</b></td>
+            </tr>
+            <tr style="text-align: center; "  >
+                <td ><b>  </b></td>
+                <td ><b>  </b></td>
+                <td ><b>  </b></td>
+                <td ><b>  </b></td>
+                <td ><b>  </b></td>    
+            </tr>
+            <tr style="text-align: center; "  >
+                <td ><b>  </b></td>
+                <td ><b>  </b></td>
+                <td  ><b> </b></td>
+                <td ><b>  </b></td>
+                <td ><b>  </b></td>      
+            </tr>
+            <tr style="text-align: center; "  >   
+                <td ><b>  </b></td>
+                <td ><b>  </b></td>
+                <td ><b>  </b></td>
+                <td ><b>  </b></td>
+                <td ><b>  </b></td>          
+            </tr>
+            <tr style="text-align: center; height: 160px; width: 170px;" >
+                <td><u> <b>#NKKP#</b></u></td>
+                <td ><b>  </b></td>
+                <td ><b>  </b></td>
+                <td ><b>  </b></td>
+                <td style="width: 18em;"><b><u>#NBENK#</b> </u> </td>
+            </tr>
+    </table>
+</div>
+
+    </div>  <!-- end subPage 4 -->
+    </div>  <!-- end Page 4 -->
+    
+    </div>
+</body>
+</html>

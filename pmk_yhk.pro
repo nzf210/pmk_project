@@ -21,6 +21,8 @@ SOURCES += \
     page_blt.cpp \
     page_covid.cpp \
     page_dds.cpp \
+    page_gab.cpp \
+    page_gab_add.cpp \
     page_sppd.cpp \
     page_tambahan.cpp \
     page_user.cpp \
@@ -36,7 +38,9 @@ HEADERS += \
     pdf_dds.h \
     pdf_dok.h \
     pdf_sppd_add.h \
-    psd_sppd_dds.h \
+    pdf_sppd_add_gab.h \
+    pdf_sppd_all_cair.h \
+    pdf_sppd_dds.h \
     qrencode.h
 
 FORMS += \
@@ -57,18 +61,21 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 #INCLUDEPATH += "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt"
 #LIBS += -L"C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\ucrt\x64"
 
-INCLUDEPATH += "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um"
-LIBS += -L"C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x86"
+#INCLUDEPATH += "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um"
+#LIBS += -L"C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x86"
 
-INCLUDEPATH += "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt"
-LIBS += -L"C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\ucrt\x86"
+#INCLUDEPATH += "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt"
+#LIBS += -L"C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\ucrt\x86"
+
+INCLUDEPATH += "C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um"
+LIBS += -L"C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x86"
+
+INCLUDEPATH += "C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt"
+LIBS += -L"C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\ucrt\x86"
 
 RESOURCES += \
     src.qrc
 
-#ICON = /gbr/html/gbr/yhk.png
-ICON = /gbr/html/gbr/yhk.ico
-#RC_ICONS = yhk.ico
-#win32:
-#ICONS = myIcon.ico
+RC_ICONS = D:\002_Syahril_Data\Github\syahril\pmk_yhk_21_add\html\gbr\yhk.ico
+
 

@@ -230,12 +230,12 @@ public:
 
         QDir dir(path);
         tahap.replace("Triwulan","Trw");
-        QString nmpdf ="Hnr "+ tahap+ " kam "+nmkamp+" dis "+nmdis+".pdf";
+        QString nmpdf ="Hnr "+tahap+ " kam "+nmkamp+" dis "+nmdis+".pdf";
         QFile  pdfFile (path + nmpdf);
         QString fn = path + nmpdf;
 
-        if(pdfFile.exists()){ pdfFile.remove(); }
-        if(pdfFile.exists()) {QMessageBox::information(this,"Info...","Tutup File pdf yg terbuka dan Generate Kembali"); qInfo()<<"Silahkan tutup pdf file"; return;}
+        //if(pdfFile.exists()){pdfFile.remove();}
+        //if(pdfFile.exists()){QMessageBox::information(this,"Info...","Tutup File pdf yg terbuka dan Generate Kembali"); qInfo()<<"Silahkan tutup pdf file"; return;}
 
 //        view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize(QSize(743,987))), QPageLayout::Portrait, QMargins(65,0,15,15)) ); ini fix ukuran 2020
         view->page()->printToPdf(fn,QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMargins(0,0,0,0)) );
